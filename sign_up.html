@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in</title>
+    <title>Sign up</title>
+
     <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg"/>
 
-    <link rel="stylesheet" href="login_sign_up.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
@@ -17,15 +17,16 @@
 
         <div>
             <img class="logo-login" src="./assets/img/logo_dark.svg">
-            <div class="ctn-no-user">
-                <span class="span-no-user">Not a Join user?</span>
-                <button class="btn-db">Sign up</button>
-            </div>
         </div>
 
         <form class="ctn-login">
-            <h1>Log in</h1>
+            <img class="arrow-sign-up" src="./assets/img/arrow-left-line.svg">
+            <h1>Sign up</h1>
             <div class="sep-login"></div>
+            <div>
+                <input type="text" placeholder="Name" required>
+                <img class="input-icon" src="./assets/img/person.svg">
+            </div>
             <div>
                 <input type="email" placeholder="Email" required>
                 <img class="input-icon" src="./assets/img/mail.svg">
@@ -34,14 +35,17 @@
                 <input type="password" placeholder="Password" required>
                 <img class="input-icon" src="./assets/img/lock.svg">
             </div>
+            <div>
+                <input type="password" placeholder="Confirm Password" required>
+                <img class="input-icon" src="./assets/img/lock.svg">
+            </div>
             <div class="ctn-rem-me">
-                <input class="checkbox" type="checkbox">
-                <p>Remember me</p>
+                <input class="checkbox" type="checkbox" required>
+                <p>I accept the <a class="link-privacy" href="privacy.html">Privacy Policy</a></p>
             </div>
             
             <div class="ctn-btn-login">
-                <button class="btn-db">Log in</button>
-                <button class="btn-outline">Guest Log in</button>
+                <button class="btn-db">Sign up</button>
             </div>
         </form>
 
@@ -55,8 +59,6 @@
         <a href="privacy.html">Privacy Policy</a>
         <a href="legal.html">Legal notice</a>
     </footer>
-
-
     
 </body>
 </html>
