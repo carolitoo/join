@@ -1,64 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign up</title>
 
-    <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg"/>
+    <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
+    <link rel="stylesheet" href="./css/login_sign_up.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="wrapper">
+      <div class="header-login">
+        <img class="logo-login" src="./assets/img/logo_dark.svg" />
+      </div>
 
+      <form class="ctn-login">
+        <a href="./index.html"
+          ><img class="arrow-sign-up" src="./assets/img/arrow-left-line.svg"
+        /></a>
+        <h1>Sign up</h1>
+        <div class="sep-login"></div>
         <div>
-            <img class="logo-login" src="./assets/img/logo_dark.svg">
+          <input type="text" placeholder="Name" required />
+          <img class="input-icon" src="./assets/img/person.svg" />
+        </div>
+        <div>
+          <input type="email" placeholder="Email" required />
+          <img class="input-icon" src="./assets/img/mail.svg" />
+        </div>
+        <div>
+          <input type="password" placeholder="Password" required />
+          <img class="input-icon" src="./assets/img/lock.svg" />
+        </div>
+        <div>
+          <input type="password" placeholder="Confirm Password" required />
+          <img class="input-icon" src="./assets/img/lock.svg" />
+        </div>
+        <div class="ctn-rem-me">
+          <input class="checkbox" type="checkbox" required />
+          <p>
+            I accept the
+            <a class="link-privacy" href="privacy.html">Privacy Policy</a>
+          </p>
         </div>
 
-        <form class="ctn-login">
-            <img class="arrow-sign-up" src="./assets/img/arrow-left-line.svg">
-            <h1>Sign up</h1>
-            <div class="sep-login"></div>
-            <div>
-                <input type="text" placeholder="Name" required>
-                <img class="input-icon" src="./assets/img/person.svg">
-            </div>
-            <div>
-                <input type="email" placeholder="Email" required>
-                <img class="input-icon" src="./assets/img/mail.svg">
-            </div>
-            <div>
-                <input type="password" placeholder="Password" required>
-                <img class="input-icon" src="./assets/img/lock.svg">
-            </div>
-            <div>
-                <input type="password" placeholder="Confirm Password" required>
-                <img class="input-icon" src="./assets/img/lock.svg">
-            </div>
-            <div class="ctn-rem-me">
-                <input class="checkbox" type="checkbox" required>
-                <p>I accept the <a class="link-privacy" href="privacy.html">Privacy Policy</a></p>
-            </div>
-            
-            <div class="ctn-btn-login">
-                <button class="btn-db">Sign up</button>
-            </div>
-        </form>
-
-        <div class="d-none">
-            <span>Not a Join user?</span>
-            <button>Sign up</button>
+        <div class="ctn-btn-login">
+          <button class="btn-db">Sign up</button>
         </div>
+      </form>
     </div>
 
     <footer class="ft-login">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="legal.html">Legal notice</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="legal.html">Legal notice</a>
     </footer>
-    
-</body>
+  </body>
 </html>

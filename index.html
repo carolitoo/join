@@ -1,62 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log in</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg"/>
+    <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
-    <link rel="stylesheet" href="login_sign_up.css" />
+    <link rel="stylesheet" href="./css/login_sign_up.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
-</head>
-<body>
-
+  </head>
+  <body onload="init()">
     <div class="wrapper">
+      <div class="header-login">
+        <img class="logo-login" src="./assets/img/logo_dark.svg" />
+        <div class="ctn-no-user">
+          <span class="span-no-user">Not a Join user?</span>
+          <a class="btn-db" href="./sign_up.html">Sign up</a>
+        </div>
+      </div>
 
+      <form class="ctn-login">
+        <h1>Log in</h1>
+        <div class="sep-login"></div>
         <div>
-            <img class="logo-login" src="./assets/img/logo_dark.svg">
-            <div class="ctn-no-user">
-                <span class="span-no-user">Not a Join user?</span>
-                <button class="btn-db">Sign up</button>
-            </div>
+          <input type="email" placeholder="Email" required />
+          <img class="input-icon" src="./assets/img/mail.svg" />
+        </div>
+        <div>
+          <input type="password" placeholder="Password" required />
+          <img class="input-icon" src="./assets/img/lock.svg" />
+        </div>
+        <div class="ctn-rem-me">
+          <input class="checkbox" type="checkbox" />
+          <p>Remember me</p>
         </div>
 
-        <form class="ctn-login">
-            <h1>Log in</h1>
-            <div class="sep-login"></div>
-            <div>
-                <input type="email" placeholder="Email" required>
-                <img class="input-icon" src="./assets/img/mail.svg">
-            </div>
-            <div>
-                <input type="password" placeholder="Password" required>
-                <img class="input-icon" src="./assets/img/lock.svg">
-            </div>
-            <div class="ctn-rem-me">
-                <input class="checkbox" type="checkbox">
-                <p>Remember me</p>
-            </div>
-            
-            <div class="ctn-btn-login">
-                <button class="btn-db">Log in</button>
-                <button class="btn-outline">Guest Log in</button>
-            </div>
-        </form>
-
-        <div class="d-none">
-            <span>Not a Join user?</span>
-            <button>Sign up</button>
+        <div class="ctn-btn-login">
+          <button class="btn-db">Log in</button>
+          <button class="btn-outline">Guest Log in</button>
         </div>
+      </form>
+
+      <div class="ctn-no-user-sub">
+        <span class="span-no-user">Not a Join user?</span>
+        <a class="btn-db" href="./sign_up.html">Sign up</a>
+      </div>
     </div>
 
     <footer class="ft-login">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="legal.html">Legal notice</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="legal.html">Legal notice</a>
     </footer>
-
-
-    
-</body>
+  </body>
 </html>
