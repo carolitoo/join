@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="./css/login_sign_up.css" />
     <link rel="stylesheet" href="style.css" />
-
+    <script src="./js/login.js"></script>
     <script src="script.js"></script>
   </head>
   <body onload="init()">
@@ -21,15 +21,15 @@
         </div>
       </div>
 
-      <form class="ctn-login">
+      <form onsubmit="addUser(); return false;" class="ctn-login">
         <h1>Log in</h1>
         <div class="sep-login"></div>
         <div>
-          <input type="email" placeholder="Email" required />
+          <input id="email" type="email" placeholder="Email" required />
           <img class="input-icon" src="./assets/img/mail.svg" />
         </div>
         <div>
-          <input type="password" placeholder="Password" required />
+          <input id="password" type="password" placeholder="Password" required />
           <img class="input-icon" src="./assets/img/lock.svg" />
         </div>
         <div class="ctn-rem-me">
