@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
     <link rel="stylesheet" href="./css/font.css" />
-    <link rel="stylesheet" href="./css/login_sign_up.css" />
+    <link rel="stylesheet" href="./css/logInsheet.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="./js/signUp.js"></script>
     <script src="script.js"></script>
@@ -19,7 +19,7 @@
         <img class="logo-login" src="./assets/img/logo_dark.svg" />
       </div>
 
-      <form onsubmit="addUser(); return false;" class="ctn-login">
+      <form name="signUpSheet" onsubmit="addUser(); return false;" class="ctn-login">
         <a href="./index.html"
           ><img class="arrow-sign-up" src="./assets/img/arrow-left-line.svg"
         /></a>
@@ -38,7 +38,7 @@
           <img class="input-icon" src="./assets/img/lock.svg" />
         </div>
         <div>
-          <input id="confirm-password" type="password" placeholder="Confirm Password" required />
+          <input id="confirmedPassword" type="password" placeholder="Confirm Password" required />
           <img class="input-icon" src="./assets/img/lock.svg" />
         </div>
         <div class="ctn-rem-me">
@@ -50,7 +50,7 @@
         </div>
 
         <div class="ctn-btn-login">
-          <button class="btn-db">Sign up</button>
+          <button class="btn-db" href="./summary.html">Sign up</button>
         </div>
       </form>
     </div>
