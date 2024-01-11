@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/font.css" />
     <link rel="stylesheet" href="./css/login_sign_up.css" />
     <link rel="stylesheet" href="style.css" />
-
+    <script src="./js/signUp.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -19,26 +19,26 @@
         <img class="logo-login" src="./assets/img/logo_dark.svg" />
       </div>
 
-      <form class="ctn-login">
+      <form onsubmit="addUser(); return false;" class="ctn-login">
         <a href="./index.html"
           ><img class="arrow-sign-up" src="./assets/img/arrow-left-line.svg"
         /></a>
         <h1>Sign up</h1>
         <div class="sep-login"></div>
         <div>
-          <input type="text" placeholder="Name" required />
+          <input id="name" type="text" placeholder="Name" required />
           <img class="input-icon" src="./assets/img/person.svg" />
         </div>
         <div>
-          <input type="email" placeholder="Email" required />
+          <input id="email" type="email" placeholder="Email" required />
           <img class="input-icon" src="./assets/img/mail.svg" />
         </div>
         <div>
-          <input type="password" placeholder="Password" required />
+          <input id="password" type="password" placeholder="Password" required />
           <img class="input-icon" src="./assets/img/lock.svg" />
         </div>
         <div>
-          <input type="password" placeholder="Confirm Password" required />
+          <input id="confirm-password" type="password" placeholder="Confirm Password" required />
           <img class="input-icon" src="./assets/img/lock.svg" />
         </div>
         <div class="ctn-rem-me">
