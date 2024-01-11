@@ -1,18 +1,8 @@
-@font-face {
-  font-family: PT_Reg;
-  src: url(./assets/font/PT_Sans/PTSans-Regular.ttf);
-}
-
-@font-face {
-  font-family: PT_Bol;
-  src: url(./assets/font/PT_Sans/PTSans-Bold.ttf);
-}
-
 
 body {
   margin: 0;
   background-color: #f6f7f8;
-  font-family: Inter, sans-serif;
+  font-family: 'Inter';
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +13,6 @@ body {
 
 h1 {
   font-size: 54px;
-  font-family: PT_Bol, sans-serif;
   margin-bottom: 0;
 }
 
