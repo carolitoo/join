@@ -1,8 +1,7 @@
-
 body {
   margin: 0;
   background-color: #f6f7f8;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +18,7 @@ h1 {
 input {
   height: 36px;
   width: 336px;
-  font-family: PT_Reg;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   color: #000000;
   border-radius: 8px;
