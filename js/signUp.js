@@ -1,23 +1,24 @@
-let users = [];
+let users = [
+    { 'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123' }
+];
 /** 
  * This function is used to add a new User to the user-array
  * 
  * @param {JSON} users - This JSON contains the information (name,email,password) which are neccessary to sign up
 */
+//
+
 function addUser() {
     let name = document.getElementById('name');
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let confirmedPassword = document.getElementById('confirmedPassword');
     if (password.value == confirmedPassword.value) {
-        let newUser = {
-            "name": name.value,
-            "email": email.value,
-            "password": password.value,
-        }
-        users.push(newUser);
+        users.push({name: name.value, email: email.value, password: password.value});
         clearInputfields(name, email, password, confirmedPassword);
-    } else {
+        window.location.href = 'index.html?msg=Du%20hast%20dich%20erfolgreich%20registriert';
+    }
+    else {
         alert('Die Passwörter stimmen nicht überein');
         clearInputfields(name, email, password, confirmedPassword);
     }
