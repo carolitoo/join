@@ -1,0 +1,25 @@
+.headline-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-board-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.input-search-task {
+    margin-bottom: 0;
+    width: 312px;
+}
+
+
+.input-icon-search {
+    position: absolute;
+    margin-left: -40px;
+    margin-top: 8px;
+    height: 32px;
+    width: 32px;
+  }
