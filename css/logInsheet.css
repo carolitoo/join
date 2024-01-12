@@ -20,6 +20,33 @@
   left: 40px;
 }
 
+.signed-successfully-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.signed-successfully {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 312px;
+  height: 74px;
+  padding: 0px 25px;
+  border-radius: 20px;
+  border: none;
+  background-color: #2a3647;
+}
+
+.signed-successfully span {
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
 .sep-login {
   width: 120px;
   height: 3px;

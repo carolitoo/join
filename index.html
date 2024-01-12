@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="./css/logInsheet.css" />
     <link rel="stylesheet" href="style.css" />
 
-    <script src="./js/login.js"></script>
-    <script src="script.js"></script>
+    <script src="./js/login.js" defer></script>
+    <script src="script.js" defer></script>
   </head>
   <body onload="init()">
     <div class="wrapper">
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <form onsubmit="login()" class="ctn-login">
+      <form onsubmit="login(); return false;" class="ctn-login">
         <h1 class="mt-48">Log in</h1>
         <div class="sep-login"></div>
         <div>
@@ -39,11 +39,14 @@
           <p>Remember me</p>
         </div>
 
+
         <div class="ctn-btn-login">
           <button class="btn-db">Log in</button>
           <button class="btn-outline">Guest Log in</button>
         </div>
       </form>
+
+      <div id="msgBox"></div>
 
       <div class="ctn-no-user-sub">
         <span class="span-no-user">Not a Join user?</span>

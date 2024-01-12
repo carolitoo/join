@@ -8,21 +8,23 @@ let users = [
 */
 //
 
+
 function addUser() {
     let name = document.getElementById('name');
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let confirmedPassword = document.getElementById('confirmedPassword');
     if (password.value == confirmedPassword.value) {
-        users.push({name: name.value, email: email.value, password: password.value});
+        users.push({ name: name.value, email: email.value.toLowerCase(), password: password.value });
         clearInputfields(name, email, password, confirmedPassword);
-        window.location.href = 'index.html?msg=Du%20hast%20dich%20erfolgreich%20registriert';
+        window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';  
     }
     else {
         alert('Die Passwörter stimmen nicht überein');
         clearInputfields(name, email, password, confirmedPassword);
     }
 }
+
 
 /**
  * This function clear all input-fields from the form-elememt
@@ -38,5 +40,11 @@ function clearInputfields(name, email, password, confirmedPassword) {
     password.value = '';
     confirmedPassword.value = '';
 }
+
+
+
+
+
+
 
 

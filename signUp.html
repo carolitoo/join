@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign up</title>
 
-    <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign up</title>
 
-    <link rel="stylesheet" href="./css/font.css" />
-    <link rel="stylesheet" href="./css/logInsheet.css" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="./js/signUp.js"></script>
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="header-login">
-        <img class="logo-login" src="./assets/img/logo_dark.svg" />
-      </div>
+  <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
-      <form name="signUpSheet" onsubmit="addUser(); return false;" class="ctn-login">
-        <a href="./index.html"
-          ><img class="arrow-sign-up" src="./assets/img/arrow-left-line.svg"
-        /></a>
-        <h1 class="mt-48">Sign up</h1>
-        <div class="sep-login"></div>
-        <div>
-          <input id="name" type="text" placeholder="Name" required />
-          <img class="input-icon" src="./assets/img/person.svg" />
-        </div>
-        <div>
-          <input id="email" type="email" placeholder="Email" required />
-          <img class="input-icon" src="./assets/img/mail.svg" />
-        </div>
-        <div>
-          <input id="password" type="password" placeholder="Password" required />
-          <img class="input-icon" src="./assets/img/lock.svg" />
-        </div>
-        <div>
-          <input id="confirmedPassword" type="password" placeholder="Confirm Password" required />
-          <img class="input-icon" src="./assets/img/lock.svg" />
-        </div>
-        <div class="ctn-rem-me">
-          <input class="checkbox" type="checkbox" required />
-          <p>
-            I accept the
-            <a class="link-privacy" href="privacy.html">Privacy Policy</a>
-          </p>
-        </div>
+  <link rel="stylesheet" href="./css/font.css" />
+  <link rel="stylesheet" href="./css/logInsheet.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="./js/signUp.js"></script>
+  <script src="script.js"></script>
+</head>
 
-        <div class="ctn-btn-login">
-          <button class="btn-db" href="./summary.html">Sign up</button>
-        </div>
-      </form>
+<body>
+  <div class="wrapper">
+    <div class="header-login">
+      <img class="logo-login" src="./assets/img/logo_dark.svg" />
     </div>
 
-    <footer class="ft-login">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="legal.html">Legal notice</a>
-    </footer>
-  </body>
+    <form name="signUpSheet" onsubmit="addUser(); return false;" class="ctn-login">
+      <a href="./index.html"><img class="arrow-sign-up" src="./assets/img/arrow-left-line.svg" /></a>
+      <h1 class="mt-48">Sign up</h1>
+      <div class="sep-login"></div>
+      <div>
+        <input id="name" type="text" placeholder="Name" required />
+        <img class="input-icon" src="./assets/img/person.svg" />
+      </div>
+      <div>
+        <input id="email" type="email" placeholder="Email" required />
+        <img class="input-icon" src="./assets/img/mail.svg" />
+      </div>
+      <div>
+        <input id="password" type="password" placeholder="Password" required />
+        <img class="input-icon" src="./assets/img/lock.svg" />
+      </div>
+      <div>
+        <input id="confirmedPassword" type="password" placeholder="Confirm Password" required />
+        <img class="input-icon" src="./assets/img/lock.svg" />
+      </div>
+      <div class="ctn-rem-me">
+        <input class="checkbox" type="checkbox" required />
+        <p>
+          I accept the
+          <a class="link-privacy" href="privacy.html">Privacy Policy</a>
+        </p>
+      </div>
+
+      <div class="ctn-btn-login">
+        <button class="btn-db" href="./summary.html">Sign up</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div id="signedUpsuccesfully" class="signed-successfully-container"></div>
+
+  <footer class="ft-login">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="legal.html">Legal notice</a>
+  </footer>
+</body>
+
 </html>
