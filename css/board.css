@@ -1,25 +1,215 @@
 .headline-board {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-board-right {
-    display: flex;
-    align-items: center;
-    gap: 32px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-right: 64px;
+}
+
+.ctn-search-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #a8a8a8;
+  border-radius: 10px;
 }
 
 .input-search-task {
-    margin-bottom: 0;
-    width: 312px;
+  margin-bottom: 0;
+  width: unset;
+  border: none;
+  /* padding-right: 32px;
+    background: url(../assets/img/search_db.svg);
+    background-repeat: no-repeat;
+    background-position: right; */
 }
 
+.input-search-task:hover {
+  cursor: pointer;
+}
 
-.input-icon-search {
-    position: absolute;
-    margin-left: -40px;
-    margin-top: 8px;
-    height: 32px;
-    width: 32px;
-  }
+.search-task-right {
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  gap: 16px;
+  margin-right: 16px;
+}
+
+.ctn-search-task-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.ctn-search-task-icon:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+}
+
+.btn-add-task-db {
+  height: 32px;
+  padding: 8px 16px !important;
+  gap: 4px;
+}
+
+.ctn-board {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-right: 64px;
+}
+
+.ctn-board-status {
+  width: 246px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+}
+
+.ctn-board-status-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #42526e;
+  margin-bottom: 16px;
+}
+
+.icon-plus-square {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-plus-square:hover {
+  cursor: pointer;
+}
+
+.ctn-board-status-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.empty-status {
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  align-items: center;
+  background-color: #e7e7e7;
+  color: #a8a8a8;
+  border: 1px dashed #a8a8a8;
+  border-radius: 10px;
+  box-shadow: 0 0 4 #00000029;
+}
+
+.card-task-small {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: white;
+  border-radius: 24px;
+  gap: 24px;
+  box-shadow: 0px 0px 10px 3px #00000014;
+}
+
+.card-task-small:hover {
+  cursor: pointer;
+}
+
+.card-category-small {
+  width: fit-content;
+  background-color: #0038ff;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px 16px;
+  border-radius: 8px;
+}
+
+.ctn-card-text-small {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  gap: 8px;
+}
+
+.card-title-small {
+  color: #2a3647;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.card-description-small {
+  color: #a8a8a8;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.ctn-card-subtasks-small {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ctn-card-progress-bar-small {
+  height: 8px;
+  flex: 1;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+}
+
+.card-progress-bar-small {
+  height: 8px;
+  width: 50%;
+  background-color: #4589ff;
+  border-radius: 8px;
+}
+
+.card-span-subtasks-small {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.ctn-card-user-prio-small {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ctn-card-assigned-users-small {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.card-assigned-user-small {
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  background-color: #ff7a00;
+  color: white;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  margin-left: -8px;
+}
+
+.card-assigned-user-small:first-of-type {
+  margin-left: 0;
+}
