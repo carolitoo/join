@@ -1,5 +1,7 @@
-.form-ctn {
+.form-layout {
     margin-top: 32px;
+    height: 440px;
+    width: 800px;   
 }
 
 .add_task_txt_forma {
@@ -24,6 +26,12 @@
     margin-bottom: 8px;
 }
 
+.parting_line_grey {
+  height: 424px;
+  width: 2px; 
+  background: #D1D1D1;
+}
+
 .resizable {
     resize: vertical;
 }
@@ -34,7 +42,7 @@ select {
     padding: 12px, 16px, 12px, 16px;
     border-radius: 10px;
     border: 1px;
-    justify: space-between;
+    content: space-between;
     font-size: 20px;
 }
 
@@ -71,18 +79,37 @@ option {
     right: 1rem;
     pointer-events: none;
   }
-  /*Arrow design */
-  .custom-select::before {
-    border-left: var(--size) solid transparent;
-    border-right: var(--size) solid transparent;
-    border-bottom: var(--size) solid black;
-    top: 40%;
-  }
+ 
   /*Arrow design */
   .custom-select::after {
     border-left: var(--size) solid transparent;
     border-right: var(--size) solid transparent;
     border-top: var(--size) solid black;
-    top: 55%;
+    top: 45%;
+  }
+
+  .prio_box_layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
+  .urgent-btn {
+    width: 136px;
+    height: 56px;
+    padding: 16px, 10px, 16px, 10px;
+    border-radius: 10px;
+    gap: 8px;
+    border: 0px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    display: flex;
+    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+  }

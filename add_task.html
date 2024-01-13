@@ -52,10 +52,11 @@
   <div class="ctn-content">
 
     <h1>Add Task</h1>
-    <div class="form-ctn">
+    
 
-      <form onsubmit="addTask(); return false">
-        <div class="form-left">
+      <form class="form-layout" onsubmit="addTask(); return false">
+       
+        
           <div class="input_box_layout">
             <div class="description-with-star">
               <span class="add_task_txt_format">Title</span>
@@ -71,11 +72,11 @@
             <input class="resizable" id="titleInput" required minlength="2" type="text"
               placeholder="Enter a description">
           </div>
-
           <div class="input_box_layout">
             <div class="description-with-star">
               <span class="add_task_txt_format">Assigned to</span>
             </div>
+
             <div class="custom-select" style="width:200px;">
               <select>
                 <option class="option" value="0">Select contacts to assaign</option>
@@ -89,12 +90,42 @@
                 <option value="8">Username Lastname</option>
               </select>
             </div>
-
           </div>
-        </div>
-    </div>
-    </form>
 
-  </div>
+          <!-- Grey Line <div class="parting_line_grey"></div>-->
+         
+            <div class="input_box_layout">
+              
+                <span class="add_task_txt_format">Prio</span>
+                <div class="prio_box_layout">
+
+                  <button class="urgent-btn">Urgent
+                      <img src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
+                    </button>
+
+                    <button class="urgent-btn">Medium
+                      <img src="./assets/img/Prio media.svg" class="urgent-icon" style="fill:#FFA800">
+                    </button>
+
+                    <button class="urgent-btn">Low
+                      <img src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
+                    </button>
+
+                </div>    
+            </div>
+
+            <div class="input_box_layout">
+              <div class="description-with-star">
+                <span class="add_task_txt_format">Title</span>
+                <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+              </div>
+              <input class="input" id="titleInput" required minlength="2" type="text" placeholder="Enter a title">
+            </div>
+          </div>
+         
+        </div>
+
+
+    
 
 </body>
