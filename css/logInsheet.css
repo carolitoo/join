@@ -20,31 +20,44 @@
   left: 40px;
 }
 
-.signed-successfully-container {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.signed-successfully {
+.successfullyBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 312px;
-  height: 74px;
-  padding: 0px 25px;
-  border-radius: 20px;
-  border: none;
-  background-color: #2a3647;
+  font-size: 18px;
+  z-index: 1000 !important;
+  position: absolute !important;
+  bottom: 190px !important;
+  left: calc(50% - 326px / 2) !important;
+  background: #2A3647 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 10px !important;
+  width: 293px !important;
+  height: 64px !important;
+  animation: slide-in 0.5s ease, slide-out 0.5s ease 2s forwards;
 }
 
-.signed-successfully span {
-  font-size: 20px;
-  font-weight: 400;
-  color: #ffffff;
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 
 .sep-login {
