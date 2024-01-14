@@ -9,7 +9,6 @@ function callStatusofSignUp() {
     const msg = urlParams.get('msg');
     const msgBox = document.getElementById('msgBox');
     if (msg) {
-        // Erstelle ein <span>-Element und füge es dem msgBox-Container hinzu
         const msgSpan = document.createElement('span');
         msgSpan.innerHTML = msg;
         msgSpan.classList.add('successfullyBtn');

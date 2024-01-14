@@ -14,17 +14,14 @@ function addUser() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let confirmedPassword = document.getElementById('confirmedPassword');
-    if (password.value == confirmedPassword.value) {
-        users.push({ name: name.value, email: email.value.toLowerCase(), password: password.value });
-        clearInputfields(name, email, password, confirmedPassword);
-        window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';  
+    if (name.value.length < 2) {
+        displayErrorMessage('The name must contain at least two letters', name);
+        return;
     }
-    else {
-        alert('Die Passwörter stimmen nicht überein');
-        clearInputfields(name, email, password, confirmedPassword);
-    }
+    users.push({ name: name.value, email: email.value.toLowerCase(), password: password.value });
+    clearInputfields(name, email, password, confirmedPassword);
+    window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
 }
-
 
 /**
  * This function clear all input-fields from the form-elememt
@@ -41,7 +38,12 @@ function clearInputfields(name, email, password, confirmedPassword) {
     confirmedPassword.value = '';
 }
 
-
+function displayErrorMessage(message, element) {
+    let errorMessage = document.createElement('div');
+    errorMessage.innerHTML = message;
+    errorMessage.style.cssText = 'color: red; margin: -27px 0 9px 6px; font-size: small;';
+    element.parentNode.appendChild(errorMessage);
+}
 
 
 
