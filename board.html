@@ -12,121 +12,121 @@
     <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
+    <script src="./js/board.js"></script>
   </head>
-  <body></body>
+
+  <body onload="initBoard()">
+    <header>
+      <div>
+        <span>Kanban Project Management Tool</span>
+        <img class="logo-header" src="./assets/img/logo_dark.svg" />
+      </div>
+
+      <div class="header-right">
+        <a class="ctn-icon-help-header"
+          ><img class="icon-help-header" src="./assets/img/help.svg"
+        /></a>
+        <a><div class="icon-user-header">AM</div></a>
+      </div>
+    </header>
+
+    <div class="sidebar">
+      <a class="logo-sidebar" href="index.html"
+        ><img class="img-logo-sidebar" src="./assets/img/logo_light.svg"
+      /></a>
+      <nav>
+        <a class="tab-selected" href="summary.html"
+          ><img
+            class="nav-icon"
+            src="./assets/img/summary_white.svg"
+          />Summary</a
+        >
+        <a href="add_task.html"
+          ><img class="nav-icon" src="./assets/img/add_task.svg" />Add Task</a
+        >
+        <a href="board.html"
+          ><img class="nav-icon" src="./assets/img/board.svg" />Board</a
+        >
+        <a href="contact.html"
+          ><img class="nav-icon" src="./assets/img/contacts.svg" />Contacts</a
+        >
+      </nav>
+      <div class="ctn-sidebar-legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="legal.html">Legal notice</a>
+      </div>
+    </div>
+
+    <div class="ctn-content">
+      <div class="headline-board">
+        <h1>Board</h1>
+        <div class="header-board-right">
+          <div class="ctn-search-task">
+            <input class="input-search-task" placeholder="Find Task" />
+            <div class="search-task-right">
+              <img src="./assets/img/separator_grey.svg" />
+              <div class="ctn-search-task-icon">
+                <img src="./assets/img/search_db.svg" />
+              </div>
+            </div>
+          </div>
+          <div class="btn-db btn-add-task-db">
+            <span>Add task</span>
+            <img class="icon-btn" src="./assets/img/add_white.svg" />
+          </div>
+        </div>
+      </div>
+
+      <div class="ctn-board">
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">To do</span>
+            <img
+              class="icon-plus-square"
+              src="./assets/img/plus_square_default.svg"
+            />
+          </div>
+          <div class="ctn-board-status-bottom" ondragover="allowDrop(event)" ondrop="moveElementTo('toDo')">
+            <div class="empty-status" id="empty-tasks-toDo">No tasks To do</div>
+            <div class="ctn-tasks" id="tasks-toDo"></div>
+          </div>
+        </div>
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">In Progress</span>
+            <img
+              class="icon-plus-square"
+              src="./assets/img/plus_square_default.svg"
+            />
+          </div>
+          <div class="ctn-board-status-bottom" ondragover="allowDrop(event)" ondrop="moveElementTo('inProgress')">
+            <div class="empty-status d-none" id="empty-tasks-inProgress">No tasks In Progress</div>
+            <div class="ctn-tasks" id="tasks-inProgress"></div>
+          </div>
+        </div>
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">Await Feedback</span>
+            <img
+              class="icon-plus-square"
+              src="./assets/img/plus_square_default.svg"
+            />
+          </div>
+          <div class="ctn-board-status-bottom" ondragover="allowDrop(event)" ondrop="moveElementTo('awaitFeedback')">
+            <div class="empty-status d-none" id="empty-tasks-awaitFeedback">No tasks Await Feedback</div>
+            <div class="ctn-tasks" id="tasks-awaitFeedback"></div>
+          </div>
+        </div>
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">Done</span>
+          </div>
+          <div class="ctn-board-status-bottom" ondragover="allowDrop(event)" ondrop="moveElementTo('done')">
+            <div class="empty-status" id="empty-tasks-done">No tasks Done</div>
+            <div class="ctn-tasks" id="tasks-done"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
-
-<header>
-  <div>
-    <span>Kanban Project Management Tool</span>
-    <img class="d-none" />
-  </div>
-
-  <div class="header-right">
-    <a class="ctn-logo-help-header"
-      ><img class="logo-help-header" src="./assets/img/help.svg"
-    /></a>
-    <a><div class="icon-user-header">AM</div></a>
-  </div>
-</header>
-
-<div class="sidebar">
-  <a class="logo-sidebar" href="index.html"
-    ><img class="img-logo-sidebar" src="./assets/img/logo_light.svg"
-  /></a>
-  <nav>
-    <a class="tab-selected" href="summary.html"
-      ><img src="./assets/img/summary_white.svg" />Summary</a
-    >
-    <a href="add_task.html"><img src="./assets/img/add_task.svg" />Add Task</a>
-    <a href="board.html"><img src="./assets/img/board.svg" />Board</a>
-    <a href="contact.html"><img src="./assets/img/contacts.svg" />Contacts</a>
-  </nav>
-  <div class="ctn-sidebar-legal">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="legal.html">Legal notice</a>
-  </div>
-</div>
-
-<div class="ctn-content">
-  <div class="headline-board">
-    <h1>Board</h1>
-    <div class="header-board-right">
-      <div class="ctn-search-task">
-        <input class="input-search-task" placeholder="Find Task" />
-        <div class="search-task-right">
-          <img src="./assets/img/separator_grey.svg" />
-          <div class="ctn-search-task-icon">
-            <img src="./assets/img/search_db.svg" />
-          </div>
-        </div>
-      </div>
-      <div class="btn-db btn-add-task-db">
-        Add task
-        <img class="icon-btn" src="./assets/img/add_white.svg" />
-      </div>
-    </div>
-  </div>
-
-  <div class="ctn-board">
-    <div class="ctn-board-status">
-      <div class="ctn-board-status-top">
-        <span class="headline-status">To do</span>
-        <img class="icon-plus-square" src="./assets/img/plus_square_default.svg" />
-      </div>
-      <div class="ctn-board-status-bottom">
-        <div class="empty-status">No tasks To do</div>
-      </div>
-    </div>
-    <div class="ctn-board-status">
-      <div class="ctn-board-status-top">
-        <span class="headline-status">In Progress</span>
-        <img class="icon-plus-square" src="./assets/img/plus_square_default.svg" />
-      </div>
-      <div class="ctn-board-status-bottom">
-        <div class="empty-status d-none">No tasks In Progress</div>
-        <div class="ctn-tasks-progress">
-          <div class="card-task-small">
-            <div class="card-category-small">User Story</div>
-            <div class="ctn-card-text-small">
-              <div class="card-title-small">Kochwelt Page & Recipe Recommander</div>
-              <div class="card-description-small">Build start page with recipe recommendation...</div>
-            </div>
-            <div class="ctn-card-subtasks-small">
-              <div class="ctn-card-progress-bar-small">
-                <div class="card-progress-bar-small"></div>
-              </div>
-              <span class="card-span-subtasks-small">1/2 Subtasks</span>
-            </div>
-            <div class="ctn-card-user-prio-small">
-              <div class="ctn-card-assigned-users-small">
-                <div class="card-assigned-user-small">AM</div>
-                <div class="card-assigned-user-small">EM</div>
-                <div class="card-assigned-user-small">MB</div>
-              </div>
-              <img class="img-card-priority-small" src="./assets/img/prio_media_color.svg">
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="ctn-board-status">
-      <div class="ctn-board-status-top">
-        <span class="headline-status">Await Feedback</span>
-        <img class="icon-plus-square" src="./assets/img/plus_square_default.svg" />
-      </div>
-      <div class="ctn-board-status-bottom">
-        <div class="empty-status">No tasks Await Feedback</div>
-      </div>
-    </div>
-    <div class="ctn-board-status">
-      <div class="ctn-board-status-top">
-        <span class="headline-status">Done</span>
-      </div>
-      <div class="ctn-board-status-bottom">
-        <div class="empty-status">No tasks Done</div>
-      </div>
-    </div>
-  </div>
-</div>

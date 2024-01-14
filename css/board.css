@@ -101,6 +101,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 16px;
+  padding-bottom: 400px;
 }
 
 .empty-status {
@@ -117,7 +119,17 @@
   box-shadow: 0 0 4 #00000029;
 }
 
+.ctn-tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 24px;
+  gap: 16px;
+}
+
 .card-task-small {
+  width: 214px;
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -189,11 +201,13 @@
 .ctn-card-user-prio-small {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .ctn-card-assigned-users-small {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .card-assigned-user-small {
@@ -212,4 +226,9 @@
 
 .card-assigned-user-small:first-of-type {
   margin-left: 0;
+}
+
+.img-card-priority-small {
+  width: 20px;
+  height: 20px;
 }

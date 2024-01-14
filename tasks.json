@@ -1,0 +1,78 @@
+[
+  {
+    "idTask": 1,
+    "titleTask": "Kochwelt Page & Recipe Recommender",
+    "descriptionTask": "Build start page with recipe recommendation.",
+    "assignedUsers": [
+      {
+        "idUser": 1,
+        "acronymUser": "EM",
+        "nameUser": "Emmanuel Mauer",
+        "mailUser": "emmanuel.mauer@online.com"
+      },
+      {
+        "idUser": 2,
+        "acronymUser": "MB",
+        "nameUser": "Marcel Bauer",
+        "mailUser": "marcel.bauer@online.com"
+      },
+      {
+        "idUser": 3,
+        "acronymUser": "AM",
+        "nameUser": "Anton Mayer",
+        "mailUser": "anton.mayer@online.com"
+      }
+    ],
+    "dueDate": "2023-05-10T20:15:00.000Z",
+    "priority": "Medium",
+    "category": "User Story",
+    "subtasks": [
+      {
+        "idSubtask": 1,
+        "titleSubtask": "Implement Recipe Recommendation",
+        "statusSubtask": "closed"
+      },
+      {
+        "idSubtask": 2,
+        "titleSubtask": "Start Page Layout",
+        "statusSubtask": "open"
+      }
+    ],
+    "statusTask": "toDo"
+  },
+  {
+    "idTask": 2,
+    "titleTask": "CSS Architecture Planning",
+    "descriptionTask": "Define CSS naming conventions and structure.",
+    "assignedUsers": [
+      {
+        "idUser": 4,
+        "acronymUser": "SM",
+        "nameUser": "Sofia Müller",
+        "mailUser": "sofia.mueller@online.com"
+      },
+      {
+        "idUser": 5,
+        "acronymUser": "BZ",
+        "nameUser": "Benedikt Ziegler",
+        "mailUser": "benedikt.ziegler@online.com"
+      }
+    ],
+    "dueDate": "2023-09-02T20:15:00.000Z",
+    "priority": "Urgent",
+    "category": "Technical Task",
+    "subtasks": [
+      {
+        "idSubtask": 1,
+        "titleSubtask": "Establish CSS Methology",
+        "statusSubtask": "closed"
+      },
+      {
+        "idSubtask": 2,
+        "titleSubtask": "Setup Base Styles",
+        "statusSubtask": "closed"
+      }
+    ],
+    "statusTask": "done"
+  }
+]
