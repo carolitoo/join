@@ -21,8 +21,7 @@ header {
   }
 
   .logo-header {
-    height: 48px;
-    width: 48px;
+    width: 32px;
     display: none;
   }
   
@@ -158,12 +157,23 @@ header {
     --margin-left-content: 64px !important;
   }
 
+  header {
+    height: 80px !important;
+    /* padding-left: var(--margin-left-content);
+    padding-right: 40px; */
+  }
+
   header span {
     display: none;
   }
 
   .icon-help-header {
     display: none;
+  }
+
+  .icon-user-header {
+    width: 40px;
+    height: 40px;
   }
 
   .sidebar {

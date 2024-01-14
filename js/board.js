@@ -4,6 +4,7 @@ let tasks = [];
 
 
 async function initBoard() {
+    await includeHTML();
     await loadTasks();
     renderBoard();
 }

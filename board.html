@@ -16,46 +16,10 @@
   </head>
 
   <body onload="initBoard()">
-    <header>
-      <div>
-        <span>Kanban Project Management Tool</span>
-        <img class="logo-header" src="./assets/img/logo_dark.svg" />
-      </div>
 
-      <div class="header-right">
-        <a class="ctn-icon-help-header"
-          ><img class="icon-help-header" src="./assets/img/help.svg"
-        /></a>
-        <a><div class="icon-user-header">AM</div></a>
-      </div>
-    </header>
-
-    <div class="sidebar">
-      <a class="logo-sidebar" href="index.html"
-        ><img class="img-logo-sidebar" src="./assets/img/logo_light.svg"
-      /></a>
-      <nav>
-        <a class="tab-selected" href="summary.html"
-          ><img
-            class="nav-icon"
-            src="./assets/img/summary_white.svg"
-          />Summary</a
-        >
-        <a href="add_task.html"
-          ><img class="nav-icon" src="./assets/img/add_task.svg" />Add Task</a
-        >
-        <a href="board.html"
-          ><img class="nav-icon" src="./assets/img/board.svg" />Board</a
-        >
-        <a href="contact.html"
-          ><img class="nav-icon" src="./assets/img/contacts.svg" />Contacts</a
-        >
-      </nav>
-      <div class="ctn-sidebar-legal">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="legal.html">Legal notice</a>
-      </div>
-    </div>
+    <div>
+    <header w3-include-html="./assets/templates/header.html"></header>
+    <div class="sidebar" w3-include-html="./assets/templates/sidebarFooter.html"></div>
 
     <div class="ctn-content">
       <div class="headline-board">
