@@ -149,6 +149,25 @@ function moveElementTo(newStatus) {
 }
 
 
+//NOT WORKING YET
+// function searchTask() {
+//     let searchInput = document.getElementById('searchTask').value.toUpperCase();
+
+//     for (let i=0; i< tasks.length; i++) {
+//         let title = document.getElementById(`title-task-${i}`).innerHTML.toUpperCase();
+//         let description = document.getElementById(`description-task-${i}`).innerHTML.toUpperCase();
+
+//         // if (title.indexOf(searchInput) > -1 || description.indexOf(searchInput) > -1) {
+//         if (title.indexOf(searchInput) > -1) {
+//             console-log(searchInput)
+//             document.getElementById(`card-task-small-${i}`).classList.remove('d-none');
+//         } else {
+//             document.getElementById(`card-task-small-${i}`).classList.add('d-none');
+//         }
+//     }
+// }
+
+
 // open layover/ detailed view
 function openElement(idTask) {
 
@@ -168,11 +187,11 @@ function openElement(idTask) {
  */
 async function generateCardSmallHTML(positionOfTask) {
     return /*html*/ `
-    <div class="card-task-small" draggable="true" ondragstart="moveElement(${tasks[positionOfTask]['idTask']})" onclick="openElement(${tasks[positionOfTask]['idTask']})">
+    <div class="card-task-small" id="card-task-small-${tasks[positionOfTask]['idTask']}" draggable="true" ondragstart="moveElement(${tasks[positionOfTask]['idTask']})" onclick="openElement(${tasks[positionOfTask]['idTask']})">
         <div class="card-category-small" id="category-task-${tasks[positionOfTask]['idTask']}">${tasks[positionOfTask]['category']}</div>
         <div class="ctn-card-text-small">
-            <div class="card-title-small">${tasks[positionOfTask]['titleTask']}</div>
-            <div class="card-description-small">${tasks[positionOfTask]['descriptionTask']}</div>
+            <div class="card-title-small" id="title-task-${tasks[positionOfTask]['idTask']}">${tasks[positionOfTask]['titleTask']}</div>
+            <div class="card-description-small" id="description-task-${tasks[positionOfTask]['idTask']}">${tasks[positionOfTask]['descriptionTask']}</div>
         </div>
 
         <div class="ctn-card-subtasks-small">

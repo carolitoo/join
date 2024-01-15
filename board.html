@@ -17,7 +17,6 @@
 
   <body onload="initBoard()">
 
-    <div>
     <header w3-include-html="./assets/templates/header.html"></header>
     <div class="sidebar" w3-include-html="./assets/templates/sidebarFooter.html"></div>
 
@@ -26,7 +25,7 @@
         <h1>Board</h1>
         <div class="header-board-right">
           <div class="ctn-search-task">
-            <input class="input-search-task" placeholder="Find Task" />
+            <input class="input-search-task" id="searchTask" onkeyup="searchTask()" placeholder="Find Task" />
             <div class="search-task-right">
               <img src="./assets/img/separator_grey.svg" />
               <div class="ctn-search-task-icon">
@@ -91,6 +90,12 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div>
+      <diV>
+
+      </diV>
     </div>
   </body>
 </html>

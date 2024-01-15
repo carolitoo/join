@@ -1,0 +1,25 @@
+.form-add-task-test {
+  display: flex;
+  justify-content: flex-start;
+  height: unset;
+  width: unset;
+  gap: 40px;
+}
+
+.separator-add-task-test {
+    width: 1px;
+    background-color: #D1D1D1;
+}
+
+
+@media (max-width: 1121px) {
+
+    .form-add-task-test {
+        flex-wrap: wrap;
+    }
+
+    .separator-add-task-test {
+        display: none;
+    }
+}
+
