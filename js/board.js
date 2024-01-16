@@ -173,6 +173,10 @@ function openElement(idTask) {
 
 }
 
+// close layover/ detailed view
+function closeElement(idTask) {
+
+}
 
 
 // **** GENERATE HTML-CODE ****

@@ -152,7 +152,7 @@ header {
 
   body {
     --height-header: 80px !important;
-    --margin-top-content: 206px;
+    --margin-top-content: 128px !important;
     --margin-left-content: 64px !important;
   }
 
