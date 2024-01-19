@@ -43,9 +43,10 @@ function clearInputfields(name, email, password, confirmedPassword) {
 
 
 /**
+ * A function that outputs an error message if the fields with the id 'name' or 'password/confirmedpassword' have not been filled in correctly.
  * 
  * @param {string} message - it's the message which is shown, if the condition is not fulfilled.
- * @param {*valueOf} element - value of the input-box (personal name or confirmed password) 
+ * @param {valueOf} element - value of the input-box (personal name or confirmed password) 
  */
 function displayErrorMessage(message, element) {
     let errorMessage = document.createElement('div');
@@ -54,18 +55,30 @@ function displayErrorMessage(message, element) {
     element.parentNode.appendChild(errorMessage);
 }
 
-function togglePasswordVisibility(inputId, iconId) {
+
+/**
+ * A function that changes the icon if you have typed something into the input field with the id 'password/confirmedPassword'.
+ * 
+ * @param {string} inputId - the id from the first or second password-field (e.g first: password, second: confirmedPassword)
+ * @param {string} iconId - the id from the first or second icon in the password-field (e.g first: password, second: confirmedPassword)
+ */
+function togglePasswordIcon(inputId, iconId) {
     let passwordInput = document.getElementById(inputId);
     let passwordIcon = document.getElementById(iconId);
 
     if (passwordInput.value.length > 0) {
         passwordIcon.setAttribute('src', './assets/img/visibility_off.svg');
     } else {
-        // Hier kannst du das Bild wieder auf das ursprüngliche Lock-Symbol ändern
         passwordIcon.setAttribute('src', './assets/img/lock.svg');
     }
 }
 
+
+/**
+ * A function that makes it possible to display the password/confirmedPassword via onclick.
+ * 
+ * @param {string} inputId - the id from the first or second password-field (e.g first: password, second: confirmedPassword)
+ */
 function showPassword(inputId) {
     let passwordInput = document.getElementById(inputId);
 
