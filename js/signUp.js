@@ -54,8 +54,25 @@ function displayErrorMessage(message, element) {
     element.parentNode.appendChild(errorMessage);
 }
 
+function togglePasswordVisibility(inputId, iconId) {
+    let passwordInput = document.getElementById(inputId);
+    let passwordIcon = document.getElementById(iconId);
 
+    if (passwordInput.value.length > 0) {
+        passwordIcon.setAttribute('src', './assets/img/visibility_off.svg');
+    } else {
+        // Hier kannst du das Bild wieder auf das ursprüngliche Lock-Symbol ändern
+        passwordIcon.setAttribute('src', './assets/img/lock.svg');
+    }
+}
 
+function showPassword(inputId) {
+    let passwordInput = document.getElementById(inputId);
 
-
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+}
 
