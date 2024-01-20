@@ -56,17 +56,19 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 18px;
+    cursor: pointer;
+    animation-timing-function: ease-in-out;
+    animation-duration: 100ms;
 }
 
 .todo_done_box:hover {
     background: #2A3647;
-    animation-timing-function: ease-out;
-    animation-duration: 80ms;
-    cursor: pointer;
+    width: 283px;
+    height: 184px;
+    color: #ffffff;
 }
 
-
-.icon-blue {
+.icon-blue-pen {
     width: 69px;
     height: 69px;
     border-radius: 100%;
@@ -75,6 +77,37 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url(/assets/img/edit.svg);  
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.todo_done_box:hover .icon-blue-pen {
+    background: #ffffff;  
+    background-image: url(/assets/img/edit_blue.svg);  
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-blue-checkmark {
+    width: 69px;
+    height: 69px;
+    border-radius: 100%;
+    background: #2A3647;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(/assets/img/vector.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.todo_done_box:hover .icon-blue-checkmark {
+    background: #ffffff;  
+    background-image: url(/assets/img/Vector_blue.svg);  
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .done_ctn {
@@ -100,6 +133,22 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 61px;
+}
+
+.urgent_date_ctn:hover {
+    border: unset;
+    width: 560px;
+    height: 168px;
+    border-radius: 30px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    background-color: #2A3647;
+    box-shadow: 0px 0px 14px 3px #0000000A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 61px;
+    color: #ffffff;
 }
 
 .urgent_content {
@@ -153,6 +202,11 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.task_progr_feedb_box:hover {
+    color: #ffffff;
+    background: #2A3647;
 }
 
 .number-and-txt-box{
