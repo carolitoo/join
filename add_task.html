@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Task</title>
+  <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
+
+  <link rel="stylesheet" href="./css/font.css" />
+  <link rel="stylesheet" href="./css/template.css" />
+  <link rel="stylesheet" href="./css/addTask.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="script.js"></script>
+  <script src="addTask.js"></script>
+
+</head>
+
+<body onload="init()">
+
+  <header w3-include-html="./assets/templates/header.html"></header>
+  <div class="sidebar" w3-include-html="./assets/templates/sidebarFooter.html"></div>
+
+  <div class="ctn-content">
+
+    <h1>Add Task</h1>
+    <div>
+
+      <form class="form-layout" onsubmit="addTask(); return false">
+
+        <div class="add-task-left-column">
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Title</span>
+              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            </div>
+            <input class="input-add-task" id="titleInput" required minlength="2" type="text"
+              placeholder="Enter a title">
+          </div>
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Description</span>
+            </div>
+            <input class="input-add-task" id="titleInput" required minlength="2" type="text"
+              placeholder="Enter a description">
+          </div>
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Assigned to</span>
+            </div>
+            <div class="custom-select">
+              <select class="select.dropdown_list">
+                <div class="grey-dropdwon-circle"></div>
+                <option value="0">Select contacts to assaign</option>
+                <option value="1">Username Lastname</option>
+                <option value="2">Username Lastname</option>
+                <option value="3">Username Lastname</option>
+                <option value="4">Username Lastname</option>
+                <option value="5">Username Lastname</option>
+                <option value="6">Username Lastname</option>
+                <option value="7">Username Lastname</option>
+                <option value="8">Username Lastname</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="parting_line_grey"></div>
+
+        <div class="add-task-right-column">
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Due date</span>
+              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            </div>
+            <img src="./assets/img/event.svg" class="icon-calendar">
+            <input class="input-add-task" required minlength="2" type="text" placeholder="dd/mm/yyyy">
+          </div>
+
+          <div class="input_box_layout">
+            <span class="add_task_txt_format">Prio</span>
+            <div class="prio_box_layout">
+
+              <button id="urgentButton" class="prio-btn red-btn" onclick="changeButtonColorsUrgent()">Urgent
+                <img src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
+              </button>
+
+              <button id="mediumButton" class="prio-btn">Medium
+                <img src="./assets/img/Prio media.svg" class="urgent-icon" style="fill:#FFA800">
+              </button>
+
+              <button id="lowButton" class="prio-btn">Low
+                <img src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
+              </button>
+
+            </div>
+          </div>
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Category</span>
+              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            </div>
+            <div class="custom-select">
+              <select class="select.dropdown_list">
+                <option value="0">Select task category</option>
+                <option value="1">Technical Task</option>
+                <option value="2">User Story</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input_box_layout">
+            <span class="add_task_txt_format">Subtasks</span>
+            <input class="input-add-task" id="titleInput" required minlength="2" type="text"
+              placeholder="Enter a title">
+          </div>
+        </div>
+    </div>
+      <div class="bottom-section-ctn">
+        <div class="description-with-star">
+          <p class="reqiured_txt_format" ; style="color: #FF8190;">*</p>
+          <span class="reqiured_txt_format">This field is required</span>
+        </div>
+        <div class="clear_create_btn_ctn">
+          <button class="clear-btn" onclick="clearTasks()">Clear</button>
+          <button class="create-task-btn" onclick="createTask()">Create Task</button>
+        </div>
+      </div>
+  </div>
+  </div>
+
+  
+
+</body>

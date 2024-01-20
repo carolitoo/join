@@ -133,6 +133,7 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 61px;
+    cursor: pointer;
 }
 
 .urgent_date_ctn:hover {
@@ -202,6 +203,7 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .task_progr_feedb_box:hover {
