@@ -1,3 +1,5 @@
+let addedSubtasks = []
+
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
@@ -47,4 +49,21 @@ function changeButtonColorsLow(){
     document.getElementById('urgentButton').classList.remove("urgent-btn-red");
     document.getElementById('urgentButton').classList.add("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta2.svg';
+}
+
+function addSubtask() {
+    
+    for (let i = 0; i < addedSubtasks.length; i++) {
+        const addedSubtask = addedSubtasks[i];
+
+        
+        
+    }
+
+
+
+}
+
+function saveSubtaskToArray {
+    let newSubtask = document.getElementById('subtaskInput').value;
 }

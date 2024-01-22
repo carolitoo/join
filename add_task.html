@@ -117,13 +117,11 @@
 
           <div class="input_box_layout">
             <span class="add_task_txt_format">Subtasks</span>
-            <div class="subtask-input-box">
-              <input class="input-add-subtask" id="titleInput" required minlength="2" type="text"
+              <input class="input-add-task" id="subtaskInput" required minlength="2" type="text"
                 placeholder="Enter a title">
-              <div class="subtask-plus-btn"></div>
-
-            </div>
+              <div id="plus-btn" class="subtask-plus-btn"></div>
           </div>
+
         </div>
     </div>
     <div class="bottom-section-ctn">
@@ -133,6 +131,7 @@
       </div>
       <div class="clear_create_btn_ctn">
         <button class="clear-btn" onclick="clearTasks()">Clear
+          <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark">
         </button>
         <button class="create-task-btn" onclick="createTask()">Create Task
           <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
