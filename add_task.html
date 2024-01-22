@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="style.css" />
 
   <script src="script.js"></script>
-  <script src="addTask.js"></script>
+  <script src="./js/addTask.js"></script>
 
 </head>
 
@@ -79,23 +79,23 @@
               <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
             </div>
             <img src="./assets/img/event.svg" class="icon-calendar">
-            <input class="input-add-task" required minlength="2" type="text" placeholder="dd/mm/yyyy">
+            <input class="input-add-task" required type="datetime" placeholder="dd/mm/yyyy">
           </div>
 
           <div class="input_box_layout">
             <span class="add_task_txt_format">Prio</span>
             <div class="prio_box_layout">
 
-              <button id="urgentButton" class="prio-btn red-btn" onclick="changeButtonColorsUrgent()">Urgent
-                <img src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
+              <button id="urgentButton" class="prio-btn-neutral" onclick="changeButtonColorsUrgent()">Urgent
+                <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
               </button>
 
-              <button id="mediumButton" class="prio-btn">Medium
-                <img src="./assets/img/Prio media.svg" class="urgent-icon" style="fill:#FFA800">
+              <button id="mediumButton" class="prio-btn-neutral" onclick="changeButtonColorsMedium()">Medium
+                <img id="medium-icon" src="./assets/img/Prio media y.svg" class="urgent-icon" style="fill:#FFA800">
               </button>
 
-              <button id="lowButton" class="prio-btn">Low
-                <img src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
+              <button id="lowButton" class="prio-btn-neutral" onclick="changeButtonColorsLow()">Low
+                <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
               </button>
 
             </div>
@@ -117,24 +117,31 @@
 
           <div class="input_box_layout">
             <span class="add_task_txt_format">Subtasks</span>
-            <input class="input-add-task" id="titleInput" required minlength="2" type="text"
-              placeholder="Enter a title">
+            <div class="subtask-input-box">
+              <input class="input-add-subtask" id="titleInput" required minlength="2" type="text"
+                placeholder="Enter a title">
+              <div class="subtask-plus-btn"></div>
+
+            </div>
           </div>
         </div>
     </div>
-      <div class="bottom-section-ctn">
-        <div class="description-with-star">
-          <p class="reqiured_txt_format" ; style="color: #FF8190;">*</p>
-          <span class="reqiured_txt_format">This field is required</span>
-        </div>
-        <div class="clear_create_btn_ctn">
-          <button class="clear-btn" onclick="clearTasks()">Clear</button>
-          <button class="create-task-btn" onclick="createTask()">Create Task</button>
-        </div>
+    <div class="bottom-section-ctn">
+      <div class="description-with-star">
+        <p class="reqiured_txt_format" ; style="color: #FF8190;">*</p>
+        <span class="reqiured_txt_format">This field is required</span>
       </div>
+      <div class="clear_create_btn_ctn">
+        <button class="clear-btn" onclick="clearTasks()">Clear
+        </button>
+        <button class="create-task-btn" onclick="createTask()">Create Task
+          <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
+        </button>
+      </div>
+    </div>
   </div>
   </div>
 
-  
+
 
 </body>
