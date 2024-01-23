@@ -38,6 +38,10 @@
   animation: slide-in 0.5s ease, slide-out 0.5s ease 2s forwards;
 }
 
+input:focus {
+  border-color: #ff0000;
+}
+
 @keyframes slide-in {
   from {
     transform: translateY(100%);

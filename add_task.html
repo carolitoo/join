@@ -13,75 +13,50 @@
   <link rel="stylesheet" href="style.css" />
 
   <script src="script.js"></script>
+  <script src="./js/addTask.js"></script>
 
 </head>
 
-<body>
+<body onload="init()">
 
-
-
-
-  <header>
-    <div>
-      <span>Kanban Project Management Tool</span>
-      <img class="d-none">
-    </div>
-
-    <div class="header-right">
-      <a class="ctn-logo-help-header"><img class="logo-help-header" src="./assets/img/help.svg"></a>
-      <a>
-        <div class="icon-user-header">AM</div>
-      </a>
-    </div>
-  </header>
-
-  <div class="sidebar">
-    <a class="logo-sidebar" href="index.html"><img class="img-logo-sidebar" src="./assets/img/logo_light.svg"></a>
-    <nav>
-      <a class="tab-selected" href="summary.html"><img src="./assets/img/summary.svg">Summary</a>
-      <a href="add_task.html"><img src="./assets/img/add_task.svg">Add Task</a>
-      <a href="board.html"><img src="./assets/img/board.svg">Board</a>
-      <a href="contact.html"><img src="./assets/img/contacts.svg">Contacts</a>
-    </nav>
-    <div class="ctn-sidebar-legal">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="legal.html">Legal notice</a>
-    </div>
-  </div>
+  <header w3-include-html="./assets/templates/header.html"></header>
+  <div class="sidebar" w3-include-html="./assets/templates/sidebarFooter.html"></div>
 
   <div class="ctn-content">
 
     <h1>Add Task</h1>
-    
+    <div>
 
       <form class="form-layout" onsubmit="addTask(); return false">
-       
-        
+
+        <div class="add-task-left-column">
+
           <div class="input_box_layout">
             <div class="description-with-star">
               <span class="add_task_txt_format">Title</span>
               <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
             </div>
-            <input class="input" id="titleInput" required minlength="2" type="text" placeholder="Enter a title">
+            <input class="input-add-task" id="titleInput" required minlength="2" type="text"
+              placeholder="Enter a title">
           </div>
-
           <div class="input_box_layout">
             <div class="description-with-star">
               <span class="add_task_txt_format">Description</span>
             </div>
-            <input class="resizable" id="titleInput" required minlength="2" type="text"
+            <input class="input-add-task" id="titleInput" required minlength="2" type="text"
               placeholder="Enter a description">
           </div>
+
           <div class="input_box_layout">
             <div class="description-with-star">
               <span class="add_task_txt_format">Assigned to</span>
             </div>
-
-            <div class="custom-select" style="width:200px;">
-              <select>
-                <option class="option" value="0">Select contacts to assaign</option>
-                <option type="Checkbox" value="1">Username Lastname</option>
-                <option type="Checkbox" value="2">Username Lastname</option>
+            <div class="custom-select">
+              <select class="select.dropdown_list">
+                <div class="grey-dropdwon-circle"></div>
+                <option value="0">Select contacts to assaign</option>
+                <option value="1">Username Lastname</option>
+                <option value="2">Username Lastname</option>
                 <option value="3">Username Lastname</option>
                 <option value="4">Username Lastname</option>
                 <option value="5">Username Lastname</option>
@@ -92,40 +67,80 @@
             </div>
           </div>
 
-          <!-- Grey Line <div class="parting_line_grey"></div>-->
-         
-            <div class="input_box_layout">
-              
-                <span class="add_task_txt_format">Prio</span>
-                <div class="prio_box_layout">
-
-                  <button class="urgent-btn">Urgent
-                      <img src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
-                    </button>
-
-                    <button class="urgent-btn">Medium
-                      <img src="./assets/img/Prio media.svg" class="urgent-icon" style="fill:#FFA800">
-                    </button>
-
-                    <button class="urgent-btn">Low
-                      <img src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
-                    </button>
-
-                </div>    
-            </div>
-
-            <div class="input_box_layout">
-              <div class="description-with-star">
-                <span class="add_task_txt_format">Title</span>
-                <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
-              </div>
-              <input class="input" id="titleInput" required minlength="2" type="text" placeholder="Enter a title">
-            </div>
-          </div>
-         
         </div>
 
+        <div class="parting_line_grey"></div>
 
-    
+        <div class="add-task-right-column">
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Due date</span>
+              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            </div>
+            <img src="./assets/img/event.svg" class="icon-calendar">
+            <input class="input-add-task" required type="datetime" placeholder="dd/mm/yyyy">
+          </div>
+
+          <div class="input_box_layout">
+            <span class="add_task_txt_format">Prio</span>
+            <div class="prio_box_layout">
+
+              <button id="urgentButton" class="prio-btn-neutral" onclick="changeButtonColorsUrgent()">Urgent
+                <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
+              </button>
+
+              <button id="mediumButton" class="prio-btn-neutral" onclick="changeButtonColorsMedium()">Medium
+                <img id="medium-icon" src="./assets/img/Prio media y.svg" class="urgent-icon" style="fill:#FFA800">
+              </button>
+
+              <button id="lowButton" class="prio-btn-neutral" onclick="changeButtonColorsLow()">Low
+                <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
+              </button>
+
+            </div>
+          </div>
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Category</span>
+              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            </div>
+            <div class="custom-select">
+              <select class="select.dropdown_list">
+                <option value="0">Select task category</option>
+                <option value="1">Technical Task</option>
+                <option value="2">User Story</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="input_box_layout">
+            <span class="add_task_txt_format">Subtasks</span>
+              <input class="input-add-task" id="subtaskInput" required minlength="2" type="text"
+                placeholder="Enter a title">
+              <div id="plus-btn" class="subtask-plus-btn"></div>
+          </div>
+
+        </div>
+    </div>
+    <div class="bottom-section-ctn">
+      <div class="description-with-star">
+        <p class="reqiured_txt_format" ; style="color: #FF8190;">*</p>
+        <span class="reqiured_txt_format">This field is required</span>
+      </div>
+      <div class="clear_create_btn_ctn">
+        <button class="clear-btn" onclick="clearTasks()">Clear
+          <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark">
+        </button>
+        <button class="create-task-btn" onclick="createTask()">Create Task
+          <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
 
 </body>
