@@ -9,7 +9,6 @@
   display: flex;
   align-items: center;
   gap: 32px;
-  margin-right: 64px;
 }
 
 .ctn-search-task {
@@ -59,6 +58,7 @@
 
 .btn-add-task-db {
   height: 32px;
+  border-radius: 10px !important;
   padding: 8px 16px !important;
   gap: 4px;
 }
@@ -111,7 +111,7 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 16px;
-  padding-bottom: 400px;
+  padding-bottom: 80px;
 }
 
 .empty-status {
@@ -145,6 +145,7 @@
   border-radius: 24px;
   gap: 24px;
   box-shadow: 0px 0px 10px 3px #00000014;
+  transition: 75ms;
 }
 
 .card-task-small:hover {
@@ -242,7 +243,7 @@
 }
 
 .overlay-board {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -256,6 +257,7 @@
 
 .ctn-task-detail {
   width: 525px;
+  height: 80%;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -263,6 +265,8 @@
   padding: 48px 40px;
   border-radius: 30px;
   gap: 24px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .ctn-task-detail-header {
@@ -400,4 +404,44 @@
 .task-detail-separator-edit {
   height: 24px;
   border: 1px solid #D1D1D1
+}
+
+
+/* **** RESPONSIVE DESIGN **** */
+
+@media (max-width: 1150px) {
+
+  .headline-board {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .btn-add-task-db {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 0;
+  }
+
+}
+
+@media (max-width: 920px) {
+
+  .btn-add-task-db {
+   padding: 3px !important;
+  }
+
+  .btn-add-task-db span {
+    display: none;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .headline-status {
+    font-size: 27px; 
+  }
+
 }

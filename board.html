@@ -7,16 +7,18 @@
     <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
     <link rel="stylesheet" href="./css/font.css" />
-    <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
     <script src="./js/board.js"></script>
+    <script src="./js/template.js"></script>
   </head>
 
   <body onload="initBoard()">
     <header w3-include-html="./assets/templates/header.html"></header>
+    <div w3-include-html="./assets/templates/submenu.html"></div>
     <div
       class="sidebar"
       w3-include-html="./assets/templates/sidebarFooter.html"
@@ -128,12 +130,12 @@
       </div>
     </div>
 
-    <div class="overlay-board">
-      <div class="ctn-task-detail" id="ctn-task-detail">
+    <div class="overlay-board d-none" id="overlay-board" onclick="closeTaskDetails()">
+      <div class="ctn-task-detail" id="ctn-task-detail" onclick="stopPropagation(event)">
         <div class="ctn-task-detail-header">
           <div class="task-detail-category">User Story</div>
           <div class="ctn-task-detail-close">
-            <img class="task-detail-close" src="./assets/img/close_black.svg" onclick="closeElement()">
+            <img class="task-detail-close" src="./assets/img/close_black.svg" onclick="closeTaskDetails()">
           </div>
         </div>
         <h1>Kochwelt Page & Recipe Recommender</h1>

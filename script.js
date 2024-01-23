@@ -2,7 +2,6 @@ async function init() {
   await includeHTML();
 }
 
-// NOCH NICHT ÜBERARBEITET
 
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");

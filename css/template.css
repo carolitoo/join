@@ -66,6 +66,44 @@ header {
   .icon-user-header:hover {
     background-color: #0C2E621F;
   }
+
+  .submenu-header {
+    position: absolute;
+    z-index: 10;
+    top: var(--height-header);
+    right: var(--margin-right-content);
+    display: flex;
+    flex-direction: column;
+    background-color: #2A3647;
+    padding: 10px;
+    gap: 8px;
+    border-radius: 20px 0 20px 20px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+  }
+
+  .submenu-header a {
+    text-decoration: none;
+    color: #CDCDCD;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  .submenu-header a:hover {
+    cursor: pointer;
+    background-color: #2A3D59;
+    transform: translateX(1px);
+    transition: 75ms;
+  }
+
+  .overlay-submenu {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+  }
   
   nav {
     display: flex;
@@ -149,12 +187,6 @@ header {
 
 
 @media (max-width: 784px) {
-
-  body {
-    --height-header: 80px !important;
-    --margin-top-content: 128px !important;
-    --margin-left-content: 64px !important;
-  }
 
   header {
     height: 80px !important;
