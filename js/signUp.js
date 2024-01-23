@@ -13,11 +13,7 @@ function addUser() {
     let password = document.getElementById('password');
     let confirmedPassword = document.getElementById('confirmedPassword');
 
-    console.log('Name:', name.value);
-    console.log('Email:', email.value);
-    console.log('Password:', password.value);
-    console.log('Confirmed Password:', confirmedPassword.value);
-    
+
     if (name.value.length < 2) {
         displayErrorMessage('The name must contain at least two letters', name);
         return;
@@ -28,6 +24,7 @@ function addUser() {
     }
     console.log('Adding user:', { name: name.value, email: email.value.toLowerCase(), password: password.value });
     users.push({ name: name.value, email: email.value.toLowerCase(), password: password.value });
+    setItem(key, value);
     clearInputfields(name, email, password, confirmedPassword);
     window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
 }
