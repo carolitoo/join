@@ -8,10 +8,10 @@ let users = [
 */
 //
 function addUser() {
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    let confirmedPassword = document.getElementById('confirmedPassword');
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmedPassword = document.getElementById('confirmedPassword');
 
     if (name.value.length < 2) {
         displayErrorMessage('The name must contain at least two letters', name);
@@ -22,34 +22,29 @@ function addUser() {
         return;
     }
 
-    let currentUser = { name: name.value, email: email.value.toLowerCase(), password: password.value };
+    const currentUser = { name: name.value, email: email.value.toLowerCase(), password: password.value };
     users.push(currentUser);
+    clearInputfields(name, email, password, confirmedPassword);
 
-    // Übergebe key und value separat an setItem
-    setItem(currentUser.name, currentUser.name)
-    
+    storeUserItems(currentUser)
         .then(response => {
             console.log('Item successfully stored:', response);
-            return setItem(currentUser.email, currentUser.email);
-        })
-        .then(response => {
-            console.log('Item successfully stored:', response);
-            return setItem(currentUser.password, currentUser.password);
-        })
-        .then(response => {
-            console.log('Item successfully stored:', response);
-            clearInputfields(name, email, password, confirmedPassword);
             window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
         })
-        .catch(error => {
-            console.error('Error storing item:', error);
+        .catch(() => {
+            alert('An unexpected error occurred');
         });
 }
 
 
-function saveUserdata() {
-
-}
+    async function storeUserItems(currentUser) {
+        const storePromises = [
+            setItem(currentUser.name, currentUser.name),
+            setItem(currentUser.email, currentUser.email),
+            setItem(currentUser.password, currentUser.password)
+        ];
+        return Promise.all(storePromises);
+    }
 
 
 /**
