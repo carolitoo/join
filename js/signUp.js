@@ -13,7 +13,6 @@ function addUser() {
     let password = document.getElementById('password');
     let confirmedPassword = document.getElementById('confirmedPassword');
 
-
     if (name.value.length < 2) {
         displayErrorMessage('The name must contain at least two letters', name);
         return;
@@ -22,11 +21,34 @@ function addUser() {
         displayErrorMessage('Ups! Your passwords don\'t match', confirmedPassword);
         return;
     }
-    console.log('Adding user:', { name: name.value, email: email.value.toLowerCase(), password: password.value });
-    users.push({ name: name.value, email: email.value.toLowerCase(), password: password.value });
-    setItem(key, value);
-    clearInputfields(name, email, password, confirmedPassword);
-    window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
+
+    let currentUser = { name: name.value, email: email.value.toLowerCase(), password: password.value };
+    users.push(currentUser);
+
+    // Übergebe key und value separat an setItem
+    setItem(currentUser.name, currentUser.name)
+    
+        .then(response => {
+            console.log('Item successfully stored:', response);
+            return setItem(currentUser.email, currentUser.email);
+        })
+        .then(response => {
+            console.log('Item successfully stored:', response);
+            return setItem(currentUser.password, currentUser.password);
+        })
+        .then(response => {
+            console.log('Item successfully stored:', response);
+            clearInputfields(name, email, password, confirmedPassword);
+            window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
+        })
+        .catch(error => {
+            console.error('Error storing item:', error);
+        });
+}
+
+
+function saveUserdata() {
+
 }
 
 
