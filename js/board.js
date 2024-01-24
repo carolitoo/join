@@ -54,11 +54,11 @@ async function updateStatus(status, currentTasks) {
             let currentId = selectedTasks[j]['idTask'];
             positionOfTask = currentTasks.findIndex(id => id['idTask'] == currentId);
  
-            document.getElementById(`tasks-${status}`).innerHTML += await generateCardSmallHTML(currentTasks,positionOfTask);
-            getSelectedCategory(currentTasks, positionOfTask)
+            document.getElementById(`tasks-${status}`).innerHTML += await generateCardSmallHTML(currentTasks, positionOfTask);
+            getSelectedCategory(`category-task-${currentId}`, currentTasks, positionOfTask);
             calculateProgressSubtasks(currentTasks, positionOfTask);
             // getAssignedUsers();
-            getSelectedPriority(currentTasks, positionOfTask);
+            getSelectedPriority(`img-prio-task-${currentId}`, currentTasks, positionOfTask);
          }
      } 
 }
@@ -67,16 +67,19 @@ async function updateStatus(status, currentTasks) {
 /**
  * This function gets the category of a given task and sets the corresponding background-color 
  * 
+ * @param {string} idOfElement - id of the element for which the background-color should be set
  * @param {array} currentTasks - array of tasks currently selected
  * @param {number} positionOfTask - position of the task (in the array currentTasks) for which the category should be determinated
  */
-function getSelectedCategory(currentTasks, positionOfTask) {
+function getSelectedCategory(idOfElement, currentTasks, positionOfTask) {
     let categoryOfTask = currentTasks[positionOfTask]['category'];
 
     if (categoryOfTask == 'User Story') {
-        document.getElementById(`category-task-${currentTasks[positionOfTask]['idTask']}`).style.backgroundColor = '#0038FF';
+        // document.getElementById(`${idOfElement}${currentTasks[positionOfTask]['idTask']}`).style.backgroundColor = '#0038FF';
+        document.getElementById(idOfElement).style.backgroundColor = '#0038FF';
     } else if (categoryOfTask == 'Technical Task') {
-        document.getElementById(`category-task-${currentTasks[positionOfTask]['idTask']}`).style.backgroundColor = '#1FD7C1';
+        // document.getElementById(`${idOfElement}${currentTasks[positionOfTask]['idTask']}`).style.backgroundColor = '#1FD7C1';
+        document.getElementById(idOfElement).style.backgroundColor = '#1FD7C1';
     } 
 }
 
@@ -92,8 +95,9 @@ function calculateProgressSubtasks(currentTasks, positionOfTask) {
     let numberOfSubtasksClosed = 0;
 
     for (k=0; k < numberOfSubtasks; k++) {
-        if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed')
-        numberOfSubtasksClosed++;
+        if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
+            numberOfSubtasksClosed++;
+        }
     }
 
     let completionOfSubtasks = numberOfSubtasksClosed / numberOfSubtasks *100;
@@ -104,7 +108,6 @@ function calculateProgressSubtasks(currentTasks, positionOfTask) {
 
 
 // function getAssignedUsers(idTask, positionOfTask) {
-
 //     document.getElementById(`users-task-${idTask}`).innerHTML =
 // }
 
@@ -112,31 +115,69 @@ function calculateProgressSubtasks(currentTasks, positionOfTask) {
 /**
  * This function gets the priority currently selected of the given task and sets the corresponding image 
  * 
+ * @param {string} idImgElement - id of the img element indicating the priority of the task
  * @param {array} currentTasks - array of tasks currently selected
- * @param {number} positionOfTask - position of the task (in the array tasks) for which the priority should be determinated
+ * @param {number} positionOfTask - position of the task (in the array currentTasks) for which the priority should be determinated
  */
-function getSelectedPriority(currentTasks, positionOfTask) {
+function getSelectedPriority(idImgElement, currentTasks, positionOfTask) {
     let priorityOfTask = currentTasks[positionOfTask]['priority'];
 
     if (priorityOfTask == 'Urgent') {
-        document.getElementById(`img-prio-task-${currentTasks[positionOfTask]['idTask']}`).src = "./assets/img/prio_high_color.svg";
+        document.getElementById(idImgElement).src = "./assets/img/prio_high_color.svg";
     } else if (priorityOfTask == 'Medium') {
-        document.getElementById(`img-prio-task-${currentTasks[positionOfTask]['idTask']}`).src = "./assets/img/prio_medium_color.svg";
+        document.getElementById(idImgElement).src = "./assets/img/prio_medium_color.svg";
     } else if (priorityOfTask == 'Low') {
-        document.getElementById(`img-prio-task-${currentTasks[positionOfTask]['idTask']}`).src = "./assets/img/prio_low_color.svg";
+        document.getElementById(idImgElement).src = "./assets/img/prio_low_color.svg";
     }
 }
 
 
+/**
+ * This function gets the subtasks of the selected task 
+ * 
+ * @param {string} idOfElement - id of the element where the subtasks should be inserted
+ * @param {array} currentTasks - array of tasks currently selected
+ * @param {number} positionOfTask - position of the task (in the array currentTasks) for which the substasks are created
+ */
+async function getSelectedSubtasks(idOfElement, currentTasks, positionOfTask) {
+    document.getElementById(idOfElement).innerHTML = ``;
+
+    let currentId = currentTasks[positionOfTask]['idTask'];
+    let numberOfSubtasks = currentTasks[positionOfTask]['subtasks'].length;
+
+    for (k=0; k < numberOfSubtasks; k++) {
+        let idOfSubtask = currentTasks[positionOfTask]['subtasks'][k]['idSubtask'];
+        let titleOfSubtask = currentTasks[positionOfTask]['subtasks'][k]['titleSubtask'];
+
+        if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
+            document.getElementById(idOfElement).innerHTML += await generateSubtasksDetailClosedHTML(currentId, idOfSubtask, titleOfSubtask);
+        } else if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'open') {
+            document.getElementById(idOfElement).innerHTML += await generateSubtasksOpenDetailHTML(currentId, idOfSubtask, titleOfSubtask);
+        }
+    }
+}
+
+
+/**
+ * This function initiates moving a card on the board by identifying its id and displaying the drag-animation
+ * 
+ * @param {number} idTask - id of the task moved
+ */
 function moveElement(idTask) {
     currentDraggedElement = idTask;
     document.getElementById(`card-task-small-${idTask}`).style.transform = 'rotate(5deg)';
 }
 
 
+/**
+ * This function allows to drop an element above the element containing this function via drag-and-drop (standard function)
+ * 
+ * @param {*} event 
+ */
 function allowDrop(event) {
     event.preventDefault();
 }
+
 
 /**
  * This function assignes the new status to a task that was shifted to another status per drag-and-drop then renders the board 
@@ -152,14 +193,18 @@ function moveElementTo(newStatus) {
 }
 
 
+/**
+ * This function ensures that a card on the kanban board returns to its original position when it is dropped 
+ * 
+ * @param {number} idTask - id of the task moved/ dragged
+ */
 function resetRotation(idTask) {
     document.getElementById(`card-task-small-${idTask}`).style.transform = 'rotate(0deg)';
 }
 
 
 /**
- * This function compares the content of the input field with all the tasks available
- * It transmits the selected tasks to the render function
+ * This function compares the content of the input field with all the tasks available - it transmits the selected tasks to the render function
  */
 async function searchTask() {
     let searchInput = document.getElementById('searchTask').value.toUpperCase();
@@ -173,65 +218,45 @@ async function searchTask() {
             includedTasks.push(tasks[p]);
         } 
     }
-
     await renderBoard(includedTasks);
 }
 
 
-// open layover/ detailed view
-function openElement(idTask) {
+/**
+ * This function opens an overlay with the nested (updated) detailed view of a task - it also prevents the scrolling of content in the background
+ * 
+ * @param {number} idTask - id of the task in the array "tasks" for which the details are opened
+ */
+async function openTaskDetail(idTask) {
+    let currentId = idTask;
+    positionOfTask = tasks.findIndex(id => id['idTask'] == currentId);
 
+    document.getElementById('overlay-board').innerHTML = await generateViewTaskDetailHTML(tasks, positionOfTask);
+    getSelectedCategory('task-detail-category', tasks, positionOfTask);
+    getSelectedPriority('img-prio-task-detail', tasks, positionOfTask);
+    // getAssignedUsers();
+    getSelectedSubtasks('task-detail-subtasks', tasks, positionOfTask);
+
+    document.getElementById('overlay-board').classList.remove('d-none');
     document.getElementsByTagName('body')[0].classList.add('disable-scroll');
 }
 
-// close layover/ detailed view
+
+/**
+ * This function closes the overlay (containig the detailed view of a task) and ensures that scrolling is possible after closing the overlay 
+ */
 function closeTaskDetails() {
     document.getElementById('overlay-board').classList.add('d-none');
     document.getElementsByTagName('body')[0].classList.remove('disable-scroll');
 }
 
 
-function stopPropagation (event) {
-    event.stopPropagation();
-}
-
-
-
-// **** GENERATE HTML-CODE ****
-
 /**
- * This function generates the HTML-Code for the small cards on the kanban board
+ * This function changes the source of an img-element (needs to be in the same folder)
  * 
- * USER ARE STILL STATIC // NEEDS TO BE REPLACED BY FUNCTION "GETASSIGNEDUSERS" AFTER DEFINING "ARCHITECTURE" FOR USERS
- * 
- * @param {array} currentTasks - array of tasks currently selected
- * @param {number} positionOfTask -  position of the task for which the card on the kanban board should be created in the array "tasks" 
- * @returns - HTML-Code for one single small card/ task
+ * @param {string} idOfImg - id of the the img-element that is changed
+ * @param {string} nameOfImg - name of the new image 
  */
-async function generateCardSmallHTML(currentTasks, positionOfTask) {
-    return /*html*/ `
-    <div class="card-task-small" id="card-task-small-${currentTasks[positionOfTask]['idTask']}" draggable="true" ondragstart="moveElement(${currentTasks[positionOfTask]['idTask']})" ondragend="resetRotation(${currentTasks[positionOfTask]['idTask']})" onclick="openElement(${currentTasks[positionOfTask]['idTask']})">
-        <div class="card-category-small" id="category-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['category']}</div>
-        <div class="ctn-card-text-small">
-            <div class="card-title-small" id="title-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['titleTask']}</div>
-            <div class="card-description-small" id="description-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['descriptionTask']}</div>
-        </div>
-
-        <div class="ctn-card-subtasks-small">
-            <div class="ctn-card-progress-bar-small">
-                <div class="card-progress-bar-small" id="progress-task-${currentTasks[positionOfTask]['idTask']}"></div>
-            </div>
-            <span class="card-span-subtasks-small" id="span-subtasks-${currentTasks[positionOfTask]['idTask']}"></span>
-        </div>
-        
-        <div class="ctn-card-user-prio-small">
-            <div class="ctn-card-assigned-users-small" id="users-task-${currentTasks[positionOfTask]['idTask']}">
-                <div class="card-assigned-user-small">AM</div>
-                <div class="card-assigned-user-small">EM</div>
-                <div class="card-assigned-user-small">MB</div>
-            </div>
-        <img class="img-card-priority-small" id="img-prio-task-${currentTasks[positionOfTask]['idTask']}" src="./assets/img/prio_medium_color.svg"/>
-        </div>
-    </div>
-    `
+function changeImgTo(idOfImg, nameOfImg) {
+    document.getElementById(idOfImg).src = `./assets/img/${nameOfImg}.svg`;
 }
