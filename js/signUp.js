@@ -1,50 +1,61 @@
 let users = [
-    { 'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123' }
+    { 'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123', 'confirmedPassword': 'test123' }
 ];
+
+
+
+function createSignUpdata() {
+     const nameInput = document.getElementById('name');
+     const emailInput = document.getElementById('email');
+     const passwordInput = document.getElementById('password');
+     const confirmedPasswordInput = document.getElementById('confirmedPassword');
+
+
+    const newUser = {
+        name: nameInput.value,
+        email: emailInput.value.toLowerCase(),
+        password: passwordInput.value,
+        confirmedPassword: confirmedPasswordInput.value
+    };
+    validateSignUpData(newUser);
+}
+
+function validateSignUpData(newUser) {
+    if (newUser.name.length >= 2) {
+        if (newUser.password === newUser.confirmedPassword) {
+            addUser(newUser);
+        } else {
+            displayErrorMessage("Passwords don't match", document.getElementById('confirmedPassword'));
+        }
+    } else {
+        displayErrorMessage('Name must contain at least two letters',document.getElementById('name'));
+    }
+}
+
+
 /** 
  * This function is used to add a new User to the user-array, if the conditions about personal name, email and password are fulfilled.
  * 
  * @param {JSON} users - This JSON contains the information (name,email,password) which are neccessary to sign up
 */
 //
-function addUser() {
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    const confirmedPassword = document.getElementById('confirmedPassword');
-
-    if (name.value.length < 2) {
-        displayErrorMessage('The name must contain at least two letters', name);
-        return;
-    }
-    if (password.value !== confirmedPassword.value) {
-        displayErrorMessage('Ups! Your passwords don\'t match', confirmedPassword);
-        return;
-    }
-
-    const currentUser = { name: name.value, email: email.value.toLowerCase(), password: password.value };
-    users.push(currentUser);
-    clearInputfields(name, email, password, confirmedPassword);
-
-    storeUserItems(currentUser)
-        .then(response => {
-            console.log('Item successfully stored:', response);
-            window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
-        })
-        .catch(() => {
-            alert('An unexpected error occurred');
-        });
+async function addUser(newUser) {
+    users.push(newUser);
+    await storeUserItems(newUser);
+    clearInputfields(newUser);
+    window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
 }
 
 
-    async function storeUserItems(currentUser) {
-        const storePromises = [
-            setItem(currentUser.name, currentUser.name),
-            setItem(currentUser.email, currentUser.email),
-            setItem(currentUser.password, currentUser.password)
-        ];
-        return Promise.all(storePromises);
-    }
+async function storeUserItems(newUser) {
+    const storePromises = [
+        setItem('name', newUser.name),
+        setItem('email', newUser.email),
+        setItem('password', newUser.password)
+    ];
+    await Promise.all(storePromises);
+    console.log('All Promises Loaded', storePromises);
+}
 
 
 /**
@@ -55,11 +66,11 @@ function addUser() {
  * @param {valueOf} password - contains value of the password from dp. input
  * @param {valueOf} confirmedPassword - contains value of the assigned password from dp. input
  */
-function clearInputfields(name, email, password, confirmedPassword) {
-    name.value = '';
-    email.value = '';
-    password.value = '';
-    confirmedPassword.value = '';
+function clearInputfields(newUser) {
+    newUser.name = '';
+    newUser.email = '';
+    newUser.password = '';
+    newUser.confirmedPassword = '';
 }
 
 
