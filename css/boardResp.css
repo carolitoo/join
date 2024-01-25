@@ -1,0 +1,64 @@
+@media (max-width: 1150px) {
+  .headline-board {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .btn-add-task-db {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 0;
+  }
+}
+
+@media (max-width: 920px) {
+  .btn-add-task-db {
+    padding: 3px !important;
+  }
+
+  .btn-add-task-db span {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .ctn-task-detail {
+    width: 80%;
+    min-width: 256px;
+    font-size: 16px;
+    padding: 32px 24px;
+    gap: 16px;
+  }
+
+  .task-detail-category {
+    font-size: 16px;
+    padding: 4px 16px;
+  }
+
+  .ctn-task-detail h1 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .ctn-task-detail-date span,
+  .ctn-task-detail-priority span {
+    width: 112px;
+  }
+
+  .task-detail-assigned-user-name {
+    font-size: 16px;
+  }
+
+  .task-detail-checkbox {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .headline-status {
+    font-size: 27px;
+  }
+}

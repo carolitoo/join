@@ -69,7 +69,7 @@ async function generateViewTaskDetailHTML(currentTasks, positionOfTask) {
         </div>
         <div class="ctn-task-detail-assigned-users">
           <div class="color-bg">Assigned To:</div>
-          <div>
+          <div class="ctn-task-detail-assigned-users-wrapper">
             <div class="ctn-task-detail-single-assigned-user">
               <div class="task-detail-assigned-user-acronym">EM</div>
               <div class="task-detail-assigned-user-name">Emmanuel Mauer</div>
