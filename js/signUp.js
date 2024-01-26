@@ -41,6 +41,7 @@ function validateSignUpData(newUser) {
 //
 async function addUser(newUser) {
     users.push(newUser);
+    console.log('die Users sind', users);
     await storeUserItems(newUser);
     clearInputfields(newUser);
     window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';

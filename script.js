@@ -1,6 +1,13 @@
 async function init() {
   await includeHTML();
-  resetSelectedTab();
+  //resetSelectedTab();////wo ist diese Funktion//?
+  loadUserData()
+}
+
+function loadUserData(){
+  getItem('name');
+  getItem('email');
+  getItem('password');
 }
 
 
