@@ -261,7 +261,7 @@
   padding: 48px 40px;
   border-radius: 30px;
   gap: 24px;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
   transition: 100ms;
 }

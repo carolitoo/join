@@ -16,7 +16,7 @@
     <script src="./js/template.js"></script>
   </head>
 
-  <body onload="initContact()">
+  <body onload="initContact()" class="body-contacts">
     <header w3-include-html="./assets/templates/header.html"></header>
     <div w3-include-html="./assets/templates/submenu.html"></div>
     <div
@@ -24,6 +24,105 @@
       w3-include-html="./assets/templates/sidebarFooter.html"
     ></div>
 
-    <div class="ctn-content"></div>
+    <div class="bg-contact-list">
+      <div class="wrapper-contact-list">
+        <div class="btn-db btn-add-contact-db">
+          <span>Add new contact</span>
+          <img class="icon-btn" src="./assets/img/person_add_white.svg" />
+        </div>
+        <div class="ctn-contact-list" id="ctn-contact-list">
+          <div id="contact-list-letter-A">
+            <div class="contact-list-initial-letter">A</div>
+            <div class="contact-list-separator"></div>
+            <div class="contact-list-single-contact">
+              <div class="contact-list-single-contact-acronym">AM</div>
+              <div class="contact-list-single-contact-right">
+                <div class="contact-list-single-contact-name">Anton Mayer</div>
+                <div class="contact-list-single-contact-mail">
+                  antom@gmail.com
+                </div>
+              </div>
+            </div>
+            <div class="contact-list-single-contact">
+              <div class="contact-list-single-contact-acronym">AS</div>
+              <div class="contact-list-single-contact-right">
+                <div class="contact-list-single-contact-name">Anja Schulz</div>
+                <div class="contact-list-single-contact-mail">
+                  schulz@hotmail.com
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="contact-list-letter-B">
+            <div class="contact-list-initial-letter">B</div>
+            <div class="contact-list-separator"></div>
+            <div class="contact-list-single-contact">
+              <div class="contact-list-single-contact-acronym">BZ</div>
+              <div class="contact-list-single-contact-right">
+                <div class="contact-list-single-contact-name">
+                  Benedikt Ziegler
+                </div>
+                <div class="contact-list-single-contact-mail">
+                  benedikt@gmail.com
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ctn-content ctn-content-contacts">
+      <div class="ctn-contacts-details">
+        <div class="headline-contacts">
+          <h1>Contacts</h1>
+          <div class="headline-separator"></div>
+          <span>Better with a team</span>
+        </div>
+        <div class="wrapper-contact-details">
+          <div class="ctn-contacts-details-name">
+            <div class="contacts-detail-acronym">AM</div>
+            <div class="ctn-contacts-details-name-right">
+              <div class="contacts-detail-name">Anton Mayer</div>
+              <div class="ctn-contacts-detail-edit-delete">
+                <div
+                  class="contacts-detail-edit-delete"
+                  onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"
+                  onmouseout="changeImgTo('img-contacts-detail-edit', 'edit_default')"
+                >
+                  <img
+                    id="img-contacts-detail-edit"
+                    src="./assets/img/edit_default.svg"
+                  />
+                  <span>Edit</span>
+                </div>
+                <div
+                  class="contacts-detail-edit-delete"
+                  onmouseover="changeImgTo('img-contacts-detail-delete', 'delete_lb')"
+                  onmouseout="changeImgTo('img-contacts-detail-delete', 'delete_default')"
+                >
+                  <img
+                    id="img-contacts-detail-delete"
+                    src="./assets/img/delete_default.svg"
+                  />
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contacts-detail-subheadline">Contact Information</div>
+          <div class="ctn-contacts-detail-mail-phone">
+            <div class="contacts-detail-mail-phone">
+              <span>Email</span>
+              <div class="contacts-detail-mail">antom@gmail.com</div>
+            </div>
+            <div class="contacts-detail-mail-phone">
+              <span>Phone</span>
+              <div>+49 111 111 111</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

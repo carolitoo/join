@@ -291,13 +291,3 @@ function closeTaskDetails() {
     document.getElementsByTagName('body')[0].classList.remove('disable-scroll');
 }
 
-
-/**
- * This function changes the source of an img-element (needs to be in the same folder)
- * 
- * @param {string} idOfImg - id of the the img-element that is changed
- * @param {string} nameOfImg - name of the new image 
- */
-function changeImgTo(idOfImg, nameOfImg) {
-    document.getElementById(idOfImg).src = `./assets/img/${nameOfImg}.svg`;
-}
