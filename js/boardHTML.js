@@ -16,7 +16,7 @@ async function generateCardSmallHTML(currentTasks, positionOfTask) {
             <div class="card-description-small" id="description-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['descriptionTask']}</div>
         </div>
 
-        <div class="ctn-card-subtasks-small">
+        <div class="ctn-card-subtasks-small" id="ctn-card-subtasks-small-${currentTasks[positionOfTask]['idTask']}">
             <div class="ctn-card-progress-bar-small">
                 <div class="card-progress-bar-small" id="progress-task-${currentTasks[positionOfTask]['idTask']}"></div>
             </div>
@@ -85,16 +85,16 @@ async function generateViewTaskDetailHTML(currentTasks, positionOfTask) {
           </div>
         </div>
 
-        <div class="ctn-task-detail-subtasks">
+        <div class="ctn-task-detail-subtasks" id="ctn-task-detail-subtasks">
             <div class="color-bg">Subtasks</div>
             <div id="task-detail-subtasks">
                 <div class="ctn-task-detail-single-subtask">
                     <img class="task-detail-checkbox" src="./assets/img/checkbox_checked_default.svg">
-                    <div>Implement Recipe Recommendation</div>
+                    <div></div>
                 </div>
                 <div class="ctn-task-detail-single-subtask">
                     <img class="task-detail-checkbox" src="./assets/img/checkbox_blank_default.svg">
-                    <div>Start Page Layout</div>
+                    <div></div>
                 </div>
             </div>
         </div>

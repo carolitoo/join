@@ -1,4 +1,5 @@
 let currentDraggedElement;
+let statusOfCurrentDraggedElement;
 let statusTask = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
 let tasks = [];
 let positionOfTask;
@@ -86,6 +87,7 @@ function getSelectedCategory(idOfElement, currentTasks, positionOfTask) {
 
 /**
  * This functions calculates the completion rate of the subtasks of a given task so that the progress bar can be displayed correctly
+ * If a tasks has no subtasks the progress bar is not displayed at all
  * 
  * @param {array} currentTasks - array of tasks currently selected
  * @param {number} positionOfTask - position of the task (in the array tasks) for which the completion rate is calculated
@@ -94,14 +96,17 @@ function calculateProgressSubtasks(currentTasks, positionOfTask) {
     let numberOfSubtasks = currentTasks[positionOfTask]['subtasks'].length;
     let numberOfSubtasksClosed = 0;
 
-    for (k=0; k < numberOfSubtasks; k++) {
-        if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
-            numberOfSubtasksClosed++;
+    if (numberOfSubtasks == 0) {
+        document.getElementById(`ctn-card-subtasks-small-${currentTasks[positionOfTask]['idTask']}`).classList.add('d-none');
+    } else {
+        for (k=0; k < numberOfSubtasks; k++) {
+            if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
+                numberOfSubtasksClosed++;
+            }
         }
     }
 
     let completionOfSubtasks = numberOfSubtasksClosed / numberOfSubtasks *100;
-
     document.getElementById(`progress-task-${currentTasks[positionOfTask]['idTask']}`).style.width = completionOfSubtasks + '%';
     document.getElementById(`span-subtasks-${currentTasks[positionOfTask]['idTask']}`).innerHTML = `${numberOfSubtasksClosed}/${numberOfSubtasks}`;
 }
@@ -133,7 +138,8 @@ function getSelectedPriority(idImgElement, currentTasks, positionOfTask) {
 
 
 /**
- * This function gets the subtasks of the selected task 
+ * This function gets the subtasks of the selected task
+ * If a tasks has no subtasks the section for the subtasks is not displayed at all
  * 
  * @param {string} idOfElement - id of the element where the subtasks should be inserted
  * @param {array} currentTasks - array of tasks currently selected
@@ -141,18 +147,21 @@ function getSelectedPriority(idImgElement, currentTasks, positionOfTask) {
  */
 async function getSelectedSubtasks(idOfElement, currentTasks, positionOfTask) {
     document.getElementById(idOfElement).innerHTML = ``;
-
     let currentId = currentTasks[positionOfTask]['idTask'];
     let numberOfSubtasks = currentTasks[positionOfTask]['subtasks'].length;
 
-    for (k=0; k < numberOfSubtasks; k++) {
-        let idOfSubtask = currentTasks[positionOfTask]['subtasks'][k]['idSubtask'];
-        let titleOfSubtask = currentTasks[positionOfTask]['subtasks'][k]['titleSubtask'];
-
-        if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
-            document.getElementById(idOfElement).innerHTML += await generateSubtasksDetailClosedHTML(currentId, idOfSubtask, titleOfSubtask);
-        } else if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'open') {
-            document.getElementById(idOfElement).innerHTML += await generateSubtasksOpenDetailHTML(currentId, idOfSubtask, titleOfSubtask);
+    if (numberOfSubtasks == 0) {
+        document.getElementById(`ctn-task-detail-subtasks`).classList.add('d-none');
+    } else {
+        for (k=0; k < numberOfSubtasks; k++) {
+            let idOfSubtask = currentTasks[positionOfTask]['subtasks'][k]['idSubtask'];
+            let titleOfSubtask = currentTasks[positionOfTask]['subtasks'][k]['titleSubtask'];
+    
+            if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
+                document.getElementById(idOfElement).innerHTML += await generateSubtasksDetailClosedHTML(currentId, idOfSubtask, titleOfSubtask);
+            } else if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'open') {
+                document.getElementById(idOfElement).innerHTML += await generateSubtasksOpenDetailHTML(currentId, idOfSubtask, titleOfSubtask);
+            }
         }
     }
 }
@@ -171,11 +180,39 @@ function moveElement(idTask) {
 
 /**
  * This function allows to drop an element above the element containing this function via drag-and-drop (standard function)
+ * This function also indicates visually that the task can be moved to another column (only if hovered over another status than the current status of the task)
  * 
  * @param {*} event 
+ * @param {string} newStatus - status of the column where the task might be dropped
  */
-function allowDrop(event) {
+function allowDropWithPreview(event, newStatus) {
     event.preventDefault();
+    statusOfCurrentDraggedElement = checkStatusofCurrentDraggedElement();
+    
+    if (statusOfCurrentDraggedElement != newStatus) {
+        document.getElementById(`preview-drop-task-${newStatus}`).classList.remove('d-none');
+    }
+}
+
+
+/**
+ * This function ensures that the preview for a task is only displayed while the task is dragged over an element/ status
+ * 
+ * @param {string} status - status of the column where the task was hovered over 
+ */
+function hidePreview(status) {
+    document.getElementById(`preview-drop-task-${status}`).classList.add('d-none');
+}
+
+
+/**
+ * This function checks the status of the currently dragged element
+ * 
+ * @returns - status of the currently dragged element
+ */
+function checkStatusofCurrentDraggedElement() {
+    positionOfTask = tasks.findIndex(id => id['idTask'] == currentDraggedElement);
+    return tasks[positionOfTask]['statusTask'];
 }
 
 
@@ -185,11 +222,11 @@ function allowDrop(event) {
  * @param {string} newStatus - status of the task after moving it 
  */
 function moveElementTo(newStatus) {
-    let currentId = currentDraggedElement;
-    positionOfTask = tasks.findIndex(id => id['idTask'] == currentId);
+    positionOfTask = tasks.findIndex(id => id['idTask'] == currentDraggedElement);
 
     tasks[positionOfTask]['statusTask'] = newStatus;
     renderBoard(tasks);
+    hidePreview(newStatus);
 }
 
 
@@ -228,8 +265,7 @@ async function searchTask() {
  * @param {number} idTask - id of the task in the array "tasks" for which the details are opened
  */
 async function openTaskDetail(idTask) {
-    let currentId = idTask;
-    positionOfTask = tasks.findIndex(id => id['idTask'] == currentId);
+    positionOfTask = tasks.findIndex(id => id['idTask'] == idTask);
 
     document.getElementById('overlay-board').innerHTML = await generateViewTaskDetailHTML(tasks, positionOfTask);
     getSelectedCategory('task-detail-category', tasks, positionOfTask);
@@ -239,6 +275,11 @@ async function openTaskDetail(idTask) {
 
     document.getElementById('overlay-board').classList.remove('d-none');
     document.getElementsByTagName('body')[0].classList.add('disable-scroll');
+    
+    document.getElementById('ctn-task-detail').classList.add('translate-x');
+    setTimeout(() => {
+        document.getElementById('ctn-task-detail').classList.remove('translate-x');
+    }, 10)  
 }
 
 

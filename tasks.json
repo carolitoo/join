@@ -74,5 +74,80 @@
       }
     ],
     "statusTask": "done"
+  },
+  {
+    "idTask": 3,
+    "titleTask": "Test Title 3",
+    "descriptionTask": "Test Description 3.",
+    "assignedUsers": [
+      {
+        "idUser": 4,
+        "acronymUser": "SM",
+        "nameUser": "Sofia Müller",
+        "mailUser": "sofia.mueller@online.com"
+      },
+      {
+        "idUser": 5,
+        "acronymUser": "BZ",
+        "nameUser": "Benedikt Ziegler",
+        "mailUser": "benedikt.ziegler@online.com"
+      }
+    ],
+    "dueDate": "2023-09-02T20:15:00.000Z",
+    "priority": "Low",
+    "category": "User Story",
+    "subtasks": [
+      {
+        "idSubtask": 1,
+        "titleSubtask": "Subtask 1 Test 3",
+        "statusSubtask": "closed"
+      },
+      {
+        "idSubtask": 2,
+        "titleSubtask": "Subtask 2 Test 3",
+        "statusSubtask": "closed"
+      },
+      {
+        "idSubtask": 3,
+        "titleSubtask": "Subtask 3 Test 3",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 4,
+        "titleSubtask": "Subtask 4 Test 3",
+        "statusSubtask": "closed"
+      }
+    ],
+    "statusTask": "inProgress"
+  },
+  {
+    "idTask": 4,
+    "titleTask": "Test Title 4",
+    "descriptionTask": "Test Description 4.",
+    "assignedUsers": [
+      {
+        "idUser": 4,
+        "acronymUser": "SM",
+        "nameUser": "Sofia Müller",
+        "mailUser": "sofia.mueller@online.com"
+      },
+      {
+        "idUser": 5,
+        "acronymUser": "BZ",
+        "nameUser": "Benedikt Ziegler",
+        "mailUser": "benedikt.ziegler@online.com"
+      },
+      {
+        "idUser": 5,
+        "acronymUser": "HM",
+        "nameUser": "Henry Müller",
+        "mailUser": "henry.mueller@online.com"
+      }
+    ],
+    "dueDate": "2023-11-05T20:15:00.000Z",
+    "priority": "Medium",
+    "category": "Technical Task",
+    "subtasks": [],
+    "statusTask": "inProgress"
   }
 ]

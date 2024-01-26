@@ -63,13 +63,15 @@
             </div>
             <div
               class="ctn-board-status-bottom"
-              ondragover="allowDrop(event)"
+              ondragover="allowDropWithPreview(event, 'toDo')"
               ondrop="moveElementTo('toDo')"
+              ondragleave="hidePreview('toDo')"
             >
               <div class="empty-status" id="empty-tasks-toDo">
                 No tasks To do
               </div>
               <div class="ctn-tasks" id="tasks-toDo"></div>
+              <div class="preview-drop-task d-none" id="preview-drop-task-toDo"></div>
             </div>
           </div>
           <div class="ctn-board-status">
@@ -82,13 +84,15 @@
             </div>
             <div
               class="ctn-board-status-bottom"
-              ondragover="allowDrop(event)"
+              ondragover="allowDropWithPreview(event, 'inProgress')"
               ondrop="moveElementTo('inProgress')"
+              ondragleave="hidePreview('inProgress')"
             >
               <div class="empty-status d-none" id="empty-tasks-inProgress">
                 No tasks In Progress
               </div>
               <div class="ctn-tasks" id="tasks-inProgress"></div>
+              <div class="preview-drop-task d-none" id="preview-drop-task-inProgress"></div>
             </div>
           </div>
         </div>
@@ -104,13 +108,15 @@
             </div>
             <div
               class="ctn-board-status-bottom"
-              ondragover="allowDrop(event)"
+              ondragover="allowDropWithPreview(event, 'awaitFeedback')"
               ondrop="moveElementTo('awaitFeedback')"
+              ondragleave="hidePreview('awaitFeedback')"
             >
               <div class="empty-status d-none" id="empty-tasks-awaitFeedback">
                 No tasks Await Feedback
               </div>
               <div class="ctn-tasks" id="tasks-awaitFeedback"></div>
+              <div class="preview-drop-task d-none" id="preview-drop-task-awaitFeedback"></div>
             </div>
           </div>
           <div class="ctn-board-status">
@@ -119,13 +125,15 @@
             </div>
             <div
               class="ctn-board-status-bottom"
-              ondragover="allowDrop(event)"
+              ondragover="allowDropWithPreview(event, 'done')"
               ondrop="moveElementTo('done')"
+              ondragleave="hidePreview('done')"
             >
               <div class="empty-status" id="empty-tasks-done">
                 No tasks Done
               </div>
               <div class="ctn-tasks" id="tasks-done"></div>
+              <div class="preview-drop-task d-none" id="preview-drop-task-done"></div>
             </div>
           </div>
         </div>
