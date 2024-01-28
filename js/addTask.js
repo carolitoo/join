@@ -1,4 +1,6 @@
-let addedSubtasks = []
+let addedSubtasks = [];
+
+
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
@@ -51,19 +53,40 @@ function changeButtonColorsLow(){
     document.getElementById('urgent-icon').src = './assets/img/Prio alta2.svg';
 }
 
-function addSubtask() {
+function saveSubtaskToArray() {
+    let newSubtask = document.getElementById('subtaskInput');
+    let inputText = document.getElementById('subtaskInput');
     
+    addedSubtasks.push(newSubtask.value);
+    document.getElementById('subtaskInput').innerHTML = '';
+    console.log("New Subtask is " + addedSubtasks);
+    inputText.value = '';
+
+    loadNewSubtasks();
+};
+
+
+
+function loadNewSubtasks() {
+    let subtaskList = document.getElementById('added-subtask-ctn');
+    subtaskList.innerHTML = '';
+
     for (let i = 0; i < addedSubtasks.length; i++) {
-        const addedSubtask = addedSubtasks[i];
+        const currentSubtask = addedSubtasks[i].trim();
 
-        
-        
+        if (currentSubtask !== '') { // Überprüfe, ob der aktuelle Subtask nicht leer ist, bevor ihn renderst
+
+            subtaskList.innerHTML += `
+                <div class="subtask-list"> 
+                    <span>&#x2022; ${currentSubtask}</span>
+                    <button onclick="deleteSubtask(${i})">-</button>
+                </div>`;
+        }
     }
+};
 
-
-
+function deleteSubtask(i) {
+    addedSubtasks.splice(i, 1)
+    loadNewSubtasks(); 
 }
 
-function saveSubtaskToArray {
-    let newSubtask = document.getElementById('subtaskInput').value;
-}
