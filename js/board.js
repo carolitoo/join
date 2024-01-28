@@ -57,7 +57,7 @@ async function updateStatus(status, currentTasks) {
  
             document.getElementById(`tasks-${status}`).innerHTML += await generateCardSmallHTML(currentTasks, positionOfTask);
             getSelectedCategory(`category-task-${currentId}`, currentTasks, positionOfTask);
-            calculateProgressSubtasks(currentTasks, positionOfTask);
+            checkSubtasks(currentTasks, positionOfTask);
             // getAssignedUsers();
             getSelectedPriority(`img-prio-task-${currentId}`, currentTasks, positionOfTask);
          }
@@ -76,44 +76,57 @@ function getSelectedCategory(idOfElement, currentTasks, positionOfTask) {
     let categoryOfTask = currentTasks[positionOfTask]['category'];
 
     if (categoryOfTask == 'User Story') {
-        // document.getElementById(`${idOfElement}${currentTasks[positionOfTask]['idTask']}`).style.backgroundColor = '#0038FF';
         document.getElementById(idOfElement).style.backgroundColor = '#0038FF';
     } else if (categoryOfTask == 'Technical Task') {
-        // document.getElementById(`${idOfElement}${currentTasks[positionOfTask]['idTask']}`).style.backgroundColor = '#1FD7C1';
         document.getElementById(idOfElement).style.backgroundColor = '#1FD7C1';
     } 
 }
 
 
 /**
- * This functions calculates the completion rate of the subtasks of a given task so that the progress bar can be displayed correctly
- * If a tasks has no subtasks the progress bar is not displayed at all
+ * This functions checks if a task has subtasks
+ * If a task has subtasks it calls a function to calculate the progress - if a tasks has no subtasks the progress bar is not displayed at all
  * 
  * @param {array} currentTasks - array of tasks currently selected
  * @param {number} positionOfTask - position of the task (in the array tasks) for which the completion rate is calculated
  */
-function calculateProgressSubtasks(currentTasks, positionOfTask) {
+function checkSubtasks(currentTasks, positionOfTask) {
     let numberOfSubtasks = currentTasks[positionOfTask]['subtasks'].length;
-    let numberOfSubtasksClosed = 0;
 
     if (numberOfSubtasks == 0) {
         document.getElementById(`ctn-card-subtasks-small-${currentTasks[positionOfTask]['idTask']}`).classList.add('d-none');
     } else {
-        for (k=0; k < numberOfSubtasks; k++) {
-            if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
-                numberOfSubtasksClosed++;
-            }
+        calculateProgressSubtasks(currentTasks, positionOfTask, numberOfSubtasks);
+    }
+}
+
+
+/**
+ * This functions calculates the completion rate of the subtasks of a given task so that the progress bar and the title can be displayed correctly
+ * 
+ * @param {array} currentTasks - array of tasks currently selected
+ * @param {number} positionOfTask - position of the task (in the array tasks) for which the completion rate is calculated
+ * @param {number} numberOfSubtasks - number of subtasks of the task currently selected
+ */
+function calculateProgressSubtasks(currentTasks, positionOfTask, numberOfSubtasks) {
+    let numberOfSubtasksClosed = 0;
+
+    for (k=0; k < numberOfSubtasks; k++) {
+        if (currentTasks[positionOfTask]['subtasks'][k]['statusSubtask'] == 'closed') {
+            numberOfSubtasksClosed++;
         }
     }
 
     let completionOfSubtasks = numberOfSubtasksClosed / numberOfSubtasks *100;
     document.getElementById(`progress-task-${currentTasks[positionOfTask]['idTask']}`).style.width = completionOfSubtasks + '%';
     document.getElementById(`span-subtasks-${currentTasks[positionOfTask]['idTask']}`).innerHTML = `${numberOfSubtasksClosed}/${numberOfSubtasks}`;
+    document.getElementById(`ctn-card-subtasks-small-${currentTasks[positionOfTask]['idTask']}`).title = `${numberOfSubtasksClosed} of ${numberOfSubtasks} subtasks completed`;
 }
 
 
 // function getAssignedUsers(idTask, positionOfTask) {
 //     document.getElementById(`users-task-${idTask}`).innerHTML =
+// BEACHTEN, DASS BEI EINER ÜBERSCHREITUNG EINER GEWISSEN ANZAHL NUR NOCH +X ANGEZEIGT WIRD
 // }
 
 
@@ -188,9 +201,12 @@ function moveElement(idTask) {
 function allowDropWithPreview(event, newStatus) {
     event.preventDefault();
     statusOfCurrentDraggedElement = checkStatusofCurrentDraggedElement();
-    
+    let heightOfDraggedElement = document.getElementById(`card-task-small-${currentDraggedElement}`).offsetHeight;
+
     if (statusOfCurrentDraggedElement != newStatus) {
+        document.getElementById(`preview-drop-task-${newStatus}`).style.height = `${heightOfDraggedElement}px`;
         document.getElementById(`preview-drop-task-${newStatus}`).classList.remove('d-none');
+        document.getElementById(`empty-tasks-${newStatus}`).classList.add('d-none');
     }
 }
 
@@ -235,13 +251,15 @@ function moveElementTo(newStatus) {
  * 
  * @param {number} idTask - id of the task moved/ dragged
  */
-function resetRotation(idTask) {
+function resetCardAndBoard(idTask) {
     document.getElementById(`card-task-small-${idTask}`).style.transform = 'rotate(0deg)';
+    renderBoard(tasks);
 }
 
 
 /**
  * This function compares the content of the input field with all the tasks available - it transmits the selected tasks to the render function
+ * The user gets an information if no tasks are found 
  */
 async function searchTask() {
     let searchInput = document.getElementById('searchTask').value.toUpperCase();
@@ -255,7 +273,16 @@ async function searchTask() {
             includedTasks.push(tasks[p]);
         } 
     }
-    await renderBoard(includedTasks);
+
+    if (includedTasks.length > 0) {
+        document.getElementById('ctn-board').classList.remove('d-none');
+        document.getElementById('board-no-results').classList.add('d-none');
+        renderBoard(includedTasks);
+    } else {
+        document.getElementById('ctn-board').classList.add('d-none');
+        document.getElementById('board-no-results').classList.remove('d-none');
+    }
+  
 }
 
 
@@ -291,3 +318,24 @@ function closeTaskDetails() {
     document.getElementsByTagName('body')[0].classList.remove('disable-scroll');
 }
 
+
+function checkScroll(idTask) {
+    let dragElement = document.getElementById(`card-task-small-${idTask}`);
+    let dragElementTop = dragElement.getBoundingClientRect().top;
+    let heightDraggedElement = dragElement.offsetHeight;
+    let pufferScroll = 30;
+
+    if (dragElementTop + heightDraggedElement + pufferScroll > window.innerHeight) {
+        window.scrollBy(0, 100);
+        console.log('Scroll-down');
+    } else if (dragElementTop - pufferScroll < 0) {
+        window.scrollBy(0, -100);
+        console.log(dragElementTop);
+        console.log('Scroll-up');
+    }
+}
+
+
+function changeBorderColorSearchTask(color) {
+    document.getElementById('ctn-search-task').style.border = `1px solid ${color}`;
+}

@@ -77,8 +77,8 @@
   },
   {
     "idTask": 3,
-    "titleTask": "Test Title 3",
-    "descriptionTask": "Test Description 3.",
+    "titleTask": "Test Title Test Test Test Test 3",
+    "descriptionTask": "Test Description Test Test Test Test Test Test 3.",
     "assignedUsers": [
       {
         "idUser": 4,

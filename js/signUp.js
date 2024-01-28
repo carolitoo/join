@@ -4,12 +4,11 @@ let users = [
 
 
 
-function createSignUpdata() {
-     const nameInput = document.getElementById('name');
-     const emailInput = document.getElementById('email');
-     const passwordInput = document.getElementById('password');
-     const confirmedPasswordInput = document.getElementById('confirmedPassword');
-
+async function createSignUpdata() {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmedPasswordInput = document.getElementById('confirmedPassword');
 
     const newUser = {
         name: nameInput.value,
@@ -17,8 +16,30 @@ function createSignUpdata() {
         password: passwordInput.value,
         confirmedPassword: confirmedPasswordInput.value
     };
+    await disableButton();
     validateSignUpData(newUser);
 }
+
+
+async function disableButton() { 
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmedPasswordInput = document.getElementById('confirmedPassword');
+    const checkboxInput = document.getElementById('checkbox');
+    const signUpButton = document.querySelector('.btn-db');
+  
+    const allFieldsFilled = nameInput.value && emailInput.value && passwordInput.value && confirmedPasswordInput.value && checkboxInput.checked;
+  
+    if (allFieldsFilled) {
+        signUpButton.removeAttribute('disabled');
+        signUpButton.classList.remove('if-disabled');
+    } else {
+        signUpButton.setAttribute('disabled', true);
+        signUpButton.classList.add('if-disabled');
+    }
+}
+
 
 function validateSignUpData(newUser) {
     if (newUser.name.length >= 2) {
@@ -28,7 +49,7 @@ function validateSignUpData(newUser) {
             displayErrorMessage("Passwords don't match", document.getElementById('confirmedPassword'));
         }
     } else {
-        displayErrorMessage('Name must contain at least two letters',document.getElementById('name'));
+        displayErrorMessage('Name must contain at least two letters', document.getElementById('name'));
     }
 }
 
@@ -42,20 +63,14 @@ function validateSignUpData(newUser) {
 async function addUser(newUser) {
     users.push(newUser);
     console.log('die Users sind', users);
-    await storeUserItems(newUser);
+    await storeUserItems();
     clearInputfields(newUser);
     window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
 }
 
 
-async function storeUserItems(newUser) {
-    const storePromises = [
-        setItem('name', newUser.name),
-        setItem('email', newUser.email),
-        setItem('password', newUser.password)
-    ];
-    await Promise.all(storePromises);
-    console.log('All Promises Loaded', storePromises);
+async function storeUserItems() {
+    setItem('users', JSON.stringify(users));
 }
 
 

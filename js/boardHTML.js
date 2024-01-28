@@ -9,7 +9,7 @@
  */
 async function generateCardSmallHTML(currentTasks, positionOfTask) {
     return /*html*/ `
-    <div class="card-task-small" id="card-task-small-${currentTasks[positionOfTask]['idTask']}" draggable="true" ondragstart="moveElement(${currentTasks[positionOfTask]['idTask']})" ondragend="resetRotation(${currentTasks[positionOfTask]['idTask']})" onclick="openTaskDetail(${currentTasks[positionOfTask]['idTask']})">
+    <div class="card-task-small" id="card-task-small-${currentTasks[positionOfTask]['idTask']}" draggable="true" ondragstart="moveElement(${currentTasks[positionOfTask]['idTask']})" ondrag="checkScroll(${currentTasks[positionOfTask]['idTask']})" ondragend="resetCardAndBoard(${currentTasks[positionOfTask]['idTask']})" onclick="openTaskDetail(${currentTasks[positionOfTask]['idTask']})">
         <div class="card-category-small" id="category-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['category']}</div>
         <div class="ctn-card-text-small">
             <div class="card-title-small" id="title-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['titleTask']}</div>

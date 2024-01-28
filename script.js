@@ -1,13 +1,14 @@
 async function init() {
   await includeHTML();
   //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
-  loadUserData()
 }
 
-function loadUserData(){
-  getItem('name');
-  getItem('email');
-  getItem('password');
+async function loadUserData() {
+  const response = await getItem('users');//wie kommen Werte züruck in's user-array?//
+  const usersData = response['data']['value'];
+  if (usersData) {
+     users = JSON.parse(usersData);
+  }
 }
 
 
@@ -26,7 +27,7 @@ async function includeHTML() {
 }
 
 
-function stopPropagation (event) {
+function stopPropagation(event) {
   event.stopPropagation();
 }
 
@@ -40,3 +41,10 @@ function stopPropagation (event) {
 function changeImgTo(idOfImg, nameOfImg) {
   document.getElementById(idOfImg).src = `./assets/img/${nameOfImg}.svg`;
 }
+
+function useGuestLogin() {
+
+  userEmail.value = "guest";
+  userPassword.value = "guest";
+}
+
