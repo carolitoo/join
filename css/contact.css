@@ -28,6 +28,24 @@
   align-items: center;
 }
 
+.btn-contact-mobile {
+  position: fixed;
+  height: 56px;
+  width: 56px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  bottom: 104px;
+  right: 36px;
+  background-color: #2a3647;
+  border-radius: 50%;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.btn-contact-mobile:hover {
+  background-color: #29abe2;
+}
+
 .contact-list-initial-letter {
   font-size: 20px;
   padding: 17px 36px;
@@ -51,14 +69,14 @@
 
 .contact-list-single-contact:hover {
   cursor: pointer;
-  background-color: #2a3647;
-  color: white;
+  background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
 }
 
 .contact-list-single-contact-acronym {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   width: 42px;
   height: 42px;
   font-size: 12px;
@@ -91,7 +109,8 @@
 
 .headline-separator {
   height: 59px;
-  border: 3px solid #29abe2;
+  width: 3px;
+  background-color: #29abe2;
 }
 
 .headline-contacts span {
@@ -102,6 +121,7 @@
   display: flex;
   flex-direction: column;
   margin-top: 32px;
+  overflow: auto;
 }
 
 .ctn-contacts-details-name {
@@ -114,6 +134,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   width: 120px;
   height: 120px;
   font-size: 47px;
@@ -163,25 +184,25 @@
 }
 
 .contacts-detail-edit-delete span {
-    width: 48px;
-  }
+  width: 48px;
+}
 
 .contacts-detail-subheadline {
-    font-size: 20px;
-    margin-top: 59px;
-    margin-bottom: 59px;
+  font-size: 20px;
+  margin-top: 59px;
+  margin-bottom: 42px;
 }
 
 .ctn-contacts-detail-mail-phone {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .contacts-detail-mail-phone {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .contacts-detail-mail-phone span {
@@ -189,5 +210,149 @@
 }
 
 .contacts-detail-mail {
-    color:#007cee;
+  color: #007cee;
+}
+
+/* **** RESPONSIVE DESIGN **** */
+
+@media (max-width: 1275px) {
+  .body-contacts {
+    --width-contacts-overview: 400px;
+  }
+
+  .wrapper-contact-list {
+    margin-left: 0;
+  }
+
+  .contact-list-single-contact {
+    padding: 15px 16px;
+    gap: 24px;
+  }
+
+  .headline-contacts {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .headline-contacts h1 {
+    font-size: 47px;
+  }
+
+  .headline-separator {
+    height: 3px;
+    width: 90px;
+    order: 1;
+  }
+
+  .wrapper-contact-details {
+    margin-top: 48px;
+  }
+
+  .ctn-contacts-details-name {
+    gap: 28px;
+  }
+
+  .contacts-detail-acronym {
+    width: 100px;
+    height: 100px;
+    font-size: 36px;
+  }
+
+  .contacts-detail-name {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .contacts-detail-subheadline {
+    margin-top: 59px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .contacts-detail-acronym {
+    width: 80px;
+    height: 80px;
+    font-size: 27px;
+    font-weight: 400;
+  }
+
+  .ctn-contacts-details-name {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 975px) {
+  .ctn-contacts-details-name {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .ctn-content-contacts {
+    display: none;
+  }
+
+  .bg-contact-list {
+    right: 0;
+    width: unset;
+  }
+}
+
+@media (max-width: 784px) {
+  .wrapper-contact-list {
+    padding: 8px 24px;
+  }
+
+  .btn-add-contact-db {
+    display: none !important;
+  }
+
+  .btn-contact-mobile {
+    display: flex;
+  }
+
+  .ctn-contacts-details-name {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .ctn-content-contacts {
+    display: none;
+  }
+
+  .bg-contact-list {
+    left: 0;
+    right: 0;
+    width: unset;
+  }
+}
+
+@media (max-width: 400px) {
+  .wrapper-contact-list {
+    padding: 8px 12px;
+  }
+
+  .contact-list-initial-letter {
+    padding: 12px 24px;
+  }
+
+  .contact-list-single-contact {
+    padding: 15px 8px;
+    gap: 16px;
+  }
+
+  .ctn-contact-list {
+    overflow-x: auto;
+  }
+
+  .contact-list-single-contact-name {
+    font-size: 18px;
+  }
+
+  .contact-list-single-contact-mail {
+    font-size: 13px;
+  }
 }
