@@ -15,7 +15,7 @@
     <script src="./js/login.js" defer></script>
     <script src="script.js" defer></script>
   </head>
-  <body onload="init(); callStatusofSignUp();">
+  <body onload="init(); callStatusofSignUp(); loadUserData()">
     <div class="wrapper">
       <div class="header-login">
         <img class="logo-login" src="./assets/img/logo_dark.svg" />
@@ -44,7 +44,7 @@
 
         <div class="ctn-btn-login">
           <button class="btn-db">Log in</button>
-          <button class="btn-outline">Guest Log in</button>
+          <button onclick="useGuestLogin()" class="btn-outline">Guest Log in</button>
         </div>
       </form>
 

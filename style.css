@@ -92,6 +92,14 @@ a {
   align-items: center;
 }
 
+/*für Button bevor man Daten ausgefüllt worden sind*/
+.ctn-btn-login .btn-db.if-disabled:disabled {
+  background-color: rgba(239, 239, 239, 0.3) !important;
+  color: rgba(16, 16, 16, 0.3) !important;
+  border-color: rgba(118, 118, 118, 0.3) !important;
+}
+
+
 .btn-db:hover {
   cursor: pointer;
   background-color: #29abe2;
@@ -183,3 +191,4 @@ a {
   }
 
 }
+

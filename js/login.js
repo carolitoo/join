@@ -26,6 +26,4 @@ function login(){
     if(currentUser){
         console.log('User gefunden');
     }
-
-
 }
