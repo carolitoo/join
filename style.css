@@ -1,7 +1,7 @@
 body {
   margin: 0;
   background-color: #f6f7f8;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,12 +26,12 @@ h1 {
 input {
   height: 36px;
   width: 336px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 400;
   color: #000000;
   border-radius: 8px;
-  border: solid 1px #D1D1D1;
+  border: solid 1px #d1d1d1;
   margin-bottom: 32px;
   padding: 4px 16px;
 }
@@ -41,7 +41,7 @@ input:focus {
 }
 
 ::placeholder {
-  color: #D1D1D1;
+  color: #d1d1d1;
 }
 
 p {
@@ -80,25 +80,38 @@ a {
 }
 
 .btn-db {
-  border: unset;
-  border-radius: 8px;
-  background-color: #2a3647;
-  color: #ffffff;
-  font-family: 'Inter', sans-serif;
-  font-size: 21px;
-  font-weight: 700;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
+  border: unset !important;
+  border-radius: 8px !important;
+  background-color: #2a3647 !important;
+  color: #ffffff !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  padding: 12px 16px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-/*für Button bevor man Daten ausgefüllt worden sind*/
+/*für SignUp & Login Button
 .ctn-btn-login .btn-db.if-disabled:disabled {
   background-color: rgba(239, 239, 239, 0.3) !important;
   color: rgba(16, 16, 16, 0.3) !important;
   border-color: rgba(118, 118, 118, 0.3) !important;
-}
+}*/
 
+.if-button-disabled {
+  border: unset !important;
+  border-radius: 8px !important;
+  border-color: rgba(118, 118, 118, 0.3) !important;
+  background-color: rgba(239, 239, 239, 0.3) !important;
+  color: rgba(16, 16, 16, 0.3) !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  padding: 12px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+}
 
 .btn-db:hover {
   cursor: pointer;
@@ -111,7 +124,7 @@ a {
   border-radius: 8px;
   background-color: #ffffff;
   color: #2a3647;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 21px;
   font-weight: 700;
   padding: 12px 16px;
@@ -157,7 +170,6 @@ a {
 /* **** RESPONSIVE DESIGN **** */
 
 @media (max-width: 784px) {
-
   body {
     --height-header: 80px !important;
     --margin-top-content: 128px !important;
@@ -166,7 +178,6 @@ a {
 }
 
 @media (max-width: 600px) {
-
   body {
     --margin-left-content: 16px !important;
     --margin-right-content: 16px !important;
@@ -175,12 +186,9 @@ a {
   h1 {
     font-size: 47px;
   }
-
 }
 
-
 @media (max-width: 420px) {
-
   input {
     /* height: 36px; */
     width: 160px;
@@ -189,6 +197,4 @@ a {
         margin-bottom: 32px;
         padding: 4px 16px; */
   }
-
 }
-

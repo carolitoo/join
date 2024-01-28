@@ -1,65 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Log in</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
-    <link rel="stylesheet" href="./css/font.css"/>
-    <link rel="stylesheet" href="./css/logInsheet.css" />
-    <link rel="stylesheet" href="style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log in</title>
+  <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
-    <script src="./js/storage.js"></script>
-    <script src="./js/signUp.js"></script>
-    <script src="./js/login.js" defer></script>
-    <script src="script.js" defer></script>
-  </head>
-  <body onload="init(); callStatusofSignUp(); loadUserData()">
-    <div class="wrapper">
-      <div class="header-login">
-        <img class="logo-login" src="./assets/img/logo_dark.svg" />
-        <div class="ctn-no-user">
-          <span class="span-no-user">Not a Join user?</span>
-          <a class="btn-db ft-sz-16" href="./signUp.html">Sign up</a>
-        </div>
-      </div>
+  <link rel="stylesheet" href="./css/font.css" />
+  <link rel="stylesheet" href="./css/logInsheet.css" />
+  <link rel="stylesheet" href="style.css" />
 
-      <form onsubmit="login(); return false;" class="ctn-login">
-        <h1 class="mt-48">Log in</h1>
-        <div class="sep-login"></div>
-        <div>
-          <input id="email" type="email" placeholder="Email" required />
-          <img class="input-icon" src="./assets/img/mail.svg" />
-        </div>
-        <div>
-          <input id="password" type="password" placeholder="Password" required />
-          <img class="input-icon" src="./assets/img/lock.svg" />
-        </div>
-        <div class="ctn-rem-me">
-          <input class="checkbox" type="checkbox" />
-          <p>Remember me</p>
-        </div>
+  <script src="./js/storage.js"></script>
+  <script src="./js/signUp.js"></script>
+  <script src="./js/login.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
 
-
-        <div class="ctn-btn-login">
-          <button class="btn-db">Log in</button>
-          <button onclick="useGuestLogin()" class="btn-outline">Guest Log in</button>
-        </div>
-      </form>
-
-      <div id="msgBox">
-      </div>
-
-      <div class="ctn-no-user-sub">
+<body onload="init(); callStatusofSignUp(); loadUserData()">
+  <div class="wrapper">
+    <div class="header-login">
+      <img class="logo-login" src="./assets/img/logo_dark.svg" />
+      <div class="ctn-no-user">
         <span class="span-no-user">Not a Join user?</span>
-        <a class="btn-db" href="./signUp.html">Sign up</a>
+        <a class="btn-db ft-sz-16" href="./signUp.html">Sign up</a>
       </div>
     </div>
 
-    <footer class="ft-login">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="legal.html">Legal notice</a>
-    </footer>
-  </body>
+    <form onsubmit="login(); return false;" class="ctn-login">
+      <h1 class="mt-48">Log in</h1>
+      <div class="sep-login"></div>
+      <div>
+        <input id="email" type="email" placeholder="Email" required oninput="disableLogInButton()" />
+        <img class="input-icon" src="./assets/img/mail.svg" />
+      </div>
+      <div>
+        <input id="password" type="password" placeholder="Password" required oninput="disableLogInButton()" />
+        <img class="input-icon" src="./assets/img/lock.svg" />
+      </div>
+      <div class="ctn-rem-me">
+        <input class="checkbox" type="checkbox" />
+        <p>Remember me</p>
+      </div>
+
+
+      <div class="ctn-btn-login">
+        <button id="LogInButton" class="if-button-disabled" disabled="true" type="submit">Log in</button>
+        <button onclick="useGuestLogin()" class="btn-outline">Guest Log in</button>
+      </div>
+    </form>
+
+    <div id="msgBox">
+    </div>
+
+    <div class="ctn-no-user-sub">
+      <span class="span-no-user">Not a Join user?</span>
+      <a class="btn-db" href="./signUp.html">Sign up</a>
+    </div>
+  </div>
+
+  <footer class="ft-login">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="legal.html">Legal notice</a>
+  </footer>
+</body>
+
 </html>

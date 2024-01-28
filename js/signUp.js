@@ -16,27 +16,27 @@ async function createSignUpdata() {
         password: passwordInput.value,
         confirmedPassword: confirmedPasswordInput.value
     };
-    await disableButton();
     validateSignUpData(newUser);
 }
 
 
-async function disableButton() { 
+function disableSignUpButton() {
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const confirmedPasswordInput = document.getElementById('confirmedPassword');
     const checkboxInput = document.getElementById('checkbox');
-    const signUpButton = document.querySelector('.btn-db');
-  
+    const signUpButton = document.getElementById('signUpButton');
+
     const allFieldsFilled = nameInput.value && emailInput.value && passwordInput.value && confirmedPasswordInput.value && checkboxInput.checked;
-  
+
     if (allFieldsFilled) {
         signUpButton.removeAttribute('disabled');
-        signUpButton.classList.remove('if-disabled');
+        signUpButton.classList.remove('if-button-disabled');
+        signUpButton.classList.add('btn-db');
     } else {
         signUpButton.setAttribute('disabled', true);
-        signUpButton.classList.add('if-disabled');
+        signUpButton.classList.add('if-button-disabled');
     }
 }
 
@@ -71,6 +71,7 @@ async function addUser(newUser) {
 
 async function storeUserItems() {
     setItem('users', JSON.stringify(users));
+    console.log('DIE aktuellen user sind', users);
 }
 
 
