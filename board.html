@@ -18,7 +18,7 @@
     <script src="./js/template.js"></script>
   </head>
 
-  <body onload="initBoard()">
+  <body onload="initBoard()" id="body-board">
     <header w3-include-html="./assets/templates/header.html"></header>
     <div w3-include-html="./assets/templates/submenu.html"></div>
     <div
@@ -30,12 +30,14 @@
       <div class="headline-board">
         <h1>Board</h1>
         <div class="header-board-right">
-          <div class="ctn-search-task">
+          <div class="ctn-search-task" id="ctn-search-task">
             <input
               class="input-search-task"
               id="searchTask"
               onkeyup="searchTask()"
               placeholder="Find Task"
+              onfocus="changeBorderColorSearchTask('#29ABE2')"
+              onblur="changeBorderColorSearchTask('#a8a8a8')"
             />
             <div class="search-task-right">
               <img src="./assets/img/separator_grey.svg" />
@@ -50,8 +52,9 @@
           </div>
         </div>
       </div>
+      <div class="ctn-board-status-top mt-48 d-none" id="board-no-results">No tasks found</div>
 
-      <div class="ctn-board">
+      <div class="ctn-board" id="ctn-board">
         <div class="ctn-board-wrapper-status">
           <div class="ctn-board-status">
             <div class="ctn-board-status-top">

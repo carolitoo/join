@@ -162,6 +162,10 @@
   height: 18px;
 }
 
+.contacts-detail-edit-delete span {
+    width: 48px;
+  }
+
 .contacts-detail-subheadline {
     font-size: 20px;
     margin-top: 59px;

@@ -62,3 +62,19 @@
     font-size: 27px;
   }
 }
+
+@media (max-width: 480px) {
+  .ctn-board-wrapper-status {
+    flex-wrap: wrap;
+  }
+
+  .input-search-task {
+    width: 240px !important;
+  }
+}
+
+@media (max-width: 370px) {
+  .input-search-task {
+    width: 188px !important;
+  }
+}
