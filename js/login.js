@@ -4,37 +4,59 @@
  * 
  */
 function callStatusofSignUp() {
+    const signUpStatus = localStorage.getItem('signUpStatus');
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('msg');
     const msgBox = document.getElementById('msgBox');
-    if (msg) {
+
+    if (signUpStatus === 'completed' && msg) {
         const msgSpan = document.createElement('span');
         msgSpan.innerHTML = msg;
         msgSpan.classList.add('successfullyBtn');
         msgBox.appendChild(msgSpan);
+        localStorage.removeItem('signUpStatus');
     } else {
         msgBox.style.display = 'none';
     }
 }
 
 
- function login(){
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    let currentUser = users.find(u => u.email == email.value && u.password == password.value);
-    //console.log(currentUser);//
-    if(currentUser){
-        window.location.href = './summary.html';
+function checkIfRememberedData() {
+    if (localStorage.getItem('email')) {
+        let rememberedEmail = localStorage.getItem('email');
+        let rememberedPassword = localStorage.getItem('password');
+
+        let emailInput = document.getElementById('email');
+        let passwordInput = document.getElementById('password');
+
+        emailInput.value = rememberedEmail;
+        passwordInput.value = rememberedPassword;
+
+        disableLogInButton(); 
     }
 }
 
-function disableLogInButton(){
+
+function login() {
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    let currentUser = users.find(u => u.email == email.value && u.password == password.value);
+    if (currentUser) {
+        window.location.href = './summary.html';
+        checkStatusofCheckBox();
+    } else {
+        displayErrorMessage('wrong e-mail or password', email);
+        displayErrorMessage('wrong e-mail or password', password);
+    }
+}
+
+function disableLogInButton() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
     const LogInButton = document.getElementById('LogInButton');
 
     const allFieldsFilled = emailInput.value && passwordInput.value;
-  
+
     if (allFieldsFilled) {
         LogInButton.removeAttribute('disabled');
         LogInButton.classList.remove('if-button-disabled');
@@ -43,5 +65,15 @@ function disableLogInButton(){
     } else {
         LogInButton.setAttribute('disabled', true);
         LogInButton.classList.add('if-button-disabled');
+    }
+}
+
+function checkStatusofCheckBox() {
+    let checkbox = document.getElementById('checkbox');
+    if (checkbox.checked) {
+        let emailInput = document.getElementById('email');
+        let passwordInput = document.getElementById('password');
+        localStorage.setItem('email', emailInput.value);
+        localStorage.setItem('password', passwordInput.value);
     }
 }

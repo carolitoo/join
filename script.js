@@ -1,5 +1,6 @@
 async function init() {
   await includeHTML();
+  await loadUserData();
   //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
 }
 
@@ -10,7 +11,6 @@ async function loadUserData() {
      users = JSON.parse(usersData);
   }
 }
-
 
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
@@ -30,7 +30,6 @@ async function includeHTML() {
 function stopPropagation(event) {
   event.stopPropagation();
 }
-
 
 /**
  * This function changes the source of an img-element (needs to be in the same folder)

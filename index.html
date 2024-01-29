@@ -11,13 +11,13 @@
   <link rel="stylesheet" href="./css/logInsheet.css" />
   <link rel="stylesheet" href="style.css" />
 
-  <script src="./js/storage.js"></script>
-  <script src="./js/signUp.js"></script>
+  <script src="./js/storage.js" defer></script>
+  <script src="./js/signUp.js" defer></script>
   <script src="./js/login.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 
-<body onload="init(); callStatusofSignUp(); loadUserData()">
+<body onload="init(); callStatusofSignUp(); checkIfRememberedData()">
   <div class="wrapper">
     <div class="header-login">
       <img class="logo-login" src="./assets/img/logo_dark.svg" />
@@ -39,7 +39,7 @@
         <img class="input-icon" src="./assets/img/lock.svg" />
       </div>
       <div class="ctn-rem-me">
-        <input class="checkbox" type="checkbox" />
+        <input id="checkbox" class="checkbox" type="checkbox"/>
         <p>Remember me</p>
       </div>
 

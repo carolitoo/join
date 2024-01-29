@@ -67,6 +67,7 @@ async function addUser(newUser) {
         users.push(newUser);
         await storeUserItems();
         clearInputfields(newUser);
+        localStorage.setItem('signUpStatus', 'completed');
         window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
     }
 }
@@ -110,12 +111,19 @@ function clearInputfields(newUser) {
  * @param {valueOf} element - value of the input-box (personal name or confirmed password) 
  */
 function displayErrorMessage(message, element) {
-    let errorMessage = document.createElement('div');
-    errorMessage.innerHTML = message;
-    errorMessage.style.cssText = 'color: red; margin: -27px 0 9px 6px; font-size: small;';
-    element.parentNode.appendChild(errorMessage);
-}
+    const errorMessageId = 'customErrorMessage';
+    let existingErrorMessage = document.getElementById(errorMessageId);
 
+    if (existingErrorMessage) {
+        existingErrorMessage.innerHTML = message;
+    } else {
+        let errorMessage = document.createElement('div');
+        errorMessage.innerHTML = message;
+        errorMessage.id = errorMessageId;
+        errorMessage.style.cssText = 'color: red; margin: -27px 0 9px 6px; font-size: small;';
+        element.parentNode.appendChild(errorMessage);
+    }
+}
 
 /**
  * A function that changes the icon if you have typed something into the input field with the id 'password/confirmedPassword'.
