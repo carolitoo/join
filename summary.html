@@ -12,15 +12,17 @@
   <link rel="stylesheet" href="./css/summary.css" />
   <link rel="stylesheet" href="style.css" />
 
-  <script src="script.js"></script>
-  <script src="summary.js"></script>
+  <script src="script.js" defer></script>
+  <script src="./js/summary.js" defer></script>
+  <script src="./js/signUp.js" defer></script>
+  <script src="./js/storage.js"></script>
 </head>
 
 
 
 </html>
 
-<body onload="init()">
+<body onload="init(); loadUserData();">
 
   <header w3-include-html="./assets/templates/header.html"></header>
   <div class="sidebar" w3-include-html="./assets/templates/sidebarFooter.html"></div>

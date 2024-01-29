@@ -21,11 +21,10 @@ function callStatusofSignUp() {
  function login(){
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-
     let currentUser = users.find(u => u.email == email.value && u.password == password.value);
-    console.log(currentUser);
+    //console.log(currentUser);//
     if(currentUser){
-        console.log('User gefunden');
+        window.location.href = './summary.html';
     }
 }
 

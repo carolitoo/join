@@ -2,7 +2,7 @@ let users = [
     { 'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123', 'confirmedPassword': 'test123' }
 ];
 
-
+let newUser;
 
 async function createSignUpdata() {
     const nameInput = document.getElementById('name');
@@ -10,7 +10,7 @@ async function createSignUpdata() {
     const passwordInput = document.getElementById('password');
     const confirmedPasswordInput = document.getElementById('confirmedPassword');
 
-    const newUser = {
+    newUser = {
         name: nameInput.value,
         email: emailInput.value.toLowerCase(),
         password: passwordInput.value,
@@ -61,11 +61,23 @@ function validateSignUpData(newUser) {
 */
 //
 async function addUser(newUser) {
-    users.push(newUser);
-    console.log('die Users sind', users);
-    await storeUserItems();
-    clearInputfields(newUser);
-    window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
+    if (checkIfUserexist(newUser)) {
+        displayErrorMessage('A user with this email already exists', confirmedPassword);
+    } else {
+        users.push(newUser);
+        await storeUserItems();
+        clearInputfields(newUser);
+        window.location.href = 'index.html?msg=You%20Signed%20Up%20successfully';
+    }
+}
+
+function checkIfUserexist(newUser) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].email == newUser.email) {
+            return true;
+        }
+    }
+    return false;
 }
 
 
