@@ -40,10 +40,3 @@ function stopPropagation(event) {
 function changeImgTo(idOfImg, nameOfImg) {
   document.getElementById(idOfImg).src = `./assets/img/${nameOfImg}.svg`;
 }
-
-function useGuestLogin() {
-
-  userEmail.value = "guest";
-  userPassword.value = "guest";
-}
-

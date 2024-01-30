@@ -32,7 +32,7 @@ function checkIfRememberedData() {
         emailInput.value = rememberedEmail;
         passwordInput.value = rememberedPassword;
 
-        disableLogInButton(); 
+        disableLogInButton();
     }
 }
 
@@ -77,3 +77,22 @@ function checkStatusofCheckBox() {
         localStorage.setItem('password', passwordInput.value);
     }
 }
+
+function useGuestLogIn() {
+    document.getElementById('email').value = 'guest@account';
+    document.getElementById('password').value = 'joinGuest2024';
+
+    const guestUser = users.find(user => user.email === 'guest@account');
+
+    if (guestUser) {
+        window.location.href = './summary.html';
+        clearGuestLogIn();
+    }
+}
+
+function clearGuestLogIn(){
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+}
+
+

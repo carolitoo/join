@@ -1,5 +1,7 @@
 let users = [
-    { 'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123', 'confirmedPassword': 'test123' }
+    {
+        'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123', 'confirmedPassword': 'test123'
+    },
 ];
 
 let newUser;
@@ -83,7 +85,7 @@ function checkIfUserexist(newUser) {
 
 
 async function storeUserItems() {
-    setItem('users', JSON.stringify(users));
+    await setItem('users', JSON.stringify(users));
     console.log('DIE aktuellen user sind', users);
 }
 
