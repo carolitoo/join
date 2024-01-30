@@ -13,6 +13,7 @@
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
+  margin-bottom: 8px;
 }
 
 .input_box_layout {
@@ -20,13 +21,12 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  margin-bottom: 8px
+  margin-bottom: 34px
 }
 
 .description-with-star {
   display: flex;
   flex-direction: row;
-  margin-bottom: 8px;
 }
 
 .parting_line_grey {
@@ -44,9 +44,10 @@
   border-radius: 8px;
   border: solid 1px #D1D1D1;
   padding: 4px 16px;
+  margin: 0px;
 }
 
-.resizable {
+.resize {
   resize: vertical;
 }
 
@@ -86,23 +87,6 @@ select:focus {
   position: absolute;
   margin-top: 50px;
   margin-left: 438px;
-}
-
-
-/*Arrow design in drop down input*/
-.custom-select::after {
-  --size: 0.3rem;
-  content: "";
-  position: absolute;
-  right: 1rem;
-  pointer-events: none;
-}
-
-.custom-select::after {
-  border-left: var(--size) solid transparent;
-  border-right: var(--size) solid transparent;
-  border-top: var(--size) solid black;
-  top: 45%;
 }
 
 .prio_box_layout {
@@ -206,7 +190,7 @@ select:focus {
   height: 24px;
   width: 24px;
   position: absolute;
-  margin-top: 40px;
+  margin-top: 48px;
   margin-left: 438px;
   border-radius: 100%;
   background-image: url(/assets/img/plus-blue.svg);
@@ -216,6 +200,34 @@ select:focus {
 
 .subtask-plus-btn:hover {
   background-color: #dcdcdc;
+}
+
+.dropDownIcon {
+  width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 10px solid #555;
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 438px;
+}
+
+.active .dropDownIcon { 
+  transform: rotate(180deg);
+}
+
+.assignedContacts-open {
+  padding: 0.5rem 1rem;
+  width: 440px;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  border: none;
+  z-index: 1000;
+  background-color: #FFFFFF;
+  display: none;
 }
 
 .bottom-section-ctn {

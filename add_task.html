@@ -36,35 +36,23 @@
               <span class="add_task_txt_format">Title</span>
               <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
             </div>
-            <input class="input-add-task" id="task-input-title" required minlength="2" type="text"
+            <input class="input-add-task" id="task-input-title" rows="4" cols="50" required minlength="2" type="text"
               placeholder="Enter a title">
           </div>
           <div class="input_box_layout">
-            <div class="description-with-star">
+            
               <span class="add_task_txt_format">Description</span>
-            </div>
-            <input class="input-add-task" id="task-input-description" required minlength="2" type="text"
-              placeholder="Enter a description">
+            
+            <textarea class="input-add-task resize" id="task-input-description" placeholder="Enter a description"> </textarea>
           </div>
 
           <div class="input_box_layout">
-            <div class="description-with-star">
-              <span class="add_task_txt_format">Assigned to</span>
-            </div>
-            <div class="custom-select">
-              <select class="select-dropdown_list">
-                <div class="grey-dropdwon-circle"></div>
-                <option value="0">Select contacts to assign</option>
-                <option value="1">Username Lastname</option>
-                <option value="2">Username Lastname</option>
-                <option value="3">Username Lastname</option>
-                <option value="4">Username Lastname</option>
-                <option value="5">Username Lastname</option>
-                <option value="6">Username Lastname</option>
-                <option value="7">Username Lastname</option>
-                <option value="8">Username Lastname</option>
-              </select>
-            </div>
+              <label class="add_task_txt_format">Assigned to</label>
+              <div>
+                <div class="dropDownIcon"></div>  
+                <input class="input-add-task" onclick="activateDropdown()">
+                  <div class="assignedContacts-open" id="assignedContactsCtn"></div>
+              </div>
           </div>
 
         </div>
@@ -117,8 +105,7 @@
 
           <div class="input_box_layout">
             <span class="add_task_txt_format">Subtasks</span>
-              <input class="input-add-task" id="subtaskInput" required minlength="2" type="text"
-                placeholder="Enter a title">
+              <input class="input-add-task" id="subtaskInput" required minlength="2" placeholder="Enter a title">
               <div id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()"></div>
               <div id="added-subtask-ctn"></div>
           </div>
