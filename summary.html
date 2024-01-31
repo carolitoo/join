@@ -15,8 +15,9 @@
   <script src="script.js" defer></script>
   <script src="./js/summary.js" defer></script>
   <script src="./js/signUp.js" defer></script>
-  <script src="./js/storage.js"></script>
-  <script src="./js/template.js"></script>
+  <script src="./js/storage.js" defer></script>
+  <script src="./js/template.js" defer></script>
+  <script src="./js/login.js" defer></script>
 </head>
 
 
@@ -40,64 +41,64 @@
     <div class="summary_and_greeting_ctn">
       <div class="summary_content_ctn">
 
-          <div class="todo_done_ctn">
+        <div class="todo_done_ctn">
 
-            <div class="todo_done_box" onclick="location.href='board.html';">
-              <div class="icon-blue-pen">
-              </div>
-              <div class="number-and-txt-box">
-                <h1>1</h1>
-                <span class="text-format-Summary-1">To-Do</span>
-              </div>
+          <div class="todo_done_box" onclick="location.href='board.html';">
+            <div class="icon-blue-pen">
             </div>
-            
-            <div class="todo_done_box" onclick="location.href='board.html';">
-              <div class="icon-blue-checkmark">
-              </div>
-              <div class="number-and-txt-box">
-                <h1>1</h1>
-                <span class="text-format-Summary-1">Done</span>
-              </div>
+            <div class="number-and-txt-box">
+              <h1>1</h1>
+              <span class="text-format-Summary-1">To-Do</span>
             </div>
           </div>
 
-          <div class="urgent_date_ctn" onclick="location.href='board.html';">
-            
-            <div class="urgent_content">
-              <div class="icon-red">
-                <img src="./assets/img/prio alta.svg" class="summary-icon-size" alt="...">
-              </div>
-              <div class="number-and-txt-box">
-                <h1>1</h1>
-                <span class="text-format-Summary-2">Urgent</span>
-              </div>
+          <div class="todo_done_box" onclick="location.href='board.html';">
+            <div class="icon-blue-checkmark">
             </div>
-            <div class="parting_line_grey"></div>
-            <div class="date_content">
-              <span class="text-format-Summary-3">October 16, 2024</span>
-              <span>Upcoming deadline</span>
+            <div class="number-and-txt-box">
+              <h1>1</h1>
+              <span class="text-format-Summary-1">Done</span>
             </div>
           </div>
+        </div>
 
-          <div class="task_progr_feedb_ctn">
-            <div class="task_progr_feedb_box">
-              <h1>5</h1>
-              <span class="text-format-Summary-1">Tasks in<br>Board</span>
+        <div class="urgent_date_ctn" onclick="location.href='board.html';">
+
+          <div class="urgent_content">
+            <div class="icon-red">
+              <img src="./assets/img/prio alta.svg" class="summary-icon-size" alt="...">
             </div>
-            <div class="task_progr_feedb_box">
-              <h1>2</h1>
-              <span class="text-format-Summary-1">Tasks in<br>Progress</span>
-            </div>
-            <div class="task_progr_feedb_box">
-              <h1>2</h1>
-              <span class="text-format-Summary-1">Awaiting<br>Feedback</span>
+            <div class="number-and-txt-box">
+              <h1>1</h1>
+              <span class="text-format-Summary-2">Urgent</span>
             </div>
           </div>
+          <div class="parting_line_grey"></div>
+          <div class="date_content">
+            <span class="text-format-Summary-3">October 16, 2024</span>
+            <span>Upcoming deadline</span>
+          </div>
+        </div>
+
+        <div class="task_progr_feedb_ctn">
+          <div class="task_progr_feedb_box">
+            <h1>5</h1>
+            <span class="text-format-Summary-1">Tasks in<br>Board</span>
+          </div>
+          <div class="task_progr_feedb_box">
+            <h1>2</h1>
+            <span class="text-format-Summary-1">Tasks in<br>Progress</span>
+          </div>
+          <div class="task_progr_feedb_box">
+            <h1>2</h1>
+            <span class="text-format-Summary-1">Awaiting<br>Feedback</span>
+          </div>
+        </div>
       </div>
       <div class="greeting_and_name_ctn">
         <div class="greeting_and_name_content">
-          <span class="greeting-txt-format">Good Morning,</span>
-          <span class="greeting-username-format">User Nickname</span>
+          <span id="greetingText" class="greeting-txt-format">Good Morning,</span>
+          <span id="greetingUsername" class="greeting-username-format"></span>
         </div>
       </div>
     </div>

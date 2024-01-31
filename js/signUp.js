@@ -2,6 +2,7 @@ let users = [
     {
         'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123', 'confirmedPassword': 'test123'
     },
+
 ];
 
 let newUser;
