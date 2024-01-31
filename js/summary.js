@@ -6,20 +6,21 @@ async function initSummary() {
     changeSelectedTab('tab-summary');
 }
 
-async function greetingUser() {
+async function greetingUser() {//später HTML auslagern//
     const loggedInEmail = await getLoggedInEmail();
     let currentUser = users.find(u => u.email === loggedInEmail);
     const greetingText = document.getElementById('greetingText');
-
     if (currentUser) {
         if (currentUser.name.toLowerCase() === 'guest') {
             greetingText.innerHTML = 'Good Morning';
         } else {
-            currentUser = currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1);
+            const nameParts = currentUser.name.split(' ');
+            const formattedName = nameParts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+
             greetingText.innerHTML = `Good Morning, 
-            <br><span class="greeting-username-format">${currentUser}</span>`;
+            <br><span class="greeting-username-format">${formattedName}</span>`;
         }
-    } 
+    }
 }
 
 
@@ -27,9 +28,9 @@ async function getLoggedInEmail() {
     try {
         const response = await getItem('loggedInEmail');
         const LoggedInEmail = response['data']['value'];
-         return LoggedInEmail;
+        return LoggedInEmail;
     } catch (error) {
         alert('An error has occurred', error);
-        return ''; 
+        return '';
     }
 }
