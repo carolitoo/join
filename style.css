@@ -11,6 +11,7 @@ body {
   min-width: 320px;
 
   --height-header: 96px;
+  --height-footer: 80px;
   --width-sidebar: 232px;
   --margin-top-content: 176px;
   --margin-left-content: 296px;

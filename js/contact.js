@@ -2,13 +2,45 @@ let positionOfContact;
 let contacts = [];
 let contactsSorted = [];
 let initialLetters = [];
+let contactIsSelected = false;
 
 async function initContact() {
   await includeHTML();
   changeSelectedTab("tab-contacts");
   await loadContacts();
   await renderContactList();
+  checkWindowWidth();
 }
+
+
+window.onresize = checkWindowWidth;
+
+
+function checkWindowWidth() {
+  if (contactIsSelected && window.innerWidth < 975) {
+    document.getElementById('bg-contact-list').classList.add('d-none');
+    document.getElementById('contact-arrow-return').classList.remove('d-none');
+    document.getElementById('ctn-content-contacts').classList.remove('d-none');
+    document.getElementById('ctn-content-contacts').style = 'left: var(--margin-left-content) !important';
+  } 
+  else if (contactIsSelected) {
+    document.getElementById('bg-contact-list').classList.remove('d-none');
+    document.getElementById('contact-arrow-return').classList.add('d-none');
+    document.getElementById('ctn-content-contacts').classList.remove('d-none');
+    document.getElementById('ctn-content-contacts').style = 'left: calc(var(--margin-left-content) + var(--width-contacts-overview)) !important';
+  } else if (!contactIsSelected && window.innerWidth < 975) {
+    document.getElementById('bg-contact-list').classList.remove('d-none');
+    document.getElementById('ctn-content-contacts').classList.add('d-none');
+  } 
+}
+
+
+function returnToContactList() {
+  contactIsSelected = false;
+  renderContactList();
+  checkWindowWidth();
+}
+
 
 /**
  * This function loads all contacts currently existing into a JSON-Array
@@ -72,6 +104,9 @@ async function createArrayInitialLetters() {
  * @param {string} idContact - id of the contact for which the details shall be displayed
  */
 async function openContactDetail(idContact) {
+  contactIsSelected = true;
+  checkWindowWidth();
+
   await resetPreviousSelectedContact();
   markSelectedContact(idContact);
 
@@ -83,6 +118,16 @@ async function openContactDetail(idContact) {
   document.getElementById('wrapper-contact-details').classList.add("translate-x");
   setTimeout(() => {document.getElementById("wrapper-contact-details").classList.remove("translate-x");}, 100);
 }
+
+
+// function checkWidthWindow() {
+//   if (window.innerWidth < 784) {
+//     document.getElementById('bg-contact-list').classList.add('d-none');
+//     document.getElementById('ctn-content-contacts').style = 'display: block';
+//     document.getElementById('ctn-content-contacts').style = 'left: var(--margin-left-content) !important';
+//   }
+// }
+
 
 
 /**
@@ -97,7 +142,6 @@ async function resetPreviousSelectedContact() {
   }
 }
 
-
 /**
  * This function marks the currently selected contact in the contact list
  * 
@@ -110,6 +154,10 @@ function markSelectedContact(idContact) {
 }
 
 
+function openSubmenuContact() {
+  
+}
+
 
 function editContact(positionOfContact) {
 }
@@ -118,6 +166,7 @@ function editContact(positionOfContact) {
 
 function deleteContact(positionOfContact) {
 }
+
 
 
 

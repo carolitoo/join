@@ -25,32 +25,35 @@
       w3-include-html="./assets/templates/sidebarFooter.html"
     ></div>
 
-    <div class="bg-contact-list">
+    <div class="bg-contact-list" id="bg-contact-list">
       <div class="wrapper-contact-list">
         <div class="ctn-btn-contact-list">
-          <div class="btn-db btn-add-contact-db">
+          <div class="btn-db btn-add-contact-db" onclick="addNewContact()">
             <span>Add new contact</span>
             <img class="icon-btn" src="./assets/img/person_add_white.svg" />
           </div>
         </div>
-        <div class="btn-contact-mobile">
+        <div class="btn-contact-mobile" onclick="addNewContact()">
           <img src="./assets/img/person_add_white.svg" />
         </div>
         <div class="ctn-contact-list" id="ctn-contact-list"></div>
       </div>
     </div>
 
-    <div class="ctn-content ctn-content-contacts">
+    <div class="ctn-content ctn-content-contacts" id="ctn-content-contacts">
+      <div class="contact-arrow-return d-none" id="contact-arrow-return" onclick="returnToContactList()">
+        <img src= "./assets/img/arrow-left-line.svg">
+      </div>
       <div class="ctn-contacts-details">
         <div class="headline-contacts">
           <h1>Contacts</h1>
           <div class="headline-separator"></div>
           <span>Better with a team</span>
         </div>
-        <div
-          class="wrapper-contact-details d-none"
-          id="wrapper-contact-details"
-        ></div>
+        <div class="wrapper-contact-details d-none" id="wrapper-contact-details"></div>
+      </div>
+      <div class="btn-contact-mobile" onclick="openSubmenuContact()">
+        <img src="./assets/img/more_vertical_white.svg" />
       </div>
     </div>
 
