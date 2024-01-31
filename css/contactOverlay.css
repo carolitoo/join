@@ -1,0 +1,68 @@
+.overlay-contacts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    background-color: #00000025;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.ctn-contacts-edit-add {
+    display: flex;
+    align-items: center;
+    height: 592px;
+    background-color: white;
+    gap: 64px;
+    border-radius: 30px;
+}
+
+.ctn-headline-contacts-edit-add {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #2A3647;
+    color: white;
+    padding: 66px 46px;
+    gap: 12px;
+}
+
+.separator-contacts-edit-add {
+    height: 3px;
+    width: 90px;
+    background-color: #29ABE2;
+}
+
+.acronym-contacts-edit-add {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    font-weight: 500;
+    background-color: #FFC700;
+    color: white;
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+.form-contacts-edit-add {
+    margin-right: 48px;
+}
+
+.ctn-input-contact-edit-add {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+
+.ctn-btns-contact-edit-add {
+    display: flex;
+    gap: 25px;
+}

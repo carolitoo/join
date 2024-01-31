@@ -27,6 +27,14 @@ let users = [
 
 ];  //dummy array for users in the remote storage 
 
+
+async function initAddTask() {
+    await includeHTML();
+    // await loadUserData();
+    changeSelectedTab('tab-add-task');
+
+}
+
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */

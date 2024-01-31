@@ -1,0 +1,73 @@
+[
+    {
+      "idContact": "contact-1",
+      "nameContact": "Antonia Zimmermann",
+      "firstName": "Antonia",
+      "lastName": "Zimmermann",
+      "acronymContact": "AZ",
+      "colorContact": "#FF7A00",
+      "emailContact": "antonia.zimmermann@gmail.com",
+      "phoneContact": "+49 111 111 111",
+      "assignedTasks": [
+        {
+          "idTaks": 1
+        },
+        {
+          "idTask": 2
+        },
+        {
+          "idTaks": 3
+        }
+      ]
+    },
+    {
+        "idContact": "contact-2",
+        "nameContact": "Anja Schulz",
+        "firstName": "Antonia",
+        "lastName": "Schulz",
+        "acronymContact": "AS",
+        "colorContact": "#FF5EB3",
+        "emailContact": "schulz@gmail.com",
+        "phoneContact": "+49 111 111 111",
+        "assignedTasks": [
+          {
+            "idTaks": 1
+          },
+          {
+            "idTaks": 3
+          }
+        ]
+      },
+      {
+        "idContact": "contact-3",
+        "nameContact": "Benedikt Ziegler",
+        "firstName": "Benedikt",
+        "lastName": "Ziegler",
+        "acronymContact": "BZ",
+        "colorContact": "#6E52FF",
+        "emailContact": "benedikt@gmail.com",
+        "phoneContact": "+49 111 111 111",
+        "assignedTasks": [
+          {
+            "idTask": 2
+          },
+          {
+            "idTaks": 3
+          }
+        ]
+      },    {
+        "idContact": "contact-4",
+        "nameContact": "Carmen Gutmann",
+        "firstName": "Carmen",
+        "lastName": "Gutmann",
+        "acronymContact": "CG",
+        "colorContact": "#9327FF",
+        "emailContact": "carmen@hotmail.com",
+        "phoneContact": "+49 111 111 111",
+        "assignedTasks": [
+          {
+            "idTaks": 1
+          }
+        ]
+      }
+]

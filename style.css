@@ -116,7 +116,7 @@ a {
 
 .btn-db:hover {
   cursor: pointer;
-  background-color: #29abe2;
+  background-color: #29abe2 !important;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 

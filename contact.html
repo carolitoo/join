@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="./css/font.css" />
     <link rel="stylesheet" href="./css/contact.css" />
+    <link rel="stylesheet" href="./css/contactOverlay.css" />
     <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="style.css" />
 
@@ -26,83 +27,16 @@
 
     <div class="bg-contact-list">
       <div class="wrapper-contact-list">
-        <div class="btn-db btn-add-contact-db">
-          <span>Add new contact</span>
-          <img class="icon-btn" src="./assets/img/person_add_white.svg" />
+        <div class="ctn-btn-contact-list">
+          <div class="btn-db btn-add-contact-db">
+            <span>Add new contact</span>
+            <img class="icon-btn" src="./assets/img/person_add_white.svg" />
+          </div>
         </div>
         <div class="btn-contact-mobile">
-          <img src="./assets/img/person_add_white.svg">
+          <img src="./assets/img/person_add_white.svg" />
         </div>
-        <div class="ctn-contact-list" id="ctn-contact-list">
-          <div id="contact-list-letter-A">
-            <div class="contact-list-initial-letter">A</div>
-            <div class="contact-list-separator"></div>
-            <div class="contact-list-single-contact">
-              <div class="contact-list-single-contact-acronym">AM</div>
-              <div class="contact-list-single-contact-right">
-                <div class="contact-list-single-contact-name">Antonia Zimmermann</div>
-                <div class="contact-list-single-contact-mail">
-                  antonia.zimmermann@gmail.com
-                </div>
-              </div>
-            </div>
-            <div class="contact-list-single-contact">
-              <div class="contact-list-single-contact-acronym">AS</div>
-              <div class="contact-list-single-contact-right">
-                <div class="contact-list-single-contact-name">Anja Schulz</div>
-                <div class="contact-list-single-contact-mail">
-                  schulz@hotmail.com
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="contact-list-letter-B">
-            <div class="contact-list-initial-letter">B</div>
-            <div class="contact-list-separator"></div>
-            <div class="contact-list-single-contact">
-              <div class="contact-list-single-contact-acronym">BZ</div>
-              <div class="contact-list-single-contact-right">
-                <div class="contact-list-single-contact-name">
-                  Benedikt Ziegler
-                </div>
-                <div class="contact-list-single-contact-mail">
-                  benedikt@gmail.com
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="contact-list-letter-C">
-            <div class="contact-list-initial-letter">C</div>
-            <div class="contact-list-separator"></div>
-            <div class="contact-list-single-contact">
-              <div class="contact-list-single-contact-acronym">CG</div>
-              <div class="contact-list-single-contact-right">
-                <div class="contact-list-single-contact-name">Carmen Gutmann</div>
-                <div class="contact-list-single-contact-mail">
-                  carmen@gmail.com
-                </div>
-              </div>
-            </div>
-            <div class="contact-list-single-contact">
-              <div class="contact-list-single-contact-acronym">CS</div>
-              <div class="contact-list-single-contact-right">
-                <div class="contact-list-single-contact-name">Celine Schulz</div>
-                <div class="contact-list-single-contact-mail">
-                  schulz@hotmail.com
-                </div>
-              </div>
-            </div>
-            <div class="contact-list-single-contact">
-              <div class="contact-list-single-contact-acronym">CZ</div>
-              <div class="contact-list-single-contact-right">
-                <div class="contact-list-single-contact-name">Carola Zaim</div>
-                <div class="contact-list-single-contact-mail">
-                  zaim@hotmail.com
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="ctn-contact-list" id="ctn-contact-list"></div>
       </div>
     </div>
 
@@ -113,49 +47,41 @@
           <div class="headline-separator"></div>
           <span>Better with a team</span>
         </div>
-        <div class="wrapper-contact-details">
-          <div class="ctn-contacts-details-name">
-            <div class="contacts-detail-acronym">AM</div>
-            <div class="ctn-contacts-details-name-right">
-              <div class="contacts-detail-name">Antonia Zimmermann</div>
-              <div class="ctn-contacts-detail-edit-delete">
-                <div
-                  class="contacts-detail-edit-delete"
-                  onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"
-                  onmouseout="changeImgTo('img-contacts-detail-edit', 'edit_default')"
-                >
-                  <img
-                    id="img-contacts-detail-edit"
-                    src="./assets/img/edit_default.svg"
-                  />
-                  <span>Edit</span>
-                </div>
-                <div
-                  class="contacts-detail-edit-delete"
-                  onmouseover="changeImgTo('img-contacts-detail-delete', 'delete_lb')"
-                  onmouseout="changeImgTo('img-contacts-detail-delete', 'delete_default')"
-                >
-                  <img
-                    id="img-contacts-detail-delete"
-                    src="./assets/img/delete_default.svg"
-                  />
-                  <span>Delete</span>
-                </div>
-              </div>
-            </div>
+        <div
+          class="wrapper-contact-details d-none"
+          id="wrapper-contact-details"
+        ></div>
+      </div>
+    </div>
+
+    <div class="overlay-contacts d-none" id="overlay-contact">
+      <div class="ctn-contacts-edit-add">
+        <div class="ctn-headline-contacts-edit-add">
+          <img src="./assets/img/logo_light.svg" />
+          <h1
+            class="headline-contacts-edit-add"
+            id="headline-contacts-edit-add"
+          >
+            Edit contact
+          </h1>
+          <div class="sub-headline-contacts-add" id="sub-headline-contacts-add">
+            Tasks are better with a team!
           </div>
-          <div class="contacts-detail-subheadline">Contact Information</div>
-          <div class="ctn-contacts-detail-mail-phone">
-            <div class="contacts-detail-mail-phone">
-              <span>Email</span>
-              <div class="contacts-detail-mail">antom@gmail.com</div>
-            </div>
-            <div class="contacts-detail-mail-phone">
-              <span>Phone</span>
-              <div>+49 111 111 111</div>
-            </div>
-          </div>
+          <div class="separator-contacts-edit-add"></div>
         </div>
+        <div class="acronym-contacts-edit-add">TW</div>
+        <form class="form-contacts-edit-add">
+          <div class="ctn-input-contact-edit-add">
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <input type="text" placeholder="Phone">
+          </div>
+          <div class="ctn-btns-contact-edit-add">
+            <div>Delete</div>
+            <div>Save</div>
+          </div>
+        
+        </form>
       </div>
     </div>
   </body>
