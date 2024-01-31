@@ -1,6 +1,6 @@
 let users = [
     {
-        'name': 'tim', 'email': 'test@testmail.de', 'password': 'test123', 'confirmedPassword': 'test123'
+        'name': 'guest', 'email': 'guest@account', 'password': 'joinGuest2024', 'confirmedPassword': 'joinGuest2024'
     },
 
 ];

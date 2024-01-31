@@ -8,11 +8,17 @@ async function initSummary() {
 
 async function greetingUser() {
     const loggedInEmail = await getLoggedInEmail();
-    const currentUser = users.find(u => u.email === loggedInEmail)
+    let currentUser = users.find(u => u.email === loggedInEmail);
+    const greetingText = document.getElementById('greetingText');
 
     if (currentUser) {
-        const greetingUsername = document.getElementById('greetingUsername');
-        greetingUsername.innerHTML = currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1);
+        if (currentUser.name.toLowerCase() === 'guest') {
+            greetingText.innerHTML = 'Good Morning';
+        } else {
+            currentUser = currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1);
+            greetingText.innerHTML = `Good Morning, 
+            <br><span class="greeting-username-format">${currentUser}</span>`;
+        }
     } 
 }
 

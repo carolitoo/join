@@ -45,8 +45,6 @@ async function login() {
     if (currentUser) {
         loggedInEmail = currentUser.email;
         await setItem('loggedInEmail', loggedInEmail);
-     
-        
         window.location.href = './summary.html';
         checkStatusofCheckBox();
         clearLogIn();
@@ -84,14 +82,15 @@ function checkStatusofCheckBox() {
     }
 }
 
-function useGuestLogIn() {
+async function useGuestLogIn() {
     document.getElementById('email').value = 'guest@account';
     document.getElementById('password').value = 'joinGuest2024';
 
     const guestUser = users.find(user => user.email === 'guest@account');
     if (guestUser) {
-        window.location.href = './summary.html';
+        await setItem('loggedInEmail', loggedInEmail);
         clearLogIn();
+        window.location.href = './summary.html';
     }
 }
 
