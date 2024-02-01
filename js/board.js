@@ -13,6 +13,7 @@ async function initBoard() {
 }
 
 
+
 /** 
  * This function loads all the tasks currently existing into a JSON-Array
  */

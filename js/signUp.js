@@ -1,6 +1,6 @@
 let users = [
     {
-        'name': 'guest', 'email': 'guest@account', 'password': 'joinGuest2024', 'confirmedPassword': 'joinGuest2024'
+        'name': 'guest', 'email': 'guest@account', 'password': 'joinGuest2024', 'confirmedPassword': 'joinGuest2024', 'acronym': acronym, 'userID': new Date().getTime(),
     },
 
 ];
@@ -17,7 +17,10 @@ async function createSignUpdata() {
         name: nameInput.value,
         email: emailInput.value.toLowerCase(),
         password: passwordInput.value,
-        confirmedPassword: confirmedPasswordInput.value
+        confirmedPassword: confirmedPasswordInput.value,
+        userID: new Date().getTime()
+        acronym: 
+        // kürzel, , colors//?
     };
     validateSignUpData(newUser);
 }

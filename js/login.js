@@ -88,8 +88,8 @@ async function useGuestLogIn() {
 
     const guestUser = users.find(user => user.email === 'guest@account');
     if (guestUser) {
-        await setItem('loggedInEmail', loggedInEmail);
         clearLogIn();
+        await setItem('loggedInEmail', loggedInEmail);
         window.location.href = './summary.html';
     }
 }
