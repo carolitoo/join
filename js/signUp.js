@@ -1,11 +1,10 @@
 let users = [
     {
-        'name': 'guest', 'email': 'guest@account', 'password': 'joinGuest2024', 'confirmedPassword': 'joinGuest2024', 'userID': new Date().getTime(),
+        'name': 'guest', 'email': 'guest@account', 'password': 'joinGuest2024', 'confirmedPassword': 'joinGuest2024', 'userID': '', 'acronym': 'G'
     },
 
 ];
 
-let newUser;
 
 async function createSignUpdata() {
     const nameInput = document.getElementById('name');
@@ -18,12 +17,40 @@ async function createSignUpdata() {
         email: emailInput.value.toLowerCase(),
         password: passwordInput.value,
         confirmedPassword: confirmedPasswordInput.value,
-        userID: new Date().getTime()
-        // kürzel, , colors evtl hier mit einbauen //?
+        userID: new Date().getTime(),
+        acronym: getAcronym(nameInput.value),
+        // colors evtl hier mit einbauen //?
     };
+   
     validateSignUpData(newUser);
 }
 
+
+function getAcronym(userName) {
+    const nameParts = userName.split(' ');
+    const firstName = capitalizeFirstLetter(nameParts[0]);
+    const lastName = checkIfLastNameExist(nameParts);
+    const formattedFirstNameInitial = firstName.charAt(0).toUpperCase();
+    const formattedLastNameInitial = lastName.charAt(0).toUpperCase();
+    return acronym = formattedFirstNameInitial + formattedLastNameInitial;
+}
+
+
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+
+function checkIfLastNameExist(nameParts) {
+    let lastName = '';
+    if (nameParts.length > 1) {
+        lastName = nameParts[nameParts.length - 1];
+        lastName = capitalizeFirstLetter(nameParts[nameParts.length - 1]);
+    }
+    return lastName;
+}
 
 function disableSignUpButton() {
     const nameInput = document.getElementById('name');

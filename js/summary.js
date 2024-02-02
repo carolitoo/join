@@ -1,3 +1,4 @@
+
 async function initSummary() {
     await includeHTML();
     await loadUserData();
@@ -10,8 +11,14 @@ async function initSummary() {
 async function identifyNewUser() {
     const loggedInEmail = await getLoggedInEmail();
     const currentUser = users.find(u => u.email === loggedInEmail);
-    generateGreeting(currentUser);
+    if (currentUser) {
+        const acronym = currentUser.acronym;
+        generateGreeting(currentUser, acronym);
+    } else {
+       alert('an error has occured');
+    }
 }
+
 
 async function getLoggedInEmail() {
     try {
@@ -25,20 +32,19 @@ async function getLoggedInEmail() {
 }
 
 
-async function generateGreeting(currentUser) {
-    const greetingText = document.getElementById('greetingText');
+async function generateGreeting(currentUser, acronym) {
     const nameParts = currentUser.name.split(' ');
-    const firstName = capitalizeFirstLetter(nameParts[0]);
-    const lastName = checkIfLastNameExist(nameParts);
+    const firstName = capitalizeFirstLetter(nameParts[0]);//
+    const lastName = checkIfLastNameExist(nameParts);//
 
     const currentHour = new Date().getHours();
 
     if (currentUser.name.toLowerCase() === 'guest') {
-        greetingGuest(greetingText, currentHour);
+        greetingGuest(currentHour);
     } else {
-        greetingUser(greetingText, currentHour, firstName, lastName);
+        greetingUser(currentHour, firstName, lastName);
     }
-    generateUserIcon(firstName, lastName);
+    generateUserIcon(acronym);
 }
 
 
@@ -61,27 +67,27 @@ function getGreeting(hour) {
     }
 }
 
-function greetingUser(greetingText, currentHour, firstName, lastName) {
+function greetingUser(currentHour, firstName, lastName) {
+    const greetingText = document.getElementById('greetingText');
     greetingText.innerHTML = `${getGreeting(currentHour)}, 
     <br><span class="greeting-username-format">${firstName} ${lastName}</span>`;
 }
 
 
 
-function greetingGuest(greetingText, currentHour,) {
+function greetingGuest(currentHour) {
+    const greetingText = document.getElementById('greetingText');
     greetingText.innerHTML = getGreeting(currentHour);
 }
 
 
 
 //soll die function hier bleiben oder zu template.js verschoben werden//?
-function generateUserIcon(firstName, lastName) {
+function generateUserIcon(acronym) {
     const userIcon = document.getElementById('iconUserheader');
-
-    const formattedFirstNameInitial = firstName.charAt(0).toUpperCase();
-    const formattedLastNameInitial = lastName.charAt(0).toUpperCase();
-
-    userIcon.textContent = formattedFirstNameInitial + formattedLastNameInitial;
+    //const formattedFirstNameInitial = firstName.charAt(0).toUpperCase();//
+    //const formattedLastNameInitial = lastName.charAt(0).toUpperCase();//
+    userIcon.textContent = acronym;
 }
 
 function capitalizeFirstLetter(string) {
