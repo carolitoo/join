@@ -51,3 +51,14 @@ async function resetSelectedTab() {
     document.getElementById('submenu-header').classList.add('d-none');
     document.getElementById('overlay-submenu').classList.add('d-none');
   }
+
+  async function logout(){
+    await clearLoggedInEmail();
+    window.location.href = './index.html';
+  }
+
+  
+  async function clearLoggedInEmail() {
+    let LoggedInEmail = await getLoggedInEmail();
+    LoggedInEmail = '';
+}
