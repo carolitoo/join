@@ -80,6 +80,9 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  background-image: url(../assets/img/close_black.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .ctn-contacts-detail-close:hover {
@@ -99,6 +102,10 @@
   margin-right: 48px;
 }
 
+.form-contacts-edit-add input {
+  padding-right: 48px;
+}
+
 .ctn-input-contact-edit-add {
   display: flex;
   flex-direction: column;
@@ -110,7 +117,7 @@
 }
 
 .ctn-btns-contact-edit-add div {
-    font-weight: 400 !important;
+  font-weight: 400 !important;
 }
 
 .ctn-btns-contact-edit-add img {

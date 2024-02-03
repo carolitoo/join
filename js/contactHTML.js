@@ -98,7 +98,7 @@ async function generateContactDetailHTML(positionOfContact) {
 
 async function generateOverlayEditContact(positionOfContact) {
   return /*html*/ `
-  <div class="ctn-contacts-edit-add">
+  <div class="ctn-contacts-edit-add" onclick="stopPropagation(event)">
     <div class="ctn-headline-contacts-edit-add">
       <img class="logo-contacts-edit-add" src="./assets/img/logo_light.svg" />
       <h1 class="headline-contacts-edit-add" id="headline-contacts-edit-add">
@@ -106,14 +106,8 @@ async function generateOverlayEditContact(positionOfContact) {
       </h1>
       <div class="separator-contacts-edit-add"></div>
     </div>
-    <div class="acronym-contacts-edit-add">TW</div>
-    <div class="ctn-contacts-detail-close">
-      <img
-        class="contacts-detail-close"
-        src="./assets/img/close_black.svg"
-        onclick="closeContactsDetails()"
-      />
-    </div>
+    <div class="acronym-contacts-edit-add">${contacts[positionOfContact]['acronymContact']}</div>
+    <div class="ctn-contacts-detail-close" onclick="closeContactsDetails()"></div>
     <form
       class="form-contacts-edit-add"
       onsumit="editContact(${positionOfContact})"
@@ -143,7 +137,7 @@ async function generateOverlayEditContact(positionOfContact) {
           <input
             type="text"
             id="contacts-detail-input-phone"
-            pattern="[+][0-9]*"
+            pattern="[+][0-9 ]*"
             placeholder="Phone"
             oninvalid="this.setCustomValidity('Please enter a valid phone number')"
             oninput="this.setCustomValidity('')"
@@ -167,7 +161,7 @@ async function generateOverlayEditContact(positionOfContact) {
 
 async function generateOverlayAddContact() {
   return /*html*/ `
-  <div class="ctn-contacts-edit-add">
+  <div class="ctn-contacts-edit-add" onclick="stopPropagation(event)">
         <div class="ctn-headline-contacts-edit-add">
           <img class="logo-contacts-edit-add" src="./assets/img/logo_light.svg" />
           <h1 class="headline-contacts-edit-add" id="headline-contacts-edit-add">
@@ -179,13 +173,7 @@ async function generateOverlayAddContact() {
           <div class="separator-contacts-edit-add"></div>
         </div>
         <div class="acronym-contacts-edit-add"><img class="icon-acronym-contacts-add" src="./assets/img/person_white.svg"></div>
-        <div class="ctn-contacts-detail-close">
-          <img
-            class="contacts-detail-close"
-            src="./assets/img/close_black.svg"
-            onclick="closeContactsDetails()"
-          />
-        </div>
+        <div class="ctn-contacts-detail-close" onclick="closeContactsDetails()"></div>
         <form
           class="form-contacts-edit-add"
           onsumit="addContact()"
@@ -224,7 +212,8 @@ async function generateOverlayAddContact() {
             </div>
           </div>
           <div class="ctn-btns-contact-edit-add">
-            <div class="btn-outline btn-cancel-contacts" onclick="deleteContact()">
+            <div class="btn-outline btn-cancel-contacts" onclick="resetAddContact()"  onmouseover="changeImgTo('icon-btn-cancel-contacts', 'close_lb')"
+            onmouseout="changeImgTo('icon-btn-cancel-contacts', 'close_black')">
               Cancel
               <img class="icon-btn-cancel-contacts" id="icon-btn-cancel-contacts" src="./assets/img/close_black.svg" />
             </div>
