@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="./css/font.css" />
     <link rel="stylesheet" href="./css/contact.css" />
     <link rel="stylesheet" href="./css/contactOverlay.css" />
+    <link rel="stylesheet" href="./css/contactResp.css" />
     <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script src="script.js"></script>
     <script src="./js/contact.js"></script>
+    <script src="./js/contactHTML.js"></script>
     <script src="./js/template.js"></script>
   </head>
 
@@ -41,8 +43,12 @@
     </div>
 
     <div class="ctn-content ctn-content-contacts" id="ctn-content-contacts">
-      <div class="contact-arrow-return d-none" id="contact-arrow-return" onclick="returnToContactList()">
-        <img src= "./assets/img/arrow-left-line.svg">
+      <div
+        class="contact-arrow-return d-none"
+        id="contact-arrow-return"
+        onclick="returnToContactList()"
+      >
+        <img src="./assets/img/arrow-left-line.svg" />
       </div>
       <div class="ctn-contacts-details">
         <div class="headline-contacts">
@@ -50,10 +56,51 @@
           <div class="headline-separator"></div>
           <span>Better with a team</span>
         </div>
-        <div class="wrapper-contact-details d-none" id="wrapper-contact-details"></div>
+        <div
+          class="wrapper-contact-details d-none"
+          id="wrapper-contact-details"
+        ></div>
       </div>
-      <div class="btn-contact-mobile" onclick="openSubmenuContact()">
+      <div
+        class="btn-contact-mobile"
+        id="btn-contact-mobile"
+        onclick="openSubmenuContact(positionOfContact)"
+      >
         <img src="./assets/img/more_vertical_white.svg" />
+      </div>
+    </div>
+    <div
+      class="overlay-contacts-submenu d-none"
+      id="overlay-contacts-submenu"
+      onclick="closeSubmenuContact()"
+    >
+      <div
+        class="ctn-contacts-submenu"
+        id="ctn-contacts-submenu"
+        onclick="stopPropagation(event)"
+      >
+        <div
+          class="contacts-detail-edit-delete"
+          id="contacts-detail-edit-mobile"
+          onclick="editContact(0)"
+        >
+          <img
+            id="img-contacts-detail-edit"
+            src="./assets/img/edit_default.svg"
+          />
+          <span>Edit</span>
+        </div>
+        <div
+          class="contacts-detail-edit-delete"
+          id="contacts-detail-delete-mobile"
+          onclick="deleteContact(0)"
+        >
+          <img
+            id="img-contacts-detail-delete"
+            src="./assets/img/delete_default.svg"
+          />
+          <span>Delete</span>
+        </div>
       </div>
     </div>
 
@@ -75,15 +122,14 @@
         <div class="acronym-contacts-edit-add">TW</div>
         <form class="form-contacts-edit-add">
           <div class="ctn-input-contact-edit-add">
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <input type="text" placeholder="Phone">
+            <input type="text" placeholder="Name" />
+            <input type="email" placeholder="Email" />
+            <input type="text" placeholder="Phone" />
           </div>
           <div class="ctn-btns-contact-edit-add">
             <div>Delete</div>
             <div>Save</div>
           </div>
-        
         </form>
       </div>
     </div>

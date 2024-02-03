@@ -105,6 +105,15 @@
   color: #007cee;
 }
 
+.contacts-no-contacts {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #42526e;
+  margin-top: 40px;
+}
+
 .ctn-content-contacts {
   left: calc(
     var(--margin-left-content) + var(--width-contacts-overview)
@@ -134,7 +143,7 @@
   flex-direction: column;
   margin-top: 32px;
   overflow: auto;
-  transition: 200ms;
+  transition: 100ms;
 }
 
 .contact-arrow-return {
@@ -232,155 +241,38 @@
   color: #007cee;
 }
 
+.overlay-contacts-submenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  background-color: transparent;
+}
+
+.ctn-contacts-submenu {
+  position: absolute;
+  right: var(--margin-right-content);
+  bottom: 24px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: white;
+  border-radius: 20px 20px 0 20px;
+  padding: 24px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.ctn-contacts-submenu img {
+  margin-right: 8px;
+}
+
 .translate-x {
   transform: translateX(800px);
 }
 
-
-/* **** RESPONSIVE DESIGN **** */
-
-@media (max-width: 1275px) {
-  .body-contacts {
-    --width-contacts-overview: 400px;
-  }
-
-  .wrapper-contact-list {
-    margin-left: 0;
-  }
-
-  .contact-list-single-contact {
-    padding: 15px 16px;
-    gap: 24px;
-  }
-
-  .headline-contacts {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .headline-contacts h1 {
-    font-size: 47px;
-  }
-
-  .headline-contacts span {
-    font-size: 20px;
-  }
-
-  .headline-separator {
-    height: 3px;
-    width: 90px;
-    order: 1;
-  }
-
-  .wrapper-contact-details {
-    margin-top: 48px;
-  }
-
-  .ctn-contacts-details-name {
-    gap: 28px;
-  }
-
-  .contacts-detail-acronym {
-    width: 100px;
-    height: 100px;
-    font-size: 36px;
-  }
-
-  .contacts-detail-name {
-    font-size: 36px;
-    font-weight: 700;
-  }
-
-  .contacts-detail-subheadline {
-    margin-top: 59px;
-    margin-bottom: 32px;
-  }
-}
-
-@media (max-width: 1120px) {
-  .contacts-detail-acronym {
-    width: 80px;
-    height: 80px;
-    font-size: 27px;
-    font-weight: 400;
-  }
-
-  .ctn-contacts-details-name {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 975px) {
-  .ctn-contacts-details-name {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .bg-contact-list {
-    right: 0;
-    width: unset;
-  }
-
-  .ctn-contacts-detail-edit-delete {
-    display: none;
-  }
-
-  .ctn-btn-contact-list {
-    display: none;
-  }
-
-  .btn-contact-mobile {
-    display: flex;
-  }
-}
-
-@media (max-width: 784px) {
-  .wrapper-contact-list {
-    padding: 8px 24px;
-  }
-
-  .ctn-contacts-details-name {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .bg-contact-list {
-    left: 0;
-    right: 0;
-    width: unset;
-  }
-
-  .btn-contact-mobile {
-    bottom: 104px;
-  }
-}
-
-@media (max-width: 400px) {
-  .wrapper-contact-list {
-    padding: 8px 12px;
-  }
-
-  .contact-list-initial-letter {
-    padding: 12px 24px;
-  }
-
-  .contact-list-single-contact {
-    padding: 15px 8px;
-    gap: 16px;
-  }
-
-  .ctn-contact-list {
-    overflow-x: auto;
-  }
-
-  .contact-list-single-contact-name {
-    font-size: 18px;
-  }
-
-  .contact-list-single-contact-mail {
-    font-size: 13px;
-  }
+.no-transition {
+  transition: none !important;
 }
