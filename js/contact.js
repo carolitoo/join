@@ -13,7 +13,9 @@ async function initContact() {
 }
 
 
+
 window.onresize = checkWindowWidth;
+
 
 
 /**
@@ -26,10 +28,14 @@ function checkWindowWidth() {
     document.getElementById("ctn-content-contacts").classList.remove("d-none");
     document.getElementById("ctn-content-contacts").style =
       "left: var(--margin-left-content) !important";
+    document.getElementById("ctn-content-contacts").style =
+      "left: var(--margin-left-content) !important";
   } else if (contactIsSelected) {
     document.getElementById("bg-contact-list").classList.remove("d-none");
     document.getElementById("contact-arrow-return").classList.add("d-none");
     document.getElementById("ctn-content-contacts").classList.remove("d-none");
+    document.getElementById("ctn-content-contacts").style =
+      "left: calc(var(--margin-left-content) + var(--width-contacts-overview)) !important";
     document.getElementById("ctn-content-contacts").style =
       "left: calc(var(--margin-left-content) + var(--width-contacts-overview)) !important";
     closeSubmenuContact();
@@ -37,7 +43,9 @@ function checkWindowWidth() {
     document.getElementById("bg-contact-list").classList.remove("d-none");
     document.getElementById("ctn-content-contacts").classList.add("d-none");
   }
+  }
 }
+
 
 
 /**
@@ -48,6 +56,7 @@ function returnToContactList() {
   renderContactList();
   checkWindowWidth();
 }
+
 
 
 /**
@@ -116,6 +125,7 @@ async function createArrayInitialLetters() {
 
   initialLetters.sort();
 }
+
 
 
 /**
@@ -254,6 +264,16 @@ function deleteContact(positionOfContact) {
   closeSubmenuContact();
   closeContactsDetails();
 }
+
+
+/**
+ * This function closes the overlay for adding oder editing a contact
+ */
+function closeContactsDetails() {
+  document.getElementById("overlay-contacts").classList.add("d-none");
+}
+
+
 
 
 /**
