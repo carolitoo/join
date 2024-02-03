@@ -4,7 +4,10 @@ let users = [
     },
 
 ];
-
+async function init() {
+    await includeHTML();
+    await loadUserData();
+}
 
 async function createSignUpdata() {
     const nameInput = document.getElementById('name');
@@ -21,7 +24,7 @@ async function createSignUpdata() {
         acronym: getAcronym(nameInput.value),
         // colors evtl hier mit einbauen //?
     };
-   
+
     validateSignUpData(newUser);
 }
 
@@ -114,10 +117,7 @@ function checkIfUserexist(newUser) {
 }
 
 
-async function storeUserItems() {
-    await setItem('users', JSON.stringify(users));
-    console.log('DIE aktuellen user sind', users);
-}
+
 
 
 /**

@@ -1,6 +1,8 @@
-async function init() {
+async function LoginInit() {
   await includeHTML();
   await loadUserData();
+  await loadDummyContacts();
+  await loadNewUserContacts();
   //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
 }
 
@@ -10,6 +12,11 @@ async function loadUserData() {
   if (usersData) {
      users = JSON.parse(usersData);
   }
+}
+
+async function storeUserItems() {
+  await setItem('users', JSON.stringify(users));
+  console.log('DIE aktuellen user sind', users);
 }
 
 async function includeHTML() {

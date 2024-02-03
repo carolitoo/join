@@ -1,7 +1,9 @@
-
+//aktuell noch Problem mit einbindung der contact.js (widow-with - class in unbekanntem html eingebunden (contact.html))//
 async function initSummary() {
     await includeHTML();
     await loadUserData();
+    await loadDummyContacts();
+    await loadNewUserContacts();
     // await loadTasks();
     identifyNewUser();
     changeSelectedTab('tab-summary');
@@ -11,13 +13,43 @@ async function initSummary() {
 async function identifyNewUser() {
     const loggedInEmail = await getLoggedInEmail();
     const currentUser = users.find(u => u.email === loggedInEmail);
-    if (currentUser) {
+    if (currentUser.name.toLowerCase() !== 'guest') {
         const acronym = currentUser.acronym;
         generateGreeting(currentUser, acronym);
+        createNewContact(currentUser);
     } else {
-       alert('an error has occured');
+        const acronym = currentUser.acronym;
+        generateGreeting(currentUser, acronym);
+
     }
 }
+
+async function createNewContact(user) {
+    const existingContact = await checkIfContactAlreadyExist();
+
+    if (!existingContact) {
+        const loggedInEmail = await getLoggedInEmail();
+        const newUserContact = {
+            idContact: `contact-${contacts.length + 1}`, // Generate a unique contact ID
+            nameContact: user.name,
+            firstName: user.name.split(' ')[0],
+            lastName: checkIfLastNameExist(user.name.split(' ')),
+            acronymContact: user.acronym,
+            colorContact: '#FF7A00', // You may want to customize this color
+            emailContact: loggedInEmail, // Verwende die eingeloggte E-Mail-Adresse
+            phoneContact: '', // Initialize with an empty string
+            assignedTasks: [], // Initialize with an empty array
+        }
+        contacts.push(newUserContact);
+        storeContactItems();
+    }
+}
+
+async function checkIfContactAlreadyExist() {
+    const loggedInEmail = await getLoggedInEmail();
+    return contacts.find(contact => contact.emailContact === loggedInEmail);
+}
+
 
 
 async function getLoggedInEmail() {
@@ -85,8 +117,6 @@ function greetingGuest(currentHour) {
 //soll die function hier bleiben oder zu template.js verschoben werden//?
 function generateUserIcon(acronym) {
     const userIcon = document.getElementById('iconUserheader');
-    //const formattedFirstNameInitial = firstName.charAt(0).toUpperCase();//
-    //const formattedLastNameInitial = lastName.charAt(0).toUpperCase();//
     userIcon.textContent = acronym;
 }
 
@@ -94,5 +124,9 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+
+async function storeContactItems(){
+    await setItem('contacts', JSON.stringify(contacts));
+  }
 
 
