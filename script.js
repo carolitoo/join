@@ -1,3 +1,9 @@
+async function init() {
+  await includeHTML();
+  resetSelectedTab();
+}
+
+
 async function LoginInit() {
   await includeHTML();
   await loadUserData();
