@@ -40,3 +40,14 @@ function stopPropagation(event) {
 function changeImgTo(idOfImg, nameOfImg) {
   document.getElementById(idOfImg).src = `./assets/img/${nameOfImg}.svg`;
 }
+
+
+/**
+ * This function changes the border color of an element
+ * 
+ * @param {*} idOfElement - id of the element for which the border color should be changed
+ * @param {color} color - color of the border that should be displayed
+ */
+function changeBorderColorSearchTask(idOfElement, color) {
+  document.getElementById(idOfElement).style.border = `1px solid ${color}`;
+}

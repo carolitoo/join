@@ -337,6 +337,4 @@ function checkScroll(idTask) {
 }
 
 
-function changeBorderColorSearchTask(color) {
-    document.getElementById('ctn-search-task').style.border = `1px solid ${color}`;
-}
+

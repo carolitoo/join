@@ -14,20 +14,32 @@
 .ctn-contacts-edit-add {
     display: flex;
     align-items: center;
-    height: 592px;
+    position: relative;
     background-color: white;
     gap: 64px;
     border-radius: 30px;
 }
 
 .ctn-headline-contacts-edit-add {
+    min-height: 440px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     background-color: #2A3647;
     color: white;
     padding: 66px 46px;
-    gap: 12px;
+    gap: 16px;
+    border-radius: 30px 0 0 20px;
+}
+
+.logo-contacts-edit-add {
+    width: 54px;
+    margin-bottom: 24px;
+}
+
+.sub-headline-contacts-add {
+    font-size: 27px;
 }
 
 .separator-contacts-edit-add {
@@ -42,6 +54,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     font-size: 47px;
     font-weight: 500;
     background-color: #FFC700;
@@ -51,6 +64,28 @@
     box-shadow: 0px 0px 4px 0px #0000001A;
 }
 
+  .ctn-contacts-detail-close {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  
+  .ctn-contacts-detail-close:hover {
+    cursor: pointer;
+    background-color: #eeeeee;
+  }
+
+.contacts-detail-close {
+    width: 13.15px;
+    height: 13.15px;
+}
+
 .form-contacts-edit-add {
     margin-right: 48px;
 }
@@ -58,11 +93,14 @@
 .ctn-input-contact-edit-add {
     display: flex;
     flex-direction: column;
-    gap: 32px;
 }
-
 
 .ctn-btns-contact-edit-add {
     display: flex;
     gap: 25px;
+}
+
+.ctn-btns-contact-edit-add img {
+    width: 16px;
+    margin-left: 8px;
 }
