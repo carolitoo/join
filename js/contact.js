@@ -7,7 +7,8 @@ let contactIsSelected = false;
 async function initContact() {
   await includeHTML();
   changeSelectedTab("tab-contacts");
-  await loadContacts();
+  await loadDummyContacts();
+  await loadNewUserContacts();
   await renderContactList();
   checkWindowWidth();
 }
@@ -44,7 +45,7 @@ function checkWindowWidth() {
     document.getElementById("ctn-content-contacts").classList.add("d-none");
   }
   }
-}
+
 
 
 
@@ -62,11 +63,18 @@ function returnToContactList() {
 /**
  * This function loads all contacts currently existing into a JSON-Array
  */
-async function loadContacts() {
+async function loadDummyContacts() {
   let resp = await fetch("../contacts.json");
   contacts = await resp.json();
 }
 
+async function loadNewUserContacts(){
+  const response = await getItem('contacts');//wie kommen Werte züruck in's user-array?//
+  const ContactsData = response['data']['value'];
+  if (ContactsData) {
+     contacts = JSON.parse(ContactsData);
+  }
+}
 
 /**
  * This function renders the loaded contacts alphabetically sorted into the contact list
@@ -264,16 +272,6 @@ function deleteContact(positionOfContact) {
   closeSubmenuContact();
   closeContactsDetails();
 }
-
-
-/**
- * This function closes the overlay for adding oder editing a contact
- */
-function closeContactsDetails() {
-  document.getElementById("overlay-contacts").classList.add("d-none");
-}
-
-
 
 
 /**
