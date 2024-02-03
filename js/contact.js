@@ -157,12 +157,23 @@ function slideInAnimationOfContact() {
   setTimeout(() => {document.getElementById("wrapper-contact-details").classList.remove("translate-x");}, 100);
 }
 
+
+
+async function addNewContact() {
+  document.getElementById('overlay-contacts').classList.remove('d-none');
+  document.getElementById('overlay-contacts').innerHTML = await generateOverlayAddContact();
+}
+
+
+
+
 function openSubmenuContact(positionOfContact) {
   document.getElementById("btn-contact-mobile").classList.add("d-none");
   document
     .getElementById("overlay-contacts-submenu")
     .classList.remove("d-none");
 }
+
 
 /**
  * This function closes the overlay containing the submenu for editing/ deleting a contact and displays the show-more-button (only relevant for mobile view)
@@ -172,8 +183,16 @@ function closeSubmenuContact() {
   document.getElementById("btn-contact-mobile").classList.remove("d-none");
 }
 
-function editContact(positionOfContact) {
+async function editContact(positionOfContact) {
   console.log(`test-edit-${positionOfContact}`);
+
+  document.getElementById('overlay-contacts').classList.remove('d-none');
+  document.getElementById('overlay-contacts').innerHTML = await generateOverlayEditContact(positionOfContact);
+  
+  document.getElementById('contacts-detail-input-name').value = contacts[positionOfContact]['nameContact'];
+  document.getElementById('contacts-detail-input-mail').value = contacts[positionOfContact]['emailContact'];
+  document.getElementById('contacts-detail-input-phone').value = contacts[positionOfContact]['phoneContact'];
+
 }
 
 /**
@@ -193,9 +212,14 @@ function deleteContact(positionOfContact) {
   contacts = contactsSorted;
   // setItem() - nach Abstimmung Architektur für users/ contacts einfügen
 
-  document.getElementById("wrapper-contact-details").innerHTML = "";
+  document.getElementById("wrapper-contact-details").innerHTML = '';
 
   renderContactList();
   returnToContactList();
   closeSubmenuContact();
+}
+
+
+function closeContactsDetails() {
+  document.getElementById('overlay-contacts').classList.add('d-none');
 }

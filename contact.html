@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/contact.css" />
     <link rel="stylesheet" href="./css/contactOverlay.css" />
     <link rel="stylesheet" href="./css/contactResp.css" />
+    <link rel="stylesheet" href="./css/contactOverlayResp.css" />
     <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="style.css" />
 
@@ -104,77 +105,6 @@
       </div>
     </div>
 
-    <div class="overlay-contacts" id="overlay-contact">
-      <div class="ctn-contacts-edit-add">
-        <div class="ctn-headline-contacts-edit-add">
-          <img
-            class="logo-contacts-edit-add"
-            src="./assets/img/logo_light.svg"
-          />
-          <h1
-            class="headline-contacts-edit-add"
-            id="headline-contacts-edit-add"
-          >
-            Edit contact
-          </h1>
-          <div class="sub-headline-contacts-add" id="sub-headline-contacts-add">
-            Tasks are better with a team!
-          </div>
-          <div class="separator-contacts-edit-add"></div>
-        </div>
-        <div class="acronym-contacts-edit-add">TW</div>
-        <div class="ctn-contacts-detail-close">
-          <img
-            class="contacts-detail-close"
-            src="./assets/img/close_black.svg"
-            onclick="closeContactsDetails()"
-          />
-        </div>
-        <form
-          class="form-contacts-edit-add"
-          onsumit="editContact(1)"
-          action="./contact.html"
-        >
-          <div class="ctn-input-contact-edit-add">
-            <div>
-              <input
-                type="text"
-                id="contacts-detail-input-name"
-                minlength="3"
-                placeholder="Name"
-                required
-              />
-              <img class="input-icon" src="./assets/img/person.svg" />
-            </div>
-            <div>
-              <input
-                type="email"
-                id="contacts-detail-input-mail"
-                placeholder="Email"
-                required
-              />
-              <img class="input-icon" src="./assets/img/mail.svg" />
-            </div>
-            <div>
-              <input
-                type="text"
-                id="contacts-detail-input-phone"
-                pattern="[+][0-9]*"
-                placeholder="Phone"
-                oninvalid="this.setCustomValidity('Please enter a valid phone number')"
-                oninput="this.setCustomValidity('')"
-              />
-              <img class="input-icon" src="./assets/img/phone.svg" />
-            </div>
-          </div>
-          <div class="ctn-btns-contact-edit-add">
-            <div class="btn-outline" onclick="deleteContact()">Delete</div>
-            <button class="btn-db">
-              Save<img src="./assets/img/check_white.svg" />
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <div class="overlay-contacts d-none" id="overlay-contacts"></div>
   </body>
 </html>
