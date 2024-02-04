@@ -269,8 +269,28 @@
   margin-right: 8px;
 }
 
+.pop-up-contacts {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2A3647;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 24px 32px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 4px 0px #0000001A;
+  transition: 200ms;
+}
+
 .translate-x {
   transform: translateX(800px);
+}
+
+.translate-y {
+  transform: translateY(600px);
 }
 
 .no-transition {

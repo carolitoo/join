@@ -33,12 +33,12 @@
     <div class="bg-contact-list" id="bg-contact-list">
       <div class="wrapper-contact-list">
         <div class="ctn-btn-contact-list">
-          <div class="btn-db btn-add-contact-db" onclick="addNewContact()">
+          <div class="btn-db btn-add-contact-db" onclick="openAddContactOverlay()">
             <span>Add new contact</span>
             <img class="icon-btn" src="./assets/img/person_add_white.svg" />
           </div>
         </div>
-        <div class="btn-contact-mobile" onclick="addNewContact()">
+        <div class="btn-contact-mobile" onclick="openAddContactOverlay()">
           <img src="./assets/img/person_add_white.svg" />
         </div>
         <div class="ctn-contact-list" id="ctn-contact-list"></div>
@@ -89,5 +89,9 @@
       id="overlay-contacts"
       onclick="closeContactsDetails()"
     ></div>
+
+    <div class="pop-up-contacts d-none" id="pop-up-contacts-add">Contact successfully created</div>
+    <div class="pop-up-contacts d-none" id="pop-up-contacts-edit">Contact successfully edited</div>
+    <div class="pop-up-contacts d-none" id="pop-up-contacts-delete">Contact successfully deleted</div>
   </body>
 </html>

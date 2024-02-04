@@ -4,7 +4,7 @@ let users = [
     },
 
 ];
-async function init() {
+async function initSignUp() {
     await includeHTML();
     await loadUserData();
 }

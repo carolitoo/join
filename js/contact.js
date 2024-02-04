@@ -152,7 +152,7 @@ async function openContactDetail(idContact) {
   document.getElementById(`contacts-detail-acronym-${idContact}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
 
   checkEmptyPhoneNumber(positionOfContact);
-  slideInAnimationOfContact();
+  slideInAnimation('wrapper-contact-details', 'translate-x', false);
 }
 
 
@@ -197,36 +197,55 @@ function markSelectedContact(idContact) {
 
 
 /**
- * This function manages the slide-in animation when opening the detailed view for a contact
+ * This function manages the slide-in animation when opening or editing an element - depending on the parameters the element stays permanently or just pops up
+ * 
+ * @param {string} idOfElement - id of the element that is suppossed to appear 
+ * @param {string} className - class that defines where the element slides in from 
+ * @param {boolean} letElementDisappear - defines whether an element lasts or disappears
  */
-function slideInAnimationOfContact() {
+function slideInAnimation(idOfElement, className, letElementDisappear) {
   document
-    .getElementById("wrapper-contact-details")
-    .classList.add("translate-x");
+    .getElementById(idOfElement)
+    .classList.add(className);
   setTimeout(() => {
     document
-      .getElementById("wrapper-contact-details")
+      .getElementById(idOfElement)
       .classList.remove("d-none");
   }, 10);
   setTimeout(() => {
     document
-      .getElementById("wrapper-contact-details")
-      .classList.remove("translate-x");
+      .getElementById(idOfElement)
+      .classList.remove(className);
   }, 100);
+
+  if (letElementDisappear == true) {
+    setTimeout(() => {
+      document
+        .getElementById(idOfElement)
+        .classList.add("d-none");
+    }, 2000);
+  }
 }
 
+
+/**
+ * This function opens the overlay for adding a new contact
+ */
+async function openAddContactOverlay() {
+  document.getElementById("overlay-contacts").classList.remove("d-none");
+  document.getElementById("overlay-contacts").innerHTML = await generateOverlayAddContact();
+}
 
 /**
  * This function allows the user to add a new contact to the contact list/ array contacts 
  */
 async function addNewContact() {
-  document.getElementById("overlay-contacts").classList.remove("d-none");
-  document.getElementById("overlay-contacts").innerHTML =
-    await generateOverlayAddContact();
-  
   // + ZU ARRAY "CONTACTS" HINZUFÜGEN & IM BACKEND SPEICHERN (RS TEAM - ANLAGE ID/ ERMITTLUNG ACRONYM/ LOGIK HINTERGRUNDFARBE)
   await renderContactList();
-  // + POP-UP MIT BESTÄTIGUNG DER ANLAGE DES KONTAKTS + NEUEN KONTAKT ÖFFNEN
+  resetAddContact();
+  document.getElementById("overlay-contacts").classList.add("d-none");
+  slideInAnimation('pop-up-contacts-add', 'translate-y', true);
+   // + NEUEN KONTAKT ÖFFNEN
 }
 
 
@@ -262,20 +281,6 @@ function closeSubmenuContact() {
 
 
 /**
- * This function allows the user to edit a contact, after saving a pop-up with a confirmation is displayed and the edited contact is opened
- * 
- * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
- */
-async function editContact(positionOfContact) {
-  // + KONTAKT SPEICHERN/ ÜBERSCHREIBEN & IM BACKEND SPEICHERN // PRÜFEN, OB AUCH USER-ARRAY ANGEPASST WERDEN MUSS
-  document.getElementById("overlay-contacts").classList.add("d-none");
-  await renderContactList();
-  // + POP-UP MIT BESTÄTIGUNG DER ÄNDERUNG DES KONTAKTS
-  // openContactDetail(contactsSorted[positionOfContact]["idContact"]); // PRÜFEN, OB ERFORDERLICH
-}
-
-
-/**
  * This function opens the overlay for editing a existing contact - the input fields are prefilled with the selected contact
  * 
  * @param {number} positionOfContact - - position of the contact currently selected in the array "contactsSorted"
@@ -288,6 +293,20 @@ async function openEditContactOverlay(positionOfContact) {
   document.getElementById("contacts-detail-input-name").value = contactsSorted[positionOfContact]["nameContact"];
   document.getElementById("contacts-detail-input-mail").value = contactsSorted[positionOfContact]["emailContact"];
   document.getElementById("contacts-detail-input-phone").value = contactsSorted[positionOfContact]["phoneContact"];
+}
+
+
+/**
+ * This function allows the user to edit a contact, after saving a pop-up with a confirmation is displayed and the edited contact is opened
+ * 
+ * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
+ */
+async function editContact(positionOfContact) {
+  // + KONTAKT SPEICHERN/ ÜBERSCHREIBEN & IM BACKEND SPEICHERN // PRÜFEN, OB AUCH USER-ARRAY ANGEPASST WERDEN MUSS
+  document.getElementById("overlay-contacts").classList.add("d-none");
+  await renderContactList();
+  slideInAnimation('pop-up-contacts-edit', 'translate-y', true);
+  // openContactDetail(contactsSorted[positionOfContact]["idContact"]); // PRÜFEN, OB ERFORDERLICH
 }
 
 
@@ -310,6 +329,7 @@ function deleteContact(positionOfContact) {
   returnToContactList();
   closeSubmenuContact();
   closeContactsDetails();
+  slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
 }
 
 
