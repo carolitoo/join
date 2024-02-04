@@ -1,4 +1,13 @@
+const SUBTASK_ID = 0;
+
+let tasks = []; // stores exsisting Tasks from the remote 
+
+const taskPrio = PRIO_MEDIUM; //MEDIUM ist the default Prio
 let addedSubtasks = []; //collects up all subtasks before sumbitting the form
+let assignedUsers = []; //collects the checked users from the "Assginded to" menu
+let category = []; //holds the chosen category from the form before submit
+let statusTask = TO_DO; //TO_DO ist the default status
+
 let users = [
     {
         'name': 'tim test',
@@ -30,15 +39,18 @@ let users = [
 
 async function initAddTask() {
     await includeHTML();
-    // await loadUserData();
+    //await loadUserData();
     changeSelectedTab('tab-add-task');
-
 }
+
+
+
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsUrgent() {
+    let taskPrio = PRIO_URGENT;
     document.getElementById('urgentButton').classList.add("urgent-btn-red");
     document.getElementById('urgentButton').classList.remove("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta w.svg';
@@ -56,6 +68,7 @@ function changeButtonColorsUrgent() {
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsMedium() {
+    let taskPrio = PRIO_MEDIUM; 
     document.getElementById('mediumButton').classList.add("medium-btn-yellow");
     document.getElementById('mediumButton').classList.remove("prio-btn-neutral");
     document.getElementById('medium-icon').src = './assets/img/capa 2.svg';
@@ -73,6 +86,7 @@ function changeButtonColorsMedium() {
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsLow() {
+    let taskPrio = PRIO_LOW;
     document.getElementById('lowButton').classList.add("low-btn-green");
     document.getElementById('lowButton').classList.remove("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja w.svg';
@@ -115,9 +129,12 @@ function loadNewSubtasks() {
         if (currentSubtask !== '') { // Checks if the input is empty before rendering to prevend adding an empty div
 
             subtaskList.innerHTML += `
-                <div class="subtask-list"> 
+                <div id="subtaskListElement${i}" class="subtask-list"> 
                     <span>&#x2022; ${currentSubtask}</span>
-                    <button onclick="deleteSubtask(${i})">-</button>
+                    <div class="subtask-icons"> 
+                        <button class="delete-btn" onclick="deleteSubtask(${i})"></button>
+                        <button class="confirm-btn" onclick="editSubtask(${i})"></button>
+                    </div>
                 </div>`;
         }
     }
@@ -141,6 +158,8 @@ function activateDropdown() {
     dropDownIcon.classList.toggle("active");
     dropDownMenu.style.display =
         dropDownMenu.style.display === "block" ? "none" : "block";
+
+        console.log("Dropdown menu style after toggle:", dropDownMenu.style.display);
     
     renderContacts();
 }

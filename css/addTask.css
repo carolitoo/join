@@ -202,6 +202,42 @@ select:focus {
   background-color: #dcdcdc;
 }
 
+.subtask-list {
+  margin-top: 8px;
+  width: 440px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.subtask-icons { 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.delete-btn {
+  background-image: url(/assets/img/delete_default.svg);
+  border: 0;
+  height: 24px;
+  width: 34px;
+  padding-right: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-right: 1px solid #caced1;
+}
+
+.confirm-btn {
+  background-image: url(/assets/img/edit_default.svg);
+  border: 0;
+  height: 24px;
+  width: 34px;
+  padding-right: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-left: 1px solid #caced1;
+}
+
 .dropDownIcon {
   width: 0;
 	height: 0;
@@ -233,7 +269,7 @@ select:focus {
 .bottom-section-ctn {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 1028px;
   margin-top: 80px;
 }
 
@@ -305,4 +341,19 @@ select:focus {
   .parting_line_grey {
     display: none;
   }
+
+  .bottom-section-ctn {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 32px;
+    margin-top: 20px;
+    padding: 16px;
+    
+  }
+
+  .clear-btn {
+    display: none;
+  }
+
 }
