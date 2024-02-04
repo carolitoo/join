@@ -5,14 +5,18 @@ async function initSummary() {
     await loadDummyContacts();
     await loadNewUserContacts();
     // await loadTasks();
-    identifyNewUser();
+    identifyUser();
     changeSelectedTab('tab-summary');
 }
 
 
-async function identifyNewUser() {
+async function identifyUser() {
     const loggedInEmail = await getLoggedInEmail();
     const currentUser = users.find(u => u.email === loggedInEmail);
+    personalizeSummary(currentUser);
+}
+
+function personalizeSummary(currentUser) {
     if (currentUser.name.toLowerCase() !== 'guest') {
         const acronym = currentUser.acronym;
         generateGreeting(currentUser, acronym);
@@ -20,9 +24,11 @@ async function identifyNewUser() {
     } else {
         const acronym = currentUser.acronym;
         generateGreeting(currentUser, acronym);
-
     }
 }
+
+
+
 
 async function createNewContact(user) {
     const existingContact = await checkIfContactAlreadyExist();
@@ -37,8 +43,8 @@ async function createNewContact(user) {
             acronymContact: user.acronym,
             colorContact: '',
             emailContact: loggedInEmail,
-            phoneContact: '', 
-            assignedTasks: [], 
+            phoneContact: '',
+            assignedTasks: [],
         }
         setBackgroundcolor(newUserContact);
         contacts.push(newUserContact);
@@ -126,8 +132,8 @@ function capitalizeFirstLetter(string) {
 }
 
 
-async function storeContactItems(){
+async function storeContactItems() {
     await setItem('contacts', JSON.stringify(contacts));
-  }
+}
 
 

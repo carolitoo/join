@@ -10,6 +10,7 @@ async function initContact() {
   await loadUserData();
   await loadDummyContacts();
   await loadNewUserContacts();
+  await renderAcronym();
   await renderContactList();
   checkWindowWidth();
 }
@@ -43,7 +44,7 @@ function checkWindowWidth() {
     document.getElementById("bg-contact-list").classList.remove("d-none");
     document.getElementById("ctn-content-contacts").classList.add("d-none");
   }
-  }
+}
 
 
 
@@ -65,12 +66,24 @@ async function loadDummyContacts() {
   contacts = await resp.json();
 }
 
-async function loadNewUserContacts(){
+async function loadNewUserContacts() {
   const response = await getItem('contacts');//wie kommen Werte züruck in's user-array?//
   const ContactsData = response['data']['value'];
   if (ContactsData) {
-     contacts = JSON.parse(ContactsData);
+    contacts = JSON.parse(ContactsData);
   }
+}
+
+/**
+ * 
+ * 
+This function finds the currentUser and updates the interface with the user's personalized acronym-based icon.
+ */
+async function renderAcronym() {
+  const loggedInEmail = await getLoggedInEmail();
+  const currentUser = users.find(u => u.email === loggedInEmail);
+
+  generateUserIcon(currentUser.acronym);
 }
 
 /**
