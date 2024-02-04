@@ -30,16 +30,17 @@ async function createNewContact(user) {
     if (!existingContact) {
         const loggedInEmail = await getLoggedInEmail();
         const newUserContact = {
-            idContact: `contact-${user.userID}`, // Generate a unique contact ID
+            idContact: `contact-${user.userID}`,
             nameContact: user.name,
             firstName: user.name.split(' ')[0],
             lastName: checkIfLastNameExist(user.name.split(' ')),
             acronymContact: user.acronym,
-            colorContact: '#FF7A00', // You may want to customize this color
-            emailContact: loggedInEmail, // Verwende die eingeloggte E-Mail-Adresse
-            phoneContact: '', // Initialize with an empty string
-            assignedTasks: [], // Initialize with an empty array
+            colorContact: '',
+            emailContact: loggedInEmail,
+            phoneContact: '', 
+            assignedTasks: [], 
         }
+        setBackgroundcolor(newUserContact);
         contacts.push(newUserContact);
         storeContactItems();
     }

@@ -39,9 +39,11 @@ function checkIfRememberedData() {
 
 
 async function login() {
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    let currentUser = users.find(u => u.email == email.value && u.password == password.value);
+    let emailInput = document.getElementById('email');
+    let convertedEmail = emailInput.value.toLowerCase();
+
+    let passwordInput = document.getElementById('password');
+    let currentUser = users.find(u => u.email.toLowerCase() == convertedEmail && u.password == passwordInput.value);
     if (currentUser) {
         loggedInEmail = currentUser.email;
         await setItem('loggedInEmail', loggedInEmail);
@@ -49,8 +51,8 @@ async function login() {
         checkStatusofCheckBox();
         clearLogIn();
     } else {
-        displayErrorMessage('wrong e-mail or password', email);
-        displayErrorMessage('wrong e-mail or password', password);
+        displayErrorMessage('wrong e-mail or password', emailInput);
+        displayErrorMessage('wrong e-mail or password', passwordInput);
     }
 }
 

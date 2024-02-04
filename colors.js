@@ -16,3 +16,8 @@ const colorsContacts = [
     "#FFBB2B",
   ];
 
+  function setBackgroundcolor(contact) {
+    const randomIndex = Math.floor(Math.random() * colorsContacts.length);
+    const randomColor = colorsContacts[randomIndex];
+    contact.colorContact = randomColor;
+}
