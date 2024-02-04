@@ -30,7 +30,7 @@ async function createNewContact(user) {
     if (!existingContact) {
         const loggedInEmail = await getLoggedInEmail();
         const newUserContact = {
-            idContact: `contact-${contacts.length + 1}`, // Generate a unique contact ID
+            idContact: `contact-${user.userID}`, // Generate a unique contact ID
             nameContact: user.name,
             firstName: user.name.split(' ')[0],
             lastName: checkIfLastNameExist(user.name.split(' ')),
