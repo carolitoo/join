@@ -5,11 +5,11 @@ let initialLetters = [];
 let contactIsSelected = false;
 
 async function initContact() {
+  await proofAuthentification();
   await includeHTML();
   changeSelectedTab("tab-contacts");
   await loadUserData();
-  await loadDummyContacts();
-  await loadNewUserContacts();
+  await loadAllContacts();
   await renderAcronym();
   await renderContactList();
   checkWindowWidth();
@@ -57,6 +57,15 @@ function returnToContactList() {
   checkWindowWidth();
 }
 
+/**
+ * This function loads both dummy data and newly created contact data
+ */
+async function loadAllContacts() {
+  await loadDummyContacts();
+  await loadNewUserContacts();
+}
+
+
 
 /**
  * This function loads all contacts currently existing into a JSON-Array
@@ -66,8 +75,12 @@ async function loadDummyContacts() {
   contacts = await resp.json();
 }
 
+
+/**
+ * This function loads users directly into the contact book after the first login
+ */
 async function loadNewUserContacts() {
-  const response = await getItem('contacts');//wie kommen Werte züruck in's user-array?//
+  const response = await getItem('contacts');
   const ContactsData = response['data']['value'];
   if (ContactsData) {
     contacts = JSON.parse(ContactsData);

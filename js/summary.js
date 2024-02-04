@@ -1,26 +1,52 @@
 //aktuell noch Problem mit einbindung der contact.js (widow-with - class in unbekanntem html eingebunden (contact.html))//
 async function initSummary() {
+    await proofAuthentification();
     await includeHTML();
     await loadUserData();
-    await loadDummyContacts();
-    await loadNewUserContacts();
+    await identifyCurrentUser();
+    await loadAllContacts();
     // await loadTasks();
-    identifyUser();
     changeSelectedTab('tab-summary');
 }
 
-
-async function identifyUser() {
+/**
+ * This function tests whether there was a registration with an e-mail address. If not, you will be redirected back to the login. Otherwise the user-data will be filtered.
+ */
+async function proofAuthentification() {
     const loggedInEmail = await getLoggedInEmail();
-    const currentUser = users.find(u => u.email === loggedInEmail);
-    personalizeSummary(currentUser);
+
+    if (loggedInEmail !== '[]') {
+    } else {
+        alert('No user found');
+        window.location.href = './index.html';
+    }
 }
 
-function personalizeSummary(currentUser) {
+
+async function getLoggedInEmail() {
+    try {
+        const response = await getItem('loggedInEmail');
+        const LoggedInEmail = response['data']['value'];
+        return LoggedInEmail;
+    } catch (error) {
+        alert('An error has occurred', error);
+        return '';
+    }
+}
+
+
+async function identifyCurrentUser() {
+    const loggedInEmail = await getLoggedInEmail();
+    const currentUser = users.find(u => u.email === loggedInEmail);
+    personalizeAppContent(currentUser)
+}
+
+
+function personalizeAppContent(currentUser) {
     if (currentUser.name.toLowerCase() !== 'guest') {
         const acronym = currentUser.acronym;
         generateGreeting(currentUser, acronym);
-        createNewContact(currentUser);
+        createOwnContact(currentUser);
     } else {
         const acronym = currentUser.acronym;
         generateGreeting(currentUser, acronym);
@@ -29,8 +55,7 @@ function personalizeSummary(currentUser) {
 
 
 
-
-async function createNewContact(user) {
+async function createOwnContact(user) {
     const existingContact = await checkIfContactAlreadyExist();
 
     if (!existingContact) {
@@ -57,18 +82,6 @@ async function checkIfContactAlreadyExist() {
     return contacts.find(contact => contact.emailContact === loggedInEmail);
 }
 
-
-
-async function getLoggedInEmail() {
-    try {
-        const response = await getItem('loggedInEmail');
-        const LoggedInEmail = response['data']['value'];
-        return LoggedInEmail;
-    } catch (error) {
-        alert('An error has occurred', error);
-        return '';
-    }
-}
 
 
 async function generateGreeting(currentUser, acronym) {

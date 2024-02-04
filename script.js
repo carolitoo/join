@@ -4,14 +4,6 @@ async function init() {
 }
 
 
-async function LoginInit() {
-  await includeHTML();
-  await loadUserData();
-  await loadDummyContacts();
-  await loadNewUserContacts();
-  //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
-}
-
 async function loadUserData() {
   const response = await getItem('users');//wie kommen Werte züruck in's user-array?//
   const usersData = response['data']['value'];
