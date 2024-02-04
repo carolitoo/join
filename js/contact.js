@@ -212,7 +212,11 @@ function markSelectedContact(idContact) {
 
 
 /**
- * This function manages the slide-in animation when opening the detailed view for a contact
+ * This function manages the slide-in animation when opening or editing an element - depending on the parameters the element stays permanently or just pops up
+ * 
+ * @param {string} idOfElement - id of the element that is suppossed to appear 
+ * @param {string} className - class that defines where the element slides in from 
+ * @param {boolean} letElementDisappear - defines whether the element lasts or disappears after sliding-in
  */
 function slideInAnimationOfContact() {
   document
@@ -228,9 +232,21 @@ function slideInAnimationOfContact() {
       .getElementById("wrapper-contact-details")
       .classList.remove("translate-x");
   }, 100);
+
+  if (letElementDisappear == true) {
+    setTimeout(() => {
+      document
+        .getElementById(idOfElement)
+        .classList.add("d-none");
+    }, 1500);
+  }
 }
 
-async function addNewContact() {
+
+/**
+ * This function opens the overlay for adding a new contact
+ */
+async function openAddContactOverlay() {
   document.getElementById("overlay-contacts").classList.remove("d-none");
   document.getElementById("overlay-contacts").innerHTML =
     await generateOverlayAddContact();

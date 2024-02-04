@@ -7,6 +7,8 @@ let positionOfTask;
 
 async function initBoard() {
     await includeHTML();
+    await loadDummyContacts();
+    // await loadNewUserContacts();
     await loadTasks();
     await renderBoard(tasks);
     changeSelectedTab('tab-board');
@@ -39,7 +41,7 @@ async function renderBoard(currentTasks) {
 
 /**
  * This function empties the array for each status then iterates through all available tasks to update the arrays
- * This function filters the available tasks for each status and calls the function to create the HTML-content for each column
+ * This function filters the available tasks for each status and calls the functions to create the HTML-content for each task on the kanban board
  * If there is no task available for a certain status a container shows that currenty there are no tasks in this status
  * 
  * @param {string} status - indicates the column/ status that is updated
@@ -53,16 +55,28 @@ async function updateStatus(status, currentTasks) {
      } else {
          document.getElementById(`empty-tasks-${status}`).classList.add('d-none');
          for (j = 0; j < selectedTasks.length; j++) {
-            let currentId = selectedTasks[j]['idTask'];
-            positionOfTask = currentTasks.findIndex(id => id['idTask'] == currentId);
+            let currentIdTask = selectedTasks[j]['idTask'];
+            positionOfTask = currentTasks.findIndex(id => id['idTask'] == currentIdTask);
  
-            document.getElementById(`tasks-${status}`).innerHTML += await generateCardSmallHTML(currentTasks, positionOfTask);
-            getSelectedCategory(`category-task-${currentId}`, currentTasks, positionOfTask);
-            checkSubtasks(currentTasks, positionOfTask);
-            // getAssignedUsers();
-            getSelectedPriority(`img-prio-task-${currentId}`, currentTasks, positionOfTask);
+            document.getElementById(`tasks-${status}`).innerHTML += await generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask);
+            await createDynamicElementsCardSmall (currentTasks, positionOfTask, currentIdTask);
          }
      } 
+}
+
+
+/**
+ * This function sets the dynamic values for a task/ card on the kanban board
+ * 
+ * @param {array} currentTasks - array of tasks currently selected
+ * @param {number} positionOfTask - position of the task (in the array currentTasks) for which the card on the kanban board is created
+ * @param {string} currentIdTask - id of the task for which the card on the kanban board is created
+ */
+async function createDynamicElementsCardSmall (currentTasks, positionOfTask, currentIdTask) {
+    getSelectedCategory(`category-task-${currentIdTask}`, currentTasks, positionOfTask);
+    await checkSubtasks(currentTasks, positionOfTask);
+    await checkAssignedContacts(currentTasks, positionOfTask, currentIdTask);
+    getSelectedPriority(`img-prio-task-${currentIdTask}`, currentTasks, positionOfTask);
 }
 
 
@@ -91,7 +105,7 @@ function getSelectedCategory(idOfElement, currentTasks, positionOfTask) {
  * @param {array} currentTasks - array of tasks currently selected
  * @param {number} positionOfTask - position of the task (in the array tasks) for which the completion rate is calculated
  */
-function checkSubtasks(currentTasks, positionOfTask) {
+async function checkSubtasks(currentTasks, positionOfTask) {
     let numberOfSubtasks = currentTasks[positionOfTask]['subtasks'].length;
 
     if (numberOfSubtasks == 0) {
@@ -125,10 +139,63 @@ function calculateProgressSubtasks(currentTasks, positionOfTask, numberOfSubtask
 }
 
 
-// function getAssignedUsers(idTask, positionOfTask) {
-//     document.getElementById(`users-task-${idTask}`).innerHTML =
-// BEACHTEN, DASS BEI EINER ÜBERSCHREITUNG EINER GEWISSEN ANZAHL NUR NOCH +X ANGEZEIGT WIRD
-// }
+/**
+ * This function checks the number of assigned contacts to a task and creates the content for the kanban card depending on this number
+ * Up to 4 contacts/ icons are displayed on the card - in case of more assigned contacts a dummy-icon indicates the number of the remaining contacts 
+ * In case that no contacts are assigned to a task nothing is displayed
+ * 
+ * @param {array} currentTasks - array of tasks currently selected
+ * @param {number} positionOfTask - position of the task (in the array currentTasks) for which the card on the kanban board is created
+ * @param {string} currentIdTask - id of the task for which the card on the kanban board is created
+ */
+async function checkAssignedContacts(currentTasks, positionOfTask, currentIdTask) {
+
+    let maxNumberOfDisplayedContacts = 4; 
+    let numberOfAssignedContacts = currentTasks[positionOfTask]['assignedContacts'].length;
+    let numberOfRemainigContacts = numberOfAssignedContacts - maxNumberOfDisplayedContacts;
+
+    if (numberOfAssignedContacts <= maxNumberOfDisplayedContacts && numberOfAssignedContacts > 0) {
+        for (let u = 0; u < numberOfAssignedContacts; u++) {
+            await getAssignedContacts(currentTasks, positionOfTask, currentIdTask, u);
+        }
+    } else if (numberOfAssignedContacts > maxNumberOfDisplayedContacts && numberOfAssignedContacts > 0) {
+        for (let u = 0; u < maxNumberOfDisplayedContacts - 1; u++) {
+            await getAssignedContacts(currentTasks, positionOfTask, currentIdTask, u);
+        }
+        await setOverflowContactIcon(currentIdTask, numberOfRemainigContacts);
+    }
+}
+
+
+/**
+ * This function generates the icon for a single contact assigned to task on the kanban board
+ * 
+ * @param {array} currentTasks - array of tasks currently selected
+ * @param {number} positionOfTask - position of the task (in the array currentTasks) for which the card on the kanban board is created
+ * @param {string} currentIdTask - id of the task for which the card on the kanban board is created
+ * @param {number} u - element/ assigned user in the for loop for which the icon is created
+ */
+async function getAssignedContacts(currentTasks, positionOfTask, currentIdTask, u) {
+    let idContact = currentTasks[positionOfTask]['assignedContacts'][u]['idContact'];
+    let positionContact = contacts.findIndex((id) => id["idContact"] == idContact);
+
+    document.getElementById(`ctn-card-assigned-users-small-${currentIdTask}`).innerHTML += await generateContactIconCardSmallHTML(currentIdTask, idContact);
+    document.getElementById(`card-assigned-user-small-${currentIdTask}-${idContact}`).innerHTML = await contacts[positionContact]['acronymContact'];
+    document.getElementById(`card-assigned-user-small-${currentIdTask}-${idContact}`).style.backgroundColor = await contacts[positionContact]['colorContact'];
+}
+
+
+/**
+ * This function creates the element indicating the remaining assigned contacts for a task (in case of an overflow)
+ * 
+ * @param {string} currentIdTask - id of the task for which the card on the kanban board is created
+ * @param {number} numberOfRemainigContacts - number of contacts for which no icon is displayed on the small card on the kanban board
+ */
+async function setOverflowContactIcon(currentIdTask, numberOfRemainigContacts) {
+    document.getElementById(`ctn-card-assigned-users-small-${currentIdTask}`).innerHTML += await generateContactIconCardSmallHTML(currentIdTask, 'overflow');
+    document.getElementById(`card-assigned-user-small-${currentIdTask}-overflow`).innerHTML = `+${numberOfRemainigContacts}`;
+    document.getElementById(`card-assigned-user-small-${currentIdTask}-overflow`).style.backgroundColor = 'grey';
+}
 
 
 /**
@@ -298,7 +365,7 @@ async function openTaskDetail(idTask) {
     document.getElementById('overlay-board').innerHTML = await generateViewTaskDetailHTML(tasks, positionOfTask);
     getSelectedCategory('task-detail-category', tasks, positionOfTask);
     getSelectedPriority('img-prio-task-detail', tasks, positionOfTask);
-    // getAssignedUsers();
+    // checkAssignedContacts();
     getSelectedSubtasks('task-detail-subtasks', tasks, positionOfTask);
 
     document.getElementById('overlay-board').classList.remove('d-none');
@@ -335,6 +402,3 @@ function checkScroll(idTask) {
         console.log('Scroll-up');
     }
 }
-
-
-
