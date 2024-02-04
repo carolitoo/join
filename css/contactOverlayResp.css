@@ -43,7 +43,6 @@
     min-height: unset;
     height: 240px;
     border-radius: unset;
-    padding: 48px 32px;
   }
 
   .logo-contacts-edit-add {
@@ -80,6 +79,10 @@
 }
 
 @media (max-width: 440px) {
+  .ctn-headline-contacts-edit-add {
+    padding: 48px 28px;
+  }
+
   .acronym-contacts-edit-add {
     height: 96px;
     width: 96px;
@@ -104,7 +107,7 @@
 
 @media (max-width: 360px) {
   .form-contacts-edit-add {
-    margin: 28px 16px;
+    margin: 24px 8px;
   }
 
   .ctn-input-contact-edit-add input {

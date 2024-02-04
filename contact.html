@@ -81,32 +81,13 @@
         class="ctn-contacts-submenu"
         id="ctn-contacts-submenu"
         onclick="stopPropagation(event)"
-      >
-        <div
-          class="contacts-detail-edit-delete"
-          id="contacts-detail-edit-mobile"
-          onclick="editContact(0)"
-        >
-          <img
-            id="img-contacts-detail-edit"
-            src="./assets/img/edit_default.svg"
-          />
-          <span>Edit</span>
-        </div>
-        <div
-          class="contacts-detail-edit-delete"
-          id="contacts-detail-delete-mobile"
-          onclick="deleteContact(0)"
-        >
-          <img
-            id="img-contacts-detail-delete"
-            src="./assets/img/delete_default.svg"
-          />
-          <span>Delete</span>
-        </div>
-      </div>
+      ></div>
     </div>
 
-    <div class="overlay-contacts d-none" id="overlay-contacts" onclick="closeContactsDetails()"></div>
+    <div
+      class="overlay-contacts d-none"
+      id="overlay-contacts"
+      onclick="closeContactsDetails()"
+    ></div>
   </body>
 </html>
