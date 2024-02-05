@@ -1,38 +1,47 @@
 /**
  * This function generates the HTML-Code for the small cards on the kanban board
  * 
- * USERS ARE STILL STATIC // NEED TO BE REPLACED BY FUNCTION "GETASSIGNEDUSERS" AFTER DEFINING "ARCHITECTURE" FOR USERS
- * 
  * @param {array} currentTasks - array of tasks currently selected
- * @param {number} positionOfTask -  position of the task for which the card on the kanban board should be created in the array currentTasks
+ * @param {number} positionOfTask - position of the task for which the card on the kanban board should be created in the array currentTasks
+ * @param {string} currentIdTask - id of the task for which the card on the kanban board should be created
  * @returns - HTML-Code for one single small card/ task
  */
-async function generateCardSmallHTML(currentTasks, positionOfTask) {
+async function generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask) {
     return /*html*/ `
-    <div class="card-task-small" id="card-task-small-${currentTasks[positionOfTask]['idTask']}" draggable="true" ondragstart="moveElement(${currentTasks[positionOfTask]['idTask']})" ondrag="checkScroll(${currentTasks[positionOfTask]['idTask']})" ondragend="resetCardAndBoard(${currentTasks[positionOfTask]['idTask']})" onclick="openTaskDetail(${currentTasks[positionOfTask]['idTask']})">
-        <div class="card-category-small" id="category-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['category']}</div>
+    <div class="card-task-small" id="card-task-small-${currentIdTask}" draggable="true" ondragstart="moveElement('${currentIdTask}')" ondrag="checkScroll('${currentIdTask}')" ondragend="resetCardAndBoard('${currentIdTask}')" onclick="openTaskDetail('${currentIdTask}')">
+        <div class="card-category-small" id="category-task-${currentIdTask}">${currentTasks[positionOfTask]['category']}</div>
         <div class="ctn-card-text-small">
-            <div class="card-title-small" id="title-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['titleTask']}</div>
-            <div class="card-description-small" id="description-task-${currentTasks[positionOfTask]['idTask']}">${currentTasks[positionOfTask]['descriptionTask']}</div>
+            <div class="card-title-small" id="title-task-${currentIdTask}">${currentTasks[positionOfTask]['titleTask']}</div>
+            <div class="card-description-small" id="description-task-${currentIdTask}">${currentTasks[positionOfTask]['descriptionTask']}</div>
         </div>
 
-        <div class="ctn-card-subtasks-small" id="ctn-card-subtasks-small-${currentTasks[positionOfTask]['idTask']}">
+        <div class="ctn-card-subtasks-small" id="ctn-card-subtasks-small-${currentIdTask}">
             <div class="ctn-card-progress-bar-small">
-                <div class="card-progress-bar-small" id="progress-task-${currentTasks[positionOfTask]['idTask']}"></div>
+                <div class="card-progress-bar-small" id="progress-task-${currentIdTask}"></div>
             </div>
-            <span class="card-span-subtasks-small" id="span-subtasks-${currentTasks[positionOfTask]['idTask']}"></span>
+            <span class="card-span-subtasks-small" id="span-subtasks-${currentIdTask}"></span>
         </div>
         
         <div class="ctn-card-user-prio-small">
-            <div class="ctn-card-assigned-users-small" id="users-task-${currentTasks[positionOfTask]['idTask']}">
-                <div class="card-assigned-user-small">AM</div>
-                <div class="card-assigned-user-small">EM</div>
-                <div class="card-assigned-user-small">MB</div>
-            </div>
-        <img class="img-card-priority-small" id="img-prio-task-${currentTasks[positionOfTask]['idTask']}" src="./assets/img/prio_medium_color.svg"/>
+            <div class="ctn-card-assigned-users-small" id="ctn-card-assigned-users-small-${currentIdTask}"></div>
+        <img class="img-card-priority-small" id="img-prio-task-${currentIdTask}" src="./assets/img/prio_medium_color.svg"/>
         </div>
     </div>
     `
+}
+
+
+/**
+ * This function returns the HTML-Code for a single user (or dummy in case of overflow) assigned to a task on the small card on the kanban board
+ * 
+ * @param {string} currentIdTask - id of the task for which the card on the kanban board should be created
+ * @param {string} idContact - id of the contact that is assigned to the task created on the kanban board
+ * @returns - HTML-Code for a single user assigned to a task on the small card on the kanban board
+ */
+async function generateContactIconCardSmallHTML(currentIdTask, idContact) {
+  return /*html*/ `
+  <div class="card-assigned-user-small" id="card-assigned-user-small-${currentIdTask}-${idContact}"></div>
+  `
 }
 
 
@@ -69,7 +78,7 @@ async function generateViewTaskDetailHTML(currentTasks, positionOfTask) {
         </div>
         <div class="ctn-task-detail-assigned-users">
           <div class="color-bg">Assigned To:</div>
-          <div class="ctn-task-detail-assigned-users-wrapper">
+          <div class="ctn-task-detail-assigned-users-wrapper" id="ctn-task-detail-assigned-users-wrapper">
             <div class="ctn-task-detail-single-assigned-user">
               <div class="task-detail-assigned-user-acronym">EM</div>
               <div class="task-detail-assigned-user-name">Emmanuel Mauer</div>

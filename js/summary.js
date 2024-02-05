@@ -1,56 +1,26 @@
 //aktuell noch Problem mit einbindung der contact.js (widow-with - class in unbekanntem html eingebunden (contact.html))//
 async function initSummary() {
+    await proofAuthentification();
     await includeHTML();
     await loadUserData();
-    await loadDummyContacts();
-    await loadNewUserContacts();
+    await identifyCurrentUser();
+    await loadAllContacts();
     // await loadTasks();
-    identifyNewUser();
     changeSelectedTab('tab-summary');
 }
 
-
-async function identifyNewUser() {
+/**
+ * This function tests whether there was a registration with an e-mail address. If not, you will be redirected back to the login. Otherwise the user-data will be filtered.
+ */
+async function proofAuthentification() {
     const loggedInEmail = await getLoggedInEmail();
-    const currentUser = users.find(u => u.email === loggedInEmail);
-    if (currentUser.name.toLowerCase() !== 'guest') {
-        const acronym = currentUser.acronym;
-        generateGreeting(currentUser, acronym);
-        createNewContact(currentUser);
+
+    if (loggedInEmail !== '[]') {
     } else {
-        const acronym = currentUser.acronym;
-        generateGreeting(currentUser, acronym);
-
+        alert('No user found');
+        window.location.href = './index.html';
     }
 }
-
-async function createNewContact(user) {
-    const existingContact = await checkIfContactAlreadyExist();
-
-    if (!existingContact) {
-        const loggedInEmail = await getLoggedInEmail();
-        const newUserContact = {
-            idContact: `contact-${user.userID}`,
-            nameContact: user.name,
-            firstName: user.name.split(' ')[0],
-            lastName: checkIfLastNameExist(user.name.split(' ')),
-            acronymContact: user.acronym,
-            colorContact: '',
-            emailContact: loggedInEmail,
-            phoneContact: '', 
-            assignedTasks: [], 
-        }
-        setBackgroundcolor(newUserContact);
-        contacts.push(newUserContact);
-        storeContactItems();
-    }
-}
-
-async function checkIfContactAlreadyExist() {
-    const loggedInEmail = await getLoggedInEmail();
-    return contacts.find(contact => contact.emailContact === loggedInEmail);
-}
-
 
 
 async function getLoggedInEmail() {
@@ -63,6 +33,55 @@ async function getLoggedInEmail() {
         return '';
     }
 }
+
+
+async function identifyCurrentUser() {
+    const loggedInEmail = await getLoggedInEmail();
+    const currentUser = users.find(u => u.email === loggedInEmail);
+    personalizeAppContent(currentUser)
+}
+
+
+function personalizeAppContent(currentUser) {
+    if (currentUser.name.toLowerCase() !== 'guest') {
+        const acronym = currentUser.acronym;
+        generateGreeting(currentUser, acronym);
+        createOwnContact(currentUser);
+    } else {
+        const acronym = currentUser.acronym;
+        generateGreeting(currentUser, acronym);
+    }
+}
+
+
+
+async function createOwnContact(user) {
+    const existingContact = await checkIfContactAlreadyExist();
+
+    if (!existingContact) {
+        const loggedInEmail = await getLoggedInEmail();
+        const newUserContact = {
+            idContact: `contact-${user.userID}`,
+            nameContact: user.name,
+            firstName: user.name.split(' ')[0],
+            lastName: checkIfLastNameExist(user.name.split(' ')),
+            acronymContact: user.acronym,
+            colorContact: '',
+            emailContact: loggedInEmail,
+            phoneContact: '',
+            assignedTasks: [],
+        }
+        setBackgroundcolor(newUserContact);
+        contacts.push(newUserContact);
+        storeContactItems();
+    }
+}
+
+async function checkIfContactAlreadyExist() {
+    const loggedInEmail = await getLoggedInEmail();
+    return contacts.find(contact => contact.emailContact === loggedInEmail);
+}
+
 
 
 async function generateGreeting(currentUser, acronym) {
@@ -126,8 +145,8 @@ function capitalizeFirstLetter(string) {
 }
 
 
-async function storeContactItems(){
+async function storeContactItems() {
     await setItem('contacts', JSON.stringify(contacts));
-  }
+}
 
 

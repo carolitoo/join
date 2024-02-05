@@ -1,17 +1,26 @@
 [
   {
-    "idTask": "task-1",
+    "idTask": 1,
     "titleTask": "Kochwelt Page & Recipe Recommender",
     "descriptionTask": "Build start page with recipe recommendation.",
-    "assignedContacts": [
+    "assignedUsers": [
       {
-        "idContact": "contact-1"
+        "idUser": 1,
+        "acronymUser": "EM",
+        "nameUser": "Emmanuel Mauer",
+        "mailUser": "emmanuel.mauer@online.com"
       },
       {
-        "idContact": "contact-2"
+        "idUser": 2,
+        "acronymUser": "MB",
+        "nameUser": "Marcel Bauer",
+        "mailUser": "marcel.bauer@online.com"
       },
       {
-        "idContact": "contact-3"
+        "idUser": 3,
+        "acronymUser": "AM",
+        "nameUser": "Anton Mayer",
+        "mailUser": "anton.mayer@online.com"
       }
     ],
     "dueDate": "2023-05-10T20:15:00.000Z",
@@ -32,27 +41,21 @@
     "statusTask": "toDo"
   },
   {
-    "idTask": "task-2",
+    "idTask": 2,
     "titleTask": "CSS Architecture Planning",
     "descriptionTask": "Define CSS naming conventions and structure.",
-    "assignedContacts": [
+    "assignedUsers": [
       {
-        "idContact": "contact-1"
+        "idUser": 4,
+        "acronymUser": "SM",
+        "nameUser": "Sofia Müller",
+        "mailUser": "sofia.mueller@online.com"
       },
       {
-        "idContact": "contact-2"
-      },
-      {
-        "idContact": "contact-3"
-      },
-      {
-        "idContact": "contact-4"
-      },
-      {
-        "idContact": "contact-5"
-      },
-      {
-        "idContact": "contact-6"
+        "idUser": 5,
+        "acronymUser": "BZ",
+        "nameUser": "Benedikt Ziegler",
+        "mailUser": "benedikt.ziegler@online.com"
       }
     ],
     "dueDate": "2023-09-02T20:15:00.000Z",
@@ -73,15 +76,21 @@
     "statusTask": "done"
   },
   {
-    "idTask": "task-3",
+    "idTask": 3,
     "titleTask": "Test Title Test Test Test Test 3",
     "descriptionTask": "Test Description Test Test Test Test Test Test 3.",
-    "assignedContacts": [
+    "assignedUsers": [
       {
-        "idContact": "contact-1"
+        "idUser": 4,
+        "acronymUser": "SM",
+        "nameUser": "Sofia Müller",
+        "mailUser": "sofia.mueller@online.com"
       },
       {
-        "idContact": "contact-4"
+        "idUser": 5,
+        "acronymUser": "BZ",
+        "nameUser": "Benedikt Ziegler",
+        "mailUser": "benedikt.ziegler@online.com"
       }
     ],
     "dueDate": "2023-09-02T20:15:00.000Z",
@@ -112,18 +121,27 @@
     "statusTask": "inProgress"
   },
   {
-    "idTask": "task-4",
+    "idTask": 4,
     "titleTask": "Test Title 4",
     "descriptionTask": "Test Description 4.",
-    "assignedContacts": [
+    "assignedUsers": [
       {
-        "idContact": "contact-3"
+        "idUser": 4,
+        "acronymUser": "SM",
+        "nameUser": "Sofia Müller",
+        "mailUser": "sofia.mueller@online.com"
       },
       {
-        "idContact": "contact-1"
+        "idUser": 5,
+        "acronymUser": "BZ",
+        "nameUser": "Benedikt Ziegler",
+        "mailUser": "benedikt.ziegler@online.com"
       },
       {
-        "idContact": "contact-5"
+        "idUser": 5,
+        "acronymUser": "HM",
+        "nameUser": "Henry Müller",
+        "mailUser": "henry.mueller@online.com"
       }
     ],
     "dueDate": "2023-11-05T20:15:00.000Z",
@@ -131,32 +149,5 @@
     "category": "Technical Task",
     "subtasks": [],
     "statusTask": "inProgress"
-  }, 
-  {
-    "idTask": "task-5",
-    "titleTask": "Test Title without contacts 5",
-    "descriptionTask": "Test Description without assigned contacts 3.",
-    "assignedContacts": [],
-    "dueDate": "2023-09-02T20:15:00.000Z",
-    "priority": "Medium",
-    "category": "User Story",
-    "subtasks": [
-      {
-        "idSubtask": 1,
-        "titleSubtask": "Subtask 1 Test 5",
-        "statusSubtask": "closed"
-      },
-      {
-        "idSubtask": 2,
-        "titleSubtask": "Subtask 2 Test 5",
-        "statusSubtask": "closed"
-      },
-      {
-        "idSubtask": 3,
-        "titleSubtask": "Subtask 3 Test 5",
-        "statusSubtask": "open"
-      }
-    ],
-    "statusTask": "toDo"
   }
 ]
