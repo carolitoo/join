@@ -1,25 +1,25 @@
 const SUBTASK_ID = 0;
 let dummyUsers = [
     {
-        'name': 'tim test',
+        'name': 'Tim Test',
         'email': 'test@testmail.de',
         'password': 'test123',
         'confirmedPassword': 'test123'
     },
     {
-        'name': 'tim test',
+        'name': 'Tina Task',
         'email': 'test@testmail.de',
         'password': 'test123',
         'confirmedPassword': 'test123'
     },
     {
-        'name': 'tim test',
+        'name': 'Harray Potter',
         'email': 'test@testmail.de',
         'password': 'test123',
         'confirmedPassword': 'test123'
     },
     {
-        'name': 'tim test',
+        'name': 'Gitta Pull',
         'email': 'test@testmail.de',
         'password': 'test123',
         'confirmedPassword': 'test123'
@@ -31,7 +31,7 @@ let tasks = []; // stores exsisting Tasks from the remote
 let taskPrio = "PRIO_MEDIUM"; //MEDIUM ist the default Prio
 let assignedUsers = []; //collects the checked users from the "Assginded to" menu
 let category = []; //holds the chosen category from the form before submit
-let statusTask = TO_DO; //TO_DO ist the default status
+let statusTask = "TO_DO"; //TO_DO ist the default status
 
 async function initAddTask() {
     await includeHTML();
@@ -55,6 +55,8 @@ function changeButtonColorsUrgent() {
     document.getElementById('lowButton').classList.remove("low-btn-green");
     document.getElementById('lowButton').classList.add("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja.svg';
+
+    console.log("Current prio is " + taskPrio);
 }
 
 /**
@@ -73,6 +75,8 @@ function changeButtonColorsMedium() {
     document.getElementById('lowButton').classList.remove("low-btn-green");
     document.getElementById('lowButton').classList.add("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja.svg';
+
+    console.log("Current prio is " + taskPrio);
 }
 
 /**
@@ -91,6 +95,8 @@ function changeButtonColorsLow() {
     document.getElementById('urgentButton').classList.remove("urgent-btn-red");
     document.getElementById('urgentButton').classList.add("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta2.svg';
+
+    console.log("Current prio is " + taskPrio);
 }
 
 /**
@@ -104,8 +110,6 @@ function activateDropdown() {
     dropDownMenu.style.display =
         dropDownMenu.style.display === "block" ? "none" : "block";
 
-        console.log("Dropdown menu style after toggle:", dropDownMenu.style.display);
-    
     renderContacts();
 }
 
@@ -122,17 +126,78 @@ function renderContacts() {
       nameInitials += names[names.length - 1].charAt(0).toUpperCase(); //combines the two first characters of the name
 
       assignedContacts.innerHTML += `
-          <div>
+          <div class="contact">
             <div>
               <span>${nameInitials}</span>
               <span>${dummyUsers[i].name}</span>
             </div>
-            <input type="checkbox">
+            <input type="checkbox" onclick="saveContactsToArray(this)">
           </div>`;
     };
+};
+
+/**
+ * Gets the selcted value fron the Category dropdown and pushes it into the category array
+ * delets the previouse categroy befor push
+ */
+function setCategory(i) {
+    taskCategories = document.querySelector('#selectCategory');
+    selectedCategory = taskCategories.value;
+    category.splice(i, 1);
+    category.push(selectedCategory);
+
+    console.log("The selcted Category is " + selectedCategory);
 }
 
-//  <input type="checkbox" class="checkbox" data-name-initials="${nameInitials}">
-//  const userColor = getUserColor(i); -----> <span class="name_initials" style="background-color: ${userColor}">${nameInitials}</span>
-//            <div class="option" data-index="${i}" onclick="addBackgroundColour(${i}); toggleCheckbox(${i})">
+
+    
+function saveContactsToArray(checkbox) {
+    let parentContact = checkbox.closest('.contact'); // Hier wird closest verwendet, um das übergeordnete Kontakt-Element zu finden
+
+    if (parentContact) {
+        let nameInitials = parentContact.querySelector('span:first-child').innerText;
+        let userName = parentContact.querySelector('span:last-child').innerText;
+
+        let selectedContacts = {
+            nameInitials: nameInitials,
+            userName: userName
+        };
+
+        if (checkbox.checked) {
+            assignedUsers.push(selectedContacts);
+        } else {
+            // Wenn die Checkbox abgewählt wird, entferne den Kontakt aus dem Array
+            let indexToRemove = assignedUsers.findIndex(contact => contact.nameInitials === nameInitials && contact.userName === userName);
+            if (indexToRemove !== -1) {
+                assignedUsers.splice(indexToRemove, 1);
+            }
+        }
+
+        console.log("Die ausgewählten Kontakte sind " + JSON.stringify(assignedUsers));
+    } else {
+        console.error("Fehler: Das übergeordnete Kontakt-Element wurde nicht gefunden.");
+    }
+
+    renderCheckedContacts();
+}
+
+
+function renderCheckedContacts() {
+    let checkedContactsCtn =  document.getElementById('checkedContactsCtn');
+
+    for (let i = 0; i < assignedUsers.length; i++) {
+        const names = dummyUsers[i].name.split(" "); //Splits the value of the "name" into an array of substrings by separating the string where a space occurs.
+        let nameInitials = names[0].charAt(0).toUpperCase(); //Takes the first character and changes them to Upper Case
+        nameInitials += names[names.length - 1].charAt(0).toUpperCase(); //combines the two first characters of the name
+
+        checkedContactsCtn.innerHTML += `
+        <div>
+            <div class="circle-wth-initials">
+                <span>${nameInitials}</span>
+            </div>
+            <span>${dummyUsers[i].name}</span>
+        </div>
+        `   
+    }
+}
 
