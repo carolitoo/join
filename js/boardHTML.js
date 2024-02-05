@@ -48,79 +48,72 @@ async function generateContactIconCardSmallHTML(currentIdTask, idContact) {
 /**
  * This function generates the HTML-Code for the detailed view of a single task (selected from the kanban board)
  * 
- * USERS ARE STILL STATIC // NEED TO BE REPLACED BY FUNCTION "GETASSIGNEDUSERS" AFTER DEFINING "ARCHITECTURE" FOR USERS
- * 
- * @param {array} currentTasks  - array of tasks currently selected
- * @param {number} positionOfTask  -  position of the task for which the card on the kanban board should be created in the array currentTasks
+ * @param {number} positionOfTask  -  position of the task (in the array tasks) for which the detailed view should be opened 
+ * @param {string} currentIdTask - id of the task for which the detailed view should be opened 
  * @returns  - HTML-Code for the detailed view of the selected task
  */
-async function generateViewTaskDetailHTML(currentTasks, positionOfTask) {
+async function generateViewTaskDetailHTML(positionOfTask, currentIdTask) {
     return /*html*/ `
     <div class="ctn-task-detail" id="ctn-task-detail" onclick="stopPropagation(event)">
         <div class="ctn-task-detail-header">
-          <div class="task-detail-category" id="task-detail-category">${currentTasks[positionOfTask]['category']}</div>
+          <div class="task-detail-category" id="task-detail-category">${tasks[positionOfTask]['category']}</div>
           <div class="ctn-task-detail-close">
             <img class="task-detail-close" src="./assets/img/close_black.svg" onclick="closeTaskDetails()">
           </div>
         </div>
-        <h1>${currentTasks[positionOfTask]['titleTask']}</h1>
-        <div>${currentTasks[positionOfTask]['descriptionTask']}</div>
+        <h1>${tasks[positionOfTask]['titleTask']}</h1>
+        <div>${tasks[positionOfTask]['descriptionTask']}</div>
         <div class="ctn-task-detail-date">
           <span class="color-bg">Due date:</span>
-          <div>${(new Date(currentTasks[positionOfTask]['dueDate'])).toLocaleDateString('en-US')}</div>
+          <div>${(new Date(tasks[positionOfTask]['dueDate'])).toLocaleDateString('en-US')}</div>
         </div>
         <div class="ctn-task-detail-priority">
           <span class="color-bg">Priority:</span>
           <div class="ctn-task-detail-priority-right">
-            <div>${currentTasks[positionOfTask]['priority']}</div>
+            <div>${tasks[positionOfTask]['priority']}</div>
             <img id="img-prio-task-detail" src="./assets/img/prio_medium_color.svg">
           </div>
         </div>
-        <div class="ctn-task-detail-assigned-users">
+        <div class="ctn-task-detail-assigned-users" id="ctn-task-detail-assigned-users">
           <div class="color-bg">Assigned To:</div>
-          <div class="ctn-task-detail-assigned-users-wrapper" id="ctn-task-detail-assigned-users-wrapper">
-            <div class="ctn-task-detail-single-assigned-user">
-              <div class="task-detail-assigned-user-acronym">EM</div>
-              <div class="task-detail-assigned-user-name">Emmanuel Mauer</div>
-            </div>
-            <div class="ctn-task-detail-single-assigned-user">
-              <div class="task-detail-assigned-user-acronym">MB</div>
-              <div class="task-detail-assigned-user-name">Marcel Bauer</div>
-            </div>
-            <div class="ctn-task-detail-single-assigned-user">
-              <div class="task-detail-assigned-user-acronym">AM</div>
-              <div class="task-detail-assigned-user-name">Anton Mayer</div>
-            </div>
-          </div>
+          <div class="ctn-task-detail-assigned-users-wrapper" id="ctn-task-detail-assigned-users-wrapper"></div>
         </div>
 
         <div class="ctn-task-detail-subtasks" id="ctn-task-detail-subtasks">
             <div class="color-bg">Subtasks</div>
-            <div id="task-detail-subtasks">
-                <div class="ctn-task-detail-single-subtask">
-                    <img class="task-detail-checkbox" src="./assets/img/checkbox_checked_default.svg">
-                    <div></div>
-                </div>
-                <div class="ctn-task-detail-single-subtask">
-                    <img class="task-detail-checkbox" src="./assets/img/checkbox_blank_default.svg">
-                    <div></div>
-                </div>
-            </div>
+            <div id="task-detail-subtasks"></div>
         </div>
 
         <div class="ctn-task-detail-edit-delete">
-          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-delete', 'delete_lb')" onmouseout="changeImgTo('img-task-detail-delete', 'delete_default')">
+          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-delete', 'delete_lb')" onmouseout="changeImgTo('img-task-detail-delete', 'delete_default')" onclick="deleteTask(${currentIdTask})">
             <img id="img-task-detail-delete" src="./assets/img/delete_default.svg">
             <span>Delete</span>
           </div>
           <div class="task-detail-separator-edit"></div>
-          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-edit', 'edit_lb')" onmouseout="changeImgTo('img-task-detail-edit', 'edit_default')">
+          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-edit', 'edit_lb')" onmouseout="changeImgTo('img-task-detail-edit', 'edit_default')" onclick="editTask(${currentIdTask})">
             <img id="img-task-detail-edit" src="./assets/img/edit_default.svg">
             <span>Edit</span>
           </div>
         </div>
 
       </div>`
+}
+
+
+/**
+ * This function returns the HTML-Code for a single user assigned to a task in the detailed view 
+ * 
+ * @param {number} positionContact - position of the contact (in the array contacts) which is added to the assigned users in the detailed view of a task 
+ * @param {string} idContact - id of the contact that is assigned to the task
+ * @returns - HTML-Code for a single user assigned to a task in the detailed view
+ */
+async function generateContactViewTaskDetailHTML(positionContact, idContact) {
+  return /*html*/ `
+  <div class="ctn-task-detail-single-assigned-user">
+      <div class="task-detail-assigned-user-acronym" id="task-detail-assigned-user-acronym-${idContact}">${contacts[positionContact]['acronymContact']}</div>
+      <div class="task-detail-assigned-user-name">${contacts[positionContact]['nameContact']}</div>
+  </div>
+  `
 }
 
 

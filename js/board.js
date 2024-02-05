@@ -15,7 +15,6 @@ async function initBoard() {
 }
 
 
-
 /** 
  * This function loads all the tasks currently existing into a JSON-Array
  */
@@ -75,7 +74,7 @@ async function updateStatus(status, currentTasks) {
 async function createDynamicElementsCardSmall (currentTasks, positionOfTask, currentIdTask) {
     getSelectedCategory(`category-task-${currentIdTask}`, currentTasks, positionOfTask);
     await checkSubtasks(currentTasks, positionOfTask);
-    await checkAssignedContacts(currentTasks, positionOfTask, currentIdTask);
+    await checkAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask);
     getSelectedPriority(`img-prio-task-${currentIdTask}`, currentTasks, positionOfTask);
 }
 
@@ -148,7 +147,7 @@ function calculateProgressSubtasks(currentTasks, positionOfTask, numberOfSubtask
  * @param {number} positionOfTask - position of the task (in the array currentTasks) for which the card on the kanban board is created
  * @param {string} currentIdTask - id of the task for which the card on the kanban board is created
  */
-async function checkAssignedContacts(currentTasks, positionOfTask, currentIdTask) {
+async function checkAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask) {
 
     let maxNumberOfDisplayedContacts = 4; 
     let numberOfAssignedContacts = currentTasks[positionOfTask]['assignedContacts'].length;
@@ -156,11 +155,11 @@ async function checkAssignedContacts(currentTasks, positionOfTask, currentIdTask
 
     if (numberOfAssignedContacts <= maxNumberOfDisplayedContacts && numberOfAssignedContacts > 0) {
         for (let u = 0; u < numberOfAssignedContacts; u++) {
-            await getAssignedContacts(currentTasks, positionOfTask, currentIdTask, u);
+            await getAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask, u);
         }
     } else if (numberOfAssignedContacts > maxNumberOfDisplayedContacts && numberOfAssignedContacts > 0) {
         for (let u = 0; u < maxNumberOfDisplayedContacts - 1; u++) {
-            await getAssignedContacts(currentTasks, positionOfTask, currentIdTask, u);
+            await getAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask, u);
         }
         await setOverflowContactIcon(currentIdTask, numberOfRemainigContacts);
     }
@@ -175,7 +174,7 @@ async function checkAssignedContacts(currentTasks, positionOfTask, currentIdTask
  * @param {string} currentIdTask - id of the task for which the card on the kanban board is created
  * @param {number} u - element/ assigned user in the for loop for which the icon is created
  */
-async function getAssignedContacts(currentTasks, positionOfTask, currentIdTask, u) {
+async function getAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask, u) {
     let idContact = currentTasks[positionOfTask]['assignedContacts'][u]['idContact'];
     let positionContact = contacts.findIndex((id) => id["idContact"] == idContact);
 
@@ -263,7 +262,7 @@ function moveElement(idTask) {
  * This function allows to drop an element above the element containing this function via drag-and-drop (standard function)
  * This function also indicates visually that the task can be moved to another column (only if hovered over another status than the current status of the task)
  * 
- * @param {*} event 
+ * @param {object} event
  * @param {string} newStatus - status of the column where the task might be dropped
  */
 function allowDropWithPreview(event, newStatus) {
@@ -349,23 +348,22 @@ async function searchTask() {
     } else {
         document.getElementById('ctn-board').classList.add('d-none');
         document.getElementById('board-no-results').classList.remove('d-none');
-    }
-  
+    } 
 }
 
 
 /**
  * This function opens an overlay with the nested (updated) detailed view of a task - it also prevents the scrolling of content in the background
  * 
- * @param {number} idTask - id of the task in the array "tasks" for which the details are opened
+ * @param {string} idTask - id of the task in the array "tasks" for which the details are opened
  */
 async function openTaskDetail(idTask) {
     positionOfTask = tasks.findIndex(id => id['idTask'] == idTask);
 
-    document.getElementById('overlay-board').innerHTML = await generateViewTaskDetailHTML(tasks, positionOfTask);
+    document.getElementById('overlay-board').innerHTML = await generateViewTaskDetailHTML(positionOfTask, idTask);
     getSelectedCategory('task-detail-category', tasks, positionOfTask);
     getSelectedPriority('img-prio-task-detail', tasks, positionOfTask);
-    // checkAssignedContacts();
+    checkAssignedContactsViedTaskDetail(positionOfTask);
     getSelectedSubtasks('task-detail-subtasks', tasks, positionOfTask);
 
     document.getElementById('overlay-board').classList.remove('d-none');
@@ -375,6 +373,42 @@ async function openTaskDetail(idTask) {
     setTimeout(() => {
         document.getElementById('ctn-task-detail').classList.remove('translate-x');
     }, 10)  
+}
+
+
+/**
+ * This function checks if contacts are assigned to the task for which the detailed view is opened
+ * If no contacts are assigned the div-container for the assigned contacts isn't displayed else the function to create the assigned contacts is called
+ * 
+ * @param {number} positionOfTask - position of the task (in the array tasks) for which the detailed view is displayed
+ */
+async function checkAssignedContactsViedTaskDetail (positionOfTask) {
+    let numberOfAssignedContacts = tasks[positionOfTask]['assignedContacts'].length;
+
+    if (numberOfAssignedContacts == 0) {
+        document.getElementById(`ctn-task-detail-assigned-users`).classList.add('d-none');
+    } else {
+        await getAssignedContactsViewTaskDetail (positionOfTask, numberOfAssignedContacts);
+    }
+}
+
+
+/**
+ * This function calls the function to generate the HTML-Code for each assigned contact in the detailed view of a task
+ * 
+ * @param {number} positionOfTask - position of the task (in the array tasks) for which the detailed view is displayed
+ * @param {number} numberOfAssignedContacts - number of the assigned contacts for the displayed task
+ */
+async function getAssignedContactsViewTaskDetail (positionOfTask, numberOfAssignedContacts) {
+    document.getElementById('ctn-task-detail-assigned-users-wrapper').innerHTML = '';
+
+    for (u = 0; u < numberOfAssignedContacts; u++) {
+        let idContact = tasks[positionOfTask]['assignedContacts'][u]['idContact'];
+        let positionContact = contacts.findIndex((id) => id["idContact"] == idContact);
+
+        document.getElementById('ctn-task-detail-assigned-users-wrapper').innerHTML += await generateContactViewTaskDetailHTML(positionContact, idContact);
+        document.getElementById(`task-detail-assigned-user-acronym-${idContact}`).style.backgroundColor = contacts[positionContact]['colorContact'];
+    }
 }
 
 
