@@ -5,15 +5,19 @@ let initialLetters = [];
 let contactIsSelected = false;
 
 async function initContact() {
-  await proofAuthentification();
+  //await proofAuthentification();//
   await includeHTML();
   changeSelectedTab("tab-contacts");
   await loadUserData();
-  await loadAllContacts();
-  await renderAcronym();
+  await getLoggedInEmail();
+  await loadDummyAndNewUserContacts()
   await renderContactList();
+  await renderAcronym(loggedInEmail);
   checkWindowWidth();
 }
+
+
+window.onresize = checkWindowWidth;
 
 
 /**
@@ -57,30 +61,18 @@ function returnToContactList() {
 /**
  * This function loads both dummy data and newly created contact data
  */
-async function loadAllContacts() {
-  await loadDummyContacts();
-  await loadNewUserContacts();
-}
 
+async function loadDummyAndNewUserContacts() {
+  const dummyContactsResponse = await fetch("../contacts.json");
+  const dummyContacts = await dummyContactsResponse.json();
 
-/**
- * This function loads all contacts currently existing into a JSON-Array
- */
-async function loadDummyContacts() {
-  let resp = await fetch("../contacts.json");
-  contacts = await resp.json();
-}
+  const newUserContactsResponse = await getItem('contacts');
+  const newUserContactsData = newUserContactsResponse['data']['value'];
+  const newUserContacts = newUserContactsData ? JSON.parse(newUserContactsData) : [];
 
-
-/**
- * This function loads users directly into the contact book after the first login
- */
-async function loadNewUserContacts() {
-  const response = await getItem('contacts');
-  const ContactsData = response['data']['value'];
-  if (ContactsData) {
-    contacts = JSON.parse(ContactsData);
-  }
+  const markedDummyContacts = dummyContacts.map(contact => ({ ...contact, isDummy: true }));
+  // Kombiniert die Dummy-Daten und neue Benutzerdaten, und fügt sie in das contacts-Array ein
+  contacts = [...markedDummyContacts, ...newUserContacts];
 }
 
 
@@ -89,9 +81,7 @@ async function loadNewUserContacts() {
 This function finds the currentUser and updates the interface with the user's personalized acronym-based icon.
  */
 async function renderAcronym() {
-  const loggedInEmail = await getLoggedInEmail();
   const currentUser = users.find(u => u.email === loggedInEmail);
-
   generateUserIcon(currentUser.acronym);
 }
 
@@ -187,7 +177,7 @@ async function openContactDetail(idContact) {
  * 
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
-function checkEmptyPhoneNumber (positionOfContact) {
+function checkEmptyPhoneNumber(positionOfContact) {
   if (contactsSorted[positionOfContact]['phoneContact'] == "") {
     document.getElementById('contacts-detail-phone').innerHTML = "n.a.";
     document.getElementById('contacts-detail-phone').style.color = "#a8a8a8";
@@ -271,7 +261,7 @@ async function addNewContact() {
   resetAddContact();
   document.getElementById("overlay-contacts").classList.add("d-none");
   slideInAnimation('pop-up-contacts-add', 'translate-y', true);
-   // + NEUEN KONTAKT ÖFFNEN
+  // + NEUEN KONTAKT ÖFFNEN
 }
 
 
