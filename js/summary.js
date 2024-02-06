@@ -1,10 +1,13 @@
+let loggedInEmail;
+
 //aktuell noch Problem mit einbindung der contact.js (widow-with - class in unbekanntem html eingebunden (contact.html))//
 async function initSummary() {
-    await proofAuthentification();
+    await getLoggedInEmail();
+    //await proofAuthentification();//
     await includeHTML();
     await loadUserData();
+    await loadDummyAndNewUserContacts();
     await identifyCurrentUser();
-    await loadAllContacts();
     // await loadTasks();
     changeSelectedTab('tab-summary');
 }
@@ -26,7 +29,7 @@ async function proofAuthentification() {
 async function getLoggedInEmail() {
     try {
         const response = await getItem('loggedInEmail');
-        const LoggedInEmail = response['data']['value'];
+        loggedInEmail = response['data']['value'];
         return LoggedInEmail;
     } catch (error) {
         alert('An error has occurred', error);
@@ -61,6 +64,7 @@ async function createOwnContact(user) {
     if (!existingContact) {
         const loggedInEmail = await getLoggedInEmail();
         const newUserContact = {
+            isDummy: false,
             idContact: `contact-${user.userID}`,
             nameContact: user.name,
             firstName: user.name.split(' ')[0],
@@ -146,7 +150,8 @@ function capitalizeFirstLetter(string) {
 
 
 async function storeContactItems() {
-    await setItem('contacts', JSON.stringify(contacts));
+    // Dummy-Kontakte filtern, um sie nicht zu speichern
+    const newUserContacts = contacts.filter(contact => !contact.isDummy);
+    await setItem('contacts', JSON.stringify(newUserContacts));
 }
-
 

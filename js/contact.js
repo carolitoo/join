@@ -4,6 +4,7 @@ let contactsSorted = [];
 let initialLetters = [];
 let contactIsSelected = false;
 
+
 async function initContact() {
   //await proofAuthentification();//
   await includeHTML();
@@ -80,7 +81,7 @@ async function loadDummyAndNewUserContacts() {
  * 
 This function finds the currentUser and updates the interface with the user's personalized acronym-based icon.
  */
-async function renderAcronym() {
+async function renderAcronym(loggedInEmail) {
   const currentUser = users.find(u => u.email === loggedInEmail);
   generateUserIcon(currentUser.acronym);
 }

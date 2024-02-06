@@ -8,8 +8,7 @@
 async function LoginInit() {
     await includeHTML();
     await loadUserData();
-    await loadDummyContacts();
-    await loadNewUserContacts();
+    await loadDummyAndNewUserContacts();
     //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
   }
 
