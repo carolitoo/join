@@ -84,6 +84,16 @@ This function finds the currentUser and updates the interface with the user's pe
 async function renderAcronym(loggedInEmail) {
   const currentUser = users.find(u => u.email === loggedInEmail);
   generateUserIcon(currentUser.acronym);
+  showUserIdentityText(currentUser);
+}
+
+/*TEST_FUNKTION für CUrrentUser (YOU)*/
+async function showUserIdentityText(currentUser) {
+  if (currentUser) {
+    const youTextElement = document.getElementById('contact-list-single-contact-identity-text'); // ID entsprechend anpassen
+    youTextElement.innerHTML = '<You>';
+    await renderContactList();
+  }
 }
 
 

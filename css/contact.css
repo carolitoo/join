@@ -275,13 +275,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2A3647;
+  background-color: #2a3647;
   color: white;
   font-size: 20px;
   font-weight: 400;
   padding: 24px 32px;
   border-radius: 20px;
-  box-shadow: 0px 0px 4px 0px #0000001A;
+  box-shadow: 0px 0px 4px 0px #0000001a;
   transition: 200ms;
 }
 
@@ -295,4 +295,13 @@
 
 .no-transition {
   transition: none !important;
+}
+
+
+
+
+/*TEST für CurrentUser (You)*/
+#contact-list-single-contact-identity-text {
+  height: 30px;
+  width: 30px;
 }

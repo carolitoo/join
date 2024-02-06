@@ -36,6 +36,7 @@ async function generateSingleListContactHTML(positionOfContact) {
       <div class="contact-list-single-contact-acronym" id="contact-list-single-contact-acronym-${contactsSorted[positionOfContact]["idContact"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
       <div class="contact-list-single-contact-right">
         <div class="contact-list-single-contact-name">${contactsSorted[positionOfContact]["nameContact"]}</div>
+        <div id='contact-list-single-contact-identity-text'></div>
         <div class="contact-list-single-contact-mail">${contactsSorted[positionOfContact]["emailContact"]}</div>
       </div>
     </div>

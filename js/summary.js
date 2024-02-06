@@ -30,7 +30,7 @@ async function getLoggedInEmail() {
     try {
         const response = await getItem('loggedInEmail');
         loggedInEmail = response['data']['value'];
-        return LoggedInEmail;
+        return loggedInEmail;
     } catch (error) {
         alert('An error has occurred', error);
         return '';
