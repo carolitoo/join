@@ -1,8 +1,10 @@
 let positionOfContact;
+let currentUser;
 let contacts = [];
 let contactsSorted = [];
 let initialLetters = [];
 let contactIsSelected = false;
+let extractedContactNumber;
 
 
 async function initContact() {
@@ -12,8 +14,8 @@ async function initContact() {
   await loadUserData();
   await getLoggedInEmail();
   await loadDummyAndNewUserContacts()
-  await renderContactList();
   await renderAcronym(loggedInEmail);
+  await renderContactList(currentUser);
   checkWindowWidth();
 }
 
@@ -72,8 +74,19 @@ async function loadDummyAndNewUserContacts() {
   const newUserContacts = newUserContactsData ? JSON.parse(newUserContactsData) : [];
 
   const markedDummyContacts = dummyContacts.map(contact => ({ ...contact, isDummy: true }));
-  // Kombiniert die Dummy-Daten und neue Benutzerdaten, und fügt sie in das contacts-Array ein
   contacts = [...markedDummyContacts, ...newUserContacts];
+
+  // Iterate over newUserContacts array to get and log idContact for each contact
+  newUserContacts.forEach(contact => {
+    NewContactsId = contact.idContact;
+    extractNewcontactIdNumber(NewContactsId);
+  });
+}
+
+
+
+function extractNewcontactIdNumber(NewContactsId) {
+  extractedContactNumber = parseInt(NewContactsId.split('-')[1], 10);
 }
 
 
@@ -82,26 +95,35 @@ async function loadDummyAndNewUserContacts() {
 This function finds the currentUser and updates the interface with the user's personalized acronym-based icon.
  */
 async function renderAcronym(loggedInEmail) {
-  const currentUser = users.find(u => u.email === loggedInEmail);
+  currentUser = users.find(u => u.email == loggedInEmail);
   generateUserIcon(currentUser.acronym);
-  showUserIdentityText(currentUser);
 }
 
-/*TEST_FUNKTION für CUrrentUser (YOU)*/
-async function showUserIdentityText(currentUser) {
-  if (currentUser) {
-    const youTextElement = document.getElementById('contact-list-single-contact-identity-text'); // ID entsprechend anpassen
-    youTextElement.innerHTML = '<You>';
-    await renderContactList();
+
+async function showUserIdentityText(extractedContactNumber, currentUser) {
+  if (currentUser.userID == extractedContactNumber) {
+    const positionOfContact = contactsSorted.findIndex(
+      (contact) => contact.idContact.split('-')[1] == currentUser.userID
+    );
+    // Überprüft, ob der Kontakt gefunden wurde
+    if (positionOfContact !== -1) {
+      await generateSingleListContactHTML(positionOfContact);
+      // Fügt ein neues HTML-Element mit dem Text 'You' hinzu
+      document.getElementById(`${contactsSorted[positionOfContact].idContact}`).insertAdjacentHTML('beforeend', '<span id="contact-list-single-contact-identity-text">You</span>');
+    }
   }
 }
+
+
 
 
 /**
  * This function renders the loaded contacts alphabetically sorted into the contact list
  */
-async function renderContactList() {
-  if (contacts.length == 0) {
+async function renderContactList(currentUser) {
+
+
+  if (contacts.length === 0) {
     document.getElementById("ctn-contact-list").innerHTML =
       await generateNoContactsHTML();
   } else {
@@ -109,10 +131,10 @@ async function renderContactList() {
     await createArrayInitialLetters();
     document.getElementById("ctn-contact-list").innerHTML = "";
 
-    for (j = 0; j < initialLetters.length; j++) {
+    for (let j = 0; j < initialLetters.length; j++) {
       document.getElementById("ctn-contact-list").innerHTML +=
         await generateInitialLetterHTML(initialLetters[j]);
-      for (k = 0; k < contactsSorted.length; k++) {
+      for (let k = 0; k < contactsSorted.length; k++) {
         if (contactsSorted[k]["nameContact"][0] == initialLetters[j]) {
           document.getElementById(
             `contact-list-letter-${initialLetters[j]}`
@@ -124,7 +146,16 @@ async function renderContactList() {
       }
     }
   }
+  proofIfcurrentUserwasRendered(currentUser);
 }
+
+
+async function proofIfcurrentUserwasRendered(currentUser) {
+  if (currentUser.userID == extractedContactNumber) {
+    await showUserIdentityText(extractedContactNumber, currentUser);
+  }
+}
+
 
 
 /**
