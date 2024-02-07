@@ -40,6 +40,7 @@ async function initAddTask() {
     changeSelectedTab('tab-add-task');
 }
 
+
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
@@ -115,46 +116,38 @@ function activateDropdown() {
 }
 
 /**
- * Loads the user contacts the the "Assigned to" dropdown menu
+ * Loads the user contacts to the "Assigned to" dropdown menu
  * It adds the initials, the username and a chekbox for every user
- * Adds event listeners for background color change and checkbox toggle.
+ * check if already rendered so it doesn't multiply
  */
 function renderContacts() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
-    for (let i = 0; i < dummyUsers.length; i++) {
-      const names = dummyUsers[i].name.split(" "); //Splits the value of the "name" into an array of substrings by separating the string where a space occurs.
-      let nameInitials = names[0].charAt(0).toUpperCase(); //Takes the first character and changes them to Upper Case
-      nameInitials += names[names.length - 1].charAt(0).toUpperCase(); //combines the two first characters of the name
+    const existingContacts = assignedContacts.querySelectorAll('.contact span:last-child'); // Sammle bereits vorhandene Kontakte
 
-      assignedContacts.innerHTML += `
-          <div class="contact">
-            <div>
-              <span>${nameInitials}</span>
-              <span>${dummyUsers[i].name}</span>
-            </div>
-            <input type="checkbox" onclick="saveContactsToArray(this)">
-          </div>`;
-    };
-}
+    dummyUsers.forEach(user => {
+        // Überprüfe, ob der aktuelle Benutzer bereits im Container vorhanden ist
+        const userExists = Array.from(existingContacts).some(contact => contact.innerText === user.name);
+        if (!userExists) {
+            const names = user.name.split(" ");
+            let nameInitials = names[0].charAt(0).toUpperCase();
+            nameInitials += names[names.length - 1].charAt(0).toUpperCase();
 
-/**
- * Gets the selcted value fron the Category dropdown and pushes it into the category array
- * delets the previouse categroy befor push
- */
-function setCategory(i) {
-    taskCategories = document.querySelector('#selectCategory');
-    selectedCategory = taskCategories.value;
-    category.splice(i, 1);
-    category.push(selectedCategory);
-
-    console.log("The selcted Category is " + selectedCategory);
+            assignedContacts.innerHTML += `
+                <div class="contact">
+                    <div>
+                        <span>${nameInitials}</span>
+                        <span>${user.name}</span>
+                    </div>
+                    <input type="checkbox" onclick="saveContactsToArray(this)">
+                </div>`;
+        }
+    });
 }
 
 function saveContactsToArray(checkbox) {
     let parentContact = checkbox.closest('.contact');
 
     if (parentContact) {
-        let nameInitials = parentContact.querySelector('span:first-child').innerText;
         let userName = parentContact.querySelector('span:last-child').innerText;
 
         let selectedContact = {
@@ -167,13 +160,13 @@ function saveContactsToArray(checkbox) {
             // Remove the contact from assignedUsers based on full name match
             assignedUsers = assignedUsers.filter(contact => contact.name !== selectedContact.name);
         }
-
+        
         renderCheckedContacts(); // Render the updated list of selected contacts
     } else {
         console.error("Fehler: Das übergeordnete Kontakt-Element wurde nicht gefunden.");
     }
-    
 }
+
 function renderCheckedContacts() {
     let checkedContactsCtn = document.getElementById('checkedContactsCtn');
     checkedContactsCtn.innerHTML = ''; // Clearing the container content to ensure no old content remains before rendering the updated contacts
@@ -193,5 +186,18 @@ function renderCheckedContacts() {
         </div>
         `;
     });
+}
+
+/**
+ * Gets the selcted value fron the Category dropdown and pushes it into the category array
+ * delets the previouse categroy befor push
+ */
+function setCategory(i) {
+    taskCategories = document.querySelector('#selectCategory');
+    selectedCategory = taskCategories.value;
+    category.splice(i, 1);
+    category.push(selectedCategory);
+
+    console.log("The selcted Category is " + selectedCategory);
 }
 
