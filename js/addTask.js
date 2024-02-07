@@ -1,31 +1,5 @@
 const SUBTASK_ID = 0;
-let dummyUsers = [
-    {
-        'name': 'Tim Test',
-        'email': 'test@testmail.de',
-        'password': 'test123',
-        'confirmedPassword': 'test123'
-    },
-    {
-        'name': 'Ana Conda',
-        'email': 'test@testmail.de',
-        'password': 'test123',
-        'confirmedPassword': 'test123'
-    },
-    {
-        'name': 'Harray Potter',
-        'email': 'test@testmail.de',
-        'password': 'test123',
-        'confirmedPassword': 'test123'
-    },
-    {
-        'name': 'Gitta Pull',
-        'email': 'test@testmail.de',
-        'password': 'test123',
-        'confirmedPassword': 'test123'
-    },
-
-];  //dummy array for users in the remote storage 
+let dummyUsers = [];  //dummy array for users in the remote storage 
 
 let tasks = []; // stores exsisting Tasks from the remote 
 let taskPrio = "PRIO_MEDIUM"; //MEDIUM ist the default Prio
@@ -37,9 +11,19 @@ let checkboxStates = {};
 async function initAddTask() {
     await includeHTML();
     //await loadUserData();//
+    await loadDummyContacts();
     changeSelectedTab('tab-add-task');
 }
 
+/**
+ * loads dummy contacts to array
+ */
+async function loadDummyContacts() {
+    const dummyContactsResponse = await fetch("../contacts.json");
+    const dummyContacts = await dummyContactsResponse.json();
+  
+    dummyUsers.push(dummyContacts);
+  }
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
@@ -126,17 +110,15 @@ function renderContacts() {
 
     dummyUsers.forEach(user => {
         // Überprüfe, ob der aktuelle Benutzer bereits im Container vorhanden ist
-        const userExists = Array.from(existingContacts).some(contact => contact.innerText === user.name);
+        const userExists = Array.from(existingContacts).some(contact => contact.innerText === user.nameContact);
         if (!userExists) {
-            const names = user.name.split(" ");
-            let nameInitials = names[0].charAt(0).toUpperCase();
-            nameInitials += names[names.length - 1].charAt(0).toUpperCase();
+            const nameInitials = user.acronymContact; // Verwende das Akronym des Benutzers
 
             assignedContacts.innerHTML += `
                 <div class="contact">
                     <div>
-                        <span>${nameInitials}</span>
-                        <span>${user.name}</span>
+                        <span>${nameInitials}</span> <!-- Initialen des Benutzers -->
+                        <span>${user.nameContact}</span> <!-- Name des Benutzers -->
                     </div>
                     <input type="checkbox" onclick="saveContactsToArray(this)">
                 </div>`;
@@ -172,19 +154,21 @@ function renderCheckedContacts() {
     checkedContactsCtn.innerHTML = ''; // Clearing the container content to ensure no old content remains before rendering the updated contacts
     
     assignedUsers.forEach(contact => { // Iterating over each element in the assignedUsers array
-        const names = contact.name.split(" "); // Splitting the full name into first and last names
-        let nameInitials = names[0].charAt(0).toUpperCase(); // Extracting the initials from the first and last names
-        nameInitials += names[names.length - 1].charAt(0).toUpperCase();
+        const user = dummyUsers.find(user => user.nameContact === contact.name);
+        if (user) {
+            const nameInitials = user.acronymContact;
+            const userName = user.nameContact;
 
-        // Adding a new DOM element for each checked contact to the container
-        checkedContactsCtn.innerHTML += ` 
-        <div>
-            <div class="circle-wth-initials">
-                <span>${nameInitials}</span> <!-- Displaying the initials of the contact -->
+            // Adding a new DOM element for each checked contact to the container
+            checkedContactsCtn.innerHTML += ` 
+            <div class="checked-contact-box">
+                <div class="circle-wth-initials">
+                    <span>${nameInitials}</span> <!-- Displaying the initials of the contact -->
+                </div>
+                <span>${userName}</span> <!-- Displaying the full name of the contact -->
             </div>
-            <span>${contact.name}</span> <!-- Displaying the full name of the contact -->
-        </div>
-        `;
+            `;
+        }
     });
 }
 

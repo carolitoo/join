@@ -81,6 +81,12 @@ select:focus {
   border-color: #29abe2;
 }
 
+.checked-contact-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .icon-calendar {
   height: 20px;
   width: 20px;
