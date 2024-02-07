@@ -7,7 +7,7 @@ let dummyUsers = [
         'confirmedPassword': 'test123'
     },
     {
-        'name': 'Tina Task',
+        'name': 'Ana Conda',
         'email': 'test@testmail.de',
         'password': 'test123',
         'confirmedPassword': 'test123'
@@ -32,6 +32,7 @@ let taskPrio = "PRIO_MEDIUM"; //MEDIUM ist the default Prio
 let assignedUsers = []; //collects the checked users from the "Assginded to" menu
 let category = []; //holds the chosen category from the form before submit
 let statusTask = "TO_DO"; //TO_DO ist the default status
+let checkboxStates = {};
 
 async function initAddTask() {
     await includeHTML();
@@ -134,7 +135,7 @@ function renderContacts() {
             <input type="checkbox" onclick="saveContactsToArray(this)">
           </div>`;
     };
-};
+}
 
 /**
  * Gets the selcted value fron the Category dropdown and pushes it into the category array
@@ -149,55 +150,48 @@ function setCategory(i) {
     console.log("The selcted Category is " + selectedCategory);
 }
 
-
-    
 function saveContactsToArray(checkbox) {
-    let parentContact = checkbox.closest('.contact'); // Hier wird closest verwendet, um das übergeordnete Kontakt-Element zu finden
+    let parentContact = checkbox.closest('.contact');
 
     if (parentContact) {
         let nameInitials = parentContact.querySelector('span:first-child').innerText;
         let userName = parentContact.querySelector('span:last-child').innerText;
 
-        let selectedContacts = {
-            nameInitials: nameInitials,
-            userName: userName
+        let selectedContact = {
+            name: userName // Pass the full name as 'name' property
         };
 
         if (checkbox.checked) {
-            assignedUsers.push(selectedContacts);
+            assignedUsers.push(selectedContact);
         } else {
-            // Wenn die Checkbox abgewählt wird, entferne den Kontakt aus dem Array
-            let indexToRemove = assignedUsers.findIndex(contact => contact.nameInitials === nameInitials && contact.userName === userName);
-            if (indexToRemove !== -1) {
-                assignedUsers.splice(indexToRemove, 1);
-            }
+            // Remove the contact from assignedUsers based on full name match
+            assignedUsers = assignedUsers.filter(contact => contact.name !== selectedContact.name);
         }
 
-        console.log("Die ausgewählten Kontakte sind " + JSON.stringify(assignedUsers));
+        renderCheckedContacts(); // Render the updated list of selected contacts
     } else {
         console.error("Fehler: Das übergeordnete Kontakt-Element wurde nicht gefunden.");
     }
-
-    renderCheckedContacts();
+    
 }
-
-
 function renderCheckedContacts() {
-    let checkedContactsCtn =  document.getElementById('checkedContactsCtn');
+    let checkedContactsCtn = document.getElementById('checkedContactsCtn');
+    checkedContactsCtn.innerHTML = ''; // Clearing the container content to ensure no old content remains before rendering the updated contacts
+    
+    assignedUsers.forEach(contact => { // Iterating over each element in the assignedUsers array
+        const names = contact.name.split(" "); // Splitting the full name into first and last names
+        let nameInitials = names[0].charAt(0).toUpperCase(); // Extracting the initials from the first and last names
+        nameInitials += names[names.length - 1].charAt(0).toUpperCase();
 
-    for (let i = 0; i < assignedUsers.length; i++) {
-        const names = dummyUsers[i].name.split(" "); //Splits the value of the "name" into an array of substrings by separating the string where a space occurs.
-        let nameInitials = names[0].charAt(0).toUpperCase(); //Takes the first character and changes them to Upper Case
-        nameInitials += names[names.length - 1].charAt(0).toUpperCase(); //combines the two first characters of the name
-
-        checkedContactsCtn.innerHTML += `
+        // Adding a new DOM element for each checked contact to the container
+        checkedContactsCtn.innerHTML += ` 
         <div>
             <div class="circle-wth-initials">
-                <span>${nameInitials}</span>
+                <span>${nameInitials}</span> <!-- Displaying the initials of the contact -->
             </div>
-            <span>${dummyUsers[i].name}</span>
+            <span>${contact.name}</span> <!-- Displaying the full name of the contact -->
         </div>
-        `   
-    }
+        `;
+    });
 }
 
