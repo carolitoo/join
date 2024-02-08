@@ -296,12 +296,3 @@
 .no-transition {
   transition: none !important;
 }
-
-
-
-
-/*TEST für CurrentUser (You)*/
-#contact-list-single-contact-identity-text {
-  height: 30px;
-  width: 30px;
-}

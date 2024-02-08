@@ -1,10 +1,12 @@
-let positionOfContact;
 let currentUser;
+let positionOfContact;
 let contacts = [];
 let contactsSorted = [];
 let initialLetters = [];
 let contactIsSelected = false;
 let extractedContactNumbers = [];
+
+
 
 
 async function initContact() {
@@ -110,11 +112,11 @@ async function showUserIdentityText(extractedContactNumber, currentUser) {
     if (positionOfContact !== -1) {
       // Fügt das HTML-Element zum DOM hinzu
       const targetContainer = document.getElementById(`contact-list-single-contact-identity-text-${contactsSorted[positionOfContact].nameContact}`);
-      
+
       // Überprüfen, ob das Element bereits existiert
       if (targetContainer) {
         targetContainer.textContent += `   (You)`;
-      } 
+      }
     }
   }
 }
@@ -216,6 +218,9 @@ async function openContactDetail(idContact) {
   );
   document.getElementById("wrapper-contact-details").innerHTML =
     await generateContactDetailHTML(positionOfContact);
+  await showUserIdentityTextinDetailCard();
+
+
   document.getElementById(
     `contacts-detail-acronym-${idContact}`
   ).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
@@ -223,6 +228,21 @@ async function openContactDetail(idContact) {
   checkEmptyPhoneNumber(positionOfContact);
   slideInAnimation('wrapper-contact-details', 'translate-x', false);
 }
+
+
+/**
+ * This function displays - the identity-hint 'You' in the Detail-Card-View
+ */
+async function showUserIdentityTextinDetailCard() {
+  const nameContact = contactsSorted[positionOfContact]["nameContact"];
+  if (nameContact) {
+    const targetContainer = document.getElementById(`contacts-detail-identity-text-${contactsSorted[positionOfContact].idContact}`);
+    targetContainer.innerHTML += ' (You)';
+  }
+}
+
+
+
 
 
 /**
