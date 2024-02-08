@@ -7,7 +7,8 @@ let positionOfTask;
 
 async function initBoard() {
     await includeHTML();
-    await loadDummyContacts();
+    // await loadDummyContacts();
+    await loadDummyAndNewUserContacts();
     // await loadNewUserContacts();
     await loadTasks();
     await renderBoard(tasks);

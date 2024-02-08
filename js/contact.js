@@ -22,9 +22,6 @@ async function initContact() {
 }
 
 
-window.onresize = checkWindowWidth;
-
-
 /**
  * This function ensures that all elements are displayed correctly regardless of the width of the window and whether a contact is selected or not
  */

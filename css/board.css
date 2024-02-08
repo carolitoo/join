@@ -275,8 +275,12 @@
   border-radius: 30px;
   gap: 24px;
   overflow-y: auto;
-  scrollbar-width: thin;
+  /* scrollbar-width: thin; */
   transition: 100ms;
+}
+
+.ctn-task-detail::-webkit-scrollbar-track {
+  margin-block: 24px;
 }
 
 .translate-x {

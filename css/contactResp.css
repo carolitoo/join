@@ -101,6 +101,10 @@
     padding: 8px 24px;
   }
 
+  .bg-contact-list::-webkit-scrollbar-track {
+    margin-bottom: var(--height-footer);
+  }
+
   .ctn-contacts-details-name {
     flex-direction: row;
     align-items: center;
