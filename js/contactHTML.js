@@ -30,13 +30,13 @@ async function generateInitialLetterHTML(initalLetter) {
  * @param {number} positionOfContact - position of the contact in the array "contactSorted" for which the HTML-Code is generated
  * @returns - HTML-Code for a single contact element in the contact list
  */
-async function generateSingleListContactHTML(positionOfContact) {
+function generateSingleListContactHTML(positionOfContact) {
   return /*html*/ `
     <div class="contact-list-single-contact" id="${contactsSorted[positionOfContact]["idContact"]}" onclick="openContactDetail('${contactsSorted[positionOfContact]['idContact']}')">
       <div class="contact-list-single-contact-acronym" id="contact-list-single-contact-acronym-${contactsSorted[positionOfContact]["idContact"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
       <div class="contact-list-single-contact-right">
-          <div class="contact-list-single-contact-name">${contactsSorted[positionOfContact]["nameContact"]}</div>
-          <span id=contact-list-single-contact-identity-text></span>
+          <div id='contact-list-single-contact-identity-text-${contactsSorted[positionOfContact]["nameContact"]}' class="contact-list-single-contact-name">${contactsSorted[positionOfContact].nameContact}</div>
+          <span></span>
         <div class="contact-list-single-contact-mail">${contactsSorted[positionOfContact]["emailContact"]}</div>
       </div>
     </div>

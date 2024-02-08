@@ -4,7 +4,7 @@ let contacts = [];
 let contactsSorted = [];
 let initialLetters = [];
 let contactIsSelected = false;
-let extractedContactNumber;
+let extractedContactNumbers = [];
 
 
 async function initContact() {
@@ -78,7 +78,7 @@ async function loadDummyAndNewUserContacts() {
 
   // Iterate over newUserContacts array to get and log idContact for each contact
   newUserContacts.forEach(contact => {
-    NewContactsId = contact.idContact;
+    let NewContactsId = contact.idContact;
     extractNewcontactIdNumber(NewContactsId);
   });
 }
@@ -86,7 +86,8 @@ async function loadDummyAndNewUserContacts() {
 
 
 function extractNewcontactIdNumber(NewContactsId) {
-  extractedContactNumber = parseInt(NewContactsId.split('-')[1], 10);
+  const extractedNumber = parseInt(NewContactsId.split('-')[1], 10);
+  extractedContactNumbers.push(extractedNumber);
 }
 
 
@@ -107,12 +108,18 @@ async function showUserIdentityText(extractedContactNumber, currentUser) {
     );
     // Überprüft, ob der Kontakt gefunden wurde
     if (positionOfContact !== -1) {
-      await generateSingleListContactHTML(positionOfContact);
-      // Fügt ein neues HTML-Element mit dem Text 'You' hinzu
-      document.getElementById(`${contactsSorted[positionOfContact].idContact}`).insertAdjacentHTML('beforeend', '<span id="contact-list-single-contact-identity-text">You</span>');
+      // Fügt das HTML-Element zum DOM hinzu
+      const targetContainer = document.getElementById(`contact-list-single-contact-identity-text-${contactsSorted[positionOfContact].nameContact}`);
+      
+      // Überprüfen, ob das Element bereits existiert
+      if (targetContainer) {
+        targetContainer.textContent += `   (You)`;
+      } 
     }
   }
 }
+
+
 
 
 
@@ -151,10 +158,14 @@ async function renderContactList(currentUser) {
 
 
 async function proofIfcurrentUserwasRendered(currentUser) {
-  if (currentUser.userID == extractedContactNumber) {
-    await showUserIdentityText(extractedContactNumber, currentUser);
+  for (const extractedNumber of extractedContactNumbers) {
+    const ctUserinContacts = contacts.find(c => c.idContact.split('-')[1] == currentUser.userID && c.idContact.split('-')[1] == extractedNumber);
+    if (ctUserinContacts) {
+      await showUserIdentityText(extractedNumber, currentUser);
+    }
   }
 }
+
 
 
 
