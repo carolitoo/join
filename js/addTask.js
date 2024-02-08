@@ -2,7 +2,7 @@ const SUBTASK_ID = 0;
 let dummyUsers = [];  //dummy array for users in the remote storage 
 
 let tasks = []; // stores exsisting Tasks from the remote 
-let taskPrio = "PRIO_MEDIUM"; //MEDIUM ist the default Prio
+let taskPrio = "Medium"; //MEDIUM ist the default Prio
 let assignedUsers = []; //collects the checked users from the "Assginded to" menu
 let category = []; //holds the chosen category from the form before submit
 let statusTask = "TO_DO"; //TO_DO ist the default status
@@ -11,25 +11,15 @@ let checkboxStates = {};
 async function initAddTask() {
     await includeHTML();
     //await loadUserData();//
-    await loadDummyContacts();
+    await loadDummyAndNewUserContacts();
     changeSelectedTab('tab-add-task');
 }
-
-/**
- * loads dummy contacts to array
- */
-async function loadDummyContacts() {
-    const dummyContactsResponse = await fetch("../contacts.json");
-    const dummyContacts = await dummyContactsResponse.json();
-  
-    dummyUsers.push(dummyContacts);
-  }
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsUrgent() {
-    let taskPrio = "PRIO_URGENT";
+    let taskPrio = "Urgent";
     document.getElementById('urgentButton').classList.add("urgent-btn-red");
     document.getElementById('urgentButton').classList.remove("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta w.svg';
@@ -49,7 +39,7 @@ function changeButtonColorsUrgent() {
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsMedium() {
-    let taskPrio = "PRIO_MEDIUM"; 
+    let taskPrio = "Medium"; 
     document.getElementById('mediumButton').classList.add("medium-btn-yellow");
     document.getElementById('mediumButton').classList.remove("prio-btn-neutral");
     document.getElementById('medium-icon').src = './assets/img/capa 2.svg';
@@ -69,7 +59,7 @@ function changeButtonColorsMedium() {
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsLow() {
-    let taskPrio = "PRIO_LOW";
+    let taskPrio = "Low";
     document.getElementById('lowButton').classList.add("low-btn-green");
     document.getElementById('lowButton').classList.remove("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja w.svg';
@@ -108,7 +98,7 @@ function renderContacts() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
     const existingContacts = assignedContacts.querySelectorAll('.contact span:last-child'); // Sammle bereits vorhandene Kontakte
 
-    dummyUsers.forEach(user => {
+    contacts.forEach(user => {
         // Überprüfe, ob der aktuelle Benutzer bereits im Container vorhanden ist
         const userExists = Array.from(existingContacts).some(contact => contact.innerText === user.nameContact);
         if (!userExists) {
@@ -154,7 +144,7 @@ function renderCheckedContacts() {
     checkedContactsCtn.innerHTML = ''; // Clearing the container content to ensure no old content remains before rendering the updated contacts
     
     assignedUsers.forEach(contact => { // Iterating over each element in the assignedUsers array
-        const user = dummyUsers.find(user => user.nameContact === contact.name);
+        const user = contacts.find(user => user.nameContact === contact.name);
         if (user) {
             const nameInitials = user.acronymContact;
             const userName = user.nameContact;
