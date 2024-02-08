@@ -87,6 +87,12 @@ select:focus {
   align-items: center;
 }
 
+.circle-wth-initials {
+  border-radius: 100%;
+  
+}
+
+
 .icon-calendar {
   height: 20px;
   width: 20px;
