@@ -32,10 +32,10 @@ async function generateInitialLetterHTML(initalLetter) {
  */
 function generateSingleListContactHTML(positionOfContact) {
   return /*html*/ `
-    <div class="contact-list-single-contact" id="${contactsSorted[positionOfContact]["idContact"]}" onclick="openContactDetail('${contactsSorted[positionOfContact]['idContact']}')">
-      <div class="contact-list-single-contact-acronym" id="contact-list-single-contact-acronym-${contactsSorted[positionOfContact]["idContact"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
+    <div class="contact-list-single-contact" id="${contactsSorted[positionOfContact]["ID"]}" onclick="openContactDetail('${contactsSorted[positionOfContact]['ID']}')">
+      <div class="contact-list-single-contact-acronym" id="contact-list-single-contact-acronym-${contactsSorted[positionOfContact]["ID"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
       <div class="contact-list-single-contact-right">
-          <div id='contact-list-single-contact-identity-text-${contactsSorted[positionOfContact]["nameContact"]}' class="contact-list-single-contact-name">${contactsSorted[positionOfContact].nameContact}</div>
+          <div id='contact-list-single-contact-identity-text-${contactsSorted[positionOfContact]["name"]}' class="contact-list-single-contact-name">${contactsSorted[positionOfContact].name}</div>
           <span></span>
         <div class="contact-list-single-contact-mail">${contactsSorted[positionOfContact]["emailContact"]}</div>
       </div>
@@ -90,9 +90,9 @@ async function generateSubmenuEditDeleteContactHTML(positionOfContact) {
 async function generateContactDetailHTML(positionOfContact) {
   return /*html*/ `
       <div class="ctn-contacts-details-name">
-      <div class="contacts-detail-acronym" id="contacts-detail-acronym-${contactsSorted[positionOfContact]["idContact"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
+      <div class="contacts-detail-acronym" id="contacts-detail-acronym-${contactsSorted[positionOfContact]["ID"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
       <div class="ctn-contacts-details-name-right">
-      <div id="contacts-detail-identity-text-${contactsSorted[positionOfContact].idContact}" class="contacts-detail-name">${contactsSorted[positionOfContact]["nameContact"]}</div>
+      <div id="contacts-detail-identity-text-${contactsSorted[positionOfContact].ID}" class="contacts-detail-name">${contactsSorted[positionOfContact]["name"]}</div>
           <div
             class="contacts-detail-edit-delete"
             onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"

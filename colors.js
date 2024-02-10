@@ -19,10 +19,9 @@ const colorsContacts = [
   /**
    * This function sets the background color (colorContact) of a contact to a randomly selected color from the predefined list of colors (colorsContacts).
    * 
-   * @param {JSON} contact 
    */
-  function setBackgroundcolor(contact) {
+  function setBackgroundcolor() {
     const randomIndex = Math.floor(Math.random() * colorsContacts.length);
     const randomColor = colorsContacts[randomIndex];
-    contact.colorContact = randomColor;
+    return randomColor;
 }

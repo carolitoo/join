@@ -1,0 +1,209 @@
+[
+    {
+    "ID": "0",
+    "name": "guest",
+    "acronym": "G",
+    "email": "guest@account",
+    "password": "joinGuest2024",
+    "confirmedPassword": "joinGuest2024",
+    "firstName": "",
+    "lastName": "",
+    "iconColor": "",
+    "isDummy": true,
+    "assignedTasks": [
+      {
+        "idTask": "task-1"
+      },
+      {
+        "idTask": "task-2"
+      },
+      {
+        "idTaksk": "task-3"
+      }
+    ]
+    },
+    {
+      "ID": "1",
+      "name": "Antonia Zimmermann",
+      "acronym": "AZ",
+      "email": "antonia.zimmermann@gmail.com",
+      "password": "dummy1",
+      "confirmedPassword": "dummy1",
+      "firstName": "Antonia",
+      "lastName": "Zimmermann",
+      "iconColor": "#FF7A00",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+            "idTask": "task-1"
+        },
+        {  
+            "idTask": "task-2"
+        },
+        {
+            "idTask": "task-3"
+        }
+      ]
+    },
+    {
+      "ID": "2",
+      "name": "Anja Schulz",
+      "acronym": "AS",
+      "email": "schulz@gmail.com",
+      "password": "dummy2",
+      "confirmedPassword": "dummy2",
+      "firstName": "Antonia",
+      "lastName": "Schulz",
+      "iconColor": "#FF5EB3",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+            "idTask": "task-1"
+        },
+        {  
+            "idTask": "task-2"
+        },
+        {
+            "idTask": "task-3"
+        }
+      ]
+    },
+    {
+      "ID": "3",
+      "name": "Benedikt Ziegler",
+      "acronym": "BZ",
+      "email": "benedikt@gmail.com",
+      "password": "dummy3",
+      "confirmedPassword": "dummy3",
+      "firstName": "Benedikt",
+      "lastName": "Ziegler",
+      "iconColor": "#6E52FF",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+            "idTask": "task-1"
+        },
+        {  
+            "idTask": "task-2"
+        },
+        {
+            "idTask": "task-3"
+        }
+      ]
+    },
+    {
+      "ID": "4",
+      "name": "Carmen Gutmann",
+      "acronym": "CG",
+      "email": "carmen@hotmail.com",
+      "pasword": "dummy3",
+      "confirmedPassword": "dummy3",
+      "firstName": "Carmen",
+      "lastName": "Gutmann",
+      "iconColor": "#9327FF",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+            "idTask": "task-1"
+        },
+        {  
+            "idTask": "task-2"
+        },
+        {
+            "idTask": "task-3"
+        }
+      ]
+    },
+    {
+      "ID": "5",
+      "name": "Miriam Müller",
+      "acronym": "MM",
+      "email": "miri@hotmail.com",
+      "password": "dummy4",
+      "confirmedPassword": "dummy4",
+      "firstName": "Miriam",
+      "lastName": "Müller",
+      "iconColor": "#00BEE8",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+            "idTask": "task-1"
+        },
+        {  
+            "idTask": "task-2"
+        },
+        {
+            "idTask": "task-3"
+        }
+      ]
+    },
+    {
+      "ID": "6",
+      "name": "Emmanuel Mauer",
+      "acronym": "EM",
+      "email": "mauer@gmail.com",
+      "password": "dummy5",
+      "confirmedPassword": "dummy5",
+      "firstName": "Emmanuel",
+      "lastName": "Mauer",
+      "iconColor": "#1FD7C1",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+          "idTask": "task-1"
+        },
+        {  
+          "idTask": "task-2"
+        },
+        {
+          "idTask": "task-3"
+        }
+      ]
+    },
+    {
+      "ID": "7",
+      "name": "Marcel Bauer",
+      "acronym": "MB",
+      "email": "mb@hotmail.com",
+      "password": "dummy6",
+      "confirmedPassword": "dummy6",
+      "firstName": "Marcel",
+      "lastName": "Bauer",
+      "iconColor": "#FF745E",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+          "idTaks": "task-1"
+        },
+        {
+          "idTask": "task-2"
+        },
+        {
+          "idTask": "task-3"
+        }
+      ]
+    },
+    {
+      "ID": "8",
+      "name": "Anton Mayer",
+      "acronym": "AM",
+      "email": "mayera@gmail.com",
+      "password": "dummy7",
+      "confirmedPassword": "dummy7",
+      "firstName": "Anton",
+      "lastName": "Mayer",
+      "iconColor": "#FC71FF",
+      "isDummy": true,
+      "assignedTasks": [
+        {
+          "idTask": "task-1"
+        },
+        {
+          "idTask": "task-2"
+        },
+        {
+          "idTask": "task-3"
+        }
+      ]
+    }
+  ]

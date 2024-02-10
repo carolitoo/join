@@ -5,17 +5,21 @@ async function init() {
 
 
 async function loadUserData() {
-  const response = await getItem('users');//wie kommen Werte züruck in's user-array?//
+  const response = await getItem('users');
   const usersData = response['data']['value'];
   if (usersData) {
-     users = JSON.parse(usersData);
+    users = JSON.parse(usersData);
   }
 }
 
-async function storeUserItems() {
-  await setItem('users', JSON.stringify(users));
-  console.log('DIE aktuellen user sind', users);
+async function loadContacts(){
+  const response = await getItem('contacts');
+  const contactsData = response['data']['value'];
+  if (contactsData) {
+    contacts = JSON.parse(contactsData);
+  }
 }
+
 
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
@@ -56,3 +60,4 @@ function changeImgTo(idOfImg, nameOfImg) {
 function changeBorderColorSearchTask(idOfElement, color) {
   document.getElementById(idOfElement).style.border = `1px solid ${color}`;
 }
+

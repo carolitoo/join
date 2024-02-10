@@ -1,4 +1,3 @@
-let currentUser;
 let positionOfContact;
 let contacts = [];
 let contactsSorted = [];
@@ -8,18 +7,31 @@ let extractedContactNumbers = [];
 
 
 
-
 async function initContact() {
-  //await proofAuthentification();//
   await includeHTML();
   changeSelectedTab("tab-contacts");
   await loadUserData();
+ // await loadContactsJSON();
+ // await storeContacts();
+  await loadContacts();
   await getLoggedInEmail();
-  await loadDummyAndNewUserContacts()
   await renderAcronym(loggedInEmail);
   await renderContactList(currentUser);
   checkWindowWidth();
 }
+
+
+
+
+
+async function loadContacts() {
+  const response = await getItem('contacts');//wie kommen Werte züruck in's user-array?//
+  const contactsData = response['data']['value'];
+  if (contactsData) {
+    contacts = JSON.parse(contactsData);
+  }
+}
+
 
 
 /**
@@ -55,40 +67,9 @@ function checkWindowWidth() {
  */
 function returnToContactList() {
   contactIsSelected = false;
-  renderContactList();
+  renderContactList(contactIsSelected);
   checkWindowWidth();
 }
-
-
-/**
- * This function loads both dummy data and newly created contact data
- */
-
-async function loadDummyAndNewUserContacts() {
-  const dummyContactsResponse = await fetch("../contacts.json");
-  const dummyContacts = await dummyContactsResponse.json();
-
-  const newUserContactsResponse = await getItem('contacts');
-  const newUserContactsData = newUserContactsResponse['data']['value'];
-  const newUserContacts = newUserContactsData ? JSON.parse(newUserContactsData) : [];
-
-  const markedDummyContacts = dummyContacts.map(contact => ({ ...contact, isDummy: true }));
-  contacts = [...markedDummyContacts, ...newUserContacts];
-
-  // Iterate over newUserContacts array to get and log idContact for each contact
-  newUserContacts.forEach(contact => {
-    let NewContactsId = contact.idContact;
-    extractNewcontactIdNumber(NewContactsId);
-  });
-}
-
-
-
-function extractNewcontactIdNumber(NewContactsId) {
-  const extractedNumber = parseInt(NewContactsId.split('-')[1], 10);
-  extractedContactNumbers.push(extractedNumber);
-}
-
 
 /**
  * 
@@ -97,75 +78,37 @@ This function finds the currentUser and updates the interface with the user's pe
 async function renderAcronym(loggedInEmail) {
   currentUser = users.find(u => u.email == loggedInEmail);
   generateUserIcon(currentUser.acronym);
+  return currentUser;
 }
-
-
-async function showUserIdentityText(extractedContactNumber, currentUser) {
-  if (currentUser.userID == extractedContactNumber) {
-    const positionOfContact = contactsSorted.findIndex(
-      (contact) => contact.idContact.split('-')[1] == currentUser.userID
-    );
-    // Überprüft, ob der Kontakt gefunden wurde
-    if (positionOfContact !== -1) {
-      // Fügt das HTML-Element zum DOM hinzu
-      const targetContainer = document.getElementById(`contact-list-single-contact-identity-text-${contactsSorted[positionOfContact].nameContact}`);
-
-      // Überprüfen, ob das Element bereits existiert
-      if (targetContainer) {
-        targetContainer.textContent += `   (You)`;
-      }
-    }
-  }
-}
-
-
-
-
 
 
 /**
  * This function renders the loaded contacts alphabetically sorted into the contact list
  */
-async function renderContactList(currentUser) {
-
-
+async function renderContactList(currentUser, contactIsSelected) {
   if (contacts.length === 0) {
-    document.getElementById("ctn-contact-list").innerHTML =
-      await generateNoContactsHTML();
+    document.getElementById("ctn-contact-list").innerHTML = await generateNoContactsHTML();
   } else {
     await sortArrayContacts();
-    await createArrayInitialLetters();
     document.getElementById("ctn-contact-list").innerHTML = "";
+    await createArrayInitialLetters(); // Verschieben Sie dies hierhin, nachdem die Kontakte sortiert wurden
 
     for (let j = 0; j < initialLetters.length; j++) {
       document.getElementById("ctn-contact-list").innerHTML +=
         await generateInitialLetterHTML(initialLetters[j]);
       for (let k = 0; k < contactsSorted.length; k++) {
-        if (contactsSorted[k]["nameContact"][0] == initialLetters[j]) {
+        if (contactsSorted[k]["name"][0] == initialLetters[j]) {
           document.getElementById(
             `contact-list-letter-${initialLetters[j]}`
           ).innerHTML += await generateSingleListContactHTML(k);
           document.getElementById(
-            `contact-list-single-contact-acronym-${contactsSorted[k]["idContact"]}`
+            `contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`
           ).style.backgroundColor = contactsSorted[k]["colorContact"];
         }
       }
     }
   }
-  proofIfcurrentUserwasRendered(currentUser);
 }
-
-
-async function proofIfcurrentUserwasRendered(currentUser) {
-  for (const extractedNumber of extractedContactNumbers) {
-    const ctUserinContacts = contacts.find(c => c.idContact.split('-')[1] == currentUser.userID && c.idContact.split('-')[1] == extractedNumber);
-    if (ctUserinContacts) {
-      await showUserIdentityText(extractedNumber, currentUser);
-    }
-  }
-}
-
-
 
 
 /**
@@ -174,10 +117,13 @@ async function proofIfcurrentUserwasRendered(currentUser) {
  * AT THE MOMENT THE ARRAY IS ONLY SORTED BY THE FULL NAME OF THE CONTACT - THE LAST NAME IS NOT CONSIDERED SEPERATLY
  */
 async function sortArrayContacts() {
-  contactsSorted = contacts.sort((a, b) =>
-    a.nameContact.localeCompare(b.nameContact)
-  );
+  contactsSorted = [contacts].sort((a, b) => {
+    const nameA = a.name || ''; 
+    const nameB = b.name || ''; 
+    return nameA.localeCompare(nameB);
+  });
 }
+
 
 
 /**
@@ -187,7 +133,7 @@ async function createArrayInitialLetters() {
   initialLetters = [];
 
   for (i = 0; i < contacts.length; i++) {
-    let intialLetterName = contacts[i]["nameContact"][0];
+    let intialLetterName = contacts[i]["name"][0];
     if (!initialLetters.includes(intialLetterName)) {
       initialLetters.push(intialLetterName.toUpperCase());
     }
@@ -197,29 +143,27 @@ async function createArrayInitialLetters() {
 }
 
 
-
 /**
  * This function opens the detailed view of a contact and ensures that only the selected contact is marked in the contact list
  *
- * @param {string} idContact - id of the contact for which the details shall be displayed
+ * @param {string} ID - id of the contact for which the details shall be displayed
  */
-async function openContactDetail(idContact) {
+async function openContactDetail(ID) {
   contactIsSelected = true;
   checkWindowWidth();
 
   await resetPreviousSelectedContact();
-  markSelectedContact(idContact);
+  markSelectedContact(ID);
 
   positionOfContact = contactsSorted.findIndex(
-    (id) => id["idContact"] == idContact
+    (id) => id["ID"] == ID
   );
   document.getElementById("wrapper-contact-details").innerHTML =
     await generateContactDetailHTML(positionOfContact);
-  await showUserIdentityTextinDetailCard();
 
 
   document.getElementById(
-    `contacts-detail-acronym-${idContact}`
+    `contacts-detail-acronym-${ID}`
   ).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
 
   checkEmptyPhoneNumber(positionOfContact);
@@ -228,27 +172,12 @@ async function openContactDetail(idContact) {
 
 
 /**
- * This function displays - the identity-hint 'You' in the Detail-Card-View
- */
-async function showUserIdentityTextinDetailCard() {
-  const nameContact = contactsSorted[positionOfContact]["nameContact"];
-  if (nameContact) {
-    const targetContainer = document.getElementById(`contacts-detail-identity-text-${contactsSorted[positionOfContact].idContact}`);
-    targetContainer.innerHTML += ' (You)';
-  }
-}
-
-
-
-
-
-/**
  * This function checks if a phone number is available - in case that there is no phone number "n.a." is displayed instead of the phone number/ an empty field
  * 
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
 function checkEmptyPhoneNumber(positionOfContact) {
-  if (contactsSorted[positionOfContact]['phoneContact'] == "") {
+  if (contactsSorted[positionOfContact]['phoneNumber'] == "") {
     document.getElementById('contacts-detail-phone').innerHTML = "n.a.";
     document.getElementById('contacts-detail-phone').style.color = "#a8a8a8";
   }
@@ -261,10 +190,10 @@ function checkEmptyPhoneNumber(positionOfContact) {
  */
 async function resetPreviousSelectedContact() {
   for (i = 0; i < contactsSorted.length; i++) {
-    let idContact = contactsSorted[i]["idContact"];
-    document.getElementById(`${idContact}`).style = `pointer-events: auto`;
-    document.getElementById(`${idContact}`).style.backgroundColor = "white";
-    document.getElementById(`${idContact}`).style.color = "black";
+    let ID = contactsSorted[i]["ID"];
+    document.getElementById(`${ID}`).style = `pointer-events: auto`;
+    document.getElementById(`${ID}`).style.backgroundColor = "white";
+    document.getElementById(`${ID}`).style.color = "black";
   }
   document.getElementById("wrapper-contact-details").classList.add("d-none");
 }
@@ -273,12 +202,12 @@ async function resetPreviousSelectedContact() {
 /**
  * This function marks the currently selected contact in the contact list
  *
- * @param {string} idContact - id of the contact for which the details are displayed
+ * @param {string} ID - id of the contact for which the details are displayed
  */
-function markSelectedContact(idContact) {
-  document.getElementById(`${idContact}`).style = `pointer-events: none`;
-  document.getElementById(`${idContact}`).style.backgroundColor = "#2A3647";
-  document.getElementById(`${idContact}`).style.color = "white";
+function markSelectedContact(ID) {
+  document.getElementById(`${ID}`).style = `pointer-events: none`;
+  document.getElementById(`${ID}`).style.backgroundColor = "#2A3647";
+  document.getElementById(`${ID}`).style.color = "white";
 }
 
 
@@ -376,9 +305,9 @@ async function openEditContactOverlay(positionOfContact) {
   document.getElementById("overlay-contacts").innerHTML = await generateOverlayEditContact(positionOfContact);
   document.getElementById("acronym-contacts-edit-add").style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
 
-  document.getElementById("contacts-detail-input-name").value = contactsSorted[positionOfContact]["nameContact"];
-  document.getElementById("contacts-detail-input-mail").value = contactsSorted[positionOfContact]["emailContact"];
-  document.getElementById("contacts-detail-input-phone").value = contactsSorted[positionOfContact]["phoneContact"];
+  document.getElementById("contacts-detail-input-name").value = contactsSorted[positionOfContact]["name"];
+  document.getElementById("contacts-detail-input-mail").value = contactsSorted[positionOfContact]["email"];
+  document.getElementById("contacts-detail-input-phone").value = contactsSorted[positionOfContact]["phoneNumber"];
 }
 
 
@@ -392,7 +321,7 @@ async function editContact(positionOfContact) {
   document.getElementById("overlay-contacts").classList.add("d-none");
   await renderContactList();
   slideInAnimation('pop-up-contacts-edit', 'translate-y', true);
-  // openContactDetail(contactsSorted[positionOfContact]["idContact"]); // PRÜFEN, OB ERFORDERLICH
+  // openContactDetail(contactsSorted[positionOfContact]["ID"]); // PRÜFEN, OB ERFORDERLICH
 }
 
 
@@ -404,11 +333,10 @@ async function editContact(positionOfContact) {
  *
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
-function deleteContact(positionOfContact) {
+async function deleteContact(positionOfContact) {
   // deleteUserFromAssignedTasks();
-  contactsSorted.splice(positionOfContact, 1);
-  contacts = contactsSorted;
-  // setItem() - nach Abstimmung Architektur für users/ contacts einfügen
+  contactsAfterDelete = contactsSorted.splice(positionOfContact, 1);
+  await setItem('contacts', JSON.stringify(contactsAfterDelete));
 
   document.getElementById("wrapper-contact-details").innerHTML = '';
 
@@ -417,6 +345,7 @@ function deleteContact(positionOfContact) {
   closeContactsDetails();
   slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
 }
+
 
 
 /**

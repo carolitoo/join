@@ -7,6 +7,12 @@ let imgTabSelected = [
   }]
 
 
+function generateUserIcon() {
+  const userIcon = document.getElementById('iconUserheader');
+  userIcon.textContent = currentUser.acronym;
+}
+
+  
 /**
  * This function ensures that the currently selected tab is marked in the sidebar/ footer
  * 
@@ -59,5 +65,5 @@ async function logout() {
 
 
 async function clearLoggedInEmail() {
- await resetRemote('loggedInEmail');
+  await resetRemote('loggedInEmail');
 }

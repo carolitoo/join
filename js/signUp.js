@@ -1,38 +1,136 @@
-let users = [
-    {
-        'name': 'guest', 'email': 'guest@account', 'password': 'joinGuest2024', 'confirmedPassword': 'joinGuest2024', 'userID': '', 'acronym': 'G'
-    },
+let nameParts = [];
+let userName;
+let firstName;
+let lastName;
 
-];
+let users = [];
+
 async function initSignUp() {
     await includeHTML();
-    await loadUserData();
+     await loadUserData();
+     await loadContacts();
+   // await loadContactsJSON();
+ //  await storeContacts();
+   // await loadUsersJSON();
+   // await storeUsers();
+
 }
 
+// HILFSFUNKTION (falls Kontakte neu geladen und initialisiert werden müssen//
+async function loadContactsJSON() {
+    try {
+        const response = await fetch('./contacts.json');
+        contacts = await response.json();
+    } catch (error) {
+        console.error('Fehler beim Laden der Benutzerdaten:', error);
+    }
+}
+
+
+//HILFSFUNKTION (für Speichern der contacts-Daten im Backend)//*css*/`
+async function storeContacts() {
+    try {
+        const contactsString = JSON.stringify(contacts);
+
+        const response = await setItem('contacts', contactsString);
+
+        console.log('Antwort vom Backend:', response);
+
+        if (response.status === 'success') {
+            const contactsResponse = await getItem('contacts');
+            const storedContacts = JSON.parse(contactsResponse.data.value);
+
+            console.log('Gespeicherte Benutzerdaten im Backend:', storedContacts);
+        } else {
+            console.error('Fehler beim Speichern der Benutzerdaten im Backend:', response.message);
+        }
+    } catch (error) {
+        console.error('Fehler beim Speichern der Benutzerdaten im Backend:', error);
+    }
+}
+
+
+
+//HILFSFUNKTION (falls Dummy-Users neu geladen und initialisiert werden müsen)//
+async function loadUsersJSON() {
+    try {
+        const response = await fetch('./users.json');
+        users = await response.json();
+    } catch (error) {
+        console.error('Fehler beim Laden der Benutzerdaten:', error);
+    }
+}
+
+//HILFSFUNKTION (für Speichern der User-Daten im Backend)//
+async function storeUsers() {
+    try {
+        const usersString = JSON.stringify(users);
+        const response = await setItem('users', usersString);
+
+        console.log('Antwort vom Backend:', response);
+
+        if (response.status === 'success') {
+            const usersResponse = await getItem('users');
+            const storedUsers = JSON.parse(usersResponse.data.value);
+
+            console.log('Gespeicherte Benutzerdaten im Backend:', storedUsers);
+        } else {
+            console.error('Fehler beim Speichern der Benutzerdaten im Backend:', response.message);
+        }
+    } catch (error) {
+        console.error('Fehler beim Speichern der Benutzerdaten im Backend:', error);
+    }
+}
+
+
+
 async function createSignUpdata() {
-    const nameInput = document.getElementById('name');
+    userName = document.getElementById('name').value;
+    splitName(userName);
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const confirmedPasswordInput = document.getElementById('confirmedPassword');
 
     newUser = {
-        name: nameInput.value,
+        userID: new Date().getTime(),
+        name: userName,
+        firstName: filterFirstName(userName),
+        lastName: filterLastName(),
+        acronym: getAcronym(),
         email: emailInput.value.toLowerCase(),
         password: passwordInput.value,
         confirmedPassword: confirmedPasswordInput.value,
-        userID: new Date().getTime(),
-        acronym: getAcronym(nameInput.value),
-        // colors evtl hier mit einbauen //?
+        iconColor: setBackgroundcolor(),
+        isDummy: false,
     };
-
     validateSignUpData(newUser);
 }
 
 
-function getAcronym(userName) {
-    const nameParts = userName.split(' ');
-    const firstName = capitalizeFirstLetter(nameParts[0]);
-    const lastName = checkIfLastNameExist(nameParts);
+function splitName(userName) {
+    nameParts = userName.split(' ');
+    return nameParts;
+}
+
+
+function filterFirstName(userName) {
+    nameParts = userName.split(' ');
+    firstName = capitalizeFirstLetter(nameParts[0]);
+    return firstName;
+}
+
+
+
+function filterLastName() {
+    lastName = ''
+    if (nameParts.length > 1) {
+        lastName = nameParts.slice(1).map(part => capitalizeFirstLetter(part)).join(' ');
+    }
+    return lastName;
+}
+
+
+function getAcronym() {
     const formattedFirstNameInitial = firstName.charAt(0).toUpperCase();
     const formattedLastNameInitial = lastName.charAt(0).toUpperCase();
     return acronym = formattedFirstNameInitial + formattedLastNameInitial;
@@ -45,15 +143,6 @@ function capitalizeFirstLetter(string) {
 }
 
 
-
-function checkIfLastNameExist(nameParts) {
-    let lastName = '';
-    if (nameParts.length > 1) {
-        lastName = nameParts[nameParts.length - 1];
-        lastName = capitalizeFirstLetter(nameParts[nameParts.length - 1]);
-    }
-    return lastName;
-}
 
 function disableSignUpButton() {
     const nameInput = document.getElementById('name');
@@ -107,6 +196,14 @@ async function addUser(newUser) {
     }
 }
 
+async function storeUserItems() {
+    await setItem('users', JSON.stringify(users));
+    console.log('DIE aktuellen user sind', users);
+}
+
+
+
+
 function checkIfUserexist(newUser) {
     for (let i = 0; i < users.length; i++) {
         if (users[i].email == newUser.email) {
@@ -115,9 +212,6 @@ function checkIfUserexist(newUser) {
     }
     return false;
 }
-
-
-
 
 
 /**

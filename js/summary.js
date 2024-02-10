@@ -1,28 +1,16 @@
 let loggedInEmail;
+let currentUser;
 
 //aktuell noch Problem mit einbindung der contact.js (widow-with - class in unbekanntem html eingebunden (contact.html))//
 async function initSummary() {
-    await getLoggedInEmail();
-    //await proofAuthentification();//
     await includeHTML();
     await loadUserData();
-    await loadDummyAndNewUserContacts();
+    await loadContacts();
+    await getLoggedInEmail();
     await identifyCurrentUser();
+    await personalizeAppContent(currentUser);
     // await loadTasks();
     changeSelectedTab('tab-summary');
-}
-
-/**
- * This function tests whether there was a registration with an e-mail address. If not, you will be redirected back to the login. Otherwise the user-data will be filtered.
- */
-async function proofAuthentification() {
-    const loggedInEmail = await getLoggedInEmail();
-
-    if (loggedInEmail !== '[]') {
-    } else {
-        alert('No user found');
-        window.location.href = './index.html';
-    }
 }
 
 
@@ -37,15 +25,13 @@ async function getLoggedInEmail() {
     }
 }
 
-
 async function identifyCurrentUser() {
-    const loggedInEmail = await getLoggedInEmail();
-    const currentUser = users.find(u => u.email === loggedInEmail);
-    personalizeAppContent(currentUser)
+    currentUser = users.find(u => u.email === loggedInEmail);
+    return currentUser;
 }
 
 
-function personalizeAppContent(currentUser) {
+async function personalizeAppContent(currentUser) {
     if (currentUser.name.toLowerCase() !== 'guest') {
         const acronym = currentUser.acronym;
         generateGreeting(currentUser, acronym);
@@ -57,61 +43,43 @@ function personalizeAppContent(currentUser) {
 }
 
 
-
-async function createOwnContact(user) {
+//erstmal Weglassen//
+async function createOwnContact(currentUser) {
     const existingContact = await checkIfContactAlreadyExist();
-
     if (!existingContact) {
-        const loggedInEmail = await getLoggedInEmail();
-        const newUserContact = {
-            isDummy: false,
-            idContact: `contact-${user.userID}`,
-            nameContact: user.name,
-            firstName: user.name.split(' ')[0],
-            lastName: checkIfLastNameExist(user.name.split(' ')),
-            acronymContact: user.acronym,
-            colorContact: '',
-            emailContact: loggedInEmail,
-            phoneContact: '',
-            assignedTasks: [],
+        let currentUserAsContact = {
+            ID: `contact-${currentUser.ID}`,
+            name: currentUser.name,
+            firstName: currentUser.firstName,
+            lastName: currentUser.lastName,
+            acronymContact: currentUser.acronym,
+            colorContact: setBackgroundcolor(),
+            emailContact: currentUser.email,
+            phoneContact: ""
         }
-        setBackgroundcolor(newUserContact);
-        contacts.push(newUserContact);
-        storeContactItems();
+        contacts.push(currentUserAsContact);
+        await setItem('contacts', JSON.stringify(contacts));
     }
 }
 
+
 async function checkIfContactAlreadyExist() {
-    const loggedInEmail = await getLoggedInEmail();
-    return contacts.find(contact => contact.emailContact === loggedInEmail);
+    loggedInEmail = await getLoggedInEmail();
+    return contacts.find(contact => contact.email === loggedInEmail);
 }
 
 
-
-async function generateGreeting(currentUser, acronym) {
-    const nameParts = currentUser.name.split(' ');
-    const firstName = capitalizeFirstLetter(nameParts[0]);//
-    const lastName = checkIfLastNameExist(nameParts);//
-
+async function generateGreeting() {
     const currentHour = new Date().getHours();
 
     if (currentUser.name.toLowerCase() === 'guest') {
         greetingGuest(currentHour);
     } else {
-        greetingUser(currentHour, firstName, lastName);
+        greetingUser(currentHour);
     }
-    generateUserIcon(acronym);
+    generateUserIcon();
 }
 
-
-function checkIfLastNameExist(nameParts) {
-    let lastName = '';
-    if (nameParts.length > 1) {
-        lastName = nameParts[nameParts.length - 1];
-        lastName = capitalizeFirstLetter(nameParts[nameParts.length - 1]);
-    }
-    return lastName;
-}
 
 function getGreeting(hour) {
     if (hour >= 5 && hour < 12) {
@@ -123,10 +91,10 @@ function getGreeting(hour) {
     }
 }
 
-function greetingUser(currentHour, firstName, lastName) {
+function greetingUser(currentHour) {
     const greetingText = document.getElementById('greetingText');
     greetingText.innerHTML = `${getGreeting(currentHour)}, 
-    <br><span class="greeting-username-format">${firstName} ${lastName}</span>`;
+    <br><span class="greeting-username-format">${currentUser.firstName} ${currentUser.lastName}</span>`;
 }
 
 
@@ -135,23 +103,3 @@ function greetingGuest(currentHour) {
     const greetingText = document.getElementById('greetingText');
     greetingText.innerHTML = getGreeting(currentHour);
 }
-
-
-
-//soll die function hier bleiben oder zu template.js verschoben werden//?
-function generateUserIcon(acronym) {
-    const userIcon = document.getElementById('iconUserheader');
-    userIcon.textContent = acronym;
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-
-async function storeContactItems() {
-    // Dummy-Kontakte filtern, um sie nicht zu speichern
-    const newUserContacts = contacts.filter(contact => !contact.isDummy);
-    await setItem('contacts', JSON.stringify(newUserContacts));
-}
-
