@@ -4,7 +4,15 @@ async function LoginInit() {
     await includeHTML();
     await loadUserData();
     await loadContacts();
+    await animationLogo();
     //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
+}
+
+async function animationLogo(){
+        setTimeout(() => {
+          document.getElementById('logo-join').classList.add('animate-logo');
+          document.getElementById('login-form').classList.add('animate-form');
+        }, 12); 
 }
 
 

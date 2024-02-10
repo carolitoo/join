@@ -22,8 +22,6 @@ async function initContact() {
 
 
 
-
-
 async function loadContacts() {
   const response = await getItem('contacts');//wie kommen Werte züruck in's user-array?//
   const contactsData = response['data']['value'];
