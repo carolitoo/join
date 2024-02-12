@@ -1,5 +1,16 @@
 [
   {
+    "ID": "contact-currentUser",
+    "name": "",
+    "firstName": "",
+    "lastName": "",
+    "acronymContact": "",
+    "colorContact": "#FF7A00",
+    "emailContact": "",
+    "phoneContact": "",
+    "assignedTasks": []
+  },
+  {
     "ID": "contact-1",
     "name": "Antonia Zimmermann",
     "firstName": "Antonia",
@@ -7,7 +18,8 @@
     "acronymContact": "AZ",
     "colorContact": "#FF7A00",
     "emailContact": "antonia.zimmermann@gmail.com",
-    "phoneContact": "+49 111 111 111"
+    "phoneContact": "+49 111 111 111",
+    "assignedTasks": []
   },
   {
     "ID": "contact-2",
@@ -17,7 +29,8 @@
     "acronymContact": "AS",
     "colorContact": "#FF5EB3",
     "emailContact": "schulz@gmail.com",
-    "phoneContact": "+49 111 111 111"
+    "phoneContact": "+49 111 111 111",
+    "assignedTasks": []
   },
   {
     "ID": "contact-3",
@@ -27,7 +40,8 @@
     "acronymContact": "BZ",
     "colorContact": "#6E52FF",
     "emailContact": "benedikt@gmail.com",
-    "phoneContact": "+49 111 111 111"
+    "phoneContact": "+49 111 111 111",
+    "assignedTasks": []
   },
   {
     "ID": "contact-4",
@@ -47,7 +61,8 @@
     "acronymContact": "MM",
     "colorContact": "#00BEE8",
     "emailContact": "miri@hotmail.com",
-    "phoneContact": "+49 111 111 111"
+    "phoneContact": "+49 111 111 111",
+    "assignedTasks": []
   },
   {
     "ID": "contact-6",
@@ -57,7 +72,8 @@
     "acronymContact": "EM",
     "colorContact": "#1FD7C1",
     "emailContact": "mauer@gmail.com",
-    "phoneContact": "+49 111 111 111"
+    "phoneContact": "+49 111 111 111",
+    "assignedTasks": []
   },
   {
     "ID": "contact-7",
@@ -67,7 +83,8 @@
     "acronymContact": "MB",
     "colorContact": "#FF745E",
     "emailContact": "mb@hotmail.com",
-    "phoneContact": "+49 111 111 111"
+    "phoneContact": "+49 111 111 111",
+    "assignedTasks": []
   },
   {
     "ID": "contact-8",
@@ -77,6 +94,7 @@
     "acronymContact": "AM",
     "colorContact": "#FC71FF",
     "emailContact": "mayera@gmail.com",
-    "phoneContact": "+49 111 111 111"
+    "phoneContact": "+49 111 111 111",
+    "assignedTasks": []
   }
 ]
