@@ -43,12 +43,11 @@ async function personalizeAppContent(currentUser) {
 }
 
 
-//erstmal Weglassen//
 async function createOwnContact(currentUser) {
     const existingContact = await checkIfContactAlreadyExist();
     if (!existingContact) {
         let currentUserAsContact = {
-            ID: `contact-${currentUser.ID}`,
+            ID: 'contact-0',
             name: currentUser.name,
             firstName: currentUser.firstName,
             lastName: currentUser.lastName,
@@ -65,7 +64,7 @@ async function createOwnContact(currentUser) {
 
 async function checkIfContactAlreadyExist() {
     loggedInEmail = await getLoggedInEmail();
-    return contacts.find(contact => contact.email === loggedInEmail);
+    return contacts.find(contact => contact.emailContact === loggedInEmail);
 }
 
 

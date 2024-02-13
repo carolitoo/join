@@ -9,6 +9,20 @@ async function generateNoContactsHTML() {
     `;
 }
 
+function generateCurrentUserHTML(currentUserAsContact) {
+  return /*html*/ `
+    <div class="contact-list-single-contact mt-42" id="${currentUserAsContact.ID}" onclick="openContactDetail('${currentUserAsContact.ID}')">
+      <div class="contact-list-single-contact-acronym" id="contact-list-single-contact-acronym-${currentUserAsContact.ID}">${currentUserAsContact.acronymContact}</div>
+      <div class="contact-list-single-contact-right">
+        <div class="contact-list-single-contact-name">${currentUserAsContact.name}  (You)</div>
+        <span></span>
+        <div class="contact-list-single-contact-mail">${currentUserAsContact.emailContact}</div>
+      </div>
+    </div>
+  `;
+}
+
+
 /**
  * This function generates the HTML-Code for the initial letter separator in the contact list
  *

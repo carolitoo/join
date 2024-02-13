@@ -296,3 +296,7 @@
 .no-transition {
   transition: none !important;
 }
+
+.mt-42 {
+  margin-top: 42px;
+}

@@ -4,6 +4,7 @@ let contactsSorted = [];
 let initialLetters = [];
 let contactIsSelected = false;
 let extractedContactNumbers = [];
+let currentUserAsContact = [];
 
 
 
@@ -11,16 +12,13 @@ async function initContact() {
   await includeHTML();
   changeSelectedTab("tab-contacts");
   await loadUserData();
- // await loadContactsJSON();
- // await storeContacts();
   await loadContacts();
   await getLoggedInEmail();
+  await identifyCurrentUserAsContact();
   await renderAcronym(loggedInEmail);
-  await renderContactList(currentUser);
+  await renderContactList(currentUserAsContact);
   checkWindowWidth();
 }
-
-
 
 
 
@@ -32,8 +30,10 @@ async function loadContacts() {
   }
 }
 
-
-
+async function identifyCurrentUserAsContact() {
+  currentUserAsContact = contacts.find(c => c.emailContact === loggedInEmail);
+  return currentUserAsContact;
+}
 
 
 /**
@@ -87,7 +87,10 @@ async function renderAcronym(loggedInEmail) {
 /**
  * This function renders the loaded contacts alphabetically sorted into the contact list
  */
-async function renderContactList(currentUser, contactIsSelected) {
+/**
+ * This function renders the loaded contacts alphabetically sorted into the contact list
+ */
+async function renderContactList(currentUserAsContact, contactIsSelected) {
   if (contacts.length === 0) {
     document.getElementById("ctn-contact-list").innerHTML = await generateNoContactsHTML();
   } else {
@@ -95,13 +98,18 @@ async function renderContactList(currentUser, contactIsSelected) {
     document.getElementById("ctn-contact-list").innerHTML = "";
     await createArrayInitialLetters();
 
+    // Render currentUser separately
+    if (currentUser) {
+      document.getElementById("ctn-contact-list").innerHTML += generateCurrentUserHTML(currentUserAsContact);
+    }
+
     for (let j = 0; j < initialLetters.length; j++) {
       document.getElementById("ctn-contact-list").innerHTML +=
         await generateInitialLetterHTML(initialLetters[j]);
       for (let k = 0; k < contactsSorted.length; k++) {
         const contactFirstNameInitial = contactsSorted[k]["firstName"][0];
 
-        if (contactFirstNameInitial == initialLetters[j]) {
+        if (contactFirstNameInitial == initialLetters[j] && k !== 0) {
           document.getElementById(`contact-list-letter-${initialLetters[j]}`).innerHTML +=
             await generateSingleListContactHTML(k);
           document.getElementById(`contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`).style.backgroundColor =
@@ -114,6 +122,7 @@ async function renderContactList(currentUser, contactIsSelected) {
 
 
 
+
 /**
  * This function sorts the loaded array "contacts" alphabetically
  *
@@ -121,8 +130,8 @@ async function renderContactList(currentUser, contactIsSelected) {
  */
 async function sortArrayContacts() {
   contactsSorted = [...contacts].sort((a, b) => {
-    const nameA = a.name || ''; 
-    const nameB = b.name || ''; 
+    const nameA = a.name || '';
+    const nameB = b.name || '';
     return nameA.localeCompare(nameB);
   });
 }
@@ -135,7 +144,7 @@ async function sortArrayContacts() {
 async function createArrayInitialLetters() {
   initialLetters = [];
 
-  for (i = 0; i < contacts.length; i++) {
+  for (i = 1; i < contacts.length; i++) {
     const firstNameInitial = contacts[i]["firstName"][0];
 
     if (!initialLetters.includes(firstNameInitial)) {
