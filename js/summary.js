@@ -47,7 +47,7 @@ async function createOwnContact(currentUser) {
     const existingContact = await checkIfContactAlreadyExist();
     if (!existingContact) {
         let currentUserAsContact = {
-            ID: 'contact-0',
+            ID: currentUser.ID,
             name: currentUser.name,
             firstName: currentUser.firstName,
             lastName: currentUser.lastName,

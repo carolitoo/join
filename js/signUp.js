@@ -10,7 +10,7 @@ async function initSignUp() {
     await loadUserData();
     await loadContacts();
     // await loadContactsJSON();
-    // await storeContacts();
+    //  await storeContacts();
     // await loadUsersJSON();
     // await storeUsers();
 
