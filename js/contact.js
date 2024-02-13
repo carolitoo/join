@@ -22,6 +22,8 @@ async function initContact() {
 
 
 
+
+
 async function loadContacts() {
   const response = await getItem('contacts');//wie kommen Werte züruck in's user-array?//
   const contactsData = response['data']['value'];
@@ -29,6 +31,8 @@ async function loadContacts() {
     contacts = JSON.parse(contactsData);
   }
 }
+
+
 
 
 
@@ -89,24 +93,25 @@ async function renderContactList(currentUser, contactIsSelected) {
   } else {
     await sortArrayContacts();
     document.getElementById("ctn-contact-list").innerHTML = "";
-    await createArrayInitialLetters(); // Verschieben Sie dies hierhin, nachdem die Kontakte sortiert wurden
+    await createArrayInitialLetters();
 
     for (let j = 0; j < initialLetters.length; j++) {
       document.getElementById("ctn-contact-list").innerHTML +=
         await generateInitialLetterHTML(initialLetters[j]);
       for (let k = 0; k < contactsSorted.length; k++) {
-        if (contactsSorted[k]["name"][0] == initialLetters[j]) {
-          document.getElementById(
-            `contact-list-letter-${initialLetters[j]}`
-          ).innerHTML += await generateSingleListContactHTML(k);
-          document.getElementById(
-            `contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`
-          ).style.backgroundColor = contactsSorted[k]["colorContact"];
+        const contactFirstNameInitial = contactsSorted[k]["firstName"][0];
+
+        if (contactFirstNameInitial == initialLetters[j]) {
+          document.getElementById(`contact-list-letter-${initialLetters[j]}`).innerHTML +=
+            await generateSingleListContactHTML(k);
+          document.getElementById(`contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`).style.backgroundColor =
+            contactsSorted[k]["colorContact"];
         }
       }
     }
   }
 }
+
 
 
 /**
@@ -115,7 +120,7 @@ async function renderContactList(currentUser, contactIsSelected) {
  * AT THE MOMENT THE ARRAY IS ONLY SORTED BY THE FULL NAME OF THE CONTACT - THE LAST NAME IS NOT CONSIDERED SEPERATLY
  */
 async function sortArrayContacts() {
-  contactsSorted = [contacts].sort((a, b) => {
+  contactsSorted = [...contacts].sort((a, b) => {
     const nameA = a.name || ''; 
     const nameB = b.name || ''; 
     return nameA.localeCompare(nameB);
@@ -131,9 +136,10 @@ async function createArrayInitialLetters() {
   initialLetters = [];
 
   for (i = 0; i < contacts.length; i++) {
-    let intialLetterName = contacts[i]["name"][0];
-    if (!initialLetters.includes(intialLetterName)) {
-      initialLetters.push(intialLetterName.toUpperCase());
+    const firstNameInitial = contacts[i]["firstName"][0];
+
+    if (!initialLetters.includes(firstNameInitial)) {
+      initialLetters.push(firstNameInitial.toUpperCase());
     }
   }
 

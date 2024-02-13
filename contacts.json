@@ -1,16 +1,5 @@
 [
   {
-    "ID": "contact-currentUser",
-    "name": "",
-    "firstName": "",
-    "lastName": "",
-    "acronymContact": "",
-    "colorContact": "#FF7A00",
-    "emailContact": "",
-    "phoneContact": "",
-    "assignedTasks": []
-  },
-  {
     "ID": "contact-1",
     "name": "Antonia Zimmermann",
     "firstName": "Antonia",
