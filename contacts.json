@@ -1,6 +1,6 @@
 [
   {
-    "ID": "contact-1",
+    "ID": 1,
     "name": "Antonia Zimmermann",
     "firstName": "Antonia",
     "lastName": "Zimmermann",
@@ -11,7 +11,7 @@
     "assignedTasks": []
   },
   {
-    "ID": "contact-2",
+    "ID": 2,
     "name": "Anja Schulz",
     "firstName": "Antonia",
     "lastName": "Schulz",
@@ -22,7 +22,7 @@
     "assignedTasks": []
   },
   {
-    "ID": "contact-3",
+    "ID": 3,
     "name": "Benedikt Ziegler",
     "firstName": "Benedikt",
     "lastName": "Ziegler",
@@ -33,7 +33,7 @@
     "assignedTasks": []
   },
   {
-    "ID": "contact-4",
+    "ID": 4,
     "name": "Carmen Gutmann",
     "firstName": "Carmen",
     "lastName": "Gutmann",
@@ -43,7 +43,7 @@
     "phoneContact": "+49 111 111 111"
   },
   {
-    "ID": "contact-5",
+    "ID": 5,
     "name": "Miriam Müller",
     "firstName": "Miriam",
     "lastName": "Müller",
@@ -54,7 +54,7 @@
     "assignedTasks": []
   },
   {
-    "ID": "contact-6",
+    "ID": 6,
     "name": "Emmanuel Mauer",
     "firstName": "Emmanuel",
     "lastName": "Mauer",
@@ -65,7 +65,7 @@
     "assignedTasks": []
   },
   {
-    "ID": "contact-7",
+    "ID": 7,
     "name": "Marcel Bauer",
     "firstName": "Marcel",
     "lastName": "Bauer",
@@ -76,7 +76,7 @@
     "assignedTasks": []
   },
   {
-    "ID": "contact-8",
+    "ID": 8,
     "name": "Anton Mayer",
     "firstName": "Anton",
     "lastName": "Mayer",
