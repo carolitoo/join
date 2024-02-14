@@ -1,13 +1,13 @@
 [
     {
     "ID": "0",
-    "name": "guest",
+    "name": "Guest",
     "acronym": "G",
     "email": "guest@account",
     "password": "joinGuest2024",
     "confirmedPassword": "joinGuest2024",
-    "firstName": "",
-    "lastName": "",
+    "firstName": "Guest",
+    "lastName": "Guest",
     "iconColor": "",
     "isDummy": true,
     "assignedTasks": [

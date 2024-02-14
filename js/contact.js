@@ -89,37 +89,57 @@ async function renderAcronym(loggedInEmail) {
  * This function renders the loaded contacts alphabetically sorted into the contact list
  */
 async function renderContactList(currentUserAsContact) {
-  proofIfContactsexist();
+  await proofIfContactsexist();
   await sortArrayContacts();
   await createArrayInitialLetters();
-
-  if (currentUserAsContact) {
+  const isGuestUser = isGuest(currentUserAsContact);
+  
+  if (!isGuestUser && currentUserAsContact) {
     await renderCurrentUserAsContact();
   }
+
   for (let j = 0; j < initialLetters.length; j++) {
-    // Skip rendering if it's the initial letter of currentUserAsContact
-    if (initialLetters[j] === currentUserAsContact["firstName"][0].toUpperCase()) {
+    const initialLetter = initialLetters[j].toUpperCase();
+
+    if (!isGuestUser && currentUserAsContact && initialLetters[j].toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
       continue;
     }
-    document.getElementById("ctn-contact-list").innerHTML += await generateInitialLetterHTML(initialLetters[j]);
 
-    for (let k = 0; k < contactsSorted.length; k++) {
-      const contactFirstNameInitial = contactsSorted[k]["firstName"][0];
-      if (contactFirstNameInitial == initialLetters[j]) {
-        document.getElementById(`contact-list-letter-${initialLetters[j]}`).innerHTML += await generateSingleListContactHTML(k);
-        document.getElementById(`contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`).style.backgroundColor = contactsSorted[k]["colorContact"];
-      }
+    const initialLetterHTML = await generateInitialLetterHTML(initialLetter);
+    document.getElementById("ctn-contact-list").innerHTML += initialLetterHTML;
+
+    await renderContactsWithInitialLetter(isGuestUser, currentUserAsContact, initialLetter);
+  }
+}
+
+
+async function renderContactsWithInitialLetter(isGuestUser, currentUserAsContact, initialLetter) {
+  const contactListLetter = document.getElementById(`contact-list-letter-${initialLetter}`);
+
+  for (let k = 0; k < contactsSorted.length; k++) {
+    const contactFirstNameInitial = contactsSorted[k]["firstName"][0];
+    if (isGuestUser && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+      continue;
+    }
+
+    if (contactFirstNameInitial == initialLetter) {
+      contactListLetter.innerHTML += await generateSingleListContactHTML(k);
+      document.getElementById(`contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`).style.backgroundColor = contactsSorted[k]["colorContact"];
     }
   }
 }
 
 
 
-function proofIfContactsexist() {
+async function proofIfContactsexist() {
   if (contacts.length === 0) {
     document.getElementById("ctn-contact-list").innerHTML = generateNoContactsHTML();
     return;
   }
+}
+
+function isGuest(user) {
+  return user && user["ID"] === 0 && user["email"] === "guest@account";
 }
 
 function clearContactList() {
@@ -367,8 +387,6 @@ async function deleteContact(positionOfContact) {
   closeContactsDetails();
   slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
 }
-
-
 
 
 /**

@@ -34,7 +34,7 @@
   position: fixed;
   top: 80px;
   left: 77px;
-  z-index: 999;
+  z-index: 999 !important;
   animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
 
