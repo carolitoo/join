@@ -1,0 +1,27 @@
+.ctn-content-help {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.color-lb {
+    color: #29ABE2;
+}
+
+.ctn-help-steps {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    gap: 18px;
+}
+
+.ctn-help-single-step {
+    display: flex;
+}
+
+.help-step-number {
+    font-size: 27px;
+    font-weight: 700;
+    margin-right: 24px;
+}

@@ -1,5 +1,3 @@
-let currentDraggedElement;
-let statusOfCurrentDraggedElement;
 let statusTask = ['toDo', 'inProgress', 'awaitFeedback', 'done'];
 let tasks = [];
 let positionOfTask;
@@ -17,10 +15,19 @@ async function initBoard() {
 
 
 /** 
+ * NUR ZUM TESTEN
+ */
+async function loadDummyContacts() {
+    let resp = await fetch('contacts.json');
+    contacts = await resp.json();
+}
+
+
+/** 
  * This function loads all the tasks currently existing into a JSON-Array
  */
 async function loadTasks() {
-    let resp = await fetch('../tasks.json');
+    let resp = await fetch('tasks.json');
     tasks = await resp.json();
 }
 
@@ -249,111 +256,6 @@ async function getSelectedSubtasks(idOfElement, currentTasks, positionOfTask) {
 
 
 /**
- * This function initiates moving a card on the board by identifying its id and displaying the drag-animation
- * 
- * @param {number} idTask - id of the task moved
- */
-function moveElement(idTask) {
-    currentDraggedElement = idTask;
-    document.getElementById(`card-task-small-${idTask}`).style.transform = 'rotate(5deg)';
-}
-
-
-/**
- * This function allows to drop an element above the element containing this function via drag-and-drop (standard function)
- * This function also indicates visually that the task can be moved to another column (only if hovered over another status than the current status of the task)
- * 
- * @param {object} event
- * @param {string} newStatus - status of the column where the task might be dropped
- */
-function allowDropWithPreview(event, newStatus) {
-    event.preventDefault();
-    statusOfCurrentDraggedElement = checkStatusofCurrentDraggedElement();
-    let heightOfDraggedElement = document.getElementById(`card-task-small-${currentDraggedElement}`).offsetHeight;
-
-    if (statusOfCurrentDraggedElement != newStatus) {
-        document.getElementById(`preview-drop-task-${newStatus}`).style.height = `${heightOfDraggedElement}px`;
-        document.getElementById(`preview-drop-task-${newStatus}`).classList.remove('d-none');
-        document.getElementById(`empty-tasks-${newStatus}`).classList.add('d-none');
-    }
-}
-
-
-/**
- * This function ensures that the preview for a task is only displayed while the task is dragged over an element/ status
- * 
- * @param {string} status - status of the column where the task was hovered over 
- */
-function hidePreview(status) {
-    document.getElementById(`preview-drop-task-${status}`).classList.add('d-none');
-}
-
-
-/**
- * This function checks the status of the currently dragged element
- * 
- * @returns - status of the currently dragged element
- */
-function checkStatusofCurrentDraggedElement() {
-    positionOfTask = tasks.findIndex(id => id['idTask'] == currentDraggedElement);
-    return tasks[positionOfTask]['statusTask'];
-}
-
-
-/**
- * This function assignes the new status to a task that was shifted to another status per drag-and-drop then renders the board 
- * 
- * @param {string} newStatus - status of the task after moving it 
- */
-function moveElementTo(newStatus) {
-    positionOfTask = tasks.findIndex(id => id['idTask'] == currentDraggedElement);
-
-    tasks[positionOfTask]['statusTask'] = newStatus;
-    renderBoard(tasks);
-    hidePreview(newStatus);
-}
-
-
-/**
- * This function ensures that a card on the kanban board returns to its original position when it is dropped 
- * 
- * @param {number} idTask - id of the task moved/ dragged
- */
-function resetCardAndBoard(idTask) {
-    document.getElementById(`card-task-small-${idTask}`).style.transform = 'rotate(0deg)';
-    renderBoard(tasks);
-}
-
-
-/**
- * This function compares the content of the input field with all the tasks available - it transmits the selected tasks to the render function
- * The user gets an information if no tasks are found 
- */
-async function searchTask() {
-    let searchInput = document.getElementById('searchTask').value.toUpperCase();
-    let includedTasks = [];
-
-    for (let p=0; p < tasks.length; p++) {
-        let title = tasks[p]['titleTask'].toUpperCase();
-        let description = tasks[p]['descriptionTask'].toUpperCase();
-
-        if (title.includes(searchInput) || description.includes(searchInput)) {
-            includedTasks.push(tasks[p]);
-        } 
-    }
-
-    if (includedTasks.length > 0) {
-        document.getElementById('ctn-board').classList.remove('d-none');
-        document.getElementById('board-no-results').classList.add('d-none');
-        renderBoard(includedTasks);
-    } else {
-        document.getElementById('ctn-board').classList.add('d-none');
-        document.getElementById('board-no-results').classList.remove('d-none');
-    } 
-}
-
-
-/**
  * This function opens an overlay with the nested (updated) detailed view of a task - it also prevents the scrolling of content in the background
  * 
  * @param {string} idTask - id of the task in the array "tasks" for which the details are opened
@@ -422,18 +324,4 @@ function closeTaskDetails() {
 }
 
 
-function checkScroll(idTask) {
-    let dragElement = document.getElementById(`card-task-small-${idTask}`);
-    let dragElementTop = dragElement.getBoundingClientRect().top;
-    let heightDraggedElement = dragElement.offsetHeight;
-    let pufferScroll = 30;
 
-    if (dragElementTop + heightDraggedElement + pufferScroll > window.innerHeight) {
-        window.scrollBy(0, 100);
-        console.log('Scroll-down');
-    } else if (dragElementTop - pufferScroll < 0) {
-        window.scrollBy(0, -100);
-        console.log(dragElementTop);
-        console.log('Scroll-up');
-    }
-}

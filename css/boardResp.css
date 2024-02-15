@@ -1,25 +1,62 @@
-@media (max-width: 1150px) {
+@media (max-width: 1270px) {
   .headline-board {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
   }
 
-  .btn-add-task-db {
-    display: block;
-    position: absolute;
-    top: 12px;
-    right: 0;
+  .ctn-board {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ctn-board-status {
+    min-width: unset;
+    max-width: unset;
+  }
+
+  .ctn-board-status-bottom {
+    padding-bottom: 40px;
+  }
+
+  .ctn-tasks {
+    flex-direction: row;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding-bottom: 16px;
+  }
+
+  .card-task-small {
+    min-width: 176px;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .headline-board {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
   }
 }
 
 @media (max-width: 920px) {
   .btn-add-task-db {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 0;
     padding: 3px !important;
   }
 
   .btn-add-task-db span {
     display: none;
+  }
+}
+
+@media (max-width: 784px) {
+  .ctn-board-status:last-child {
+    margin-bottom: 80px;
   }
 }
 
@@ -64,16 +101,6 @@
 }
 
 @media (max-width: 530px) {
-  .ctn-board-wrapper-status {
-    flex-wrap: wrap;
-  }
-
-  .ctn-tasks {
-    flex-direction: row;
-    align-items: flex-start;
-    overflow-x: auto;
-  }
-
   .ctn-board-status {
     min-width: 230px;
   }

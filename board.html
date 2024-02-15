@@ -8,16 +8,18 @@
 
     <link rel="stylesheet" href="./css/font.css" />
     <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/boardOverlay.css" />
     <link rel="stylesheet" href="./css/boardResp.css" />
     <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="style.css" />
 
-    <script src="script.js"></script>
-    <script src="./js/board.js"></script>
-    <script src="./js/boardHTML.js"></script>
-    <script src="./js/contact.js"></script>
-    <script src="./js/storage.js"></script>
-    <script src="./js/template.js"></script>
+    <script src="script.js" defer></script>
+    <script src="./js/board.js" defer></script>
+    <script src="./js/boardHTML.js" defer></script>
+    <script src="./js/boardNavigation.js" defer></script>
+    <script src="./js/contact.js" defer></script>
+    <script src="./js/storage.js" defer></script>
+    <script src="./js/template.js" defer></script>
   </head>
 
   <body onload="initBoard()" id="body-board">
@@ -54,161 +56,116 @@
           </div>
         </div>
       </div>
-      <div class="ctn-board-status-top mt-48 d-none" id="board-no-results">No tasks found</div>
+      <div class="ctn-board-status-top mt-48 d-none" id="board-no-results">
+        No tasks found
+      </div>
 
       <div class="ctn-board" id="ctn-board">
-        <div class="ctn-board-wrapper-status">
-          <div class="ctn-board-status">
-            <div class="ctn-board-status-top">
-              <span class="headline-status">To do</span>
-              <img
-                class="icon-plus-square"
-                src="./assets/img/plus_square_default.svg"
-              />
-            </div>
-            <div
-              class="ctn-board-status-bottom"
-              ondragover="allowDropWithPreview(event, 'toDo')"
-              ondrop="moveElementTo('toDo')"
-              ondragleave="hidePreview('toDo')"
-            >
-              <div class="empty-status" id="empty-tasks-toDo">
-                No tasks To do
-              </div>
-              <div class="ctn-tasks" id="tasks-toDo"></div>
-              <div class="preview-drop-task d-none" id="preview-drop-task-toDo"></div>
-            </div>
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">To do</span>
+            <img
+              class="icon-plus-square"
+              src="./assets/img/plus_square_default.svg"
+            />
           </div>
-          <div class="ctn-board-status">
-            <div class="ctn-board-status-top">
-              <span class="headline-status">In Progress</span>
-              <img
-                class="icon-plus-square"
-                src="./assets/img/plus_square_default.svg"
-              />
-            </div>
+          <div
+            class="ctn-board-status-bottom"
+            id="ctn-board-status-bottom-toDo"
+            ondragover="allowDropWithPreview(event, 'toDo')"
+            ondrop="moveElementTo('toDo')"
+            ondragleave="hidePreview('toDo')"
+          >
+            <div class="empty-status" id="empty-tasks-toDo">No tasks To do</div>
+            <div class="ctn-tasks" id="tasks-toDo"></div>
             <div
-              class="ctn-board-status-bottom"
-              ondragover="allowDropWithPreview(event, 'inProgress')"
-              ondrop="moveElementTo('inProgress')"
-              ondragleave="hidePreview('inProgress')"
-            >
-              <div class="empty-status d-none" id="empty-tasks-inProgress">
-                No tasks In Progress
-              </div>
-              <div class="ctn-tasks" id="tasks-inProgress"></div>
-              <div class="preview-drop-task d-none" id="preview-drop-task-inProgress"></div>
+              class="preview-drop-task d-none"
+              id="preview-drop-task-toDo"
+            ></div>
+          </div>
+        </div>
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">In Progress</span>
+            <img
+              class="icon-plus-square"
+              src="./assets/img/plus_square_default.svg"
+            />
+          </div>
+          <div
+            class="ctn-board-status-bottom"
+            id="ctn-board-status-bottom-inProgress"
+            ondragover="allowDropWithPreview(event, 'inProgress')"
+            ondrop="moveElementTo('inProgress')"
+            ondragleave="hidePreview('inProgress')"
+          >
+            <div class="empty-status d-none" id="empty-tasks-inProgress">
+              No tasks In Progress
             </div>
+            <div class="ctn-tasks" id="tasks-inProgress"></div>
+            <div
+              class="preview-drop-task d-none"
+              id="preview-drop-task-inProgress"
+            ></div>
           </div>
         </div>
 
-        <div class="ctn-board-wrapper-status">
-          <div class="ctn-board-status">
-            <div class="ctn-board-status-top">
-              <span class="headline-status">Await Feedback</span>
-              <img
-                class="icon-plus-square"
-                src="./assets/img/plus_square_default.svg"
-              />
-            </div>
-            <div
-              class="ctn-board-status-bottom"
-              ondragover="allowDropWithPreview(event, 'awaitFeedback')"
-              ondrop="moveElementTo('awaitFeedback')"
-              ondragleave="hidePreview('awaitFeedback')"
-            >
-              <div class="empty-status d-none" id="empty-tasks-awaitFeedback">
-                No tasks Await Feedback
-              </div>
-              <div class="ctn-tasks" id="tasks-awaitFeedback"></div>
-              <div class="preview-drop-task d-none" id="preview-drop-task-awaitFeedback"></div>
-            </div>
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">Await Feedback</span>
+            <img
+              class="icon-plus-square"
+              src="./assets/img/plus_square_default.svg"
+            />
           </div>
-          <div class="ctn-board-status">
-            <div class="ctn-board-status-top">
-              <span class="headline-status">Done</span>
+          <div
+            class="ctn-board-status-bottom"
+            id="ctn-board-status-bottom-awaitFeedback"
+            ondragover="allowDropWithPreview(event, 'awaitFeedback')"
+            ondrop="moveElementTo('awaitFeedback')"
+            ondragleave="hidePreview('awaitFeedback')"
+          >
+            <div class="empty-status d-none" id="empty-tasks-awaitFeedback">
+              No tasks Await Feedback
             </div>
+            <div class="ctn-tasks" id="tasks-awaitFeedback"></div>
             <div
-              class="ctn-board-status-bottom"
-              ondragover="allowDropWithPreview(event, 'done')"
-              ondrop="moveElementTo('done')"
-              ondragleave="hidePreview('done')"
-            >
-              <div class="empty-status" id="empty-tasks-done">
-                No tasks Done
-              </div>
-              <div class="ctn-tasks" id="tasks-done"></div>
-              <div class="preview-drop-task d-none" id="preview-drop-task-done"></div>
-            </div>
+              class="preview-drop-task d-none"
+              id="preview-drop-task-awaitFeedback"
+            ></div>
+          </div>
+        </div>
+        <div class="ctn-board-status">
+          <div class="ctn-board-status-top">
+            <span class="headline-status">Done</span>
+          </div>
+          <div
+            class="ctn-board-status-bottom"
+            id="ctn-board-status-bottom-done"
+            ondragover="allowDropWithPreview(event, 'done')"
+            ondrop="moveElementTo('done')"
+            ondragleave="hidePreview('done')"
+          >
+            <div class="empty-status" id="empty-tasks-done">No tasks Done</div>
+            <div class="ctn-tasks" id="tasks-done"></div>
+            <div
+              class="preview-drop-task d-none"
+              id="preview-drop-task-done"
+            ></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="overlay-board d-none" id="overlay-board" onclick="closeTaskDetails()">
-      <div class="ctn-task-detail" id="ctn-task-detail" onclick="stopPropagation(event)">
-        <div class="ctn-task-detail-header">
-          <div class="task-detail-category">User Story</div>
-          <div class="ctn-task-detail-close">
-            <img class="task-detail-close" src="./assets/img/close_black.svg" onclick="closeTaskDetails()">
-          </div>
-        </div>
-        <h1>Kochwelt Page & Recipe Recommender</h1>
-        <div>Build start page with recipe recommendation.</div>
-        <div class="ctn-task-detail-date">
-          <span class="color-bg">Due date:</span>
-          <div>10/05/2023</div>
-        </div>
-        <div class="ctn-task-detail-priority">
-          <span class="color-bg">Priority:</span>
-          <div class="ctn-task-detail-priority-right">
-            <div>Medium</div>
-            <img src="./assets/img/prio_medium_color.svg">
-          </div>
-        </div>
-        <div class="ctn-task-detail-assigned-users">
-          <div class="color-bg">Assigned To:</div>
-          <div>
-            <div class="ctn-task-detail-single-assigned-user">
-              <div class="task-detail-assigned-user-acronym">EM</div>
-              <div class="task-detail-assigned-user-name">Emmanuel Mauer</div>
-            </div>
-            <div class="ctn-task-detail-single-assigned-user">
-              <div class="task-detail-assigned-user-acronym">MB</div>
-              <div class="task-detail-assigned-user-name">Marcel Bauer</div>
-            </div>
-            <div class="ctn-task-detail-single-assigned-user">
-              <div class="task-detail-assigned-user-acronym">AM</div>
-              <div class="task-detail-assigned-user-name">Anton Mayer</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ctn-task-detail-subtasks">
-          <div class="color-bg">Subtasks</div>
-          <div class="ctn-task-detail-single-subtask">
-            <img class="task-detail-checkbox" src="./assets/img/checkbox_checked_default.svg">
-            <div>Implement Recipe Recommendation</div>
-          </div>
-          <div class="ctn-task-detail-single-subtask">
-            <img class="task-detail-checkbox" src="./assets/img/checkbox_blank_default.svg">
-            <div>Start Page Layout</div>
-          </div>
-        </div>
-
-        <div class="ctn-task-detail-edit-delete">
-          <div class="ctn-task-detail-edit-delete-single">
-            <img src="./assets/img/delete_default.svg">
-            <span>Delete</span>
-          </div>
-          <div class="task-detail-separator-edit"></div>
-          <div class="ctn-task-detail-edit-delete-single">
-            <img src="./assets/img/edit_default.svg">
-            <span>Edit</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <div
+      class="overlay-board d-none"
+      id="overlay-board"
+      onclick="closeTaskDetails()"
+    ></div>
+    <div
+      class="overlay-board d-none"
+      id="overlay-board-submenu"
+      onclick="closeSubmenuChangeStatusMobile()"
+    ></div>
   </body>
 </html>

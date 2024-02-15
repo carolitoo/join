@@ -73,48 +73,46 @@
     "statusTask": "done"
   },
   {
-    "idTask": "task-3",
-    "titleTask": "Test Title Test Test Test Test 3",
-    "descriptionTask": "Test Description Test Test Test Test Test Test 3.",
+    "idTask": "task-6",
+    "titleTask": "Planning JOIN-Project",
+    "descriptionTask": "Analyse structur of the project, detect interdependencies and define responsibilities",
     "assignedContacts": [
       {
-        "idContact": "contact-1"
+        "idContact": "contact-5"
       },
       {
         "idContact": "contact-4"
+      },
+      {
+        "idContact": "contact-2"
       }
     ],
-    "dueDate": "2023-09-02T20:15:00.000Z",
-    "priority": "Low",
-    "category": "User Story",
+    "dueDate": "2024-11-01T10:30:00.000Z",
+    "priority": "High",
+    "category": "Technical Task",
     "subtasks": [
       {
         "idSubtask": 1,
-        "titleSubtask": "Subtask 1 Test 3",
+        "titleSubtask": "Analyse structure",
         "statusSubtask": "closed"
       },
       {
         "idSubtask": 2,
-        "titleSubtask": "Subtask 2 Test 3",
+        "titleSubtask": "Visualize interdependencies in Miro",
         "statusSubtask": "closed"
       },
       {
         "idSubtask": 3,
-        "titleSubtask": "Subtask 3 Test 3",
-        "statusSubtask": "open"
-      },
-      {
-        "idSubtask": 4,
-        "titleSubtask": "Subtask 4 Test 3",
+        "titleSubtask": "Define responsibilities",
         "statusSubtask": "closed"
       }
     ],
-    "statusTask": "inProgress"
+    "statusTask": "awaitFeedback"
   },
   {
-    "idTask": "task-4",
-    "titleTask": "Test Title 4",
-    "descriptionTask": "Test Description 4.",
+    "idTask": "task-7",
+    "titleTask": "Revision of UX/UI-Design",
+    "descriptionTask": "Check whether elements can be adjusted to guarantee a better user experience",
     "assignedContacts": [
       {
         "idContact": "contact-3"
@@ -123,37 +121,130 @@
         "idContact": "contact-1"
       },
       {
-        "idContact": "contact-5"
+        "idContact": "contact-2"
       }
     ],
-    "dueDate": "2023-11-05T20:15:00.000Z",
-    "priority": "Medium",
-    "category": "Technical Task",
-    "subtasks": [],
-    "statusTask": "inProgress"
-  }, 
-  {
-    "idTask": "task-5",
-    "titleTask": "Test Title without contacts 5",
-    "descriptionTask": "Test Description without assigned contacts 3.",
-    "assignedContacts": [],
-    "dueDate": "2023-09-02T20:15:00.000Z",
+    "dueDate": "2024-03-20T14:40:00.000Z",
     "priority": "Medium",
     "category": "User Story",
     "subtasks": [
       {
         "idSubtask": 1,
-        "titleSubtask": "Subtask 1 Test 5",
+        "titleSubtask": "Identify elements",
         "statusSubtask": "closed"
       },
       {
         "idSubtask": 2,
-        "titleSubtask": "Subtask 2 Test 5",
+        "titleSubtask": "Formulate and discuss suggestions",
         "statusSubtask": "closed"
       },
       {
         "idSubtask": 3,
-        "titleSubtask": "Subtask 3 Test 5",
+        "titleSubtask": "Realization of agreed adjustments",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 4,
+        "titleSubtask": "A/B-Testing",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 5,
+        "titleSubtask": "Implentation of changes for everone",
+        "statusSubtask": "open"
+      }
+    ],
+    "statusTask": "toDo"
+  },
+  {
+    "idTask": "task-8",
+    "titleTask": "Testing JOIN-Project (completeness)",
+    "descriptionTask": "Check whether all points from the checklist were accomplished.",
+    "assignedContacts": [
+      {
+        "idContact": "contact-4"
+      },
+      {
+        "idContact": "contact-1"
+      },
+      {
+        "idContact": "contact-6"
+      }
+    ],
+    "dueDate": "2024-02-12T09:25:00.000Z",
+    "priority": "High",
+    "category": "Technical Task",
+    "subtasks": [
+      {
+        "idSubtask": 1,
+        "titleSubtask": "Check User/ Login",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 2,
+        "titleSubtask": "Check Summary",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 3,
+        "titleSubtask": "Check AddTask",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 4,
+        "titleSubtask": "Check Board",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 5,
+        "titleSubtask": "Check Contacts",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 6,
+        "titleSubtask": "Check legal pages/ help",
+        "statusSubtask": "open"
+      }
+    ],
+    "statusTask": "inProgress"
+  },
+  {
+    "idTask": "task-9",
+    "titleTask": "Testing JOIN-Project (compatibility)",
+    "descriptionTask": "Check appearance and whether all features work in the established browsers",
+    "assignedContacts": [
+      {
+        "idContact": "contact-4"
+      },
+      {
+        "idContact": "contact-1"
+      },
+      {
+        "idContact": "contact-6"
+      }
+    ],
+    "dueDate": "2024-02-16T09:25:00.000Z",
+    "priority": "Medium",
+    "category": "Technical Task",
+    "subtasks": [
+      {
+        "idSubtask": 1,
+        "titleSubtask": "Testing Chrome",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 2,
+        "titleSubtask": "Testing Firefox",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 3,
+        "titleSubtask": "Testing Safari",
+        "statusSubtask": "open"
+      },
+      {
+        "idSubtask": 4,
+        "titleSubtask": "Testing IE/ Edge",
         "statusSubtask": "open"
       }
     ],

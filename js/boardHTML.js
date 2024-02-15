@@ -8,8 +8,24 @@
  */
 async function generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask) {
     return /*html*/ `
-    <div class="card-task-small" id="card-task-small-${currentIdTask}" draggable="true" ondragstart="moveElement('${currentIdTask}')" ondrag="checkScroll('${currentIdTask}')" ondragend="resetCardAndBoard('${currentIdTask}')" onclick="openTaskDetail('${currentIdTask}')">
+    <div 
+    class="card-task-small" 
+    id="card-task-small-${currentIdTask}" 
+    draggable="true" 
+    ondragstart="moveElement('${currentIdTask}')" 
+    ondrag = "checkScrollY(event)"
+    ondragend="resetCardAndBoard('${currentIdTask}')" 
+    onclick="openTaskDetail('${currentIdTask}')">    
+      <div class="ctn-card-category-show-more-small">
         <div class="card-category-small" id="category-task-${currentIdTask}">${currentTasks[positionOfTask]['category']}</div>
+        <div 
+          class="ctn-card-show-more-small"
+          id="ctn-card-show-more-small-${currentIdTask}"
+          onclick="changeStatusMobile(event, '${currentTasks[positionOfTask]['statusTask']}', '${currentIdTask}')">
+          <img class="icon-card-show-more-small" src="./assets/img/more_vertical_white.svg">
+        </div>
+        <div class="ctn-submenu-card-small d-none" id="ctn-submenu-card-small-${currentIdTask}" onclick="stopPropagation(event)"></div>
+      </div>
         <div class="ctn-card-text-small">
             <div class="card-title-small" id="title-task-${currentIdTask}">${currentTasks[positionOfTask]['titleTask']}</div>
             <div class="card-description-small" id="description-task-${currentIdTask}">${currentTasks[positionOfTask]['descriptionTask']}</div>
@@ -41,6 +57,24 @@ async function generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask
 async function generateContactIconCardSmallHTML(currentIdTask, idContact) {
   return /*html*/ `
   <div class="card-assigned-user-small" id="card-assigned-user-small-${currentIdTask}-${idContact}"></div>
+  `
+}
+
+
+/**
+ * 
+ * @param {*} newStatus 
+ * @param {*} newStatusName 
+ * @returns 
+ */
+async function generateElementSubmenuChangeStatusCardSmallHTML(newStatus, newStatusName) {
+  return /*html*/ `
+      <div 
+          class="ctn-submenu-selection-card-small" 
+          onclick="moveElementTo(${newStatus})">
+          <img class="icon-submenu-selection-card-small" src="./assets/img/arrow-left-line.svg"> 
+          ${newStatusName}
+      </div>
   `
 }
 
@@ -155,3 +189,6 @@ async function generateSubtasksOpenDetailHTML(idOfTask, idOfSubtask, titleOfSubt
     </div>
     `
 }
+
+
+
