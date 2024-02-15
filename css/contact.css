@@ -17,6 +17,10 @@
   overflow-y: auto;
 }
 
+.bg-contact-list::-webkit-scrollbar-track {
+  margin-block: 4px;
+}
+
 .wrapper-contact-list {
   margin-left: 28px;
   padding: 0px 24px;
