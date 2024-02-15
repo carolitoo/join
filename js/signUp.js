@@ -7,13 +7,12 @@ let users = [];
 
 async function initSignUp() {
     await includeHTML();
-     await loadUserData();
-     await loadContacts();
-   // await loadContactsJSON();
- //  await storeContacts();
-   // await loadUsersJSON();
-   // await storeUsers();
-
+    await loadUserData();
+    await loadContacts();
+    // await loadContactsJSON();
+    // await storeContacts();
+    // await loadUsersJSON();
+    //  await storeUsers();
 }
 
 // HILFSFUNKTION (falls Kontakte neu geladen und initialisiert werden müssen//
@@ -92,7 +91,7 @@ async function createSignUpdata() {
     const confirmedPasswordInput = document.getElementById('confirmedPassword');
 
     newUser = {
-        userID: new Date().getTime(),
+        ID: new Date().getTime(),
         name: userName,
         firstName: filterFirstName(userName),
         lastName: filterLastName(),

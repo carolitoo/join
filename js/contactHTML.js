@@ -9,6 +9,20 @@ async function generateNoContactsHTML() {
     `;
 }
 
+function generateCurrentUserHTML(currentUserAsContact) {
+  return /*html*/ `
+    <div class="contact-list-single-contact mt-42" id="${currentUserAsContact.ID}" onclick="openContactDetail('${currentUserAsContact.ID}, ps')">
+      <div class="contact-list-single-contact-acronym" id="contact-list-single-contact-acronym-${currentUserAsContact.ID}">${currentUserAsContact.acronymContact}</div>
+      <div class="contact-list-single-contact-right">
+        <div class="contact-list-single-contact-name">${currentUserAsContact.name}  (You)</div>
+        <span></span>
+        <div class="contact-list-single-contact-mail">${currentUserAsContact.emailContact}</div>
+      </div>
+    </div>
+  `;
+}
+
+
 /**
  * This function generates the HTML-Code for the initial letter separator in the contact list
  *
@@ -88,6 +102,7 @@ async function generateSubmenuEditDeleteContactHTML(positionOfContact) {
  * @returns - HTML-Code for the detailed view of the selected contact
  */
 async function generateContactDetailHTML(positionOfContact) {
+ 
   return /*html*/ `
       <div class="ctn-contacts-details-name">
       <div class="contacts-detail-acronym" id="contacts-detail-acronym-${contactsSorted[positionOfContact]["ID"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
@@ -133,6 +148,55 @@ async function generateContactDetailHTML(positionOfContact) {
       </div>
     `;
 }
+
+function generateContactDetailCurrentUser(currentUserAsContact){
+  let positionOfContact = -1;
+  return /*html*/ `
+  <div class="ctn-contacts-details-name">
+  <div class="contacts-detail-acronym" id="contacts-detail-acronym-${currentUserAsContact[positionOfContact]["ID"]}">${currentUserAsContact[positionOfContact]["acronymContact"]}</div>
+  <div class="ctn-contacts-details-name-right">
+  <div id="contacts-detail-identity-text-${currentUserAsContact[positionOfContact].ID}" class="contacts-detail-name">${currentUserAsContact[positionOfContact]["name"]}</div>
+      <div
+        class="contacts-detail-edit-delete"
+        onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"
+        onmouseout="changeImgTo('img-contacts-detail-edit', 'edit_default')"
+        onclick="openEditContactOverlay(${positionOfContact})"
+      >
+        <img
+          id="img-contacts-detail-edit"
+          src="./assets/img/edit_default.svg"
+        />
+        <span>Edit</span>
+      </div>
+      <div
+        class="contacts-detail-edit-delete"
+        onmouseover="changeImgTo('img-contacts-detail-delete', 'delete_lb')"
+        onmouseout="changeImgTo('img-contacts-detail-delete', 'delete_default')"
+        onclick="deleteContact(${positionOfContact})"
+      >
+        <img
+          id="img-contacts-detail-delete"
+          src="./assets/img/delete_default.svg"
+        />
+        <span>Delete</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="contacts-detail-subheadline">Contact Information</div>
+        <div class="ctn-contacts-detail-mail-phone">
+          <div class="contacts-detail-mail-phone">
+            <span>Email</span>
+            <div class="contacts-detail-mail">${currentUserAsContact[positionOfContact]["emailContact"]}</div>
+          </div>
+          <div class="contacts-detail-mail-phone">
+            <span>Phone</span>
+            <div id="contacts-detail-phone">${currentUserAsContact[positionOfContact]["phoneContact"]}</div>
+          </div>
+  </div>
+`;
+}
+
 
 /**
  * This function return the HTML-Code for editing a contact (overlay) - the input fields are prefilled for the selected contact

@@ -1,15 +1,49 @@
-.ctn-login {
-  border: unset;
-  border-radius: 24px;
-  background-color: #ffffff;
-  width: 50%;
-  min-width: 400px;
-  max-width: 540px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.wrapper {
   position: relative;
+}
+
+.start-animations-helper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+  z-index: 998;
+}
+
+.ctn-login {
+  border: unset !important;
+  border-radius: 24px !important;
+  background-color: #ffffff !important;
+  width: 50% !important;
+  min-width: 400px !important;
+  max-width: 540px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  position: relative !important;
+}
+
+.logo-login {
+  width: 80%;
+  height: 80%;
+  position: fixed;
+  top: 80px;
+  left: 77px;
+  z-index: 999 !important;
+  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
+}
+
+.logo-login-signUp {
+  position: absolute;
+  top: 80px;
+  left: 77px;
+  height: 96px;
+  width: 96px;
 }
 
 .arrow-sign-up {
@@ -29,7 +63,7 @@
   position: absolute !important;
   bottom: 190px !important;
   left: calc(50% - 326px / 2) !important;
-  background: #2A3647 !important;
+  background: #2a3647 !important;
   color: white !important;
   border: none !important;
   border-radius: 10px !important;
@@ -74,19 +108,12 @@ input:focus {
 
 .header-login {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   width: 100%;
   max-width: 1240px;
 }
 
-.logo-login {
-  position: absolute;
-  top: 56px;
-  left: 64px;
-  height: 96px;
-  width: 96px;
-}
-
+/* reagiert nicht mehr in dem div 'header-login' - gleiche class nochmal im loginSheet*/
 .ctn-no-user {
   position: absolute;
   top: 56px;
@@ -154,23 +181,23 @@ input:focus {
 
 /* **** RESPONSIVE DESIGN **** */
 
+/*
 @media (max-width: 760px) {
   .logo-login {
     position: static;
     display: flex;
     justify-content: flex-start;
-  }
+  }*/
 
-  .ctn-no-user {
-    display: none;
-  }
+.ctn-no-user {
+  display: none;
+}
 
-  .ctn-no-user-sub {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-  }
+.ctn-no-user-sub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
 }
 
 @media (max-width: 420px) {

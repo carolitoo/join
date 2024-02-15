@@ -4,6 +4,7 @@ let contactsSorted = [];
 let initialLetters = [];
 let contactIsSelected = false;
 let extractedContactNumbers = [];
+let currentUserAsContact = [];
 
 
 
@@ -11,16 +12,13 @@ async function initContact() {
   await includeHTML();
   changeSelectedTab("tab-contacts");
   await loadUserData();
- // await loadContactsJSON();
- // await storeContacts();
   await loadContacts();
   await getLoggedInEmail();
+  await identifyCurrentUserAsContact();
   await renderAcronym(loggedInEmail);
-  await renderContactList(currentUser);
+  await renderContactList(currentUserAsContact);
   checkWindowWidth();
 }
-
-
 
 
 
@@ -32,6 +30,11 @@ async function loadContacts() {
   }
 }
 
+async function identifyCurrentUserAsContact() {
+  currentUserAsContact = contacts.find(c => c.emailContact === loggedInEmail);
+  console.log('currentUserAsContact', currentUserAsContact);
+  return currentUserAsContact;
+}
 
 
 /**
@@ -67,7 +70,7 @@ function checkWindowWidth() {
  */
 function returnToContactList() {
   contactIsSelected = false;
-  renderContactList(contactIsSelected);
+  renderContactList(currentUserAsContact);
   checkWindowWidth();
 }
 
@@ -85,41 +88,83 @@ async function renderAcronym(loggedInEmail) {
 /**
  * This function renders the loaded contacts alphabetically sorted into the contact list
  */
-async function renderContactList(currentUser, contactIsSelected) {
-  if (contacts.length === 0) {
-    document.getElementById("ctn-contact-list").innerHTML = await generateNoContactsHTML();
-  } else {
-    await sortArrayContacts();
-    document.getElementById("ctn-contact-list").innerHTML = "";
-    await createArrayInitialLetters(); // Verschieben Sie dies hierhin, nachdem die Kontakte sortiert wurden
+async function renderContactList(currentUserAsContact) {
+  await proofIfContactsexist();
+  await sortArrayContacts();
+  await createArrayInitialLetters();
+  const isGuestUser = isGuest(currentUserAsContact);
+  
+  if (!isGuestUser && currentUserAsContact) {
+    await renderCurrentUserAsContact();
+  }
 
-    for (let j = 0; j < initialLetters.length; j++) {
-      document.getElementById("ctn-contact-list").innerHTML +=
-        await generateInitialLetterHTML(initialLetters[j]);
-      for (let k = 0; k < contactsSorted.length; k++) {
-        if (contactsSorted[k]["name"][0] == initialLetters[j]) {
-          document.getElementById(
-            `contact-list-letter-${initialLetters[j]}`
-          ).innerHTML += await generateSingleListContactHTML(k);
-          document.getElementById(
-            `contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`
-          ).style.backgroundColor = contactsSorted[k]["colorContact"];
-        }
-      }
+  for (let j = 0; j < initialLetters.length; j++) {
+    const initialLetter = initialLetters[j].toUpperCase();
+
+    if (!isGuestUser && currentUserAsContact && initialLetters[j].toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+      continue;
+    }
+
+    const initialLetterHTML = await generateInitialLetterHTML(initialLetter);
+    document.getElementById("ctn-contact-list").innerHTML += initialLetterHTML;
+
+    await renderContactsWithInitialLetter(isGuestUser, currentUserAsContact, initialLetter);
+  }
+}
+
+
+async function renderContactsWithInitialLetter(isGuestUser, currentUserAsContact, initialLetter) {
+  const contactListLetter = document.getElementById(`contact-list-letter-${initialLetter}`);
+
+  for (let k = 0; k < contactsSorted.length; k++) {
+    const contactFirstNameInitial = contactsSorted[k]["firstName"][0];
+    if (isGuestUser && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+      continue;
+    }
+
+    if (contactFirstNameInitial == initialLetter) {
+      contactListLetter.innerHTML += await generateSingleListContactHTML(k);
+      document.getElementById(`contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`).style.backgroundColor = contactsSorted[k]["colorContact"];
     }
   }
+}
+
+
+
+async function proofIfContactsexist() {
+  if (contacts.length === 0) {
+    document.getElementById("ctn-contact-list").innerHTML = generateNoContactsHTML();
+    return;
+  }
+}
+
+function isGuest(user) {
+  return user && user["ID"] === 0 && user["email"] === "guest@account";
+}
+
+function clearContactList() {
+  document.getElementById("ctn-contact-list").innerHTML = "";
+}
+
+
+async function renderCurrentUserAsContact() {
+  document.getElementById("ctn-contact-list").innerHTML += generateSingleListContactHTML(0);
+  document.getElementById(`contact-list-single-contact-acronym-${currentUserAsContact["ID"]}`).style.backgroundColor = currentUserAsContact["colorContact"];
 }
 
 
 /**
  * This function sorts the loaded array "contacts" alphabetically
  *
- * AT THE MOMENT THE ARRAY IS ONLY SORTED BY THE FULL NAME OF THE CONTACT - THE LAST NAME IS NOT CONSIDERED SEPERATLY
  */
 async function sortArrayContacts() {
-  contactsSorted = [contacts].sort((a, b) => {
-    const nameA = a.name || ''; 
-    const nameB = b.name || ''; 
+  contactsSorted = [...contacts].sort((a, b) => {
+    // Move currentUserAsContact to the beginning of the array
+    if (a === currentUserAsContact) return -1;
+    if (b === currentUserAsContact) return 1;
+
+    const nameA = a.name || '';
+    const nameB = b.name || '';
     return nameA.localeCompare(nameB);
   });
 }
@@ -133,14 +178,15 @@ async function createArrayInitialLetters() {
   initialLetters = [];
 
   for (i = 0; i < contacts.length; i++) {
-    let intialLetterName = contacts[i]["name"][0];
-    if (!initialLetters.includes(intialLetterName)) {
-      initialLetters.push(intialLetterName.toUpperCase());
+    const firstNameInitial = contacts[i]["firstName"][0];
+
+    if (!initialLetters.includes(firstNameInitial)) {
+      initialLetters.push(firstNameInitial.toUpperCase());
     }
   }
-
   initialLetters.sort();
 }
+
 
 
 /**
@@ -155,33 +201,19 @@ async function openContactDetail(ID) {
   await resetPreviousSelectedContact();
   markSelectedContact(ID);
 
-  positionOfContact = contactsSorted.findIndex(
-    (id) => id["ID"] == ID
-  );
+  positionOfContact = contactsSorted.findIndex(contact => String(contact.ID) === String(ID));
+
   document.getElementById("wrapper-contact-details").innerHTML =
     await generateContactDetailHTML(positionOfContact);
 
-
   document.getElementById(
-    `contacts-detail-acronym-${ID}`
-  ).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
+    `contacts-detail-acronym-${ID}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
 
-  checkEmptyPhoneNumber(positionOfContact);
+  /*checkEmptyPhoneNumber(positionOfContact);*/
   slideInAnimation('wrapper-contact-details', 'translate-x', false);
 }
 
 
-/**
- * This function checks if a phone number is available - in case that there is no phone number "n.a." is displayed instead of the phone number/ an empty field
- * 
- * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
- */
-function checkEmptyPhoneNumber(positionOfContact) {
-  if (contactsSorted[positionOfContact]['phoneNumber'] == "") {
-    document.getElementById('contacts-detail-phone').innerHTML = "n.a.";
-    document.getElementById('contacts-detail-phone').style.color = "#a8a8a8";
-  }
-}
 
 
 /**
@@ -334,18 +366,27 @@ async function editContact(positionOfContact) {
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
 async function deleteContact(positionOfContact) {
-  // deleteUserFromAssignedTasks();
-  contactsAfterDelete = contactsSorted.splice(positionOfContact, 1);
-  await setItem('contacts', JSON.stringify(contactsAfterDelete));
+  // Ensure positionOfContact is a valid index
+  if (positionOfContact < 0 || positionOfContact >= contacts.length) {
+    console.error("Invalid index for deleting contact");
+    return;
+  }
 
+  // Remove the contact at the specified index using splice
+  contactsSorted.splice(positionOfContact, 1);
+
+  // Update the contacts array and save to storage
+  await setItem('contacts', JSON.stringify(contacts));
+
+  // Clear the details and return to contact list
   document.getElementById("wrapper-contact-details").innerHTML = '';
-
   returnToContactList();
+
+  // Close submenu, details, and show confirmation popup
   closeSubmenuContact();
   closeContactsDetails();
   slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
 }
-
 
 
 /**
