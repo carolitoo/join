@@ -9,6 +9,7 @@ let guest = false;
 
 
 
+
 async function initContact() {
   await includeHTML();
   changeSelectedTab("tab-contacts");
@@ -196,7 +197,8 @@ async function clearContactList() {
 
 
 async function renderCurrentUserAsContact() {
-  document.getElementById("ctn-contact-list").innerHTML += await generateSingleListContactHTML(0);
+  const currentUserHTML = await generateSingleListContactHTMLCurrentUSER(currentUserAsContact);
+  document.getElementById("ctn-contact-list").innerHTML += currentUserHTML;
   document.getElementById(`contact-list-single-contact-acronym-${currentUserAsContact["ID"]}`).style.backgroundColor = currentUserAsContact["colorContact"];
 }
 
