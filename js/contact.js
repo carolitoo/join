@@ -5,6 +5,7 @@ let initialLetters = [];
 let contactIsSelected = false;
 let extractedContactNumbers = [];
 let currentUserAsContact = [];
+let guest = false;
 
 
 
@@ -14,12 +15,12 @@ async function initContact() {
   await loadUserData();
   await loadContacts();
   await getLoggedInEmail();
-  await identifyCurrentUserAsContact();
+  await checkIfGuestOrCurrentUser();
   await renderAcronym(loggedInEmail);
-  await renderContactList(currentUserAsContact);
+  await sortArrayContacts();
+  await renderContactList();
   checkWindowWidth();
 }
-
 
 
 async function loadContacts() {
@@ -30,11 +31,17 @@ async function loadContacts() {
   }
 }
 
-async function identifyCurrentUserAsContact() {
+async function checkIfGuestOrCurrentUser() {
   currentUserAsContact = contacts.find(c => c.emailContact === loggedInEmail);
-  console.log('currentUserAsContact', currentUserAsContact);
+
+  if (currentUserAsContact && currentUserAsContact.emailContact === 'guest@account') {
+    guest = true; 
+    loggedInEmail = 'guest@account';
+    return true;
+  }
   return currentUserAsContact;
 }
+
 
 
 /**
@@ -68,9 +75,13 @@ function checkWindowWidth() {
 /**
  * This function navigates back to the contact list and resets the currently selected user
  */
-function returnToContactList() {
+async function returnToContactList() {
   contactIsSelected = false;
-  renderContactList(currentUserAsContact);
+  await clearContactList();
+  await loadContacts();
+  console.log('die gelöschten contacts', contacts);
+  await renderContactList();
+  // Check the window width and update the view accordingly
   checkWindowWidth();
 }
 
@@ -85,70 +96,107 @@ async function renderAcronym(loggedInEmail) {
 }
 
 
+async function proofIfContactsexist() {
+  if (contacts.length === 0) {
+    document.getElementById("ctn-contact-list").innerHTML = await generateNoContactsHTML();
+    return true;
+  }
+  return false;
+}
+
+
 /**
  * This function renders the loaded contacts alphabetically sorted into the contact list
  */
-async function renderContactList(currentUserAsContact) {
-  await proofIfContactsexist();
-  await sortArrayContacts();
-  await createArrayInitialLetters();
-  const isGuestUser = isGuest(currentUserAsContact);
-  
-  if (!isGuestUser && currentUserAsContact) {
+async function renderContactList() {
+  if (!guest && currentUserAsContact) {
     await renderCurrentUserAsContact();
   }
-
-  for (let j = 0; j < initialLetters.length; j++) {
-    const initialLetter = initialLetters[j].toUpperCase();
-
-    if (!isGuestUser && currentUserAsContact && initialLetters[j].toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
-      continue;
+  const proofExecuted = await proofIfContactsexist();
+  if (!proofExecuted) {
+    for (let j = 0; j < initialLetters.length; j++) {
+      const initialLetter = initialLetters[j].toUpperCase();
+      if (!guest && currentUserAsContact && initialLetters[j].toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+        continue;
+      }
+      await generateAndInsertInitialLetterHTML(initialLetter);
+      const contactListLetter = document.getElementById(`contact-list-letter-${initialLetter}`);
+      if (!contactListLetter.hasAttribute("data-iteration-done")) {
+        await processContactsForInitialLetter(contactsSorted, initialLetter);
+        contactListLetter.setAttribute("data-iteration-done", true);
+        // Check if any contacts with the current initial letter exist after deletion
+        await checkIfContactLetterstillThere(contactsSorted, initialLetter, contactListLetter);
+      }
+      await updateContactElementStylesForInitialLetter(contactsSorted, initialLetter);
     }
-
-    const initialLetterHTML = await generateInitialLetterHTML(initialLetter);
-    document.getElementById("ctn-contact-list").innerHTML += initialLetterHTML;
-
-    await renderContactsWithInitialLetter(isGuestUser, currentUserAsContact, initialLetter);
   }
 }
 
 
-async function renderContactsWithInitialLetter(isGuestUser, currentUserAsContact, initialLetter) {
-  const contactListLetter = document.getElementById(`contact-list-letter-${initialLetter}`);
+async function generateAndInsertInitialLetterHTML(initialLetter) {
+  const initialLetterHTML = await generateInitialLetterHTML(initialLetter);
+  document.getElementById("ctn-contact-list").innerHTML += initialLetterHTML;
+}
 
-  for (let k = 0; k < contactsSorted.length; k++) {
-    const contactFirstNameInitial = contactsSorted[k]["firstName"][0];
-    if (isGuestUser && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+
+async function checkIfContactLetterstillThere(contactsSorted, initialLetter, contactListLetter) {
+  const contactsWithInitial = contactsSorted.filter(contact => contact["firstName"][0].toUpperCase() === initialLetter);
+  if (contactsWithInitial.length === 0) {
+    contactListLetter.parentNode.removeChild(contactListLetter);
+  }
+}
+
+
+async function processContactsForInitialLetter(contacts,initialLetter) {
+  let htmlContent = '';
+
+  for (let k = 0; k < contacts.length; k++) {
+    const contactFirstNameInitial = contacts[k]["firstName"][0];
+    if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
       continue;
     }
 
     if (contactFirstNameInitial == initialLetter) {
-      contactListLetter.innerHTML += await generateSingleListContactHTML(k);
-      document.getElementById(`contact-list-single-contact-acronym-${contactsSorted[k]["ID"]}`).style.backgroundColor = contactsSorted[k]["colorContact"];
+      htmlContent += await generateSingleListContactHTML(k);
+    }
+  }
+  document.getElementById(`contact-list-letter-${initialLetter}`).innerHTML += htmlContent;
+}
+
+
+
+async function updateContactElementStylesForInitialLetter(contacts, initialLetter) {
+  for (let k = 0; k < contacts.length; k++) {
+    const contactFirstNameInitial = contacts[k]["firstName"][0];
+    if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+      continue;
+    }
+    if (contactFirstNameInitial == initialLetter) {
+      const contactElement = document.getElementById(`contact-list-single-contact-acronym-${contacts[k]["ID"]}`);
+
+      if (contactElement) {
+        contactElement.style.backgroundColor = contacts[k]["colorContact"];
+      } 
     }
   }
 }
 
 
-
-async function proofIfContactsexist() {
-  if (contacts.length === 0) {
-    document.getElementById("ctn-contact-list").innerHTML = generateNoContactsHTML();
-    return;
+async function generateSingleListContactHTML(positionOfContact) {
+  const contactFirstNameInitial = contactsSorted[positionOfContact]["firstName"][0];
+  if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+    return ''; // Bei Übereinstimmung den leeren String zurückgeben
   }
 }
 
-function isGuest(user) {
-  return user && user["ID"] === 0 && user["email"] === "guest@account";
-}
 
-function clearContactList() {
+async function clearContactList() {
   document.getElementById("ctn-contact-list").innerHTML = "";
 }
 
 
 async function renderCurrentUserAsContact() {
-  document.getElementById("ctn-contact-list").innerHTML += generateSingleListContactHTML(0);
+  document.getElementById("ctn-contact-list").innerHTML += await generateSingleListContactHTML(0);
   document.getElementById(`contact-list-single-contact-acronym-${currentUserAsContact["ID"]}`).style.backgroundColor = currentUserAsContact["colorContact"];
 }
 
@@ -167,8 +215,9 @@ async function sortArrayContacts() {
     const nameB = b.name || '';
     return nameA.localeCompare(nameB);
   });
+  await createArrayInitialLetters();
+  console.log('test', contactsSorted);
 }
-
 
 
 /**
@@ -188,7 +237,6 @@ async function createArrayInitialLetters() {
 }
 
 
-
 /**
  * This function opens the detailed view of a contact and ensures that only the selected contact is marked in the contact list
  *
@@ -196,12 +244,10 @@ async function createArrayInitialLetters() {
  */
 async function openContactDetail(ID) {
   contactIsSelected = true;
+  positionOfContact = contactsSorted.findIndex(contact => String(contact.ID) === String(ID));
   checkWindowWidth();
-
   await resetPreviousSelectedContact();
   markSelectedContact(ID);
-
-  positionOfContact = contactsSorted.findIndex(contact => String(contact.ID) === String(ID));
 
   document.getElementById("wrapper-contact-details").innerHTML =
     await generateContactDetailHTML(positionOfContact);
@@ -214,13 +260,12 @@ async function openContactDetail(ID) {
 }
 
 
-
-
 /**
  * This functions resets the format for all contacts in the contact list (required in case that a contact was selected previously)
  * The function also hides the details of the previous contact (essential for the correct display of the slide-in animation of the following contact)
  */
 async function resetPreviousSelectedContact() {
+  console.log('hier vor previous', contactsSorted);
   for (i = 0; i < contactsSorted.length; i++) {
     let ID = contactsSorted[i]["ID"];
     document.getElementById(`${ID}`).style = `pointer-events: auto`;
@@ -359,33 +404,41 @@ async function editContact(positionOfContact) {
 
 /**
  * This function deletes the currently selected/ displayed contact, then updates the array contacts and
- * The function renders the contact list without the deleted contact and resets the detailed view
  *
  * !!! LÖSCHUNG AUS TASKS & UPDATE BACKEND MUSS NOCH ERGÄNZT WERDEN
- *
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
 async function deleteContact(positionOfContact) {
-  // Ensure positionOfContact is a valid index
-  if (positionOfContact < 0 || positionOfContact >= contacts.length) {
-    console.error("Invalid index for deleting contact");
-    return;
+  try {
+    const confirmation = window.confirm("Are you sure you want to delete this contact?");
+    if (!confirmation) {
+      return;
+    }
+    let updatedContactsSorted = await spliceContacts(positionOfContact);
+    await setItem('contacts', JSON.stringify(updatedContactsSorted));
+    checkWindowWidth();
+    await clearContactWrapper();
+    await returnToContactList();
+
+    closeSubmenuContact();
+    closeContactsDetails();
+    slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
+    
+  } catch (error) {
+    console.error("Error deleting contact:", error);
   }
+}
 
-  // Remove the contact at the specified index using splice
+
+
+
+async function spliceContacts(positionOfContact) {
   contactsSorted.splice(positionOfContact, 1);
+  return [...contactsSorted]; // Return a new array with the contact removed
+}
 
-  // Update the contacts array and save to storage
-  await setItem('contacts', JSON.stringify(contacts));
-
-  // Clear the details and return to contact list
+async function clearContactWrapper() {
   document.getElementById("wrapper-contact-details").innerHTML = '';
-  returnToContactList();
-
-  // Close submenu, details, and show confirmation popup
-  closeSubmenuContact();
-  closeContactsDetails();
-  slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
 }
 
 

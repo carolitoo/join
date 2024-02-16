@@ -44,7 +44,7 @@ async function generateInitialLetterHTML(initalLetter) {
  * @param {number} positionOfContact - position of the contact in the array "contactSorted" for which the HTML-Code is generated
  * @returns - HTML-Code for a single contact element in the contact list
  */
-function generateSingleListContactHTML(positionOfContact) {
+async function generateSingleListContactHTML(positionOfContact) {
   return /*html*/ `
     <div class="contact-list-single-contact" id="${contactsSorted[positionOfContact]["ID"]}" onclick="openContactDetail('${contactsSorted[positionOfContact]['ID']}')">
       <div class="contact-list-single-contact-acronym" id="contact-list-single-contact-acronym-${contactsSorted[positionOfContact]["ID"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
@@ -149,53 +149,6 @@ async function generateContactDetailHTML(positionOfContact) {
     `;
 }
 
-function generateContactDetailCurrentUser(currentUserAsContact){
-  let positionOfContact = -1;
-  return /*html*/ `
-  <div class="ctn-contacts-details-name">
-  <div class="contacts-detail-acronym" id="contacts-detail-acronym-${currentUserAsContact[positionOfContact]["ID"]}">${currentUserAsContact[positionOfContact]["acronymContact"]}</div>
-  <div class="ctn-contacts-details-name-right">
-  <div id="contacts-detail-identity-text-${currentUserAsContact[positionOfContact].ID}" class="contacts-detail-name">${currentUserAsContact[positionOfContact]["name"]}</div>
-      <div
-        class="contacts-detail-edit-delete"
-        onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"
-        onmouseout="changeImgTo('img-contacts-detail-edit', 'edit_default')"
-        onclick="openEditContactOverlay(${positionOfContact})"
-      >
-        <img
-          id="img-contacts-detail-edit"
-          src="./assets/img/edit_default.svg"
-        />
-        <span>Edit</span>
-      </div>
-      <div
-        class="contacts-detail-edit-delete"
-        onmouseover="changeImgTo('img-contacts-detail-delete', 'delete_lb')"
-        onmouseout="changeImgTo('img-contacts-detail-delete', 'delete_default')"
-        onclick="deleteContact(${positionOfContact})"
-      >
-        <img
-          id="img-contacts-detail-delete"
-          src="./assets/img/delete_default.svg"
-        />
-        <span>Delete</span>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="contacts-detail-subheadline">Contact Information</div>
-        <div class="ctn-contacts-detail-mail-phone">
-          <div class="contacts-detail-mail-phone">
-            <span>Email</span>
-            <div class="contacts-detail-mail">${currentUserAsContact[positionOfContact]["emailContact"]}</div>
-          </div>
-          <div class="contacts-detail-mail-phone">
-            <span>Phone</span>
-            <div id="contacts-detail-phone">${currentUserAsContact[positionOfContact]["phoneContact"]}</div>
-          </div>
-  </div>
-`;
-}
 
 
 /**

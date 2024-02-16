@@ -1,6 +1,6 @@
 [
     {
-    "ID": "0",
+    "ID": 0,
     "name": "Guest",
     "acronym": "G",
     "email": "guest@account",
@@ -23,7 +23,7 @@
     ]
     },
     {
-      "ID": "1",
+      "ID": 1,
       "name": "Antonia Zimmermann",
       "acronym": "AZ",
       "email": "antonia.zimmermann@gmail.com",
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "ID": "2",
+      "ID": 2,
       "name": "Anja Schulz",
       "acronym": "AS",
       "email": "schulz@gmail.com",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "ID": "3",
+      "ID": 3,
       "name": "Benedikt Ziegler",
       "acronym": "BZ",
       "email": "benedikt@gmail.com",
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "ID": "4",
+      "ID": 4,
       "name": "Carmen Gutmann",
       "acronym": "CG",
       "email": "carmen@hotmail.com",
@@ -115,7 +115,7 @@
       ]
     },
     {
-      "ID": "5",
+      "ID": 5,
       "name": "Miriam Müller",
       "acronym": "MM",
       "email": "miri@hotmail.com",
@@ -138,7 +138,7 @@
       ]
     },
     {
-      "ID": "6",
+      "ID": 6,
       "name": "Emmanuel Mauer",
       "acronym": "EM",
       "email": "mauer@gmail.com",
@@ -161,7 +161,7 @@
       ]
     },
     {
-      "ID": "7",
+      "ID": 7,
       "name": "Marcel Bauer",
       "acronym": "MB",
       "email": "mb@hotmail.com",
@@ -184,7 +184,7 @@
       ]
     },
     {
-      "ID": "8",
+      "ID": 8,
       "name": "Anton Mayer",
       "acronym": "AM",
       "email": "mayera@gmail.com",
