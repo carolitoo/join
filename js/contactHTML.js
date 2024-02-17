@@ -122,7 +122,7 @@ async function generateContactDetailHTML(positionOfContact) {
             />
             <span>Edit</span>
           </div>
-          <div
+          <div id="trash-bin-container"
             class="contacts-detail-edit-delete"
             onmouseover="changeImgTo('img-contacts-detail-delete', 'delete_lb')"
             onmouseout="changeImgTo('img-contacts-detail-delete', 'delete_default')"

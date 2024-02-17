@@ -37,7 +37,7 @@ async function checkIfGuestOrCurrentUser() {
   currentUserAsContact = contacts.find(c => c.emailContact === loggedInEmail);
 
   if (currentUserAsContact && currentUserAsContact.emailContact === 'guest@account') {
-    guest = true; 
+    guest = true;
     loggedInEmail = 'guest@account';
     return true;
   }
@@ -120,7 +120,7 @@ async function renderContactList() {
       const initialLetter = initialLetters[j].toUpperCase();
       if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase() && k !== 0) {
         continue;
-      }       
+      }
       await generateAndInsertInitialLetterHTML(initialLetter);
       const contactListLetter = document.getElementById(`contact-list-letter-${initialLetter}`);
       if (!contactListLetter.hasAttribute("data-iteration-done")) {
@@ -178,7 +178,7 @@ async function updateContactElementStylesForInitialLetter(contacts, initialLette
 
       if (contactElement) {
         contactElement.style.backgroundColor = contacts[k]["colorContact"];
-      } 
+      }
     }
   }
 }
@@ -187,7 +187,7 @@ async function updateContactElementStylesForInitialLetter(contacts, initialLette
 async function generateSingleListContactHTML(positionOfContact) {
   const contactFirstNameInitial = contactsSorted[positionOfContact]["firstName"][0];
   if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
-    return ''; // Bei Übereinstimmung den leeren String zurückgeben
+    return '';
   }
 }
 
@@ -243,23 +243,35 @@ async function createArrayInitialLetters() {
 /**
  * This function opens the detailed view of a contact and ensures that only the selected contact is marked in the contact list
  *
+/**
  * @param {string} ID - id of the contact for which the details shall be displayed
  */
 async function openContactDetail(ID) {
   contactIsSelected = true;
   positionOfContact = contactsSorted.findIndex(contact => String(contact.ID) === String(ID));
+  const isCurrentUser = currentUserAsContact && String(currentUserAsContact.ID) === String(ID);
+
   checkWindowWidth();
   await resetPreviousSelectedContact(ID);
   markSelectedContact(ID);
 
-  document.getElementById("wrapper-contact-details").innerHTML =
-    await generateContactDetailHTML(positionOfContact);
-
-  document.getElementById(
-    `contacts-detail-acronym-${ID}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
-
-  /*checkEmptyPhoneNumber(positionOfContact);*/
+  if (isCurrentUser) {
+    await openContactDetailCurrentUser(positionOfContact)
+  }
+  else {
+    document.getElementById("wrapper-contact-details").innerHTML = await generateContactDetailHTML(positionOfContact);
+  }
+  document.getElementById(`contacts-detail-acronym-${ID}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
   slideInAnimation('wrapper-contact-details', 'translate-x', false);
+}
+
+
+async function openContactDetailCurrentUser(positionOfContact) {
+
+  document.getElementById("wrapper-contact-details").innerHTML = await generateContactDetailHTML(positionOfContact);
+  const deleteButtonContainer = document.getElementById("trash-bin-container");
+  deleteButtonContainer.style.display = "none";
+
 }
 
 
@@ -426,7 +438,7 @@ async function deleteContact(positionOfContact) {
     closeSubmenuContact();
     closeContactsDetails();
     slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
-    
+
   } catch (error) {
     console.error("Error deleting contact:", error);
   }
