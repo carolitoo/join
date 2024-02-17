@@ -7,7 +7,6 @@ let users = [];
 
 async function initSignUp() {
     await includeHTML();
-
     await loadContactsJSON();
     await storeContacts();
     await loadUsersJSON();

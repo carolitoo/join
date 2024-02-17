@@ -19,6 +19,7 @@ async function initContact() {
   await checkIfGuestOrCurrentUser();
   await renderAcronym(loggedInEmail);
   await sortArrayContacts();
+  console.log('sorted', contactsSorted);
   await renderContactList();
   checkWindowWidth();
 }
@@ -117,9 +118,9 @@ async function renderContactList() {
   if (!proofExecuted) {
     for (let j = 0; j < initialLetters.length; j++) {
       const initialLetter = initialLetters[j].toUpperCase();
-      if (!guest && currentUserAsContact && initialLetters[j].toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+      if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase() && k !== 0) {
         continue;
-      }
+      }       
       await generateAndInsertInitialLetterHTML(initialLetter);
       const contactListLetter = document.getElementById(`contact-list-letter-${initialLetter}`);
       if (!contactListLetter.hasAttribute("data-iteration-done")) {
@@ -148,12 +149,12 @@ async function checkIfContactLetterstillThere(contactsSorted, initialLetter, con
 }
 
 
-async function processContactsForInitialLetter(contacts,initialLetter) {
+async function processContactsForInitialLetter(contacts, initialLetter) {
   let htmlContent = '';
 
   for (let k = 0; k < contacts.length; k++) {
     const contactFirstNameInitial = contacts[k]["firstName"][0];
-    if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
+    if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase() && k !== 0) {
       continue;
     }
 
@@ -248,7 +249,7 @@ async function openContactDetail(ID) {
   contactIsSelected = true;
   positionOfContact = contactsSorted.findIndex(contact => String(contact.ID) === String(ID));
   checkWindowWidth();
-  await resetPreviousSelectedContact();
+  await resetPreviousSelectedContact(ID);
   markSelectedContact(ID);
 
   document.getElementById("wrapper-contact-details").innerHTML =
