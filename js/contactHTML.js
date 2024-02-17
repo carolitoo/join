@@ -191,6 +191,7 @@ async function generateOverlayEditContact(positionOfContact) {
             type="email"
             id="contacts-detail-input-mail"
             placeholder="Email"
+            value="${contactsSorted[positionOfContact]["emailContact"]}"
             required
           />
           <img class="input-icon" src="./assets/img/mail.svg" />

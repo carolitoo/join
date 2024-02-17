@@ -398,8 +398,8 @@ async function openEditContactOverlay(positionOfContact) {
   document.getElementById("acronym-contacts-edit-add").style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
 
   document.getElementById("contacts-detail-input-name").value = contactsSorted[positionOfContact]["name"];
-  document.getElementById("contacts-detail-input-mail").value = contactsSorted[positionOfContact]["email"];
-  document.getElementById("contacts-detail-input-phone").value = contactsSorted[positionOfContact]["phoneNumber"];
+  document.getElementById("contacts-detail-input-mail").value = contactsSorted[positionOfContact]["emailContact"];
+  document.getElementById("contacts-detail-input-phone").value = contactsSorted[positionOfContact]["phoneContact"];
 }
 
 
@@ -409,10 +409,18 @@ async function openEditContactOverlay(positionOfContact) {
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
 async function editContact(positionOfContact) {
-  // + KONTAKT SPEICHERN/ ÜBERSCHREIBEN & IM BACKEND SPEICHERN // PRÜFEN, OB AUCH USER-ARRAY ANGEPASST WERDEN MUSS
+  const editedName = document.getElementById('contacts-detail-input-name').value;
+  const editedEmail = document.getElementById('contacts-detail-input-mail').value;
+  const editedPhone = document.getElementById('contacts-detail-input-phone').value;
+
+  contactsSorted[positionOfContact].name = editedName;
+  contactsSorted[positionOfContact].emailContact = editedEmail;
+  contactsSorted[positionOfContact].phoneContact = editedPhone;
+  await setItem('contacts', JSON.stringify(contactsSorted));
+  
   document.getElementById("overlay-contacts").classList.add("d-none");
-  await renderContactList();
   slideInAnimation('pop-up-contacts-edit', 'translate-y', true);
+  await resetPreviousSelectedContact();
   // openContactDetail(contactsSorted[positionOfContact]["ID"]); // PRÜFEN, OB ERFORDERLICH
 }
 

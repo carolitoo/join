@@ -7,10 +7,8 @@ let users = [];
 
 async function initSignUp() {
     await includeHTML();
-    await loadContactsJSON();
-    await storeContacts();
-    await loadUsersJSON();
-    await storeUsers();
+    await loadContacts();
+    await loadUserData();
 }
 
 // HILFSFUNKTION (falls Kontakte neu geladen und initialisiert werden müssen//
