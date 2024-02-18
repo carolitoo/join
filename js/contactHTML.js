@@ -104,7 +104,7 @@ async function generateSubmenuEditDeleteContactHTML(positionOfContact) {
  * @returns - HTML-Code for the detailed view of the selected contact
  */
 async function generateContactDetailHTML(positionOfContact) {
- 
+
   return /*html*/ `
       <div class="ctn-contacts-details-name">
       <div class="contacts-detail-acronym" id="contacts-detail-acronym-${contactsSorted[positionOfContact]["ID"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
@@ -197,14 +197,15 @@ async function generateOverlayEditContact(positionOfContact) {
           <img class="input-icon" src="./assets/img/mail.svg" />
         </div>
         <div>
-          <input
-            type="text"
-            id="contacts-detail-input-phone"
-            pattern="[+][0-9 ]*"
-            placeholder="Phone (optional)"
-            oninvalid="this.setCustomValidity('Please enter a valid phone number')"
-            oninput="this.setCustomValidity('')"
-          />
+        <input
+  type="tel"
+  id="contacts-detail-input-phone"
+  pattern="[0-9+]*"
+  placeholder="Phone (optional)"
+  oninvalid="this.setCustomValidity('Please enter a valid phone number')"
+  oninput="this.setCustomValidity('')"
+/>
+
           <img class="input-icon" src="./assets/img/phone.svg" />
         </div>
       </div>
@@ -244,7 +245,7 @@ async function generateOverlayAddContact() {
         <div class="ctn-contacts-detail-close" onclick="closeContactsDetails()"></div>
         <form
           class="form-contacts-edit-add"
-          onsubmit="addNewContact(); return false;"
+          onsubmit="createContact(); return false;"
         >
           <div class="ctn-input-contact-edit-add">
             <div>
