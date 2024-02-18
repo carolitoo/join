@@ -21,13 +21,6 @@ let matchingStatusTask = [
     }
 ]
 
-// let startX;
-// let startY;
-
-// function checkScrollY(e) {
-//     console.log(e)
-// }
-
 
 
 function changeStatusMobile(event, currentStatus, idTask) {
@@ -123,10 +116,11 @@ function checkStatusofCurrentDraggedElement() {
  * 
  * @param {string} newStatus - status of the task after moving it 
  */
-function moveElementTo(newStatus) {
+async function moveElementTo(newStatus) {
     positionOfTask = tasks.findIndex(id => id['idTask'] == currentIdTask);
 
     tasks[positionOfTask]['statusTask'] = newStatus;
+    await saveTasks();
     renderBoard(tasks);
 
     hidePreview(newStatus);
@@ -171,48 +165,3 @@ async function searchTask() {
         document.getElementById('board-no-results').classList.remove('d-none');
     } 
 }
-
-
-
-
-
-// function scrollY(event) {
-//   isDragging = true;
-//   let startY = event.clientY;
-//   let initialScrollTop = window.scrollY;
-
-//   function onMouseMove(event) {
-//     if (isDragging) {
-//       let deltaY = event.clientY - startY;
-//       window.scrollTo(initialScrollTop - deltaY);
-//       console.log(deltaY);
-//     }
-//   }
-
-//   function onMouseUp() {
-//     isDragging = false;
-//     document.removeEventListener("mousemove", onMouseMove);
-//     document.removeEventListener("mouseup", onMouseUp);
-//   }
-
-//   document.addEventListener("mousemove", onMouseMove);
-//   document.addEventListener("mouseup", onMouseUp);
-// }
-
-
-
-// function checkScroll(idTask) {
-//     let dragElement = document.getElementById(`card-task-small-${idTask}`);
-//     let dragElementTop = dragElement.getBoundingClientRect().top;
-//     let heightDraggedElement = dragElement.offsetHeight;
-//     let pufferScroll = 30;
-
-//     if (dragElementTop + heightDraggedElement + pufferScroll > window.innerHeight) {
-//         window.scrollBy(0, 100);
-//         console.log('Scroll-down');
-//     } else if (dragElementTop - pufferScroll < 0) {
-//         window.scrollBy(0, -100);
-//         console.log(dragElementTop);
-//         console.log('Scroll-up');
-//     }
-// }

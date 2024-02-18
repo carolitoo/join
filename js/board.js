@@ -17,17 +17,6 @@ async function initBoard() {
 
 
 /** 
- * NUR ZUM TESTEN
- */
-// async function loadDummyContacts() {
-//     let resp = await fetch('contacts_CO.json');
-//     contacts = await resp.json();
-// }
-
-/** 
- * 
- * NUR ZUM TESTEN
- * 
  * This function loads all the tasks currently existing (in the local array) into a JSON-Array
  */
 async function loadDummyTasks() {
@@ -41,6 +30,11 @@ async function loadDummyTasks() {
  */
 async function storeDummyTasks() {
     await loadDummyTasks();
+    await saveTasks();
+}
+
+
+async function saveTasks() {
     await setItem('tasks', JSON.stringify(tasks));
 }
 

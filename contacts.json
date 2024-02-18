@@ -7,8 +7,7 @@
     "acronymContact": "AZ",
     "colorContact": "#FF7A00",
     "emailContact": "antonia.zimmermann@gmail.com",
-    "phoneContact": "+49 111 111 111",
-    "assignedTasks": []
+    "phoneContact": "+49 111 111 111"
   },
   {
     "ID": 2,
@@ -18,8 +17,7 @@
     "acronymContact": "AS",
     "colorContact": "#FF5EB3",
     "emailContact": "schulz@gmail.com",
-    "phoneContact": "+49 111 111 111",
-    "assignedTasks": []
+    "phoneContact": "+49 111 111 111"
   },
   {
     "ID": 3,
@@ -29,8 +27,7 @@
     "acronymContact": "BZ",
     "colorContact": "#6E52FF",
     "emailContact": "benedikt@gmail.com",
-    "phoneContact": "+49 111 111 111",
-    "assignedTasks": []
+    "phoneContact": "+49 111 111 111"
   },
   {
     "ID": 4,
@@ -50,8 +47,7 @@
     "acronymContact": "MM",
     "colorContact": "#00BEE8",
     "emailContact": "miri@hotmail.com",
-    "phoneContact": "+49 111 111 111",
-    "assignedTasks": []
+    "phoneContact": "+49 111 111 111"
   },
   {
     "ID": 6,
@@ -61,8 +57,7 @@
     "acronymContact": "EM",
     "colorContact": "#1FD7C1",
     "emailContact": "mauer@gmail.com",
-    "phoneContact": "+49 111 111 111",
-    "assignedTasks": []
+    "phoneContact": "+49 111 111 111"
   },
   {
     "ID": 7,
@@ -72,8 +67,7 @@
     "acronymContact": "MB",
     "colorContact": "#FF745E",
     "emailContact": "mb@hotmail.com",
-    "phoneContact": "+49 111 111 111",
-    "assignedTasks": []
+    "phoneContact": "+49 111 111 111"
   },
   {
     "ID": 8,
@@ -83,7 +77,6 @@
     "acronymContact": "AM",
     "colorContact": "#FC71FF",
     "emailContact": "mayera@gmail.com",
-    "phoneContact": "+49 111 111 111",
-    "assignedTasks": []
+    "phoneContact": "+49 111 111 111"
   }
 ]
