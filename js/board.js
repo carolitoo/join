@@ -344,10 +344,11 @@ function closeTaskDetails() {
 
 function deleteTask(idTask) {
     let positionTask = tasks.findIndex((id) => id['idTask'] == idTask);
-    if (positionTask > -1) {
-        tasks.splice(positionTask, 1); 
-        saveTasks();
-      }
+    console.log(positionTask);
+    tasks.splice(positionTask, 1); 
+    saveTasks();
+    closeTaskDetails();
+    renderBoard(tasks);
 }
 
 
