@@ -9,6 +9,7 @@ async function initBoard() {
     // await loadDummyAndNewUserContacts();
     // await loadNewUserContacts();
     await loadContacts();
+    // await storeDummyTasks();
     await loadTasks();
     await renderBoard(tasks);
     changeSelectedTab('tab-board');
@@ -23,13 +24,34 @@ async function initBoard() {
 //     contacts = await resp.json();
 // }
 
-
 /** 
- * This function loads all the tasks currently existing into a JSON-Array
+ * 
+ * NUR ZUM TESTEN
+ * 
+ * This function loads all the tasks currently existing (in the local array) into a JSON-Array
  */
-async function loadTasks() {
+async function loadDummyTasks() {
     let resp = await fetch('tasks.json');
     tasks = await resp.json();
+}
+
+
+/**
+ * This function can be used to initially store the locally saved tasks in the backend 
+ */
+async function storeDummyTasks() {
+    await loadDummyTasks();
+    await setItem('tasks', JSON.stringify(tasks));
+}
+
+
+/** 
+ * This function loads all the tasks currently existing in the backend into a JSON-Array
+ */
+async function loadTasks() {
+    let resp = await getItem('tasks');
+    tasksAsString = resp['data']['value'];
+    tasks = JSON.parse(tasksAsString);
 }
 
 
