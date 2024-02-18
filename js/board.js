@@ -5,9 +5,10 @@ let positionOfTask;
 
 async function initBoard() {
     await includeHTML();
-    await loadDummyContacts();
+    // await loadDummyContacts();
     // await loadDummyAndNewUserContacts();
     // await loadNewUserContacts();
+    await loadContacts();
     await loadTasks();
     await renderBoard(tasks);
     changeSelectedTab('tab-board');
@@ -17,10 +18,10 @@ async function initBoard() {
 /** 
  * NUR ZUM TESTEN
  */
-async function loadDummyContacts() {
-    let resp = await fetch('contacts_CO.json');
-    contacts = await resp.json();
-}
+// async function loadDummyContacts() {
+//     let resp = await fetch('contacts_CO.json');
+//     contacts = await resp.json();
+// }
 
 
 /** 
@@ -184,7 +185,7 @@ async function checkAssignedContactsCardSmall(currentTasks, positionOfTask, curr
  */
 async function getAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask, u) {
     let idContact = currentTasks[positionOfTask]['assignedContacts'][u]['idContact'];
-    let positionContact = contacts.findIndex((id) => id["idContact"] == idContact);
+    let positionContact = contacts.findIndex((id) => id["ID"] == idContact);
 
     document.getElementById(`ctn-card-assigned-users-small-${currentIdTask}`).innerHTML += await generateContactIconCardSmallHTML(currentIdTask, idContact);
     document.getElementById(`card-assigned-user-small-${currentIdTask}-${idContact}`).innerHTML = await contacts[positionContact]['acronymContact'];
@@ -307,7 +308,7 @@ async function getAssignedContactsViewTaskDetail (positionOfTask, numberOfAssign
 
     for (u = 0; u < numberOfAssignedContacts; u++) {
         let idContact = tasks[positionOfTask]['assignedContacts'][u]['idContact'];
-        let positionContact = contacts.findIndex((id) => id["idContact"] == idContact);
+        let positionContact = contacts.findIndex((id) => id["ID"] == idContact);
 
         document.getElementById('ctn-task-detail-assigned-users-wrapper').innerHTML += await generateContactViewTaskDetailHTML(positionContact, idContact);
         document.getElementById(`task-detail-assigned-user-acronym-${idContact}`).style.backgroundColor = contacts[positionContact]['colorContact'];

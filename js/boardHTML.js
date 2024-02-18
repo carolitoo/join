@@ -145,7 +145,7 @@ async function generateContactViewTaskDetailHTML(positionContact, idContact) {
   return /*html*/ `
   <div class="ctn-task-detail-single-assigned-user">
       <div class="task-detail-assigned-user-acronym" id="task-detail-assigned-user-acronym-${idContact}">${contacts[positionContact]['acronymContact']}</div>
-      <div class="task-detail-assigned-user-name">${contacts[positionContact]['nameContact']}</div>
+      <div class="task-detail-assigned-user-name">${contacts[positionContact]['name']}</div>
   </div>
   `
 }

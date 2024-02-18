@@ -5,13 +5,13 @@
     "descriptionTask": "Build start page with recipe recommendation.",
     "assignedContacts": [
       {
-        "idContact": "contact-1"
+        "idContact": 1
       },
       {
-        "idContact": "contact-2"
+        "idContact": 2
       },
       {
-        "idContact": "contact-3"
+        "idContact": 3
       }
     ],
     "dueDate": "2023-05-10T20:15:00.000Z",
@@ -37,22 +37,22 @@
     "descriptionTask": "Define CSS naming conventions and structure.",
     "assignedContacts": [
       {
-        "idContact": "contact-1"
+        "idContact": 1
       },
       {
-        "idContact": "contact-2"
+        "idContact": 2
       },
       {
-        "idContact": "contact-3"
+        "idContact": 3
       },
       {
-        "idContact": "contact-4"
+        "idContact": 4
       },
       {
-        "idContact": "contact-5"
+        "idContact": 5
       },
       {
-        "idContact": "contact-6"
+        "idContact": 6
       }
     ],
     "dueDate": "2023-09-02T20:15:00.000Z",
@@ -78,13 +78,13 @@
     "descriptionTask": "Analyse structur of the project, detect interdependencies and define responsibilities",
     "assignedContacts": [
       {
-        "idContact": "contact-5"
+        "idContact": 5
       },
       {
-        "idContact": "contact-4"
+        "idContact": 4
       },
       {
-        "idContact": "contact-2"
+        "idContact": 2
       }
     ],
     "dueDate": "2024-11-01T10:30:00.000Z",
@@ -115,13 +115,13 @@
     "descriptionTask": "Check whether elements can be adjusted to guarantee a better user experience",
     "assignedContacts": [
       {
-        "idContact": "contact-3"
+        "idContact": 3
       },
       {
-        "idContact": "contact-1"
+        "idContact": 1
       },
       {
-        "idContact": "contact-2"
+        "idContact": 2
       }
     ],
     "dueDate": "2024-03-20T14:40:00.000Z",
@@ -162,13 +162,13 @@
     "descriptionTask": "Check whether all points from the checklist were accomplished.",
     "assignedContacts": [
       {
-        "idContact": "contact-4"
+        "idContact": 4
       },
       {
-        "idContact": "contact-1"
+        "idContact": 1
       },
       {
-        "idContact": "contact-6"
+        "idContact": 6
       }
     ],
     "dueDate": "2024-02-12T09:25:00.000Z",
@@ -214,13 +214,13 @@
     "descriptionTask": "Check appearance and whether all features work in the established browsers",
     "assignedContacts": [
       {
-        "idContact": "contact-4"
+        "idContact": 4
       },
       {
-        "idContact": "contact-1"
+        "idContact": 1
       },
       {
-        "idContact": "contact-6"
+        "idContact": 6
       }
     ],
     "dueDate": "2024-02-16T09:25:00.000Z",
