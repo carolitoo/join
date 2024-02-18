@@ -20,11 +20,10 @@
   <script src="./js/storage.js" defer></script>
   <script src="./js/template.js" defer></script>
   <script src="./js/login.js" defer></script>
+  <script src="./js/board.js" defer></script>
   <script src="./js/contact.js" defer></script>
   <script src="./js/contactHTML.js" defer></script>
-  <script src="./contacts.json" defer></script>
   <script src="colors.js" defer></script>
-  <script src="users.json"></script>
 </head>
 
 
@@ -54,7 +53,7 @@
             <div class="icon-blue-pen">
             </div>
             <div class="number-and-txt-box">
-              <h1>1</h1>
+              <h1 id="summary-tasks-toDo">1</h1>
               <span class="text-format-Summary-1">To-Do</span>
             </div>
           </div>
@@ -63,7 +62,7 @@
             <div class="icon-blue-checkmark">
             </div>
             <div class="number-and-txt-box">
-              <h1>1</h1>
+              <h1 id="summary-tasks-done">1</h1>
               <span class="text-format-Summary-1">Done</span>
             </div>
           </div>
@@ -72,32 +71,32 @@
         <div class="urgent_date_ctn" onclick="location.href='board.html';">
 
           <div class="urgent_content">
-            <div class="icon-red">
-              <img src="./assets/img/prio alta.svg" class="summary-icon-size" alt="...">
+            <div class="summary-icon-priority" id="summary-icon-priority">
+              <img id="summary-img-priority" src="./assets/img/prio_urgent_white.svg" alt="...">
             </div>
             <div class="number-and-txt-box">
-              <h1>1</h1>
-              <span class="text-format-Summary-2">Urgent</span>
+              <h1 id="summary-number-upcoming-task">1</h1>
+              <span class="text-format-Summary-2" id="summary-priority-upcoming-task">Urgent</span>
             </div>
           </div>
           <div class="parting_line_grey"></div>
           <div class="date_content">
-            <span class="text-format-Summary-3">October 16, 2024</span>
+            <span class="text-format-Summary-3" id="summary-date-upcoming-task">October 16, 2024</span>
             <span>Upcoming deadline</span>
           </div>
         </div>
 
         <div class="task_progr_feedb_ctn">
           <div class="task_progr_feedb_box">
-            <h1>5</h1>
+            <h1 id="summary-tasks-all">3</h1>
             <span class="text-format-Summary-1">Tasks in<br>Board</span>
           </div>
           <div class="task_progr_feedb_box">
-            <h1>2</h1>
+            <h1 id="summary-tasks-inProgress">2</h1>
             <span class="text-format-Summary-1">Tasks in<br>Progress</span>
           </div>
           <div class="task_progr_feedb_box">
-            <h1>2</h1>
+            <h1 id="summary-tasks-awaitFeedback">2</h1>
             <span class="text-format-Summary-1">Awaiting<br>Feedback</span>
           </div>
         </div>

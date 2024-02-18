@@ -14,7 +14,7 @@
         "idContact": 3
       }
     ],
-    "dueDate": "2023-05-10T20:15:00.000Z",
+    "dueDate": "2024-08-10T20:15:00.000Z",
     "priority": "Medium",
     "category": "User Story",
     "subtasks": [
@@ -55,7 +55,7 @@
         "idContact": 6
       }
     ],
-    "dueDate": "2023-09-02T20:15:00.000Z",
+    "dueDate": "2024-09-02T20:15:00.000Z",
     "priority": "Urgent",
     "category": "Technical Task",
     "subtasks": [
@@ -87,8 +87,8 @@
         "idContact": 2
       }
     ],
-    "dueDate": "2024-11-01T10:30:00.000Z",
-    "priority": "High",
+    "dueDate": "2024-02-12T10:30:00.000Z",
+    "priority": "Urgent",
     "category": "Technical Task",
     "subtasks": [
       {
@@ -124,8 +124,8 @@
         "idContact": 2
       }
     ],
-    "dueDate": "2024-03-20T14:40:00.000Z",
-    "priority": "Medium",
+    "dueDate": "2024-05-20T14:40:00.000Z",
+    "priority": "Low",
     "category": "User Story",
     "subtasks": [
       {
@@ -171,8 +171,8 @@
         "idContact": 6
       }
     ],
-    "dueDate": "2024-02-12T09:25:00.000Z",
-    "priority": "High",
+    "dueDate": "2024-02-22T09:25:00.000Z",
+    "priority": "Urgent",
     "category": "Technical Task",
     "subtasks": [
       {
@@ -223,7 +223,7 @@
         "idContact": 6
       }
     ],
-    "dueDate": "2024-02-16T09:25:00.000Z",
+    "dueDate": "2024-02-26T09:25:00.000Z",
     "priority": "Medium",
     "category": "Technical Task",
     "subtasks": [

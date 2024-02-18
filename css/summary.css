@@ -60,8 +60,8 @@ h1 {
 
 .todo_done_box:hover {
     background: #2A3647;
-    width: 283px;
-    height: 184px;
+    /* width: 283px;
+    height: 184px; */
     color: #ffffff;
 }
 
@@ -157,7 +157,7 @@ h1 {
     gap: 18px;
 }
 
-.icon-red {
+.summary-icon-priority {
     width: 69px;
     height: 69px;
     border-radius: 100%;
@@ -166,6 +166,10 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.summary-icon-priority img {
+    width: 34px;
 }
 
 .parting_line_grey {

@@ -233,7 +233,7 @@ function getSelectedPriority(idImgElement, currentTasks, positionOfTask) {
     let priorityOfTask = currentTasks[positionOfTask]['priority'];
 
     if (priorityOfTask == 'Urgent') {
-        document.getElementById(idImgElement).src = "./assets/img/prio_high_color.svg";
+        document.getElementById(idImgElement).src = "./assets/img/prio_urgent_color.svg";
     } else if (priorityOfTask == 'Medium') {
         document.getElementById(idImgElement).src = "./assets/img/prio_medium_color.svg";
     } else if (priorityOfTask == 'Low') {
