@@ -5,8 +5,8 @@ let positionOfTask;
 
 async function initBoard() {
     await includeHTML();
-    // await loadDummyContacts();
-    await loadDummyAndNewUserContacts();
+    await loadDummyContacts();
+    // await loadDummyAndNewUserContacts();
     // await loadNewUserContacts();
     await loadTasks();
     await renderBoard(tasks);
@@ -18,7 +18,7 @@ async function initBoard() {
  * NUR ZUM TESTEN
  */
 async function loadDummyContacts() {
-    let resp = await fetch('contacts.json');
+    let resp = await fetch('contacts_CO.json');
     contacts = await resp.json();
 }
 
