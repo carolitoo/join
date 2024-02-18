@@ -119,12 +119,12 @@ async function generateViewTaskDetailHTML(positionOfTask, currentIdTask) {
         </div>
 
         <div class="ctn-task-detail-edit-delete">
-          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-delete', 'delete_lb')" onmouseout="changeImgTo('img-task-detail-delete', 'delete_default')" onclick="deleteTask(${currentIdTask})">
+          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-delete', 'delete_lb')" onmouseout="changeImgTo('img-task-detail-delete', 'delete_default')" onclick="deleteTask('${currentIdTask}')">
             <img id="img-task-detail-delete" src="./assets/img/delete_default.svg">
             <span>Delete</span>
           </div>
           <div class="task-detail-separator-edit"></div>
-          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-edit', 'edit_lb')" onmouseout="changeImgTo('img-task-detail-edit', 'edit_default')" onclick="editTask(${currentIdTask})">
+          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-edit', 'edit_lb')" onmouseout="changeImgTo('img-task-detail-edit', 'edit_default')" onclick="editTask('${currentIdTask}')">
             <img id="img-task-detail-edit" src="./assets/img/edit_default.svg">
             <span>Edit</span>
           </div>

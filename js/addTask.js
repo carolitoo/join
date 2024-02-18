@@ -1,17 +1,20 @@
 const SUBTASK_ID = 0;
 let dummyUsers = [];  //dummy array for users in the remote storage 
 
-let tasks = []; // stores exsisting Tasks from the remote 
 let taskPrio = "Medium"; //MEDIUM ist the default Prio
 let assignedUsers = []; //collects the checked users from the "Assginded to" menu
 let category = []; //holds the chosen category from the form before submit
-let statusTask = "TO_DO"; //TO_DO ist the default status
+// let statusTask = "TO_DO"; //TO_DO ist the default status
 let checkboxStates = {};
 
 async function initAddTask() {
     await includeHTML();
+    // await loadUserData();
+    // await getLoggedInEmail();
+    // await renderAcronym(loggedInEmail);
     //await loadUserData();//
-    await loadDummyAndNewUserContacts();
+    await loadContacts();
+    await loadTasks();
     changeSelectedTab('tab-add-task');
 }
 

@@ -9,7 +9,7 @@ async function initSummary() {
     await getLoggedInEmail();
     await identifyCurrentUser();
     await personalizeAppContent(currentUser);
-    // await loadTasks();
+    await loadTasks();
     changeSelectedTab('tab-summary');
 }
 

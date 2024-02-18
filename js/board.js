@@ -5,9 +5,9 @@ let positionOfTask;
 
 async function initBoard() {
     await includeHTML();
-    // await loadDummyContacts();
-    // await loadDummyAndNewUserContacts();
-    // await loadNewUserContacts();
+    // await loadUserData();
+    // await getLoggedInEmail();
+    // await renderAcronym(loggedInEmail);
     await loadContacts();
     // await storeDummyTasks();
     await loadTasks();
@@ -338,6 +338,16 @@ async function getAssignedContactsViewTaskDetail (positionOfTask, numberOfAssign
 function closeTaskDetails() {
     document.getElementById('overlay-board').classList.add('d-none');
     document.getElementsByTagName('body')[0].classList.remove('disable-scroll');
+}
+
+
+
+function deleteTask(idTask) {
+    let positionTask = tasks.findIndex((id) => id['idTask'] == idTask);
+    if (positionTask > -1) {
+        tasks.splice(positionTask, 1); 
+        saveTasks();
+      }
 }
 
 
