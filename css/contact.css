@@ -17,10 +17,6 @@
   overflow-y: auto;
 }
 
-.bg-contact-list::-webkit-scrollbar-track {
-  margin-block: 4px;
-}
-
 .wrapper-contact-list {
   margin-left: 28px;
   padding: 0px 24px;
@@ -190,12 +186,15 @@
   font-size: 47px;
   font-weight: 500;
 }
-
 .ctn-contacts-detail-edit-delete {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 24px;
+}
+
+.contacts-detail-edit-delete-container {
+  display: flex !important;
 }
 
 .contacts-detail-edit-delete {

@@ -93,7 +93,7 @@ async function generateSubmenuEditDeleteContactHTML(positionOfContact) {
             src="./assets/img/delete_default.svg"
           />
           <span>Delete</span>
-        </div>
+           </div>         
   `;
 }
 
@@ -110,29 +110,32 @@ async function generateContactDetailHTML(positionOfContact) {
       <div class="contacts-detail-acronym" id="contacts-detail-acronym-${contactsSorted[positionOfContact]["ID"]}">${contactsSorted[positionOfContact]["acronymContact"]}</div>
       <div class="ctn-contacts-details-name-right">
       <div id="contacts-detail-identity-text-${contactsSorted[positionOfContact].ID}" class="contacts-detail-name">${contactsSorted[positionOfContact]["name"]}</div>
-          <div
-            class="contacts-detail-edit-delete"
-            onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"
-            onmouseout="changeImgTo('img-contacts-detail-edit', 'edit_default')"
-            onclick="openEditContactOverlay(${positionOfContact})"
-          >
-            <img
-              id="img-contacts-detail-edit"
-              src="./assets/img/edit_default.svg"
-            />
-            <span>Edit</span>
-          </div>
-          <div id="trash-bin-container"
-            class="contacts-detail-edit-delete"
-            onmouseover="changeImgTo('img-contacts-detail-delete', 'delete_lb')"
-            onmouseout="changeImgTo('img-contacts-detail-delete', 'delete_default')"
-            onclick="deleteContact(${positionOfContact})"
-          >
-            <img
-              id="img-contacts-detail-delete"
-              src="./assets/img/delete_default.svg"
-            />
-            <span>Delete</span>
+          
+              <div class="contacts-detail-edit-delete-container">
+                <div
+                class="contacts-detail-edit-delete"
+                onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"
+                onmouseout="changeImgTo('img-contacts-detail-edit', 'edit_default')"
+                onclick="openEditContactOverlay(${positionOfContact})"
+                 >
+                 <img
+                 id="img-contacts-detail-edit"
+                 src="./assets/img/edit_default.svg"
+                 />
+                 <span>Edit</span>
+                </div>
+                <div id="trash-bin-container"
+               class="contacts-detail-edit-delete"
+               onmouseover="changeImgTo('img-contacts-detail-delete', 'delete_lb')"
+               onmouseout="changeImgTo('img-contacts-detail-delete', 'delete_default')"
+               onclick="deleteContact(${positionOfContact})"
+               >
+               <img
+               id="img-contacts-detail-delete"
+               src="./assets/img/delete_default.svg"
+               />
+               <span>Delete</span>
+              </div>
           </div>
         </div>
       </div>
