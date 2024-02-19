@@ -243,20 +243,21 @@ async function createArrayInitialLetters() {
 async function createContact() {
   let nameInput = document.getElementById('contacts-detail-input-name').value;
   let emailInput = document.getElementById('contacts-detail-input-mail').value;
-  let phoneNumberInput = document.getElementById('contacts-detail-input-phone').value
+  let phoneNumberInput = document.getElementById('contacts-detail-input-phone').value;
 
   let newContact = {
-    "ID": new Date().getTime(),
-    "name": nameInput,
-    "firstName": filterFirstName(nameInput),
-    "lastName": filterLastName(),
-    "acronymContact": getAcronym(),
-    "colorContact": setBackgroundcolor(),
-    "emailContact": emailInput,
-    "phoneContact": phoneNumberInput
-  }
+      "ID": new Date().getTime(),
+      "firstName": filterFirstName(nameInput),
+      "lastName": filterLastName(),
+      "name": filterFirstName(nameInput) + ' ' + filterLastName(),
+      "acronymContact": getAcronym(),
+      "colorContact": setBackgroundcolor(),
+      "emailContact": emailInput,
+      "phoneContact": phoneNumberInput
+  };
   await addNewContact(newContact);
 }
+
 
 
 
@@ -272,7 +273,7 @@ async function openContactDetail(ID) {
   const isCurrentUser = currentUserAsContact && String(currentUserAsContact.ID) === String(ID);
 
   checkWindowWidth();
-  await resetPreviousSelectedContact(ID);
+  await resetPreviousSelectedContact();
   markSelectedContact(ID);
 
   if (isCurrentUser) {
@@ -367,8 +368,8 @@ async function openAddContactOverlay() {
  * This function allows the user to add a new contact to the contact list/ array contacts 
  */
 async function addNewContact(newContact) {
-  await checkIfContactexist(newContact);
-  if (!checkIfContactexist) {
+  const contactExists = await checkIfContactexist(newContact);
+  if (!contactExists) {
     contacts.push(newContact);
     contactsSorted.push(newContact);
     contactsSorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -387,25 +388,26 @@ async function checkIfContactexist(newContact) {
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].emailContact == newContact.emailContact) {
       let emailInput = document.getElementById('contacts-detail-input-mail');
-       displayErrorMessage('Contact already exists', emailInput);
-       return true;
+      displayErrorMessage('Contact already exists', emailInput);
+      return true; // Contact exists, return true
     }
   }
   return false;
 }
 
 
+
 function displayErrorMessage(message, element) {
   const errorMessageId = 'customErrorMessage';
   let existingErrorMessage = document.getElementById(errorMessageId);
   if (existingErrorMessage) {
-      existingErrorMessage.innerHTML = message;
+    existingErrorMessage.innerHTML = message;
   } else {
-      let errorMessage = document.createElement('div');
-      errorMessage.innerHTML = message;
-      errorMessage.id = errorMessageId;
-      errorMessage.style.cssText = 'color: red; margin: -27px 0 9px 6px; font-size: small;';
-      element.parentNode.appendChild(errorMessage);
+    let errorMessage = document.createElement('div');
+    errorMessage.innerHTML = message;
+    errorMessage.id = errorMessageId;
+    errorMessage.style.cssText = 'color: red; margin: -27px 0 9px 6px; font-size: small;';
+    element.parentNode.appendChild(errorMessage);
   }
 }
 

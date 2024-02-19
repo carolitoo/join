@@ -200,7 +200,7 @@ async function generateOverlayEditContact(positionOfContact) {
         <input
   type="tel"
   id="contacts-detail-input-phone"
-  pattern="[0-9+]*"
+  pattern="[0-9+ ]*"
   placeholder="Phone (optional)"
   oninvalid="this.setCustomValidity('Please enter a valid phone number')"
   oninput="this.setCustomValidity('')"
