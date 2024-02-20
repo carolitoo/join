@@ -21,6 +21,9 @@
   <script src="./js/board.js" defer></script>
   <script src="./js/addTask.js" defer></script>
   <script src="./js/addTask_subtasks.js" defer></script>
+  <script src="./js/submitTasks.js" defer></script>
+  <script src="contacts.json"></script>
+  <script src="tasksTest.json"></script>
   
 
 </head>
@@ -83,15 +86,15 @@
             <span class="add_task_txt_format">Prio</span>
             <div class="prio_box_layout">
 
-              <button id="urgentButton" class="prio-btn-neutral" onclick="changeButtonColorsUrgent()">Urgent
+              <button id="urgentButton" class="prio-btn-neutral" onclick="changeButtonColorsUrgent(event)">Urgent
                 <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
               </button>
 
-              <button id="mediumButton" class="medium-btn-yellow" onclick="changeButtonColorsMedium()">Medium
+              <button id="mediumButton" class="medium-btn-yellow" onclick="changeButtonColorsMedium(event)">Medium
                 <img id="medium-icon" src="./assets/img/capa 2.svg" class="urgent-icon" style="fill:#FFA800">
               </button>
 
-              <button id="lowButton" class="prio-btn-neutral" onclick="changeButtonColorsLow()">Low
+              <button id="lowButton" class="prio-btn-neutral" onclick="changeButtonColorsLow(event)">Low
                 <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
               </button>
 
@@ -114,7 +117,7 @@
 
           <div class="input_box_layout">
             <span class="add_task_txt_format">Subtasks</span>
-              <input class="input-add-task" id="subtaskInput" required minlength="2" placeholder="Enter a title">
+              <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title">
               <div id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()"></div>
               <div id="added-subtask-ctn"></div>
           </div>
@@ -130,7 +133,7 @@
         <button class="clear-btn" onclick="clearTasks()">Clear
           <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark">
         </button>
-        <button class="create-task-btn" onsubmit="">Create Task
+        <button type="button" class="create-task-btn" onclick="submitTask()">Create Task
           <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
         </button>
       </div>
