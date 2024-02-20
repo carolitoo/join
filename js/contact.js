@@ -15,6 +15,7 @@ async function initContact() {
   changeSelectedTab("tab-contacts");
   await loadUserData();
   await loadContacts();
+  await loadTasks();
   await getLoggedInEmail();
   await proofAuthentification(loggedInEmail);
   await checkIfGuestOrCurrentUser();
@@ -489,7 +490,6 @@ async function editContact(positionOfContact) {
 /**
  * This function deletes the currently selected/ displayed contact, then updates the array contacts and
  *
- * !!! LÖSCHUNG AUS TASKS & UPDATE BACKEND MUSS NOCH ERGÄNZT WERDEN
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
 async function deleteContact(positionOfContact) {
@@ -498,6 +498,7 @@ async function deleteContact(positionOfContact) {
     if (!confirmation) {
       return;
     }
+    await removeContactFromTasks(positionOfContact);
     let updatedContactsSorted = await spliceContacts(positionOfContact);
     await setItem('contacts', JSON.stringify(updatedContactsSorted));
     checkWindowWidth();
@@ -527,8 +528,31 @@ async function clearContactWrapper() {
 
 
 /**
- * This function closes the overlay for adding oder editing a contact
+ * This function closes the overlay for adding or editing a contact
  */
 function closeContactsDetails() {
   document.getElementById("overlay-contacts").classList.add("d-none");
+}
+
+
+/**
+ * This function ensures that a contact is removed from any assigned tasks before this contact is deleted
+ * 
+ * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
+ */
+async function removeContactFromTasks(positionOfContact) {
+  let idOfDeletedContact = contactsSorted[positionOfContact]['ID'];
+
+  for (let i = 0; i < tasks.length; i++) {
+    let counterContacts = tasks[i]['assignedContacts'].length;
+    for (let j =0; j < counterContacts; j++) {
+      if (tasks[i]['assignedContacts'][j]['idContact'] == idOfDeletedContact) {
+        tasks[i]['assignedContacts'].splice(j, 1);
+        break;
+      }
+    }
+  }
+
+  saveTasks();
+
 }

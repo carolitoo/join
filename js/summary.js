@@ -120,7 +120,7 @@ function greetingGuest(currentHour) {
 
 
 /**
- * This function renders the flexible content of the summary concerning the tasks
+ * This function renders the dynamic content of the summary concerning the tasks
  */
 async function renderOverviewTasks() {
     for (let i = 0; i < statusTask.length; i++) {
