@@ -118,7 +118,9 @@ function renderContacts() {
             assignedContacts.innerHTML += `
                 <div class="contact">
                     <div>
-                        <span>${nameInitials}</span> <!-- Initialen des Kontakts -->
+                        <div class="task-detail-assigned-user-acronym">
+                            <span>${nameInitials}</span> <!-- Initialen des Kontakts -->
+                        </div>
                         <span>${contactName}</span> <!-- Name des Kontakts -->
                     </div>
                     <input type="checkbox" onclick="saveContactsToArray(this)">
@@ -126,12 +128,11 @@ function renderContacts() {
         }
     });
 }
-
 function saveContactsToArray(checkbox) {
     let parentContact = checkbox.closest('.contact');
 
     if (parentContact) {
-        let userName = parentContact.querySelector('span:last-child').innerText;
+        let userName = parentContact.querySelector('.contact span:nth-child(2)').innerText;
         let foundContact = contacts.find(contact => contact.name === userName);
 
         if (foundContact) {
