@@ -9,10 +9,11 @@ let checkboxStates = {};
 
 async function initAddTask() {
     await includeHTML();
-    // await loadUserData();
-    // await getLoggedInEmail();
-    // await renderAcronym(loggedInEmail);
-    //await loadUserData();//
+    await loadUserData();
+    await getLoggedInEmail();
+    await proofAuthentification(loggedInEmail);
+    await renderAcronym(loggedInEmail);
+    await loadUserData();//
     await loadContacts();
     await loadTasks();
     changeSelectedTab('tab-add-task');

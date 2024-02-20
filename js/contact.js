@@ -16,6 +16,7 @@ async function initContact() {
   await loadUserData();
   await loadContacts();
   await getLoggedInEmail();
+  await proofAuthentification(loggedInEmail);
   await checkIfGuestOrCurrentUser();
   await renderAcronym(loggedInEmail);
   await sortArrayContacts();
@@ -126,7 +127,7 @@ async function renderContactList() {
       if (!contactListLetter.hasAttribute("data-iteration-done")) {
         await processContactsForInitialLetter(contactsSorted, initialLetter);
         contactListLetter.setAttribute("data-iteration-done", true);
-        // Check if any contacts with the current initial letter exist after deletion
+     
         await checkIfContactLetterstillThere(contactsSorted, initialLetter, contactListLetter);
       }
       await updateContactElementStylesForInitialLetter(contactsSorted, initialLetter);
