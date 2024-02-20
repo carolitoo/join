@@ -115,7 +115,6 @@ function filterFirstName(userName) {
 }
 
 
-
 function filterLastName() {
     lastName = ''
     if (nameParts.length > 1) {
@@ -124,7 +123,6 @@ function filterLastName() {
     return lastName;
 }
 
-
 function getAcronym() {
     const formattedFirstNameInitial = firstName.charAt(0).toUpperCase();
     const formattedLastNameInitial = lastName.charAt(0).toUpperCase();
@@ -132,10 +130,14 @@ function getAcronym() {
 }
 
 
-
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
 }
+
+
 
 
 

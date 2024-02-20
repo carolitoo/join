@@ -5,9 +5,10 @@ let positionOfTask;
 
 async function initBoard() {
     await includeHTML();
-    // await loadUserData();
-    // await getLoggedInEmail();
-    // await renderAcronym(loggedInEmail);
+    await loadUserData();
+    await getLoggedInEmail();
+    await proofAuthentification(loggedInEmail);
+    await renderAcronym(loggedInEmail);
     await loadContacts();
     // await storeDummyTasks();
     await loadTasks();
@@ -341,10 +342,13 @@ function closeTaskDetails() {
 }
 
 
-
+/**
+ * This function deletes a task, updates the array in the backend and renders the updated tasks
+ * 
+ * @param {string} idTask - id of the task deleted
+ */
 function deleteTask(idTask) {
     let positionTask = tasks.findIndex((id) => id['idTask'] == idTask);
-    console.log(positionTask);
     tasks.splice(positionTask, 1); 
     saveTasks();
     closeTaskDetails();

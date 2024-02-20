@@ -16,22 +16,19 @@ async function initContact() {
   await loadUserData();
   await loadContacts();
   await getLoggedInEmail();
+  await proofAuthentification(loggedInEmail);
   await checkIfGuestOrCurrentUser();
   await renderAcronym(loggedInEmail);
   await sortArrayContacts();
-  console.log('sorted', contactsSorted);
   await renderContactList();
   checkWindowWidth();
 }
 
-
-async function loadContacts() {
-  const response = await getItem('contacts');//wie kommen Werte züruck in's user-array?//
-  const contactsData = response['data']['value'];
-  if (contactsData) {
-    contacts = JSON.parse(contactsData);
-  }
-}
+/**
+ * This function checks whether a guest is logging in or whether it is a personal account.
+ * 
+ * @returns returns true if the current user is the guest user. returns false if the user is using personalized access.
+ */
 
 async function checkIfGuestOrCurrentUser() {
   currentUserAsContact = contacts.find(c => c.emailContact === loggedInEmail);
@@ -81,21 +78,24 @@ async function returnToContactList() {
   contactIsSelected = false;
   await clearContactList();
   await loadContacts();
-  console.log('die gelöschten contacts', contacts);
   await renderContactList();
   // Check the window width and update the view accordingly
   checkWindowWidth();
 }
 
+
 /**
+ * This function finds the currentUser and updates the interface with the user's personalized acronym-based icon.
  * 
-This function finds the currentUser and updates the interface with the user's personalized acronym-based icon.
+ * @param {string} loggedInEmail - currently used email-adress
+ * @returns - an array with all access information about the current user.
  */
 async function renderAcronym(loggedInEmail) {
   currentUser = users.find(u => u.email == loggedInEmail);
   generateUserIcon(currentUser.acronym);
   return currentUser;
 }
+
 
 
 async function proofIfContactsexist() {
@@ -111,7 +111,7 @@ async function proofIfContactsexist() {
 /**
  * This function renders the loaded contacts alphabetically sorted into the contact list
  */
-async function renderContactList(newContact) {
+async function renderContactList() {
   if (!guest && currentUserAsContact) {
     await renderCurrentUserAsContact();
   }
@@ -127,7 +127,7 @@ async function renderContactList(newContact) {
       if (!contactListLetter.hasAttribute("data-iteration-done")) {
         await processContactsForInitialLetter(contactsSorted, initialLetter);
         contactListLetter.setAttribute("data-iteration-done", true);
-        // Check if any contacts with the current initial letter exist after deletion
+     
         await checkIfContactLetterstillThere(contactsSorted, initialLetter, contactListLetter);
       }
       await updateContactElementStylesForInitialLetter(contactsSorted, initialLetter);
@@ -240,21 +240,24 @@ async function createArrayInitialLetters() {
   initialLetters.sort();
 }
 
+/**
+ * This function generates values after filling in the input fields and uses them to create a new contact.
+ */
 async function createContact() {
   let nameInput = document.getElementById('contacts-detail-input-name').value;
   let emailInput = document.getElementById('contacts-detail-input-mail').value;
-  let phoneNumberInput = document.getElementById('contacts-detail-input-phone').value
+  let phoneNumberInput = document.getElementById('contacts-detail-input-phone').value;
 
   let newContact = {
-    "ID": new Date().getTime(),
-    "name": nameInput,
-    "firstName": filterFirstName(nameInput),
-    "lastName": filterLastName(),
-    "acronymContact": getAcronym(),
-    "colorContact": setBackgroundcolor(),
-    "emailContact": emailInput,
-    "phoneContact": phoneNumberInput
-  }
+      "ID": new Date().getTime(),
+      "firstName": filterFirstName(nameInput),
+      "lastName": filterLastName(),
+      "name": filterFirstName(nameInput) + ' ' + filterLastName(),
+      "acronymContact": getAcronym(),
+      "colorContact": setBackgroundcolor(),
+      "emailContact": emailInput,
+      "phoneContact": phoneNumberInput
+  };
   await addNewContact(newContact);
 }
 
@@ -272,7 +275,7 @@ async function openContactDetail(ID) {
   const isCurrentUser = currentUserAsContact && String(currentUserAsContact.ID) === String(ID);
 
   checkWindowWidth();
-  await resetPreviousSelectedContact(ID);
+  await resetPreviousSelectedContact();
   markSelectedContact(ID);
 
   if (isCurrentUser) {
@@ -286,12 +289,16 @@ async function openContactDetail(ID) {
 }
 
 
+/**
+ * This function generates an extra 'open-contact-view' to hide the delete-button to prevent the current user from being deleted.
+ * 
+ * @param {number} positionOfContact - the position of the currently selected contact
+ */
 async function openContactDetailCurrentUser(positionOfContact) {
 
   document.getElementById("wrapper-contact-details").innerHTML = await generateContactDetailHTML(positionOfContact);
   const deleteButtonContainer = document.getElementById("trash-bin-container");
   deleteButtonContainer.style.display = "none";
-
 }
 
 
@@ -300,7 +307,6 @@ async function openContactDetailCurrentUser(positionOfContact) {
  * The function also hides the details of the previous contact (essential for the correct display of the slide-in animation of the following contact)
  */
 async function resetPreviousSelectedContact() {
-  console.log('hier vor previous', contactsSorted);
   for (i = 0; i < contactsSorted.length; i++) {
     let ID = contactsSorted[i]["ID"];
     document.getElementById(`${ID}`).style = `pointer-events: auto`;
@@ -364,11 +370,13 @@ async function openAddContactOverlay() {
 }
 
 /**
- * This function allows the user to add a new contact to the contact list/ array contacts 
+ * This function adds the new contact to the existing contact list and opens it directly in the detail view.
+ * 
+ * @param {array} newContact - the new contact to be added to the existing contacts.
  */
 async function addNewContact(newContact) {
-  await checkIfContactexist(newContact);
-  if (!checkIfContactexist) {
+  const contactExists = await checkIfContactexist(newContact);
+  if (!contactExists) {
     contacts.push(newContact);
     contactsSorted.push(newContact);
     contactsSorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -387,25 +395,26 @@ async function checkIfContactexist(newContact) {
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].emailContact == newContact.emailContact) {
       let emailInput = document.getElementById('contacts-detail-input-mail');
-       displayErrorMessage('Contact already exists', emailInput);
-       return true;
+      displayErrorMessage('Contact already exists', emailInput);
+      return true; // Contact exists, return true
     }
   }
   return false;
 }
 
 
+
 function displayErrorMessage(message, element) {
   const errorMessageId = 'customErrorMessage';
   let existingErrorMessage = document.getElementById(errorMessageId);
   if (existingErrorMessage) {
-      existingErrorMessage.innerHTML = message;
+    existingErrorMessage.innerHTML = message;
   } else {
-      let errorMessage = document.createElement('div');
-      errorMessage.innerHTML = message;
-      errorMessage.id = errorMessageId;
-      errorMessage.style.cssText = 'color: red; margin: -27px 0 9px 6px; font-size: small;';
-      element.parentNode.appendChild(errorMessage);
+    let errorMessage = document.createElement('div');
+    errorMessage.innerHTML = message;
+    errorMessage.id = errorMessageId;
+    errorMessage.style.cssText = 'color: red; margin: -27px 0 9px 6px; font-size: small;';
+    element.parentNode.appendChild(errorMessage);
   }
 }
 

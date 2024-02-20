@@ -9,6 +9,7 @@ async function initSummary() {
     await loadUserData();
     await loadContacts();
     await getLoggedInEmail();
+    await proofAuthentification(loggedInEmail);
     await identifyCurrentUser();
     await personalizeAppContent(currentUser);
     await loadTasks();
@@ -27,6 +28,17 @@ async function getLoggedInEmail() {
         return '';
     }
 }
+
+
+async function proofAuthentification(loggedInEmail) {
+    if (loggedInEmail.trim() === "[]") {
+        window.location.href = "index.html"; 
+    } else {
+        return; 
+    }
+}
+
+
 
 async function identifyCurrentUser() {
     currentUser = users.find(u => u.email === loggedInEmail);
@@ -109,9 +121,9 @@ function greetingGuest(currentHour) {
 
 /**
  * This function renders the flexible content of the summary concerning the tasks
- */ 
-async function renderOverviewTasks () {
-    for (let i =0; i < statusTask.length; i++) {
+ */
+async function renderOverviewTasks() {
+    for (let i = 0; i < statusTask.length; i++) {
         let currentStatus = statusTask[i]
         document.getElementById(`summary-tasks-${currentStatus}`).innerHTML = countTasks(currentStatus);
     }
@@ -129,7 +141,7 @@ async function renderOverviewTasks () {
  */
 function countTasks(currentStatus) {
     let counter = 0;
-    for (let j=0; j < tasks.length;j++) {
+    for (let j = 0; j < tasks.length; j++) {
         if (tasks[j]['statusTask'] == currentStatus) {
             counter++;
         }
@@ -143,7 +155,7 @@ function countTasks(currentStatus) {
  * In case that there are tasks for the current priority the for loop is stopped (and the closest upcoming date is displayed)
  */
 function getUpcomingTask() {
-    for (k=0; k < prioritiesTask.length; k++) {
+    for (k = 0; k < prioritiesTask.length; k++) {
         let currentPriority = prioritiesTask[k];
         if (checkExistingTasksForPriority(currentPriority)) {
             break;
@@ -162,7 +174,7 @@ function getUpcomingTask() {
  */
 async function checkExistingTasksForPriority(currentPriority) {
     let tasksCurrentPriority = [];
-    for (let i=0; i< tasks.length; i++) {
+    for (let i = 0; i < tasks.length; i++) {
         if (tasks[i]['priority'] == currentPriority) {
             tasksCurrentPriority.push(tasks[i]);
         }
@@ -186,7 +198,7 @@ async function checkExistingTasksForPriority(currentPriority) {
  */
 async function getClosestDate(tasksCurrentPriority) {
     let closestDate = tasksCurrentPriority[0]['dueDate'];
-    for (d=1; d < tasksCurrentPriority.length; d++) {
+    for (d = 1; d < tasksCurrentPriority.length; d++) {
         let dateCurrentTask = tasksCurrentPriority[d]['dueDate'];
         if (dateCurrentTask < closestDate) {
             closestDate = dateCurrentTask;

@@ -7,10 +7,11 @@ let category = []; //holds the chosen category from the form before submit
 
 async function initAddTask() {
     await includeHTML();
-    // await loadUserData();
-    // await getLoggedInEmail();
-    // await renderAcronym(loggedInEmail);
-    //await loadUserData();//
+    await loadUserData();
+    await getLoggedInEmail();
+    await proofAuthentification(loggedInEmail);
+    await renderAcronym(loggedInEmail);
+    await loadUserData();//
     await loadContacts();
     await loadTasks();
     clearAssignedUsersArray();
