@@ -198,10 +198,9 @@
   display: flex;
 }
 
-.d-flex{
+.d-flex {
   display: flex !important;
 }
-
 
 .contacts-detail-edit-delete {
   display: flex;
@@ -308,4 +307,36 @@
 
 .mt-42 {
   margin-top: 42px;
+}
+
+#confirmationModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(246,247,248);
+  padding: 20px;
+  border: 1px solid #ccc;
+  z-index: 1000;
+  border-radius: 15px;
+  height: 76px;
+}
+
+#confirmationModal p {
+  margin-bottom: 10px;
+}
+
+.modal-content {
+  text-align: center;
+}
+
+#confirmDelete,
+#cancelDelete {
+  margin: 7px;
+  cursor: pointer;
+  color: white;
+  background-color: #2a3647;
+  border-radius: 5px;
+  width: 45px;
+  height: 26px;
 }

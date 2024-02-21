@@ -333,7 +333,7 @@ async function openContactDetailCurrentUser(positionOfContact) {
  * The function also hides the details of the previous contact (essential for the correct display of the slide-in animation of the following contact)
  */
 async function resetPreviousSelectedContact(ID) {
-  for (i = 0; i < contactsSorted.length-1; i++) {
+  for (i = 0; i < contactsSorted.length - 1; i++) {
     ID = contactsSorted[i]["ID"];
     document.getElementById(`${ID}`).style = `pointer-events: auto`;
     document.getElementById(`${ID}`).style.backgroundColor = "white";
@@ -534,10 +534,11 @@ async function deleteContact(positionOfContact) {
     await clearContactWrapper();
     await returnToContactList();
 
-  closeSubmenuContact();
-  closeContactsDetails();
-  slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
-  isConfirmationDisplayed = false;
+    closeSubmenuContact();
+    closeContactsDetails();
+    slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
+    isConfirmationDisplayed = false;
+  }
 }
 
 
@@ -598,7 +599,7 @@ async function removeContactFromTasks(positionOfContact) {
 
   for (let i = 0; i < tasks.length; i++) {
     let counterContacts = tasks[i]['assignedContacts'].length;
-    for (let j =0; j < counterContacts; j++) {
+    for (let j = 0; j < counterContacts; j++) {
       if (tasks[i]['assignedContacts'][j]['idContact'] == idOfDeletedContact) {
         tasks[i]['assignedContacts'].splice(j, 1);
         break;
