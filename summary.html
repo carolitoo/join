@@ -31,7 +31,7 @@
 
 </html>
 
-<body onload="initSummary()">
+<body onload="initSummary()" onresize="checkWindowWidthSummary()">
 
   <header w3-include-html="./assets/templates/header.html"></header>
   <div w3-include-html="./assets/templates/submenu.html"></div>
@@ -39,14 +39,14 @@
 
   <div class="ctn-content">
 
-    <div class="title_ctn">
+    <div class="title_ctn d-none" id="title_ctn">
       <h1>Join 360</h1>
       <div class="parting_line"></div>
       <span class="second_titlefont">Key Metrics at a Glance</span>
     </div>
 
     <div class="summary_and_greeting_ctn">
-      <div class="summary_content_ctn">
+      <div class="summary_content_ctn d-none" id="summary_content_ctn">
 
         <div class="todo_done_ctn">
 
@@ -102,7 +102,7 @@
           </div>
         </div>
       </div>
-      <div class="greeting_and_name_ctn">
+      <div class="greeting_and_name_ctn d-none" id="greeting_and_name_ctn">
         <div class="greeting_and_name_content">
           <span id="greetingText" class="greeting-txt-format"></span>
         </div>

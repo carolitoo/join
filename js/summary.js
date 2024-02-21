@@ -15,6 +15,53 @@ async function initSummary() {
     await loadTasks();
     await renderOverviewTasks();
     changeSelectedTab('tab-summary');
+    checkDisplayGreetingAnimation();
+}
+
+
+/**
+ * This function displays/ hides the greeting of the user depending on the window width
+ */
+function checkWindowWidthSummary() {
+    if (window.innerWidth <= 1350) {
+        document.getElementById('greeting_and_name_ctn').classList.add('d-none');
+    } else {
+        document.getElementById('greeting_and_name_ctn').classList.remove('d-none');
+    }
+}
+
+
+/**
+ * This function checks if the user is forwarded from the login page
+ * 
+ * @returns - true in case that user is forwarded from the login page
+ */
+function checkReferringFromIndex() {
+    if (document.referrer.slice(-10) == "index.html") {
+        return true;
+    }
+}
+
+
+/**
+ * This function ensures that the greeting animation is displayed correctly depending on the previous page and the current window width
+ */
+function checkDisplayGreetingAnimation() {
+    if (checkReferringFromIndex() && window.innerWidth <= 1350) {
+        document.getElementById('greeting_and_name_ctn').classList.remove('d-none');
+        setTimeout(() => {
+            document.getElementById('title_ctn').classList.remove('d-none');
+            document.getElementById('summary_content_ctn').classList.remove('d-none');
+            document.getElementById('greeting_and_name_ctn').classList.add('d-none');
+          }, 1500);
+    } else if (window.innerWidth <= 1350) {
+        document.getElementById('title_ctn').classList.remove('d-none');
+        document.getElementById('summary_content_ctn').classList.remove('d-none');
+    } else {
+        document.getElementById('title_ctn').classList.remove('d-none');
+        document.getElementById('summary_content_ctn').classList.remove('d-none');
+        document.getElementById('greeting_and_name_ctn').classList.remove('d-none');
+    }
 }
 
 
