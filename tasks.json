@@ -5,10 +5,10 @@
     "descriptionTask": "Build start page with recipe recommendation.",
     "assignedContacts": [
       {
-        "idContact": 4
+        "idContact": 1
       },
       {
-        "idContact": 1708285615392
+        "idContact": 8
       },
       {
         "idContact": 7
@@ -37,22 +37,22 @@
     "descriptionTask": "Define CSS naming conventions and structure.",
     "assignedContacts": [
       {
-        "idContact": 1708290660457
+        "idContact": 8
       },
       {
-        "idContact": 1708284430232
+        "idContact": 1
       },
       {
-        "idContact": 1708285062543
+        "idContact": 5
       },
       {
         "idContact": 6
       },
       {
-        "idContact": 1708283421948
+        "idContact": 1708513544186
       },
       {
-        "idContact": 1708283563251
+        "idContact": 7
       }
     ],
     "dueDate": "2024-09-02T20:15:00.000Z",
@@ -78,13 +78,13 @@
     "descriptionTask": "Analyse structur of the project, detect interdependencies and define responsibilities",
     "assignedContacts": [
       {
-        "idContact": 6
+        "idContact": 1
       },
       {
-        "idContact": 4
+        "idContact": 5
       },
       {
-        "idContact": 1708285062543
+        "idContact": 7
       }
     ],
     "dueDate": "2024-02-12T10:30:00.000Z",
@@ -115,13 +115,13 @@
     "descriptionTask": "Check whether elements can be adjusted to guarantee a better user experience",
     "assignedContacts": [
       {
-        "idContact": 1708282960908
+        "idContact": 1
       },
       {
         "idContact": 7
       },
       {
-        "idContact": 1708284430232
+        "idContact": 5
       }
     ],
     "dueDate": "2024-05-20T14:40:00.000Z",
@@ -162,10 +162,10 @@
     "descriptionTask": "Check whether all points from the checklist were accomplished.",
     "assignedContacts": [
       {
-        "idContact": 4
+        "idContact": 1
       },
       {
-        "idContact": 1708290660457
+        "idContact": 8
       },
       {
         "idContact": 6
@@ -214,10 +214,10 @@
     "descriptionTask": "Check appearance and whether all features work in the established browsers",
     "assignedContacts": [
       {
-        "idContact": 1708284430232
+        "idContact": 1
       },
       {
-        "idContact": 1708282960908
+        "idContact": 5
       },
       {
         "idContact": 7
