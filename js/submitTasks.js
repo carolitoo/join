@@ -1,6 +1,3 @@
-let tasksTest = []
-
-
 async function initAddTask() {
     await includeHTML();
     // await loadUserData();
@@ -34,15 +31,7 @@ async function submitTask() {
         'subtasks': addedSubtasks,
         'statusTask': "toDo",
     };
-    tasks.push(newTask); // Füge den neuen Task hinzu
+    tasks.push(newTask); 
     await setItem('tasks', tasks);
     console.log(tasks)
 };
-
-
-
-
-
-
-
-//await setItem('tasks', tasks);

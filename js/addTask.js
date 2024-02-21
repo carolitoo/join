@@ -11,7 +11,7 @@ async function initAddTask() {
     await getLoggedInEmail();
     await proofAuthentification(loggedInEmail);
     await renderAcronym(loggedInEmail);
-    await loadUserData();//
+    await loadUserData();
     await loadContacts();
     await loadTasks();
     clearAssignedUsersArray();

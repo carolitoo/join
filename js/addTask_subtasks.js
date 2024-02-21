@@ -4,16 +4,22 @@ let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
 */
 function saveSubtaskToArray() {
-    let newSubtask = document.getElementById('subtaskInput');
-    let inputText = document.getElementById('subtaskInput');
+    let inputText = document.getElementById('subtaskInput').value;
+    let timeStampSubtask = new Date().getTime();
 
-    addedSubtasks.push(newSubtask.value);
-    document.getElementById('subtaskInput').innerHTML = '';
-    console.log("New Subtask is " + addedSubtasks);
-    inputText.value = '';
+    let newSubtask = {
+        'idSubtask':  `task-${timeStampSubtask}`,
+        'titleSubtask': inputText,
+        'statusSubtask': "open",
+    }
 
-    loadNewSubtasks();
-};
+    addedSubtasks.push(newSubtask);
+    document.getElementById('subtaskInput').value = '';
+    console.log("New Subtask is " + JSON.stringify(addedSubtasks));
+
+    loadNewSubtasks(); // Hier wird die loadNewSubtasks-Funktion aufgerufen
+}
+
 
 /**
  * Iterrates through the array subtasks and renders the subtasks 
@@ -24,21 +30,24 @@ function loadNewSubtasks() {
     subtaskList.innerHTML = '';
 
     for (let i = 0; i < addedSubtasks.length; i++) {
-        const currentSubtask = addedSubtasks[i].trim();
-
-        if (currentSubtask !== '') { // Checks if the input is empty before rendering to prevend adding an empty div
-
-            subtaskList.innerHTML += `
-                <div id="subtaskListElement${i}" class="subtask-list"> 
-                    <span>&#x2022; ${currentSubtask}</span>
-                    <div class="subtask-icons"> 
-                        <button class="delete-btn" onclick="deleteSubtask(${i})"></button>
-                        <button class="confirm-btn" onclick="editSubtask(${i})"></button>
-                    </div>
-                </div>`;
+        
+        if (addedSubtasks[i].titleSubtask && typeof addedSubtasks[i].titleSubtask === 'string') {
+            const currentSubtaskTitle = addedSubtasks[i].titleSubtask.trim();
+            
+            if (currentSubtaskTitle !== '') {
+                subtaskList.innerHTML += `
+                    <div id="subtaskListElement${i}" class="subtask-list"> 
+                        <span>&#x2022; ${currentSubtaskTitle}</span>
+                        <div class="subtask-icons"> 
+                            <button class="delete-btn" onclick="deleteSubtask(${i})"></button>
+                            <button class="confirm-btn" onclick="editSubtask(${i})"></button>
+                        </div>
+                    </div>`;
+            }
         }
     }
 };
+
 
 /**
  * This function deletes a subtask by clicking on the trashcan icon from the array
