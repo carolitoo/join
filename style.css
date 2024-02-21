@@ -39,7 +39,6 @@ h2 {
   font-weight: 700;
 }
 
-
 h3 {
   font-size: 20px;
   font-weight: 700;
@@ -250,23 +249,4 @@ a {
         margin-bottom: 32px;
         padding: 4px 16px; */
   }
-}
-#confirmationModal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  z-index: 1000;
-}
-
-.modal-content {
-  text-align: center;
-}
-
-#confirmDelete, #cancelDelete {
-  margin: 10px;
 }

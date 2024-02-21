@@ -78,7 +78,9 @@ async function storeUsers() {
 }
 
 
-
+/**
+ * This function creates a new user based on the values read from the input fields and calls to validate these values.
+ */
 async function createSignUpdata() {
     userName = document.getElementById('name').value;
     splitName(userName);
@@ -102,19 +104,34 @@ async function createSignUpdata() {
 }
 
 
+/**
+ * the name is split into two parts by recognizing spaces.
+ * 
+ * @param {string} userName - the name of the user to be added.
+ * @returns - the two strings from the input field of the name. 
+ */
 function splitName(userName) {
     nameParts = userName.split(' ');
     return nameParts;
 }
 
 
-function filterFirstName(userName) {
-    nameParts = userName.split(' ');
+/**
+ * This function takes the first part of the name-parts variable and passes it to display the first letter of it in large letters.
+ * 
+ * @returns - the first filtered name
+ */
+function filterFirstName() {
     firstName = capitalizeFirstLetter(nameParts[0]);
     return firstName;
 }
 
 
+/**
+ * This function checks whether there is a second name for the new user (last name) and transfers it with the first letter capitalized.
+ * 
+ * @returns - the second name entered if it exists. Otherwise, an empty value is returned
+ */
 function filterLastName() {
     lastName = ''
     if (nameParts.length > 1) {
@@ -123,20 +140,17 @@ function filterLastName() {
     return lastName;
 }
 
+
+/**
+ * This function uses the first and second name (if available) to combine the first letters into an acronym.
+ * 
+ * @returns - an acronym consisting of one or two letters
+ */
 function getAcronym() {
     const formattedFirstNameInitial = firstName.charAt(0).toUpperCase();
     const formattedLastNameInitial = lastName.charAt(0).toUpperCase();
     return acronym = formattedFirstNameInitial + formattedLastNameInitial;
 }
-
-
-function capitalizeFirstLetter(string) {
-    return string
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-}
-
 
 
 

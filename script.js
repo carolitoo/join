@@ -3,7 +3,9 @@ async function init() {
   resetSelectedTab();
 }
 
-
+/**
+ * This function loads the user data from the back-end using the getItem function and updates the global variable 'users' with the loaded user data
+ */
 async function loadUserData() {
   const response = await getItem('users');
   const usersData = response['data']['value'];
@@ -12,6 +14,9 @@ async function loadUserData() {
   }
 }
 
+/**
+ * This function loads the contacts data from the back-end using the getItem function and updates the global variable 'contacts' with the loaded contacts data
+ */
 async function loadContacts(){
   const response = await getItem('contacts');
   const contactsData = response['data']['value'];
@@ -33,6 +38,19 @@ async function includeHTML() {
       element.innerHTML = "Page not found";
     }
   }
+}
+
+/**
+ * This function converts the first letter of a string into a capital letter.
+ * 
+ * @param {string} string - takes over strings from firstName/lastName
+ * @returns - First name/last name with capitalized first letter.
+ */
+function capitalizeFirstLetter(string) {
+  return string
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
 }
 
 

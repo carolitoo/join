@@ -7,6 +7,9 @@ let imgTabSelected = [
   }]
 
 
+/**
+ * This function generates a user icon in the header area by reading the current-user acronym
+ */
 function generateUserIcon() {
   const userIcon = document.getElementById('iconUserheader');
   userIcon.textContent = currentUser.acronym;
@@ -58,12 +61,19 @@ function closeSubmenu() {
   document.getElementById('overlay-submenu').classList.add('d-none');
 }
 
+
+/**
+ * this function logs out the current user by calling the clearLoggedInEmail function and redirecting to the login page.
+ */
 async function logout() {
   await clearLoggedInEmail();
   window.location.href = './index.html';
 }
 
 
+/**
+ * This function resets the value for the currently used mail address by calling the resetRemote function.
+ */
 async function clearLoggedInEmail() {
   await resetRemote('loggedInEmail');
 }

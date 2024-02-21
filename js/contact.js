@@ -6,6 +6,9 @@ let contactIsSelected = false;
 let extractedContactNumbers = [];
 let currentUserAsContact = [];
 let guest = false;
+nameParts = [];
+let confirmation;
+let isConfirmationDisplayed = false;
 
 
 
@@ -15,6 +18,7 @@ async function initContact() {
   changeSelectedTab("tab-contacts");
   await loadUserData();
   await loadContacts();
+  await loadTasks();
   await getLoggedInEmail();
   await proofAuthentification(loggedInEmail);
   await checkIfGuestOrCurrentUser();
@@ -97,7 +101,11 @@ async function renderAcronym(loggedInEmail) {
 }
 
 
-
+/**
+ * This function checks whether there are contacts that can be rendered.
+ * 
+ * @returns - true (if no contacts exist) or false (if contacts exist)
+ */
 async function proofIfContactsexist() {
   if (contacts.length === 0) {
     document.getElementById("ctn-contact-list").innerHTML = await generateNoContactsHTML();
@@ -109,7 +117,7 @@ async function proofIfContactsexist() {
 
 
 /**
- * This function renders the loaded contacts alphabetically sorted into the contact list
+ * This function renders the contact list on the user interface, whereby certain conditions apply to the display of contacts and initial letters.
  */
 async function renderContactList() {
   if (!guest && currentUserAsContact) {
@@ -127,7 +135,7 @@ async function renderContactList() {
       if (!contactListLetter.hasAttribute("data-iteration-done")) {
         await processContactsForInitialLetter(contactsSorted, initialLetter);
         contactListLetter.setAttribute("data-iteration-done", true);
-     
+
         await checkIfContactLetterstillThere(contactsSorted, initialLetter, contactListLetter);
       }
       await updateContactElementStylesForInitialLetter(contactsSorted, initialLetter);
@@ -135,13 +143,24 @@ async function renderContactList() {
   }
 }
 
-
+/**
+ * This function renders an initial letter of a contact.
+ * 
+ * @param {string} initialLetter - first letter of a contact
+ */
 async function generateAndInsertInitialLetterHTML(initialLetter) {
   const initialLetterHTML = await generateInitialLetterHTML(initialLetter);
   document.getElementById("ctn-contact-list").innerHTML += initialLetterHTML;
 }
 
 
+/**
+ * This function checks whether the initial letter already exists; if there are one or more contacts that share the respective initial letter, it is only displayed once.
+ * 
+ * @param {array} contactsSorted - array with all contacts, sorted by their first letter
+ * @param {string} initialLetter - first letter of a contact 
+ * @param {string} contactListLetter - initial letter which is assigned to the respective contact
+ */
 async function checkIfContactLetterstillThere(contactsSorted, initialLetter, contactListLetter) {
   const contactsWithInitial = contactsSorted.filter(contact => contact["firstName"][0].toUpperCase() === initialLetter);
   if (contactsWithInitial.length === 0) {
@@ -150,6 +169,12 @@ async function checkIfContactLetterstillThere(contactsSorted, initialLetter, con
 }
 
 
+/**
+ * This function generates HTML content for contacts and adds it to the corresponding element in the contact list (depending on inital letter). The current user is excluded.
+ * 
+ * @param {array} contacts - array with all contacts  
+ * @param {string} initialLetter - first letter of a contact  
+ */
 async function processContactsForInitialLetter(contacts, initialLetter) {
   let htmlContent = '';
 
@@ -245,18 +270,19 @@ async function createArrayInitialLetters() {
  */
 async function createContact() {
   let nameInput = document.getElementById('contacts-detail-input-name').value;
+  splitName(nameInput);
   let emailInput = document.getElementById('contacts-detail-input-mail').value;
   let phoneNumberInput = document.getElementById('contacts-detail-input-phone').value;
 
   let newContact = {
-      "ID": new Date().getTime(),
-      "firstName": filterFirstName(nameInput),
-      "lastName": filterLastName(),
-      "name": filterFirstName(nameInput) + ' ' + filterLastName(),
-      "acronymContact": getAcronym(),
-      "colorContact": setBackgroundcolor(),
-      "emailContact": emailInput,
-      "phoneContact": phoneNumberInput
+    "ID": new Date().getTime(),
+    "firstName": filterFirstName(),
+    "lastName": filterLastName(),
+    "name": filterFirstName() + ' ' + filterLastName(),
+    "acronymContact": getAcronym(),
+    "colorContact": setBackgroundcolor(),
+    "emailContact": emailInput,
+    "phoneContact": phoneNumberInput
   };
   await addNewContact(newContact);
 }
@@ -275,7 +301,6 @@ async function openContactDetail(ID) {
   const isCurrentUser = currentUserAsContact && String(currentUserAsContact.ID) === String(ID);
 
   checkWindowWidth();
-  await resetPreviousSelectedContact();
   markSelectedContact(ID);
 
   if (isCurrentUser) {
@@ -286,6 +311,7 @@ async function openContactDetail(ID) {
   }
   document.getElementById(`contacts-detail-acronym-${ID}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
   slideInAnimation('wrapper-contact-details', 'translate-x', false);
+  await resetPreviousSelectedContact(ID);
 }
 
 
@@ -306,9 +332,9 @@ async function openContactDetailCurrentUser(positionOfContact) {
  * This functions resets the format for all contacts in the contact list (required in case that a contact was selected previously)
  * The function also hides the details of the previous contact (essential for the correct display of the slide-in animation of the following contact)
  */
-async function resetPreviousSelectedContact() {
-  for (i = 0; i < contactsSorted.length; i++) {
-    let ID = contactsSorted[i]["ID"];
+async function resetPreviousSelectedContact(ID) {
+  for (i = 0; i < contactsSorted.length - 1; i++) {
+    ID = contactsSorted[i]["ID"];
     document.getElementById(`${ID}`).style = `pointer-events: auto`;
     document.getElementById(`${ID}`).style.backgroundColor = "white";
     document.getElementById(`${ID}`).style.color = "black";
@@ -403,7 +429,12 @@ async function checkIfContactexist(newContact) {
 }
 
 
-
+/**
+ * This function generates an error message under the passed input field.
+ * 
+ * @param {string} message - the message which has to be displayed
+ * @param {htmlContent} element - the html element under which the message should appear
+ */
 function displayErrorMessage(message, element) {
   const errorMessageId = 'customErrorMessage';
   let existingErrorMessage = document.getElementById(errorMessageId);
@@ -487,14 +518,13 @@ async function editContact(positionOfContact) {
 
 
 /**
- * This function deletes the currently selected/ displayed contact, then updates the array contacts and
+ * This function deletes the currently selected/ displayed contact, then updates the array contacts and reloads the contact list.
  *
- * !!! LÖSCHUNG AUS TASKS & UPDATE BACKEND MUSS NOCH ERGÄNZT WERDEN
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
 async function deleteContact(positionOfContact) {
-  try {
-    const confirmation = window.confirm("Are you sure you want to delete this contact?");
+  if (!isConfirmationDisplayed) { // Überprüfen, ob die Bestätigung bereits angezeigt wird
+    const confirmation = await askingforCommitment();
     if (!confirmation) {
       return;
     }
@@ -507,28 +537,76 @@ async function deleteContact(positionOfContact) {
     closeSubmenuContact();
     closeContactsDetails();
     slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
-
-  } catch (error) {
-    console.error("Error deleting contact:", error);
+    isConfirmationDisplayed = false;
   }
 }
 
 
+async function askingforCommitment() {
+  const confirmationModal = document.getElementById('confirmationModal');
+  confirmationModal.classList.remove('d-none');
 
+  const confirmButton = document.getElementById('confirmDelete');
+  const cancelButton = document.getElementById('cancelDelete');
 
-async function spliceContacts(positionOfContact) {
-  contactsSorted.splice(positionOfContact, 1);
-  return [...contactsSorted]; // Return a new array with the contact removed
+  const confirmationPromise = new Promise((resolve) => {
+    confirmButton.addEventListener('click', () => resolve(true));
+    cancelButton.addEventListener('click', () => resolve(false));
+  });
+
+  const confirmation = await confirmationPromise;
+  confirmationModal.classList.add('d-none');
+  return confirmation;
 }
 
+
+
+/**
+ * This function copies the contactsSorted array and removes the currently selected contact from it.
+ * 
+ * @param {number} positionOfContact - position of the currently selected contact
+ * @returns - a copy of the contactsSorted array with the desired change 
+ */
+async function spliceContacts(positionOfContact) {
+  contactsSorted.splice(positionOfContact, 1);
+  return [...contactsSorted];
+}
+
+
+/**
+ * This function empties the content of the contact list.
+ */
 async function clearContactWrapper() {
   document.getElementById("wrapper-contact-details").innerHTML = '';
 }
 
 
 /**
- * This function closes the overlay for adding oder editing a contact
+ * This function closes the overlay for adding or editing a contact
  */
 function closeContactsDetails() {
   document.getElementById("overlay-contacts").classList.add("d-none");
+}
+
+
+/**
+ * This function ensures that a contact is removed from any assigned tasks before this contact is deleted
+ * 
+ * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
+ */
+async function removeContactFromTasks(positionOfContact) {
+  let idOfDeletedContact = contactsSorted[positionOfContact]['ID'];
+
+  for (let i = 0; i < tasks.length; i++) {
+    let counterContacts = tasks[i]['assignedContacts'].length;
+    for (let j = 0; j < counterContacts; j++) {
+      if (tasks[i]['assignedContacts'][j]['idContact'] == idOfDeletedContact) {
+        tasks[i]['assignedContacts'].splice(j, 1);
+        break;
+      }
+    }
+  }
+
+  saveTasks();
+
 }
