@@ -47,7 +47,10 @@ async function includeHTML() {
  * @returns - First name/last name with capitalized first letter.
  */
 function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  return string
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
 }
 
 

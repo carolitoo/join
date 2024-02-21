@@ -6,6 +6,9 @@ let contactIsSelected = false;
 let extractedContactNumbers = [];
 let currentUserAsContact = [];
 let guest = false;
+nameParts = [];
+let confirmation;
+let isConfirmationDisplayed = false;
 
 
 
@@ -266,14 +269,15 @@ async function createArrayInitialLetters() {
  */
 async function createContact() {
   let nameInput = document.getElementById('contacts-detail-input-name').value;
+  splitName(nameInput);
   let emailInput = document.getElementById('contacts-detail-input-mail').value;
   let phoneNumberInput = document.getElementById('contacts-detail-input-phone').value;
 
   let newContact = {
     "ID": new Date().getTime(),
-    "firstName": filterFirstName(nameInput),
+    "firstName": filterFirstName(),
     "lastName": filterLastName(),
-    "name": filterFirstName(nameInput) + ' ' + filterLastName(),
+    "name": filterFirstName() + ' ' + filterLastName(),
     "acronymContact": getAcronym(),
     "colorContact": setBackgroundcolor(),
     "emailContact": emailInput,
@@ -296,7 +300,6 @@ async function openContactDetail(ID) {
   const isCurrentUser = currentUserAsContact && String(currentUserAsContact.ID) === String(ID);
 
   checkWindowWidth();
-  await resetPreviousSelectedContact();
   markSelectedContact(ID);
 
   if (isCurrentUser) {
@@ -307,6 +310,7 @@ async function openContactDetail(ID) {
   }
   document.getElementById(`contacts-detail-acronym-${ID}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
   slideInAnimation('wrapper-contact-details', 'translate-x', false);
+  await resetPreviousSelectedContact(ID);
 }
 
 
@@ -327,9 +331,9 @@ async function openContactDetailCurrentUser(positionOfContact) {
  * This functions resets the format for all contacts in the contact list (required in case that a contact was selected previously)
  * The function also hides the details of the previous contact (essential for the correct display of the slide-in animation of the following contact)
  */
-async function resetPreviousSelectedContact() {
-  for (i = 0; i < contactsSorted.length; i++) {
-    let ID = contactsSorted[i]["ID"];
+async function resetPreviousSelectedContact(ID) {
+  for (i = 0; i < contactsSorted.length-1; i++) {
+    ID = contactsSorted[i]["ID"];
     document.getElementById(`${ID}`).style = `pointer-events: auto`;
     document.getElementById(`${ID}`).style.backgroundColor = "white";
     document.getElementById(`${ID}`).style.color = "black";
@@ -519,20 +523,43 @@ async function editContact(positionOfContact) {
  * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
  */
 async function deleteContact(positionOfContact) {
-    const confirmation = window.confirm("Are you sure you want to delete this contact?");
+  if (!isConfirmationDisplayed) { // Überprüfen, ob die Bestätigung bereits angezeigt wird
+    const confirmation = await askingforCommitment();
     if (!confirmation) {
       return;
     }
-    let updatedContactsSorted = await spliceContacts(positionOfContact);
-    await setItem('contacts', JSON.stringify(updatedContactsSorted));
-    checkWindowWidth();
-    await clearContactWrapper();
-    await returnToContactList();
-
-    closeSubmenuContact();
-    closeContactsDetails();
-    slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
+    isConfirmationDisplayed = true; // Setzen Sie die Variable auf true, um mehrmalige Anzeige zu verhindern
   }
+  let updatedContactsSorted = await spliceContacts(positionOfContact);
+  await setItem('contacts', JSON.stringify(updatedContactsSorted));
+  checkWindowWidth();
+  await clearContactWrapper();
+  await returnToContactList();
+
+  closeSubmenuContact();
+  closeContactsDetails();
+  slideInAnimation('pop-up-contacts-delete', 'translate-y', true);
+  isConfirmationDisplayed = false;
+}
+
+
+async function askingforCommitment() {
+  const confirmationModal = document.getElementById('confirmationModal');
+  confirmationModal.classList.remove('d-none');
+
+  const confirmButton = document.getElementById('confirmDelete');
+  const cancelButton = document.getElementById('cancelDelete');
+
+  const confirmationPromise = new Promise((resolve) => {
+    confirmButton.addEventListener('click', () => resolve(true));
+    cancelButton.addEventListener('click', () => resolve(false));
+  });
+
+  const confirmation = await confirmationPromise;
+  confirmationModal.classList.add('d-none');
+  return confirmation;
+}
+
 
 
 /**

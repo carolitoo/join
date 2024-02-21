@@ -193,9 +193,15 @@
   gap: 24px;
 }
 
+/*gucken ob das raus kann - edit-delete-container wird oft untereinander angezeigt*/
 .contacts-detail-edit-delete-container {
+  display: flex;
+}
+
+.d-flex{
   display: flex !important;
 }
+
 
 .contacts-detail-edit-delete {
   display: flex;

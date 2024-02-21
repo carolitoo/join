@@ -153,16 +153,6 @@ function getAcronym() {
 }
 
 
-/**
- * This function converts the first letter of a string into a capital letter.
- * 
- * @param {string} string - takes over strings from firstName/lastName
- * @returns - First name/last name with capitalized first letter.
- */
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 
 
 function disableSignUpButton() {

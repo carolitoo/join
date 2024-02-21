@@ -111,7 +111,7 @@ async function generateContactDetailHTML(positionOfContact) {
       <div class="ctn-contacts-details-name-right">
       <div id="contacts-detail-identity-text-${contactsSorted[positionOfContact].ID}" class="contacts-detail-name">${contactsSorted[positionOfContact]["name"]}</div>
           
-              <div class="contacts-detail-edit-delete-container">
+              <div class="contacts-detail-edit-delete-container d-flex">
                 <div
                 class="contacts-detail-edit-delete"
                 onmouseover="changeImgTo('img-contacts-detail-edit', 'edit_lb')"
