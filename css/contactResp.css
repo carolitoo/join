@@ -1,3 +1,35 @@
+#confirmationModal {
+  position: fixed !important;
+  top: 50% !important;
+  left: 46% !important;
+  transform: translate(35%, -118%) !important;
+  background-color: rgb(246, 247, 248) !important;
+  padding: 20px;
+  border: 1px solid #ccc;
+  z-index: 1000 !important;
+  border-radius: 15px !important;
+  height: 76px !important;
+}
+
+#confirmationModal p {
+  margin-bottom: 10px !important;
+}
+
+.modal-content {
+  text-align: center !important;
+}
+
+#confirmDelete,
+#cancelDelete {
+  margin: 7px !important;
+  cursor: pointer !important;
+  color: white !important;
+  background-color: #2a3647 !important;
+  border-radius: 5px !important;
+  width: 45px !important;
+  height: 26px !important;
+}
+
 @media (max-width: 1275px) {
   .body-contacts {
     --width-contacts-overview: 400px;
@@ -94,6 +126,10 @@
   .btn-contact-mobile {
     display: flex;
   }
+
+  #confirmationModal {
+    transform: translate(-17%, -118%) !important;
+  }
 }
 
 @media (max-width: 784px) {
@@ -126,6 +162,19 @@
 
   .ctn-contacts-submenu {
     bottom: 96px;
+  }
+}
+
+@media (max-width: 422px) {
+  #confirmationModal p {
+    font-size: 14px !important;
+  }
+
+  #confirmDelete,
+  #cancelDelete {
+    font-size: 13px !important;
+    height: 23px !important;
+    width: 42px !important;
   }
 }
 
