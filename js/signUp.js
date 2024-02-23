@@ -11,6 +11,7 @@ async function initSignUp() {
     await loadUserData();
 }
 
+
 // HILFSFUNKTION (falls Kontakte neu geladen und initialisiert werden müssen//
 async function loadContactsJSON() {
     try {
@@ -45,7 +46,6 @@ async function storeContacts() {
 }
 
 
-
 //HILFSFUNKTION (falls Dummy-Users neu geladen und initialisiert werden müsen)//
 async function loadUsersJSON() {
     try {
@@ -55,6 +55,7 @@ async function loadUsersJSON() {
         console.error('Fehler beim Laden der Benutzerdaten:', error);
     }
 }
+
 
 //HILFSFUNKTION (für Speichern der User-Daten im Backend)//
 async function storeUsers() {
@@ -153,8 +154,9 @@ function getAcronym() {
 }
 
 
-
-
+/**
+ * This function checks whether all input fields (+checkbox) have been filled in. If this is the case, the button is enabled for activation.
+ */
 function disableSignUpButton() {
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
@@ -176,6 +178,11 @@ function disableSignUpButton() {
 }
 
 
+/**
+ * This function checks whether the name field has been filled in correctly and whether the passwords match.
+ * 
+ * @param {array} newUser - the completed data of the new user
+ */
 function validateSignUpData(newUser) {
     if (newUser.name.length >= 2) {
         if (newUser.password === newUser.confirmedPassword) {
@@ -207,14 +214,21 @@ async function addUser(newUser) {
     }
 }
 
+
+/**
+ * This function saves the JSON object with the key 'users' to the back end via the setItem function.
+ */
 async function storeUserItems() {
     await setItem('users', JSON.stringify(users));
-    console.log('DIE aktuellen user sind', users);
 }
 
 
-
-
+/**
+ * This function checks whether a user with the entered e-mail address already exists.
+ * 
+ * @param {array} newUser - the completed data of the new user
+ * @returns - true (if user already exists), false (if the user does not exist yet.)
+ */
 function checkIfUserexist(newUser) {
     for (let i = 0; i < users.length; i++) {
         if (users[i].email == newUser.email) {
@@ -262,6 +276,7 @@ function displayErrorMessage(message, element) {
     }
 }
 
+
 /**
  * A function that changes the icon if you have typed something into the input field with the id 'password/confirmedPassword'.
  * 
@@ -281,17 +296,29 @@ function togglePasswordIcon(inputId, iconId) {
 
 
 /**
+ * The changePasswordVisibility function is responsible for changing the visibility of the password field and the associated icon when the icon is clicked.
+ * 
+ * @param {ID} - inputId 
+ * @param {ID} - iconId 
+ */
+function changePasswordVisibility(inputId, iconId) {
+    let passwordInput = document.getElementById(inputId);
+    let passwordIcon = document.getElementById(iconId);
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordIcon.setAttribute('src', './assets/img/visibility.svg');
+    } else {
+        passwordInput.type = "password";
+        passwordIcon.setAttribute('src', './assets/img/visibility_off.svg');
+    }
+}
+/**
  * A function that makes it possible to display the password/confirmedPassword via onclick.
  * 
  * @param {string} inputId - the id from the first or second password-field (e.g first: password, second: confirmedPassword)
  */
-function showPassword(inputId) {
-    let passwordInput = document.getElementById(inputId);
-
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-    } else {
-        passwordInput.type = "password";
-    }
+function showPassword(inputId, iconId) {
+    changePasswordVisibility(inputId, iconId);
 }
 
