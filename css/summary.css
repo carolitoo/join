@@ -67,17 +67,18 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url(/assets/img/edit.svg);
+  background-image: url(../assets/img/edit.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 40%;
 }
 
 .todo_done_box:hover .icon-blue-pen {
   background: #ffffff;
-  background-image: url(/assets/img/edit_blue.svg);
+  background-image: url(../assets/img/edit_blue.svg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 45%;
+  background-size: 40%;
 }
 
 .icon-blue-checkmark {
@@ -89,14 +90,15 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url(/assets/img/vector.svg);
+  background-image: url(../assets/img/check_summary_white.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 45%;
 }
 
 .todo_done_box:hover .icon-blue-checkmark {
   background: #ffffff;
-  background-image: url(/assets/img/Vector_blue.svg);
+  background-image: url(../assets/img/check_summary_db.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 45%;

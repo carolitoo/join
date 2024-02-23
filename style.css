@@ -269,12 +269,7 @@ a {
 
 @media (max-width: 420px) {
   input {
-    /* height: 36px; */
     width: 160px;
-    /* font-size: 16px;
-        border-radius: 8px;
-        margin-bottom: 32px;
-        padding: 4px 16px; */
   }
 }
 
@@ -283,4 +278,10 @@ a {
     display: flex;
   }
 
+}
+
+@media (min-width: 1800px) {
+  body {
+    --margin-right-content: calc(100vw - 1800px);
+  }  
 }

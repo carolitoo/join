@@ -68,7 +68,7 @@ header span {
 }
 
 .submenu-header {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: var(--height-header);
   right: var(--margin-right-content);
