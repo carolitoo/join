@@ -92,11 +92,34 @@ function changeButtonColorsLow(e) {
 function activateDropdown() {
     const dropDownMenu = document.getElementById("assignedContactsCtn");
     const dropDownIcon = document.querySelector(".dropDownIcon");
-    dropDownIcon.classList.toggle("active");
-    dropDownMenu.style.display =
-        dropDownMenu.style.display === "block" ? "none" : "block";
 
+    // Umkehren der Klasse für das Dropdown-Symbol
+    dropDownIcon.classList.toggle("active");
+
+    // Öffnen oder Schließen des Dropdown-Menüs
+    dropDownMenu.style.display = dropDownMenu.style.display === "block" ? "none" : "block";
+
+    // Rendern der Kontakte
     renderContacts();
+
+    // Wenn das Dropdown-Menü geöffnet ist, fügen Sie einen Event-Listener hinzu, um Klicks außerhalb des Menüs zu überwachen
+    if (dropDownMenu.style.display === "block") {
+        document.body.addEventListener("click", clickOutsideHandler);
+    } else {
+        // Wenn das Dropdown-Menü geschlossen ist, entfernen Sie den Event-Listener
+        document.body.removeEventListener("click", clickOutsideHandler);
+    }
+}
+
+// Funktion zur Verarbeitung von Klicks außerhalb des Dropdown-Menüs
+function clickOutsideHandler(event) {
+    const dropDownMenu = document.getElementById("assignedContactsCtn");
+
+    // Überprüfen, ob das geklickte Element nicht Teil des Dropdown-Menüs und nicht das Eingabefeld ist
+    if (!dropDownMenu.contains(event.target) && event.target.className !== "input-add-task") {
+        // Wenn ja, schließen Sie das Dropdown-Menü
+        dropDownMenu.style.display = "none";
+    }
 }
 
 /**
@@ -104,35 +127,51 @@ function activateDropdown() {
  * It adds the initials, the username and a chekbox for every user
  * check if already rendered so it doesn't multiply
  */
-function renderContacts() {
+async function renderContacts() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
-    const existingContacts = assignedContacts.querySelectorAll('.contact span:last-child'); // Sammle bereits vorhandene Kontakte
+    const existingContacts = document.querySelectorAll('#assignedContactsCtn .contact span:last-child'); // Sammle bereits vorhandene Kontakte direkt aus dem DOM
 
-    contacts.forEach(contact => {
+    contacts.forEach((contact, index) => {
         // Überprüfe, ob der aktuelle Benutzer bereits im Container vorhanden ist
         const contactExists = Array.from(existingContacts).some(existingContact => existingContact.innerText === contact.name);
+        
+        // Überprüfen, ob der aktuelle Benutzer der aktuelle Benutzer ist, den wir hinzufügen möchten
+        const isCurrentUser = index === 0; // Annahme: Der aktuelle Benutzer ist der erste Benutzer in der Liste
+
         if (!contactExists) {
             const nameInitials = contact.acronymContact; // Verwende das Akronym des Kontakts
-            const contactName = contact.name; // Korrekte Zuweisung des Kontakt-Namens
+            const contactName = isCurrentUser ? `${contact.name} (YOU)` : contact.name; // Füge "YOU" hinzu, wenn es sich um den aktuellen Benutzer handelt
+            const contactBgColor = contact.colorContact;
 
-            assignedContacts.innerHTML += `
+            // Generiere HTML für den aktuellen Benutzer
+            let contactHTML = `
                 <div class="contact">
-                    <div>
-                        <div class="task-detail-assigned-user-acronym">
-                            <span>${nameInitials}</span> <!-- Initialen des Kontakts -->
+                    <div class="contact-circle-and-name-box">
+                        <div style="background-color:${contactBgColor}" class="task-detail-assigned-user-acronym">
+                            <span>${nameInitials}</span> 
                         </div>
-                        <span>${contactName}</span> <!-- Name des Kontakts -->
+                        <span>${contactName}</span> 
                     </div>
-                    <input type="checkbox" onclick="saveContactsToArray(this)">
+                    <input class="dropdwon-checkbox" type="checkbox" onclick="saveContactsToArray(this)">
                 </div>`;
+
+            // Füge das Kontakt-HTML dem Container hinzu
+            assignedContacts.innerHTML += contactHTML;
         }
     });
 }
+
+
 function saveContactsToArray(checkbox) {
     let parentContact = checkbox.closest('.contact');
 
     if (parentContact) {
-        let userName = parentContact.querySelector('.contact span:nth-child(2)').innerText;
+        let userNameElement = parentContact.querySelector('.contact span:nth-child(2)');
+        let userName = userNameElement.innerText.trim(); // Benutzernamen bereinigen
+
+        // Entferne "(YOU)" aus dem Benutzernamen, falls vorhanden
+        userName = userName.replace(" (YOU)", "");
+
         let foundContact = contacts.find(contact => contact.name === userName);
 
         if (foundContact) {
@@ -154,6 +193,7 @@ function saveContactsToArray(checkbox) {
     }
 }
 
+
 function renderCheckedContacts() {
     let checkedContactsCtn = document.getElementById('checkedContactsCtn');
     checkedContactsCtn.innerHTML = ''; // Clearing the container content to ensure no old content remains before rendering the updated contacts
@@ -163,15 +203,15 @@ function renderCheckedContacts() {
         if (foundContact) {
             const nameInitials = foundContact.acronymContact;
             const contactName = foundContact.name;
+            const contactBgColor = foundContact.colorContact; // Farbe des Kreises von den vorhandenen Kontakten übernehmen
 
             // Adding a new DOM element for each checked contact to the container
             checkedContactsCtn.innerHTML += ` 
-            <div class="checked-contact-box">
-                <div class="circle-wth-initials">
-                    <span>${nameInitials}</span> <!-- Displaying the initials of the contact -->
+                <div class="checked-contact-box">
+                    <div class="task-detail-assigned-user-acronym" style="background-color:${contactBgColor}">
+                        <span>${nameInitials}</span> 
+                    </div> 
                 </div>
-                <span>${contactName}</span> <!-- Displaying the full name of the contact -->
-            </div>
             `;
         }
     });

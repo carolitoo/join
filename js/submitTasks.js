@@ -6,7 +6,7 @@ async function initAddTask() {
     //await loadUserData();//
     await loadContacts();
     await loadTasks();
-    clearAssignedUsersArray();
+    //clearAssignedUsersArray();
     changeSelectedTab('tab-add-task');
 }
 
@@ -32,6 +32,8 @@ async function submitTask() {
         'statusTask': "toDo",
     };
     tasks.push(newTask); 
-    await setItem('tasks', tasks);
+    await saveTasks();
+    location.href='board.html'
+    
     console.log(tasks)
 };
