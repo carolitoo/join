@@ -152,6 +152,10 @@
   right: 0;
 }
 
+.contact-arrow-return:hover {
+  cursor: pointer;;
+}
+
 .ctn-contacts-details-name {
   display: flex;
   align-items: center;

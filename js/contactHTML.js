@@ -144,7 +144,7 @@ async function generateContactDetailHTML(positionOfContact) {
             <div class="ctn-contacts-detail-mail-phone">
               <div class="contacts-detail-mail-phone">
                 <span>Email</span>
-                <div class="contacts-detail-mail">${contactsSorted[positionOfContact]["emailContact"]}</div>
+                <a class="contacts-detail-mail" href="mailto:${contactsSorted[positionOfContact]["emailContact"]}">${contactsSorted[positionOfContact]["emailContact"]}</a>
               </div>
               <div class="contacts-detail-mail-phone">
                 <span>Phone</span>
