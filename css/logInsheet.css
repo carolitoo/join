@@ -58,10 +58,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 20px;
   z-index: 1000 !important;
   position: absolute !important;
-  bottom: 190px !important;
+  bottom: 390px !important;
   left: calc(50% - 326px / 2) !important;
   background: #2a3647 !important;
   color: white !important;

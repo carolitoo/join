@@ -528,6 +528,7 @@ async function deleteContact(positionOfContact) {
     if (!confirmation) {
       return;
     }
+    await removeContactFromTasks(positionOfContact);
     let updatedContactsSorted = await spliceContacts(positionOfContact);
     await setItem('contacts', JSON.stringify(updatedContactsSorted));
     checkWindowWidth();
