@@ -65,6 +65,11 @@ function checkDisplayGreetingAnimation() {
 }
 
 
+/**
+ * this function finds the current email address via the getItem function and returns it
+ * 
+ * @returns - the email the user is currently logged in with
+ */
 async function getLoggedInEmail() {
     try {
         const response = await getItem('loggedInEmail');
@@ -86,13 +91,23 @@ async function proofAuthentification(loggedInEmail) {
 }
 
 
+/**
+ * this function finds the current user in the users json based on the email entered.
 
+ * 
+ * @returns - an array with information about the currentUser
+ */
 async function identifyCurrentUser() {
     currentUser = users.find(u => u.email === loggedInEmail);
     return currentUser;
 }
 
 
+/**
+ * This function generates a personal interface in case that it is not the user with the  guest login. Includes: greeting, own contact and acronym.
+ * 
+ * @param {array} currentUser - current user 
+ */
 async function personalizeAppContent(currentUser) {
     if (currentUser.name.toLowerCase() !== 'guest') {
         const acronym = currentUser.acronym;
@@ -105,6 +120,11 @@ async function personalizeAppContent(currentUser) {
 }
 
 
+/**
+ * This function checks whether there is already a contact with the user data of the current user. If this is not the case, the new user is added as a contact.
+ * 
+ * @param {array} currentUser - the current user who has logged in.
+ */
 async function createOwnContact(currentUser) {
     const existingContact = await checkIfContactAlreadyExist();
     if (!existingContact) {
@@ -124,12 +144,19 @@ async function createOwnContact(currentUser) {
 }
 
 
+/**
+ * This function checks whether there is already a contact with the email address entered
+ * 
+ * @returns - a comparison of the current e-mail address and the e-mail addresses in the contacts array
+ */
 async function checkIfContactAlreadyExist() {
     loggedInEmail = await getLoggedInEmail();
     return contacts.find(contact => contact.emailContact === loggedInEmail);
 }
 
-
+/**
+ * This function generates the greeting for the guest login, as well as the personal user and their acronym icons in the header area.
+ */
 async function generateGreeting() {
     const currentHour = new Date().getHours();
 
@@ -142,6 +169,12 @@ async function generateGreeting() {
 }
 
 
+/**
+ * This function processes the hourly value of the current time into a welcome text
+ * 
+ * @param {number} hour - the current hour in your own medium 
+ * @returns - greeting text
+ */
 function getGreeting(hour) {
     if (hour >= 5 && hour < 12) {
         return 'Good Morning';
@@ -152,6 +185,13 @@ function getGreeting(hour) {
     }
 }
 
+
+
+/**
+ * This function renders a welcome text including the user's first (and last) name.
+ * 
+ * @param {number} currentHour - current hour 
+ */
 function greetingUser(currentHour) {
     const greetingText = document.getElementById('greetingText');
     greetingText.innerHTML = `${getGreeting(currentHour)}, 
@@ -159,7 +199,11 @@ function greetingUser(currentHour) {
 }
 
 
-
+/**
+ * This function renders a welcome text for the user who logs in with the guest login.
+ * 
+ * @param {number} currentHour - current hour
+ */
 function greetingGuest(currentHour) {
     const greetingText = document.getElementById('greetingText');
     greetingText.innerHTML = getGreeting(currentHour);
