@@ -154,6 +154,7 @@ async function checkIfContactAlreadyExist() {
     return contacts.find(contact => contact.emailContact === loggedInEmail);
 }
 
+
 /**
  * This function generates the greeting for the guest login, as well as the personal user and their acronym icons in the header area.
  */
@@ -184,7 +185,6 @@ function getGreeting(hour) {
         return 'Good Evening';
     }
 }
-
 
 
 /**
@@ -299,7 +299,6 @@ async function getClosestDate(tasksCurrentPriority) {
     formattedClosestDate = new Date(closestDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     return formattedClosestDate;
 }
-
 
 
 /**

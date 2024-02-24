@@ -23,12 +23,12 @@
 </head>
 
 <body onload="LoginInit(); callStatusofSignUp(); checkIfRememberedData()">
-  <div class="landscape-msg">Please rotate your device to portrait mode<br> for better user experience.</div>
+  
   <div class="wrapper">
     <img id="logo-join" class="logo-login" src="./assets/img/logo_dark.svg" />
     <div class="start-animations-helper"></div>
       <div class="header-login">
-        <div class="ctn-no-user">
+        <div id="ctn-no-user" class="ctn-no-user">
           <span class="span-no-user">Not a Join user?</span>
           <a class="btn-db ft-sz-16" href="./signUp.html">Sign up</a>
         </div>
@@ -60,7 +60,8 @@
 
       <div id="msgBox">
       </div>
-
+      
+      <div id="responsive-ctn-container"></div>
 
       <footer class="ft-login">
         <a href="privacy.html">Privacy Policy</a>

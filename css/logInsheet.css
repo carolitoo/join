@@ -30,20 +30,21 @@
 
 .logo-login {
   width: 80%;
-  height: 80%;
+  height: 50%;
   position: fixed;
-  top: 80px;
+  top: 56px;
   left: 77px;
   z-index: 999 !important;
   animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
 
 .logo-login-signUp {
-  position: absolute;
-  top: 80px;
-  left: 77px;
-  height: 96px;
-  width: 96px;
+  position: absolute !important;
+  top: 80px !important;
+  left: 77px !important;
+  height: 96px !important;
+  width: 96px !important;
+  margin-left: 100px !important;
 }
 
 .arrow-sign-up {
@@ -113,7 +114,6 @@ input:focus {
   max-width: 1240px;
 }
 
-/* reagiert nicht mehr in dem div 'header-login' - gleiche class nochmal im loginSheet*/
 .ctn-no-user {
   position: absolute;
   top: 56px;
@@ -181,23 +181,91 @@ input:focus {
 
 /* **** RESPONSIVE DESIGN **** */
 
-/*
-@media (max-width: 760px) {
-  .logo-login {
-    position: static;
-    display: flex;
-    justify-content: flex-start;
-  }*/
+/** SIGN UP **/
 
-.ctn-no-user {
-  display: none;
+@media (max-width: 1130px) {
+  .logo-login-signUp {
+    top: 43px !important;
+  }
+  h1 {
+    font-size: 50px !important;
+  }
+
+  .mt-48 {
+    margin-top: 24px !important;
+  }
+
+  .ctn-login {
+    width: 40% !important;
+    height: 570px;
+    margin-top: 182px !important;
+  }
 }
 
-.ctn-no-user-sub {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
+@media (max-width: 775px) {
+  .logo-login-signUp {
+    left: -65px !important;
+  }
+
+  h1 {
+    font-size: 44px !important;
+  }
+  .ctn-login {
+    margin-top: 80px !important;
+  }
+
+  .ctn-btn-login {
+    margin-bottom: 0;
+  }
+
+  .ft-login {
+    margin-top: -52px;
+    margin-bottom: 34px;
+  }
+}
+
+@media (max-width: 425px) {
+  input::placeholder {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .ctn-login {
+    min-width: 320px !important;
+  }
+
+  .arrow-sign-up {
+    left: 22px;
+  }
+}
+
+/*
+@media (max-width: 760px) {
+  .ctn-login {
+    margin-top: calc(20vh + 16px) !important;
+  }
+
+  .ft-login {
+    margin-top: calc(
+      154px + -3px
+    ) !important; 
+    margin-bottom: 58px !important;
+  }
+
+  .ctn-no-user {
+    position: absolute !important;
+    bottom: calc(
+      -61% + 12px
+    ) !important; 
+    right: calc(
+      50vw - 50% + 210px
+    ) !important; 
+  }
+
+  footer {
+    position: relative;
+  }
 }
 
 @media (max-width: 420px) {
@@ -215,3 +283,4 @@ input:focus {
     left: 16px;
   }
 }
+*/
