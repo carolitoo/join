@@ -23,49 +23,56 @@
 </head>
 
 <body onload="LoginInit(); callStatusofSignUp(); checkIfRememberedData()">
-  <div class="landscape-msg">Please rotate your device to portrait mode<br> for better user experience.</div>
+
   <div class="wrapper">
     <img id="logo-join" class="logo-login" src="./assets/img/logo_dark.svg" />
     <div class="start-animations-helper"></div>
-      <div class="header-login">
-        <div class="ctn-no-user">
-          <span class="span-no-user">Not a Join user?</span>
-          <a class="btn-db ft-sz-16" href="./signUp.html">Sign up</a>
-        </div>
-
+    <div class="header-login">
+      <div id="ctn-no-user" class="ctn-no-user">
+        <span class="span-no-user">Not a Join user?</span>
+        <a class="btn-db" href="./signUp.html">Sign up</a>
       </div>
 
-      <form id="login-form" onsubmit="login(); return false;" class="ctn-login">
-        <h1 class="mt-48">Log in</h1>
-        <div class="sep-login"></div>
-        <div>
-          <input id="email" type="email" placeholder="Email" required oninput="disableLogInButton()" />
-          <img class="input-icon" src="./assets/img/mail.svg" />
-        </div>
-        <div>
-          <input id="password" type="password" placeholder="Password" required oninput="disableLogInButton(); togglePasswordIcon('password', 'passwordIcon');" />
-          <img id="passwordIcon" class="input-icon" src="./assets/img/lock.svg" onclick="showPassword('password', 'passwordIcon')"/>
-        </div>
-        <div class="ctn-rem-me">
-          <input id="checkbox" class="checkbox" type="checkbox" />
-          <p>Remember me</p>
-        </div>
+    </div>
 
-
-        <div class="ctn-btn-login">
-          <button id="LogInButton" class="if-button-disabled" disabled="true" type="submit">Log in</button>
-          <button id="GuestLoginButton" onclick="useGuestLogIn()" class="btn-outline">Guest Log in</button>
-        </div>
-      </form>
-
-      <div id="msgBox">
+    <form id="login-form" onsubmit="login(); return false;" class="ctn-login">
+      <h1 class="mt-48">Log in</h1>
+      <div class="sep-login"></div>
+      <div>
+        <input id="email" type="email" placeholder="Email" required oninput="disableLogInButton()" />
+        <img class="input-icon" src="./assets/img/mail.svg" />
+      </div>
+      <div>
+        <input id="password" type="password" placeholder="Password" required
+          oninput="disableLogInButton(); togglePasswordIcon('password', 'passwordIcon');" />
+        <img id="passwordIcon" class="input-icon" src="./assets/img/lock.svg"
+          onclick="showPassword('password', 'passwordIcon')" />
+      </div>
+      <div class="ctn-rem-me">
+        <input id="checkbox" class="checkbox" type="checkbox" />
+        <p>Remember me</p>
       </div>
 
 
-      <footer class="ft-login">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="legal.html">Legal notice</a>
-      </footer>
+      <div class="ctn-btn-login">
+        <button id="LogInButton" class="logIn-button" disabled="true" type="submit">Log in</button>
+        <button id="GuestLoginButton" onclick="useGuestLogIn()" class="btn-outline">Guest Log in</button>
+      </div>
+    </form>
+
+    <div id="msgBox">
+    </div>
+
+    <footer class="ft-login">
+      <div class="mobile-frame-signUp d-none">
+        <span class="span-no-user">Not a Join user?</span>
+        <a class="signUp-button" href="./signUp.html">Sign up</a>
+      </div>
+      <div class="links-footer">
+        <a class="links-in-footer" href="privacy.html">Privacy Policy</a>
+        <a class="links-in-footer" href="legal.html">Legal notice</a>
+      </div>
+    </footer>
 </body>
 
 </html>
