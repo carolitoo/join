@@ -2,7 +2,6 @@ async function init() {
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
-  await proofAuthentification(loggedInEmail);
   await renderAcronym(loggedInEmail);
   resetSelectedTab();
 }
