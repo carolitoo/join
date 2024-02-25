@@ -4,23 +4,44 @@ async function LoginInit() {
     await includeHTML();
     await loadUserData();
     await loadContacts();
-   // await animationLogo();//
+     checkDisplaywith();
     //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
 }
 
-/*
-async function animationLogo() {
-    const logo = document.getElementById('logo-join');
-    const animateHelper = document.querySelector('.start-animations-helper');
-  
-    setTimeout(() => {
-      logo.classList.add('animate-logo');
-      animateHelper.classList.add('start-animations-helper');
-      animateHelper.classList.add('d-none');
-    }, 12);
-  }
-*/
+async function checkDisplaywith() {
+    if (window.innerWidth >= 428) {
+        animationLogo();
+    } else {
+        animationLogoResponsive();
+    }
+}
 
+
+
+function animationLogo() {
+    const logo = document.getElementById('logo-join-dark');
+    const animateHelper = document.querySelector('.start-animations-helper');
+    setTimeout(() => {
+        logo.classList.add('animate-logo');
+        animateHelper.classList.add('start-animations-helper');
+        animateHelper.classList.add('d-none');
+    }, 12);
+}
+
+
+function animationLogoResponsive() {
+    const logoDark = document.getElementById('logo-join-dark');
+    const logoLight = document.getElementById('logo-light');
+    const animateHelper = document.querySelector('.start-animations-helper');
+
+    setTimeout(() => {
+        logoLight.classList.remove('d-none');
+        logoLight.classList.add('animate-logo');
+        animateHelper.classList.add('start-animations-helper-responsive');
+        animateHelper.classList.add('d-none');
+    }, 12);
+
+}
 
 /**
  * This function is part of the forwarding from signUp to login.

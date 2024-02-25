@@ -10,12 +10,13 @@
 }
 
 .logo-login-signUp {
-  position: absolute !important;
-  top: 80px !important;
-  left: 77px !important;
-  height: 96px !important;
-  width: 96px !important;
+  position: fixed !important;
+  top: 92px !important;
+  left: 64px !important;
+  width: 101px !important;
+  height: 122px !important;
   margin-left: 100px !important;
+  z-index: 999 !important;
 }
 
 .ctn-login {
@@ -30,6 +31,7 @@
   justify-content: center !important;
   align-items: center !important;
   position: relative !important;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04) !important;
 }
 
 .if-button-disabled {
@@ -85,8 +87,8 @@
   align-items: center;
   color: #898c90;
   font-size: 14px;
-  margin-bottom: 40px;
-  margin-top: 40px;
+  position: absolute;
+  bottom: 10px;
 }
 
 .links-in-footer {
@@ -106,7 +108,7 @@
 
 @media (max-width: 1130px) {
   .logo-login-signUp {
-    top: 43px !important;
+    top: 28px !important;
   }
   h1 {
     font-size: 50px !important;
@@ -117,9 +119,9 @@
   }
 
   .ctn-login {
-    width: 40% !important;
+    width: 50% !important;
     height: 570px;
-    margin-top: 182px !important;
+    margin-top: 55px !important;
   }
 
   .ft-login {

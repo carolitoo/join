@@ -1,11 +1,11 @@
+/*desktop-animation*/
 .animate-logo {
   animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
 
 .animate-helper {
-   animation: logo_animation 0.75s ease-in-out 0.25s forwards;
+  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
-
 
 @keyframes logo_animation {
   0% {
@@ -19,18 +19,28 @@
   }
 }
 
-
 @keyframes start-animations-helper_animation {
   0% {
-      opacity: 100%;
+    opacity: 100%;
   }
 
   100% {
-      opacity: 0%;
+    opacity: 0%;
   }
 }
 
-
-.d-none{
+.d-none {
   display: none;
+}
+
+
+@keyframes logo_animation_responsive {
+  0% {
+    width: 50%;
+    height: 50%;
+  }
+  100% {
+    width: 64px;
+    height: 78px;
+  }
 }
