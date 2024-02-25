@@ -90,9 +90,6 @@
 }
 
 @media (max-width: 1130px) {
-  .logo-login-signUp {
-    top: 28px !important;
-  }
   h1 {
     font-size: 50px !important;
   }
@@ -113,9 +110,12 @@
   }
 }
 
+
 @media (max-width: 775px) {
   .logo-login-signUp {
-    left: -65px !important;
+    top: 27px !important;
+    left: 38px !important;
+    width: 64px !important;
   }
 
   h1 {
