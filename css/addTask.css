@@ -226,6 +226,7 @@ select:focus {
   background-image: url(/assets/img/plus-blue.svg);
   background-repeat: no-repeat;
   background-position: center;
+  border: 0;
 }
 
 .subtask-plus-btn:hover {

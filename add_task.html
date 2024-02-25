@@ -45,7 +45,7 @@
     <h1>Add Task</h1>
     <div>
 
-      <form class="form-layout" onsubmit="addTask(); return false">
+      <form class="form-layout">
 
         <div class="add-task-left-column">
 
@@ -54,8 +54,7 @@
               <span class="add_task_txt_format">Title</span>
               <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
             </div>
-            <input class="input-add-task" id="task-input-title" required="" type="text"
-              placeholder="Enter a title">
+            <input class="input-add-task" id="task-input-title" minlength="5" required type="text" placeholder="Enter a title">
           </div>
           <div class="input_box_layout">
             
@@ -113,7 +112,7 @@
               <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
             </div>
             <div class="custom-select">
-              <select id="selectCategory" class="select.dropdown_list" onchange="setCategory()">
+              <select id="selectCategory" class="select.dropdown_list" onchange="setCategory()" required>
                 <option value="" disabled selected>Select task category</option>
                 <option value="Technical Task">Technical Task</option>
                 <option value="User Story">User Story</option>
@@ -123,10 +122,11 @@
 
           <div class="input_box_layout">
             <span class="add_task_txt_format">Subtasks</span>
-              <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title">
-              <div id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()"></div>
-              <div id="added-subtask-ctn"></div>
-          </div>
+            <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title">
+            <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()">+</button>
+            <div id="added-subtask-ctn"></div>
+        </div>
+        
 
         </div>
     </div>
@@ -139,7 +139,7 @@
         <button class="clear-btn" onclick="clearTasks()">Clear
           <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark">
         </button>
-        <button type="button" class="create-task-btn" onclick="submitTask()">Create Task
+        <button type="submit" class="create-task-btn" onclick="submitTask()">Create Task
           <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
         </button>
       </div>

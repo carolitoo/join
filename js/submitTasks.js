@@ -19,21 +19,32 @@ async function submitTask() {
     let description = document.getElementById('task-input-description').value;
     let date = new Date(document.getElementById('task-input-dueDate').value);
     let timeStamp = new Date().getTime();
-  
+
+    // Validierung des Titels
+    if (title.trim() === '') {
+        return; // Beende die Funktion, wenn der Titel nicht ausgefüllt ist
+    }
+
+       // Validierung der Kategorie
+       if (category === '') {
+        return; // Beende die Funktion, wenn keine Kategorie ausgewählt wurde
+    }
+
+    // Fortsetzung der Aufgabenverarbeitung, wenn der Titel ausgefüllt ist
     let newTask = {
-        'idTask':  `task-${timeStamp}`, // ID is set as a timecode so every ID is unique
+        'idTask':  `task-${timeStamp}`,
         'titleTask': title,
         'descriptionTask': description,
-        'assignedContacts':  assignedUsers.map(user => ({ idContact: user.ID })), 
+        'assignedContacts':  assignedUsers.map(user => ({ idContact: user.ID })),
         'dueDate': date,
         'priority': taskPrio,
         'category': category,
         'subtasks': addedSubtasks,
         'statusTask': "toDo",
     };
-    tasks.push(newTask); 
+    tasks.push(newTask);
     await saveTasks();
-    location.href='board.html'
-    
-    console.log(tasks)
-};
+    location.href='board.html';
+    console.log(tasks);
+}
+

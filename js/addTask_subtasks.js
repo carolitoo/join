@@ -1,5 +1,14 @@
 let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 
+function handleKeyPress(event) {
+    // Überprüfen, ob die Eingabetaste gedrückt wurde
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Verhindern, dass das Standardverhalten des Browsers ausgeführt wird
+        saveSubtaskToArray(); // Aufrufen der Funktion zum Hinzufügen der Teilaufgabe
+    }
+}
+
+
 /**
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
 */

@@ -15,11 +15,21 @@ async function initAddTask() {
     await loadContacts();
     await loadTasks();
     clearAssignedUsersArray();
+    keypressEvent()
     changeSelectedTab('tab-add-task');
 }
 
 function clearAssignedUsersArray () {
     assignedUsers = [];
+}
+
+function keypressEvent() {
+    document.getElementById('subtaskInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Unterdrückt die Standardaktion des Formulars für die Eingabetaste
+            saveSubtaskToArray(); // Ruft die Funktion zum Hinzufügen der Teilaufgabe auf
+        }
+    });
 }
 
 /**
