@@ -3,7 +3,7 @@
 }
 
 .start-animations-helper {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
   right: 0;
@@ -11,7 +11,7 @@
   height: 100vh;
   width: 100%;
   background-color: white;
-  z-index: 998;
+  z-index: 998 !important;
 }
 
 .ctn-login {
@@ -32,26 +32,24 @@
 }
 
 .logo-login {
-  position: fixed;
-  top: 56px;
-  left: 77px;
+  position: fixed !important;
+  top: 80px !important;
+  left: 77px !important;
   z-index: 999 !important;
-  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
+  width: 101px;
+  height: 122px;
+  animation: logo_animation 0.75s ease-in-out 0.25s forwards !important;
 }
+
 
 .logo-light {
+  display: none;
   position: fixed;
-  top: 56px;
-  left: 77px;
-  z-index: 999 !important;
+  top: 80px !important;
+  left: 77px !important;
+  z-index: 1000 !important;
 }
 
-.logo-login-dark {
-  position: fixed;
-  top: 56px;
-  left: 77px;
-  z-index: 999 !important;
-}
 
 .arrow-sign-up {
   height: 32px;
@@ -291,16 +289,13 @@ input:focus {
     background-color: #2a3647;
   }
 
-  .logo-login-light {
-    display: flex;
-    z-index: 999 !important;
-    animation: logo_animation_responsive 0.75s ease-in-out 0.25s forwards;
-  }
 
-  .logo-login-dark {
-    display: flex;
-    width: 64px;
-    height: 78px;
+  .logo-light {
+    display: block;
+    z-index: 999 !important;
+    top: 50% !important;
+    left: 50% !important;
+    animation: logo_animation_responsive 0.75s ease-in-out 0.25s forwards;
   }
 
 }

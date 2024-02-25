@@ -4,11 +4,11 @@ async function LoginInit() {
     await includeHTML();
     await loadUserData();
     await loadContacts();
-     checkDisplaywith();
+    checkDisplaywidth();
     //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
 }
 
-async function checkDisplaywith() {
+async function checkDisplaywidth() {
     if (window.innerWidth >= 428) {
         animationLogo();
     } else {
@@ -19,7 +19,7 @@ async function checkDisplaywith() {
 
 
 function animationLogo() {
-    const logo = document.getElementById('logo-join-dark');
+    const logo = document.getElementById('logo-join');
     const animateHelper = document.querySelector('.start-animations-helper');
     setTimeout(() => {
         logo.classList.add('animate-logo');
@@ -30,14 +30,14 @@ function animationLogo() {
 
 
 function animationLogoResponsive() {
-    const logoDark = document.getElementById('logo-join-dark');
+    const logoDark = document.getElementById('logo-join');
     const logoLight = document.getElementById('logo-light');
     const animateHelper = document.querySelector('.start-animations-helper');
 
     setTimeout(() => {
         logoLight.classList.remove('d-none');
         logoLight.classList.add('animate-logo');
-        animateHelper.classList.add('start-animations-helper-responsive');
+        animateHelper.classList.add('start-animations-helper');
         animateHelper.classList.add('d-none');
     }, 12);
 

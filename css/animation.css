@@ -1,4 +1,3 @@
-/*desktop-animation*/
 .animate-logo {
   animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
@@ -36,11 +35,15 @@
 
 @keyframes logo_animation_responsive {
   0% {
-    width: 50%;
-    height: 50%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -50%) translate(0%, 0%);
+    opacity: 1;
   }
   100% {
     width: 64px;
     height: 78px;
+    transform: translate(-50%, -50%) translate(-100%, -100%);
+    opacity: 0;
   }
 }
