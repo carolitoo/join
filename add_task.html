@@ -28,7 +28,7 @@
   <script src="./js/contactDetail.js" defer></script>
   <script src="./js/contactHTML.js" defer></script>
   <script src="contacts.json" defer></script>
-  
+
 
 </head>
 
@@ -45,7 +45,7 @@
     <h1>Add Task</h1>
     <div>
 
-      <form class="form-layout">
+      <form id="Add-Task-Form" class="form-layout" onsubmit="submitTask()">
 
         <div class="add-task-left-column">
 
@@ -54,99 +54,102 @@
               <span class="add_task_txt_format">Title</span>
               <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
             </div>
-            <input class="input-add-task" id="task-input-title" minlength="5" required type="text" placeholder="Enter a title">
+            <input class="input-add-task" id="task-input-title" minlength="5" required type="text"
+              placeholder="Enter a title">
           </div>
           <div class="input_box_layout">
-            
-              <span class="add_task_txt_format">Description</span>
-            
-            <textarea class="input-add-task resize" id="task-input-description" placeholder="Enter a description"> </textarea>
+
+            <span class="add_task_txt_format">Description</span>
+
+            <textarea class="input-add-task resize" id="task-input-description"
+              placeholder="Enter a description"> </textarea>
           </div>
 
           <div class="input_box_layout">
-              <label class="add_task_txt_format">Assigned to</label>
-              <div>
-                <div class="dropDownIcon"></div>  
-                <input class="input-add-task" onclick="activateDropdown()">
-                  <div class="assignedContacts-open" id="assignedContactsCtn"></div>
-                  <div id="checkedContactsCtn"></div>
+            <label class="add_task_txt_format">Assigned to</label>
+            <div>
+              <div class="dropDownIcon"></div>
+              <input class="input-add-task" onclick="activateDropdown()">
+              <div class="assignedContacts-open" id="assignedContactsCtn"></div>
+              <div id="checkedContactsCtn"></div>
+            </div>
+          </div>
+
+          </div>
+
+          <div class="parting_line_grey"></div>
+
+          <div class="add-task-right-column">
+
+            <div class="input_box_layout">
+              <div class="description-with-star">
+                <span class="add_task_txt_format">Due date</span>
+                <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
               </div>
-          </div>
-
-        </div>
-
-        <div class="parting_line_grey"></div>
-
-        <div class="add-task-right-column">
-
-          <div class="input_box_layout">
-            <div class="description-with-star">
-              <span class="add_task_txt_format">Due date</span>
-              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
-            </div>
               <input id="task-input-dueDate" class="input-add-task" required type="date" placeholder="dd/mm/yyyy">
-          </div>
-
-          <div class="input_box_layout">
-            <span class="add_task_txt_format">Prio</span>
-            <div class="prio_box_layout">
-
-              <button id="urgentButton" class="prio-btn-neutral" onclick="changeButtonColorsUrgent(event)">Urgent
-                <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
-              </button>
-
-              <button id="mediumButton" class="medium-btn-yellow" onclick="changeButtonColorsMedium(event)">Medium
-                <img id="medium-icon" src="./assets/img/capa 2.svg" class="urgent-icon" style="fill:#FFA800">
-              </button>
-
-              <button id="lowButton" class="prio-btn-neutral" onclick="changeButtonColorsLow(event)">Low
-                <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
-              </button>
-
             </div>
-          </div>
 
-          <div class="input_box_layout">
-            <div class="description-with-star">
-              <span class="add_task_txt_format">Category</span>
-              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            <div class="input_box_layout">
+              <span class="add_task_txt_format">Prio</span>
+              <div class="prio_box_layout">
+
+                <div id="urgentButton" class="prio-btn-neutral" onclick="changeButtonColorsUrgent(event)">Urgent
+                  <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
+                </div>
+
+                <div id="mediumButton" class="medium-btn-yellow" onclick="changeButtonColorsMedium(event)">Medium
+                  <img id="medium-icon" src="./assets/img/capa 2.svg" class="urgent-icon" style="fill:#FFA800">
+                </div>
+
+                <div id="lowButton" class="prio-btn-neutral" onclick="changeButtonColorsLow(event)">Low
+                  <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
+                </div>
+
+              </div>
             </div>
-            <div class="custom-select">
-              <select id="selectCategory" class="select.dropdown_list" onchange="setCategory()" required>
-                <option value="" disabled selected>Select task category</option>
-                <option value="Technical Task">Technical Task</option>
-                <option value="User Story">User Story</option>
-              </select>
-            </div>            
-          </div>
 
-          <div class="input_box_layout">
-            <span class="add_task_txt_format">Subtasks</span>
-            <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title">
-            <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()">+</button>
-            <div id="added-subtask-ctn"></div>
+            <div class="input_box_layout">
+              <div class="description-with-star">
+                <span class="add_task_txt_format">Category</span>
+                <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+              </div>
+              <div class="custom-select">
+                <select id="selectCategory" class="select.dropdown_list" onchange="setCategory()" required>
+                  <option value="" disabled selected>Select task category</option>
+                  <option value="Technical Task">Technical Task</option>
+                  <option value="User Story">User Story</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input_box_layout">
+              <span class="add_task_txt_format">Subtasks</span>
+              <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title">
+              <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()">+</button>
+              <div id="added-subtask-ctn"></div>
+            </div>
         </div>
         
 
         </div>
-    </div>
-    <div class="bottom-section-ctn">
-      <div class="description-with-star">
-        <p class="reqiured_txt_format" ; style="color: #FF8190;">*</p>
-        <span class="reqiured_txt_format">This field is required</span>
-      </div>
-      <div class="clear_create_btn_ctn">
-        <button class="clear-btn" onclick="clearTasks()">Clear
-          <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark">
-        </button>
-        <button type="submit" class="create-task-btn" onclick="submitTask()">Create Task
-          <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
-        </button>
-      </div>
-    </div>
+        <div class="bottom-section-ctn">
+          <div class="description-with-star">
+            <p class="reqiured_txt_format" ; style="color: #FF8190;">*</p>
+            <span class="reqiured_txt_format">This field is required</span>
+          </div>
+          <div class="clear_create_btn_ctn">
+            <button class="clear-btn" onclick="clearForm()">Clear
+              <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark">
+            </button>
+            <button type="submit" class="create-task-btn">Create Task
+              <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
+            </button>
+          </div>
+        </div>
+      </form>
+
   </div>
   </div>
-
-
 
 </body>
+</html>

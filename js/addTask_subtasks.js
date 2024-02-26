@@ -13,20 +13,22 @@ function handleKeyPress(event) {
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
 */
 function saveSubtaskToArray() {
-    let inputText = document.getElementById('subtaskInput').value;
-    let timeStampSubtask = new Date().getTime();
+    let inputText = document.getElementById('subtaskInput').value.trim(); // Den Wert des Eingabefeldes abrufen und führende/trailing Leerzeichen entfernen
+    if (inputText) { // Überprüfen, ob das Eingabefeld nicht leer ist
+        let timeStampSubtask = new Date().getTime();
 
-    let newSubtask = {
-        'idSubtask':  `task-${timeStampSubtask}`,
-        'titleSubtask': inputText,
-        'statusSubtask': "open",
+        let newSubtask = {
+            'idSubtask':  `task-${timeStampSubtask}`,
+            'titleSubtask': inputText,
+            'statusSubtask': "open",
+        }
+
+        addedSubtasks.push(newSubtask);
+        document.getElementById('subtaskInput').value = '';
+        console.log("New Subtask is " + JSON.stringify(addedSubtasks));
+
+        loadNewSubtasks(); // Hier wird die loadNewSubtasks-Funktion aufgerufen
     }
-
-    addedSubtasks.push(newSubtask);
-    document.getElementById('subtaskInput').value = '';
-    console.log("New Subtask is " + JSON.stringify(addedSubtasks));
-
-    loadNewSubtasks(); // Hier wird die loadNewSubtasks-Funktion aufgerufen
 }
 
 

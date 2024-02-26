@@ -3,7 +3,7 @@ let taskPrio = "Medium"; //MEDIUM ist the default Prio
 let assignedUsers = []; //collects the checked users from the "Assginded to" menu
 let category = []; //holds the chosen category from the form before submit
 // let statusTask = "toDo"; //TO_DO ist the default status
-
+let contactsRendered = false;
 
 async function initAddTask() {
     await includeHTML();
@@ -15,7 +15,6 @@ async function initAddTask() {
     await loadContacts();
     await loadTasks();
     clearAssignedUsersArray();
-    keypressEvent()
     changeSelectedTab('tab-add-task');
 }
 
@@ -23,14 +22,6 @@ function clearAssignedUsersArray () {
     assignedUsers = [];
 }
 
-function keypressEvent() {
-    document.getElementById('subtaskInput').addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Unterdrückt die Standardaktion des Formulars für die Eingabetaste
-            saveSubtaskToArray(); // Ruft die Funktion zum Hinzufügen der Teilaufgabe auf
-        }
-    });
-}
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
@@ -132,45 +123,61 @@ function clickOutsideHandler(event) {
     }
 }
 
-/**
- * Loads the user contacts to the "Assigned to" dropdown menu
- * It adds the initials, the username and a chekbox for every user
- * check if already rendered so it doesn't multiply
- */
 async function renderContacts() {
+    if (!contactsRendered) {
+        await renderCurrentUser();
+        await renderOtherContacts();
+        contactsRendered = true;
+    }
+}
+
+async function renderCurrentUser() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
-    const existingContacts = document.querySelectorAll('#assignedContactsCtn .contact span:last-child'); // Sammle bereits vorhandene Kontakte direkt aus dem DOM
+    const existingContactNames = Array.from(document.querySelectorAll('#assignedContactsCtn .contact span:nth-child(2)')).map(span => span.innerText.trim());
 
-    contacts.forEach((contact, index) => {
-        // Überprüfe, ob der aktuelle Benutzer bereits im Container vorhanden ist
-        const contactExists = Array.from(existingContacts).some(existingContact => existingContact.innerText === contact.name);
-        
-        // Überprüfen, ob der aktuelle Benutzer der aktuelle Benutzer ist, den wir hinzufügen möchten
-        const isCurrentUser = index === 0; // Annahme: Der aktuelle Benutzer ist der erste Benutzer in der Liste
+    // Generiere HTML für den aktuellen Benutzer (der erste Kontakt in der Liste ist der aktuelle Benutzer)
+    const currentUser = contacts[0];
+    const currentUserExists = existingContactNames.includes(currentUser.name);
+    if (!currentUserExists) {
+        const currentUserInitials = currentUser.acronymContact;
+        const currentUserHTML = `
+            <div class="contact">
+                <div class="contact-circle-and-name-box">
+                    <div style="background-color:${currentUser.colorContact}" class="task-detail-assigned-user-acronym">
+                        <span>${currentUserInitials}</span> 
+                    </div>
+                    <span>${currentUser.name} (YOU)</span> 
+                </div>
+                <input class="dropdwon-checkbox" type="checkbox" onclick="saveContactsToArray(this)">
+            </div>`;
+        assignedContacts.innerHTML += currentUserHTML;
+    }
+}
 
+async function renderOtherContacts() {
+    const assignedContacts = document.getElementById("assignedContactsCtn");
+    const existingContactNames = Array.from(document.querySelectorAll('#assignedContactsCtn .contact span:nth-child(2)')).map(span => span.innerText.trim());
+
+    // Generiere HTML für die anderen Kontakte
+    for (let i = 1; i < contacts.length; i++) {
+        const contact = contacts[i];
+        const contactExists = existingContactNames.includes(contact.name);
         if (!contactExists) {
-            const nameInitials = contact.acronymContact; // Verwende das Akronym des Kontakts
-            const contactName = isCurrentUser ? `${contact.name} (YOU)` : contact.name; // Füge "YOU" hinzu, wenn es sich um den aktuellen Benutzer handelt
-            const contactBgColor = contact.colorContact;
-
-            // Generiere HTML für den aktuellen Benutzer
-            let contactHTML = `
+            const contactInitials = contact.acronymContact;
+            const contactHTML = `
                 <div class="contact">
                     <div class="contact-circle-and-name-box">
-                        <div style="background-color:${contactBgColor}" class="task-detail-assigned-user-acronym">
-                            <span>${nameInitials}</span> 
+                        <div style="background-color:${contact.colorContact}" class="task-detail-assigned-user-acronym">
+                            <span>${contactInitials}</span> 
                         </div>
-                        <span>${contactName}</span> 
+                        <span>${contact.name}</span> 
                     </div>
                     <input class="dropdwon-checkbox" type="checkbox" onclick="saveContactsToArray(this)">
                 </div>`;
-
-            // Füge das Kontakt-HTML dem Container hinzu
             assignedContacts.innerHTML += contactHTML;
         }
-    });
+    }
 }
-
 
 function saveContactsToArray(checkbox) {
     let parentContact = checkbox.closest('.contact');
@@ -202,7 +209,6 @@ function saveContactsToArray(checkbox) {
         console.error("Fehler: Das übergeordnete Kontakt-Element wurde nicht gefunden.");
     }
 }
-
 
 function renderCheckedContacts() {
     let checkedContactsCtn = document.getElementById('checkedContactsCtn');
@@ -239,3 +245,18 @@ function setCategory(i) {
 
     console.log("The selcted Category is " + selectedCategory);
 }
+
+function clearForm() {
+    addedSubtasks = 0;
+    
+    clearAssignedUsersArray();
+    resetFormElements();
+    renderCheckedContacts();
+    changeButtonColorsMedium(event);
+    loadNewSubtasks()
+}
+
+function resetFormElements() {
+    document.getElementById("Add-Task-Form").reset();
+  }
+

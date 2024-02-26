@@ -42,6 +42,7 @@ async function submitTask() {
         'subtasks': addedSubtasks,
         'statusTask': "toDo",
     };
+    
     tasks.push(newTask);
     await saveTasks();
     location.href='board.html';
