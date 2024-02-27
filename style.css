@@ -229,3 +229,11 @@ a {
     font-size: 16px;
   }
 }
+
+
+@media screen and (max-height: 480px) and (orientation: landscape) {
+  .landscape-msg {
+    display: flex;
+  }
+
+}
