@@ -3,7 +3,6 @@ let contacts = [];
 let contactsSorted = [];
 let initialLetters = [];
 let contactIsSelected = false;
-let extractedContactNumbers = [];
 let currentUserAsContact = [];
 let guest = false;
 nameParts = [];

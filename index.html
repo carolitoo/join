@@ -25,8 +25,11 @@
 <body onload="LoginInit(); callStatusofSignUp(); checkIfRememberedData()">
 
   <div class="wrapper">
-    <img id="logo-join" class="logo-login" src="./assets/img/logo_dark.svg" />
-    <div class="start-animations-helper"></div>
+    <img id="logo-join" class="logo-login animate-logo" src="./assets/img/logo_dark.svg" />
+    <img id="logo-light" class="logo-light animate-logo d-none" src="./assets/img/logo_light.svg"/>
+    <img id="logo-dark" class="logo-login animate-logo d-none" src="./">
+    <div id="start-animations-helper" class="start-animations-helper animate-helper"></div>
+    <div class="start-animations-helper-responsive animate-helper d-none" src="./assets/img/logo_dark.svg"></div>
     <div class="header-login">
       <div id="ctn-no-user" class="ctn-no-user">
         <span class="span-no-user">Not a Join user?</span>
@@ -55,7 +58,7 @@
 
 
       <div class="ctn-btn-login">
-        <button id="LogInButton" class="logIn-button" disabled="true" type="submit">Log in</button>
+        <button id="LogInButton" class="logIn-button if-button-disabled" disabled="true" type="submit">Log in</button>
         <button id="GuestLoginButton" onclick="useGuestLogIn()" class="btn-outline">Guest Log in</button>
       </div>
     </form>
