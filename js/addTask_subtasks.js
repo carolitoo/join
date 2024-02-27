@@ -9,6 +9,12 @@ function handleKeyPress(event) {
 }
 
 
+function checkInputSubtask(event) {
+    if (event.key == "Enter") {
+        saveSubtaskToArray();
+    }
+}
+
 /**
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
 */

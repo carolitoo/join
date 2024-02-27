@@ -128,7 +128,7 @@
 
             <div class="input_box_layout">
               <span class="add_task_txt_format">Subtasks</span>
-              <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title">
+              <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title" onkeyup="checkInputSubtask(event)">
               <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()">+</button>
               <div id="added-subtask-ctn"></div>
             </div>
