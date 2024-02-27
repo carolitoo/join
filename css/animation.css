@@ -1,18 +1,14 @@
 .animate-logo {
-  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
+  animation: logo_animation 0.75s ease-in-out 0.75s forwards;
 }
 
-
 .animate-helper {
-  animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards;
+  animation: start-animations-helper_animation 0.95s ease-in-out 0.25s forwards;
 }
 
 .animate-white-logo {
   animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards;
 }
-
-
-
 
 @keyframes logo_animation {
   0% {
@@ -28,7 +24,50 @@
 
 @keyframes logo_animation_lightLogo {
   0% {
-    opacity: 100%; 
+    opacity: 100%;
+    width: 80% !important;
+    height: 80% !important;
+  }
+  50% {
+    opacity: 100%;
+  }
+  75% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 0;
+    width: 101px !important;
+    height: 122px !important;
+  }
+}
+
+@keyframes start-animations-helper_animation {
+  0% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
+}
+
+@keyframes logo_animation_resp {
+  0% {
+    width: 80%;
+    height: 80%;
+  }
+
+  100% {
+    width: 64px;
+    height: 78px;
+    top: 24px;
+    left: 36px;
+  }
+}
+
+@keyframes logo_light_animation_resp {
+  0% {
+    opacity: 100%;
     width: 80%;
     height: 80%;
   }
@@ -39,19 +78,10 @@
     opacity: 50%;
   }
   100% {
-    opacity: 0; 
-    width: 101px;
-    height: 122px;
-  }
-}
-
-
-@keyframes start-animations-helper_animation {
-  0% {
-    opacity: 100%;
-  }
-
-  100% {
-    opacity: 0%;
+    opacity: 0;
+    width: 64px;
+    height: 78px;
+    top: 24px;
+    left: 36px;
   }
 }

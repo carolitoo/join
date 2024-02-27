@@ -12,9 +12,9 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="./css/animation.css">
 
+  <script src="./js/login.js" defer></script>
   <script src="./js/storage.js" defer></script>
   <script src="./js/signUp.js" defer></script>
-  <script src="./js/login.js" defer></script>
   <script src="script.js" defer></script>
   <script src="./js/template.js" defer></script>
   <script src="./js/summary.js" defer></script>
@@ -25,11 +25,10 @@
 <body onload="LoginInit(); callStatusofSignUp(); checkIfRememberedData()">
 
   <div class="wrapper">
-    <img id="logo-join" class="logo-login-animated" src="./assets/img/logo_dark.svg" />
-    <img id="logo-light" class="logo-light hidden-logo" src="./assets/img/logo_light.svg"/>
     <img id="logo-login-animated" class="logo-login-animated" src="./assets/img/logo_dark.svg">
-    <div id="start-animations-helper" class="start-animations-helper animate-helper"></div>
-    <div class="start-animations-helper-responsive hidden-logo" src="./assets/img/logo_dark.svg"></div>
+    <img id="logo-light" class="logo-light hidden-logo" src="./assets/img/logo_light.svg"/>
+    <div id="start-animations-helper" class="start-animations-helper"></div>
+    <div class="start-animations-helper-responsive hidden-logo"></div>
     <div class="header-login">
       <div id="ctn-no-user" class="ctn-no-user">
         <span class="span-no-user">Not a Join user?</span>

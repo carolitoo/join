@@ -2,14 +2,14 @@
 
 async function LoginInit() {
     await includeHTML();
-    await checkDisplaywidth();
+    await chooseDisplayAnimation();
     await loadUserData();
     await loadContacts();
     //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
 }
 
-async function checkDisplaywidth() {
-    if (window.innerWidth >= 428) {
+async function chooseDisplayAnimation() {
+    if (window.innerWidth >= 450) {
         await hideAnimationsContainer();
         await hideAnimationsContainerResponsive();
     } else {

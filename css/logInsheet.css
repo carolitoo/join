@@ -3,63 +3,63 @@
 }
 
 .start-animations-helper {
-  position: fixed !important;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   height: 100vh;
   width: 100%;
-  background-color: white !important;
+  background-color: white;
   z-index: 998;
-}
-
-.start-animations-helper-responsive {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: #2a3647 !important;
-  z-index: 998 !important;
   animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards;
 }
 
+.start-animations-helper-responsive {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #2a3647;
+  z-index: 998 !important;
+  animation: start-animations-helper_animation 1.5s ease-in-out 0.25s forwards;
+}
+
 .ctn-login {
-  border: unset !important;
-  border-radius: 30px !important;
-  background-color: #ffffff !important;
+  border: unset;
+  border-radius: 30px;
+  background-color: #ffffff;
   width: 652px;
   height: 493px;
-  min-width: 400px !important;
-  max-width: 540px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  position: relative !important;
+  min-width: 400px;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   margin-top: 50px;
-  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 }
 
 .logo-login-animated {
-  position: fixed !important;
-  top: 80px !important;
-  left: 77px !important;
-  z-index: 999 !important;
+  position: fixed;
+  top: 80px;
+  left: 77px;
+  z-index: 999;
   width: 101px;
   height: 122px;
-  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
+  animation: logo_animation 0.85s ease-in-out 0.25s forwards;
 }
-
 
 .logo-light {
   position: fixed;
-  top: 80px !important;
-  left: 77px !important;
-  z-index: 1000 !important;
+  top: 80px;
+  left: 77px;
+  z-index: 1000;
   animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards;
 }
 
@@ -172,33 +172,33 @@ input:focus {
 }
 
 .signUp-button {
-  border: unset !important;
-  border-radius: 8px !important;
-  background-color: #2a3647 !important;
-  color: #ffffff !important;
-  font-family: "Inter", sans-serif !important;
+  border: unset;
+  border-radius: 8px;
+  background-color: #2a3647;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
   font-size: 21px;
-  font-weight: 700 !important;
+  font-weight: 700;
   padding: 15px 16px;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .logIn-button {
-  border: unset !important;
-  border-radius: 8px !important;
-  background-color: #2a3647 !important;
-  color: #ffffff !important;
-  font-family: "Inter", sans-serif !important;
+  border: unset;
+  border-radius: 8px;
+  background-color: #2a3647;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
   font-size: 21px;
-  font-weight: 700 !important;
+  font-weight: 700;
   padding: 12px 16px;
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  cursor: pointer !important;
+  cursor: pointer;
 }
 
 .hidden-logo {
@@ -214,22 +214,16 @@ input:focus {
 }
 
 .links-footer {
-  display: flex !important;
-  gap: 8px !important;
+  display: flex;
+  gap: 8px;
 }
 
 /* **** RESPONSIVE DESIGN **** */
 
 @media (max-width: 760px) {
-  .logo-login {
-    top: 5px !important;
-    left: 38px !important;
-    width: 64px !important;
-  }
-
   .ctn-login {
-    width: 405px !important;
-    height: 515px !important;
+    width: 405px;
+    height: 515px;
     margin-top: 0;
     margin-bottom: 25px;
   }
@@ -240,28 +234,28 @@ input:focus {
   }
 
   .signUp-button {
-    padding: 8px 6px !important;
-    width: 104px !important;
+    padding: 8px 6px;
+    width: 104px;
   }
 
   .logIn-button {
-    width: 180px !important;
-    height: 51px !important;
+    width: 180px;
+    height: 51px;
   }
 
   .btn-outline {
-    width: 180px !important;
-    height: 51px !important;
+    width: 180px;
+    height: 51px;
   }
 
   .signUp-button a {
     width: 95px;
-    line-height: 19px !important;
-    font-size: 16px !important;
+    line-height: 19px;
+    font-size: 16px;
   }
 
   .ctn-no-user {
-    display: none !important;
+    display: none;
   }
 
   .span-no-user {
@@ -269,7 +263,7 @@ input:focus {
   }
 
   .mobile-frame-signUp {
-    display: flex !important;
+    display: flex;
     align-items: center;
     margin-bottom: -3px;
   }
@@ -280,19 +274,19 @@ input:focus {
   }
 
   .links-in-footer {
-    font-size: 16px !important;
-    font-weight: 400 !important;
+    font-size: 16px;
+    font-weight: 400;
   }
 
   .links-in-footer:hover {
-    font-weight: 400 !important;
+    font-weight: 400;
     color: #a8a8a8;
   }
 
   .btn-outline:hover {
-    border-color: initial !important;
-    color: #2a3647 !important;
-    box-shadow: initial !important;
+    border-color: initial;
+    color: #2a3647;
+    box-shadow: initial;
   }
 
   footer {
@@ -300,28 +294,25 @@ input:focus {
   }
 }
 
-@media (max-width: 428px) {
-  .logo-join {
-    display: none;
-  }
-  .start-animations-helper {
-    background-color: #2a3647;
-  }
+@media (max-width: 450px) {
 
+  .logo-login-animated {
+    animation: logo_animation_resp 0.95s ease-in-out 0.25s forwards !important;
+  }
   .logo-light {
-    display: block;
+    animation: logo_light_animation_resp 0.95s ease-in-out 0.25s forwards !important;
   }
 }
 
 @media (max-width: 400px) {
   .ctn-login {
-    width: 320px !important;
-    min-width: 320px !important;
+    width: 320px;
+    min-width: 320px;
   }
 
   .if-button-disabled {
-    padding: 6px 0 !important;
-    font-size: 16px !important;
+    padding: 6px 0;
+    font-size: 16px;
   }
 
   .arrow-sign-up {
