@@ -356,4 +356,13 @@ function deleteTask(idTask) {
 }
 
 
+/**
+ * This function closes the overlay (containig the form for adding a task) and ensures that scrolling is possible after closing the overlay 
+ */
+function closeAddTaskBoard() {
+    document.getElementById('overlay-board-addTask').classList.add('d-none');
+    document.getElementsByTagName('body')[0].classList.remove('disable-scroll');
+}
+
+
 
