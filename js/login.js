@@ -2,7 +2,7 @@
 
 async function LoginInit() {
     await includeHTML();
-     await checkDisplaywidth();
+    await checkDisplaywidth();
     await loadUserData();
     await loadContacts();
     //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
@@ -10,58 +10,39 @@ async function LoginInit() {
 
 async function checkDisplaywidth() {
     if (window.innerWidth >= 428) {
-       await animationLogo();
         await hideAnimationsContainer();
+        await hideAnimationsContainerResponsive();
     } else {
-        await hideJoinLogo();
-        animationLogoResponsive();
+        await animationLogoResponsive();
+        await hideAnimationsContainer();
+        await hideAnimationsContainerResponsive();
     }
 }
 
 
 async function hideAnimationsContainer() {
-    let AnimationsContainer = document.querySelector('.start-animations-helper');
+    let AnimationsContainer = document.getElementById('start-animations-helper');
     setTimeout(() => {
-        AnimationsContainer.style.display = 'none';
-    }, 750); 
-}
-
-async function hideJoinLogo() {
-    const logoDark = document.getElementById('logo-join');
-    const animateHelper = document.querySelector('.start-animations-helper');
-
-    // Füge eine Klasse hinzu, um das Logo und das Overlay zu verstecken
-    logoDark.classList.add('d-none');
-    animateHelper.classList.add('d-none');
-}
-
-
-
-async function animationLogo() {
-    const logo = document.getElementById('logo-join');
-    const animateHelper = document.querySelector('.start-animations-helper');
-    setTimeout(() => {
-        animateHelper.classList.add('animate-helper');
-
-    }, 12);
+        AnimationsContainer.classList.add('d-none');
+    }, 750);
 }
 
 
 async function animationLogoResponsive() {
-    const logoDark = document.getElementById('logo-join');
     const logoLight = document.getElementById('logo-light');
-    const animateHelper = document.querySelector('.start-animations-helper')
     const animateHelperResponsive = document.querySelector('.start-animations-helper-responsive');
 
-    logoDark.classList.remove('d-none');
-    animateHelperResponsive.classList.remove('d-none');
-
-    logoDark.classList.add('animate-black-logo-responsive');
-    logoLight.classList.add('animate-logo');
-    animateHelperResponsive.classList.add('animate-helper');
-    animationLogoResponsive.classList.add('d-none');
+    logoLight.classList.remove('hidden-logo');
+    animateHelperResponsive.classList.remove('hidden-logo');
 }
 
+
+async function hideAnimationsContainerResponsive() {
+    let AnimationsContainer = document.querySelector('.start-animations-helper-responsive');
+    setTimeout(() => {
+        AnimationsContainer.classList.add('d-none');
+    }, 750);
+}
 
 
 /**

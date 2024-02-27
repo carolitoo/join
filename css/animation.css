@@ -2,13 +2,16 @@
   animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
 
-.animate-black-logo-responsive {
-    animation: logo_animation_black 0.75s ease-in-out 0.25s forwards;
-}
 
 .animate-helper {
   animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards;
 }
+
+.animate-white-logo {
+  animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards;
+}
+
+
 
 
 @keyframes logo_animation {
@@ -23,56 +26,27 @@
   }
 }
 
-@keyframes logo_animation_blackLogo {
+@keyframes logo_animation_lightLogo {
   0% {
+    opacity: 100%; 
     width: 80%;
     height: 80%;
-    opacity: 0%; /* Das schwarze Logo ist am Anfang unsichtbar */
   }
-
+  50% {
+    opacity: 100%;
+  }
+  75% {
+    opacity: 50%;
+  }
   100% {
+    opacity: 0; 
     width: 101px;
     height: 122px;
-    opacity: 100%; /* Das schwarze Logo wird am Ende sichtbar */
   }
 }
+
 
 @keyframes start-animations-helper_animation {
-  0% {
-    opacity: 100%;
-  }
-
-  100% {
-    opacity: 0%;
-    visibility: hidden !important;
-    display: none !important;
-  }
-}
-
-
-.d-none {
-  display: none;
-}
-
-
-.animate-logo-responsive {
-  animation: logo_animation_responsive 0.75s ease-in-out 0.25s forwards;
-}
-
-@keyframes logo_animation_responsive {
-  0% {
-    width: 80%;
-    height: 80%;
-    opacity: 100%;
-  }
-  100% {
-    width: 64px;
-    height: 78px;
-    opacity: 0%;
-  }
-}
-
-@keyframes start-animations-helper-responsive_animation {
   0% {
     opacity: 100%;
   }

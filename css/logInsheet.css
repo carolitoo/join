@@ -24,6 +24,7 @@
   width: 100%;
   background-color: #2a3647 !important;
   z-index: 998 !important;
+  animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards;
 }
 
 .ctn-login {
@@ -43,20 +44,23 @@
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04) !important;
 }
 
-.logo-login {
+.logo-login-animated {
   position: fixed !important;
   top: 80px !important;
   left: 77px !important;
   z-index: 999 !important;
   width: 101px;
   height: 122px;
+  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
+
 
 .logo-light {
   position: fixed;
   top: 80px !important;
   left: 77px !important;
   z-index: 1000 !important;
+  animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards;
 }
 
 .arrow-sign-up {
@@ -197,6 +201,10 @@ input:focus {
   cursor: pointer !important;
 }
 
+.hidden-logo {
+  opacity: 0 !important;
+}
+
 .d-none {
   display: none;
 }
@@ -208,10 +216,6 @@ input:focus {
 .links-footer {
   display: flex !important;
   gap: 8px !important;
-}
-
-.z-index0 {
-  z-index: 0 !important;
 }
 
 /* **** RESPONSIVE DESIGN **** */
