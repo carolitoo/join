@@ -16,6 +16,8 @@ async function initAddTask() {
     await loadTasks();
     clearAssignedUsersArray();
     changeSelectedTab('tab-add-task');
+    addEventListenerToAddForm();
+    setMinDueDate();
 }
 
 function clearAssignedUsersArray () {
@@ -23,12 +25,42 @@ function clearAssignedUsersArray () {
 }
 
 
+function addEventListenerToAddForm() {
+    document.getElementById("Add-Task-Form").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+      }
+    });
+  }
+  
+
+  function checkSubmission(event) {
+    if (event.key == "Enter") {
+      document.getElementById("submit-btn").click();
+    }
+  }
+
+
+  /**
+ * This function ensures that dates in the past can not be selected as due date
+ */
+function setMinDueDate() {
+    let startDate = new Date();
+  
+    let minYear = startDate.getFullYear();
+    let minMonth = String(startDate.getMonth() + 1).padStart(2, "0");
+    let minDay = String(startDate.getDate()).padStart(2, "0");
+  
+    let today = `${minYear}-${minMonth}-${minDay}`;
+    document.getElementById("task-input-dueDate").setAttribute("min", today);
+  }
+
+
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
-function changeButtonColorsUrgent(e) {
+function changeButtonColorsUrgent() {
     let taskPrio = "Urgent";
-    e.preventDefault();
     document.getElementById('urgentButton').classList.add("urgent-btn-red");
     document.getElementById('urgentButton').classList.remove("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta w.svg';
@@ -47,9 +79,8 @@ function changeButtonColorsUrgent(e) {
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
-function changeButtonColorsMedium(e) {
+function changeButtonColorsMedium() {
     let taskPrio = "Medium";
-    e.preventDefault(); 
     document.getElementById('mediumButton').classList.add("medium-btn-yellow");
     document.getElementById('mediumButton').classList.remove("prio-btn-neutral");
     document.getElementById('medium-icon').src = './assets/img/capa 2.svg';
@@ -68,9 +99,8 @@ function changeButtonColorsMedium(e) {
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
-function changeButtonColorsLow(e) {
+function changeButtonColorsLow() {
     let taskPrio = "Low";
-    e.preventDefault();
     document.getElementById('lowButton').classList.add("low-btn-green");
     document.getElementById('lowButton').classList.remove("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja w.svg';
@@ -252,7 +282,7 @@ function clearForm() {
     clearAssignedUsersArray();
     resetFormElements();
     renderCheckedContacts();
-    changeButtonColorsMedium(event);
+    changeButtonColorsMedium();
     loadNewSubtasks()
 }
 

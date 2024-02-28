@@ -1,19 +1,5 @@
 let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 
-function handleKeyPress(event) {
-    // Überprüfen, ob die Eingabetaste gedrückt wurde
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Verhindern, dass das Standardverhalten des Browsers ausgeführt wird
-        saveSubtaskToArray(); // Aufrufen der Funktion zum Hinzufügen der Teilaufgabe
-    }
-}
-
-
-function checkInputSubtask(event) {
-    if (event.key == "Enter") {
-        saveSubtaskToArray();
-    }
-}
 
 /**
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
@@ -38,6 +24,13 @@ function saveSubtaskToArray() {
 }
 
 
+function checkInputSubtask(event) {
+    if (event.key == "Enter") {
+      saveSubtaskToArray();
+    }
+  }
+
+
 /**
  * Iterrates through the array subtasks and renders the subtasks 
  * only adds a subtask if the array isn't empty
@@ -56,8 +49,8 @@ function loadNewSubtasks() {
                     <div id="subtaskListElement${i}" class="subtask-list"> 
                         <span>&#x2022; ${currentSubtaskTitle}</span>
                         <div class="subtask-icons"> 
-                            <button class="delete-btn" onclick="deleteSubtask(${i})"></button>
-                            <button class="confirm-btn" onclick="editSubtask(${i})"></button>
+                            <button class="delete-btn" type="button" onclick="deleteSubtask(${i})"></button>
+                            <button class="confirm-btn" type="button" onclick="editSubtask(${i})"></button>
                         </div>
                     </div>`;
             }

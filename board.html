@@ -61,7 +61,7 @@
               </div>
             </div>
           </div>
-          <div class="btn-db btn-add-task-db">
+          <div class="btn-db btn-add-task-db" onclick="openAddTaskBoard('toDo')">
             <span>Add task</span>
             <img class="icon-btn" src="./assets/img/add_white.svg" />
           </div>
@@ -76,6 +76,7 @@
           <div class="ctn-board-status-top">
             <span class="headline-status">To do</span>
             <img
+              onclick="openAddTaskBoard('toDo')"
               class="icon-plus-square"
               src="./assets/img/plus_square_default.svg"
             />
@@ -99,6 +100,7 @@
           <div class="ctn-board-status-top">
             <span class="headline-status">In Progress</span>
             <img
+              onclick="openAddTaskBoard('inProgress')"
               class="icon-plus-square"
               src="./assets/img/plus_square_default.svg"
             />
@@ -125,6 +127,7 @@
           <div class="ctn-board-status-top">
             <span class="headline-status">Await Feedback</span>
             <img
+              onclick="openAddTaskBoard('awaitFeedback')"
               class="icon-plus-square"
               src="./assets/img/plus_square_default.svg"
             />
@@ -179,11 +182,11 @@
       onclick="closeSubmenuChangeStatusMobile()"
     ></div>
     <div
-      class="overlay-board"
+      class="overlay-board d-none"
       id="overlay-board-addTask"
       onclick="closeAddTaskBoard()"
     >
-      <div class="wrapper-add-task-board d-none">
+      <div class="wrapper-add-task-board">
         <div w3-include-html="./assets/templates/taskForm.html" onclick="stopPropagation(event)"></div>
       </div>
     </div>
