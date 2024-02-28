@@ -82,3 +82,10 @@ function changeBorderColorSearchTask(idOfElement, color) {
   document.getElementById(idOfElement).style.border = `1px solid ${color}`;
 }
 
+
+/**
+ * This function loads the previous page
+ */
+function returnToPreviousPage() {
+  history.back();
+}

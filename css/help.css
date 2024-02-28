@@ -5,6 +5,35 @@
     padding-bottom: 32px;
 }
 
+.headline-help-legal-privacy {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ctn-arrow-return {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ctn-arrow-return:hover {
+    background-color: #EEEEEE;
+    cursor: pointer;
+}
+
+.img-arrow-return {
+    width: 28px;
+    height: 28px;
+}
+
+.img-arrow-return:hover {
+    width: 32px;
+    height: 32px;
+}
+
 .color-lb {
     color: #29ABE2;
 }
