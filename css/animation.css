@@ -1,9 +1,9 @@
 .animate-logo {
-  animation: logo_animation 0.75s ease-in-out 0.75s forwards;
+  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
 
 .animate-helper {
-  animation: start-animations-helper_animation 0.95s ease-in-out 0.25s forwards;
+  animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards;
 }
 
 .animate-white-logo {
@@ -24,9 +24,9 @@
 
 @keyframes logo_animation_lightLogo {
   0% {
-    opacity: 100%;
-    width: 80% !important;
-    height: 80% !important;
+    opacity: 100% !important;
+    width: 80%;
+    height: 80%;
   }
   50% {
     opacity: 100%;
@@ -36,8 +36,8 @@
   }
   100% {
     opacity: 0;
-    width: 101px !important;
-    height: 122px !important;
+    width: 101px;
+    height: 122px;
   }
 }
 
@@ -51,6 +51,7 @@
   }
 }
 
+
 @keyframes logo_animation_resp {
   0% {
     width: 80%;
@@ -60,8 +61,8 @@
   100% {
     width: 64px;
     height: 78px;
-    top: 24px;
-    left: 36px;
+    top: 24px !important;
+    left: 36px !important;
   }
 }
 
@@ -81,7 +82,7 @@
     opacity: 0;
     width: 64px;
     height: 78px;
-    top: 24px;
-    left: 36px;
+    top: 180px !important;
+    left: 36px !important;
   }
 }

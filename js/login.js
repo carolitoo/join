@@ -66,8 +66,11 @@ function callStatusofSignUp() {
         msgBox.style.display = 'none';
     }
 }
+ 
 
-
+/**
+ * This function checks whether there is stored data in the Local Storage and fills it into the input fields if it exists.
+ */
 function checkIfRememberedData() {
     if (localStorage.getItem('email')) {
         let rememberedEmail = localStorage.getItem('email');
@@ -83,7 +86,9 @@ function checkIfRememberedData() {
     }
 }
 
-
+/**
+ * This function checks whether the input matches an existing user and then logs this user in with the saved e-mail address.
+ */
 async function login() {
     let emailInput = document.getElementById('email');
     let convertedEmail = emailInput.value.toLowerCase();
@@ -102,6 +107,10 @@ async function login() {
     }
 }
 
+
+/**
+ * This function checks whether all input fields have been filled and then releases the login button.
+ */
 function disableLogInButton() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
@@ -120,6 +129,9 @@ function disableLogInButton() {
     }
 }
 
+/**
+ * This function checks whether the 'remember me' checkbox has been activated. If this is the case, the email and password are saved in the localStorage for the next login.
+ */
 function checkStatusofCheckBox() {
     let checkbox = document.getElementById('checkbox');
     if (checkbox.checked) {
@@ -130,6 +142,9 @@ function checkStatusofCheckBox() {
     }
 }
 
+/**
+ * The useGuestLogIn function sets the values of the email and password fields to predefined guest login information and saves the email address as loggedInEmail for later processing. The user is redirected to the summary page.
+ */
 async function useGuestLogIn() {
     document.getElementById('email').value = 'guest@account';
     document.getElementById('password').value = 'joinGuest2024';
@@ -142,6 +157,10 @@ async function useGuestLogIn() {
     }
 }
 
+
+/**
+ * This function clears the input fields of the login form.
+ */
 function clearLogIn() {
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';

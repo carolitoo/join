@@ -12,7 +12,7 @@
   width: 100%;
   background-color: white;
   z-index: 998;
-  animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards;
+  animation: start-animations-helper_animation 1.75s ease-in-out 0.25s forwards;
 }
 
 .start-animations-helper-responsive {
@@ -23,9 +23,9 @@
   bottom: 0;
   height: 100vh;
   width: 100%;
-  background-color: #2a3647;
+  background-color: #2a3647 !important;
   z-index: 998 !important;
-  animation: start-animations-helper_animation 1.5s ease-in-out 0.25s forwards;
+  animation: start-animations-helper_animation 1.75s ease-in-out 0.25s forwards;
 }
 
 .ctn-login {
@@ -49,18 +49,18 @@
   position: fixed;
   top: 80px;
   left: 77px;
-  z-index: 999;
+  z-index: 999 !important;
   width: 101px;
   height: 122px;
-  animation: logo_animation 0.85s ease-in-out 0.25s forwards;
+  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
 }
 
 .logo-light {
   position: fixed;
   top: 80px;
   left: 77px;
-  z-index: 1000;
-  animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards;
+  z-index: 1000 !important;
+  animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards !important;
 }
 
 .arrow-sign-up {
@@ -297,10 +297,10 @@ input:focus {
 @media (max-width: 450px) {
 
   .logo-login-animated {
-    animation: logo_animation_resp 0.95s ease-in-out 0.25s forwards !important;
+    animation: logo_animation_resp 0.75s ease-in-out 0.25s forwards !important;
   }
   .logo-light {
-    animation: logo_light_animation_resp 0.95s ease-in-out 0.25s forwards !important;
+    animation: logo_light_animation_resp 0.75s ease-in-out 0.25s forwards !important;
   }
 }
 
