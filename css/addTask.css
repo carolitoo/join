@@ -1,3 +1,7 @@
+.no-margin-bottom {
+margin-bottom: 0px !important;
+}
+
 .form-layout {
   display: flex;
   justify-content: flex-start;
@@ -51,13 +55,6 @@
   resize: vertical;
 }
 
-/*style for Input with dropdwon menu*/
-.custom-select {
-  min-width: 364px;
-  position: relative;
-  margin-bottom: 32px;
-}
-
 select {
   appearance: none;
   /*  safari  */
@@ -105,11 +102,18 @@ select:focus {
   align-items: center;
 }
 
-.circle-wth-initials {
-  border-radius: 100%;
-  
+.checked-contacts-ctn {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  gap: 8px;
+  width: 480px;
+  flex-wrap: wrap;
 }
 
+.circle-wth-initials {
+  border-radius: 100%;
+}
 
 .icon-calendar {
   height: 20px;
@@ -123,7 +127,6 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 28px;
   width: 470px;
 }
 
@@ -387,5 +390,23 @@ select:focus {
   .clear-btn {
     display: none;
   }
+}
 
+
+@media (max-width: 490px) {
+
+  .bottom-section-ctn {
+    position: fixed;
+    bottom: 80px;
+    z-index: 5;
+    background-color: #f6f7f8;
+  }
+
+  .input-add-task{
+    width: 400px;
+  }
+
+  .select.dropdown_list {
+    width: 380px;
+  }
 }
