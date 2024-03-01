@@ -81,7 +81,12 @@ async function getLoggedInEmail() {
     }
 }
 
-
+/**
+ * The proofAuthentification function checks whether the passed loggedInEmail string, after removing spaces, is equal to [] (empty array). If this is the case, user redirection to the "index.html" page is triggered.
+ * 
+ * @param {string} loggedInEmail - the email which was used for the login
+ * @returns - returns with no action
+ */
 async function proofAuthentification(loggedInEmail) {
     if (loggedInEmail.trim() === "[]") {
         window.location.href = "index.html"; 

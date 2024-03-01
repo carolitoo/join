@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="./css/animation.css">
 
-  <script src="./js/login.js" defer></script>
   <script src="./js/storage.js" defer></script>
+  <script src="./js/login.js" defer></script>
   <script src="./js/signUp.js" defer></script>
   <script src="script.js" defer></script>
   <script src="./js/template.js" defer></script>
@@ -25,10 +25,10 @@
 <body onload="LoginInit(); callStatusofSignUp(); checkIfRememberedData()">
 
   <div class="wrapper">
-    <img id="logo-login-animated" class="logo-login-animated" src="./assets/img/logo_dark.svg">
-    <img id="logo-light" class="logo-light hidden-logo" src="./assets/img/logo_light.svg"/>
+    <img id="logo-login" class="logo-login" src="./assets/img/logo_dark.svg">
     <div id="start-animations-helper" class="start-animations-helper"></div>
-    <div class="start-animations-helper-responsive hidden-logo"></div>
+    <img id="logo-light" class="logo-light" src="./assets/img/logo_light.svg"/>
+    <div id="start-animations-helper-responsive" class="start-animations-helper-responsive"></div>
     <div class="header-login">
       <div id="ctn-no-user" class="ctn-no-user">
         <span class="span-no-user">Not a Join user?</span>
@@ -55,6 +55,7 @@
         <p>Remember me</p>
       </div>
 
+      <div id="msgBox" class="d-none"></div>
 
       <div class="ctn-btn-login">
         <button id="LogInButton" class="logIn-button if-button-disabled" disabled="true" type="submit">Log in</button>
@@ -62,8 +63,7 @@
       </div>
     </form>
 
-    <div id="msgBox">
-    </div>
+
 
     <footer class="ft-login">
       <div class="mobile-frame-signUp d-none">

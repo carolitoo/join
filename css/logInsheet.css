@@ -2,6 +2,7 @@
   position: relative;
 }
 
+
 .start-animations-helper {
   position: fixed;
   top: 0;
@@ -10,12 +11,13 @@
   bottom: 0;
   height: 100vh;
   width: 100%;
-  background-color: white;
-  z-index: 998;
-  animation: start-animations-helper_animation 1.75s ease-in-out 0.25s forwards;
+  background-color: #F6F7F8;
+  z-index: 90 !important;
 }
 
+
 .start-animations-helper-responsive {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -24,8 +26,7 @@
   height: 100vh;
   width: 100%;
   background-color: #2a3647 !important;
-  z-index: 998 !important;
-  animation: start-animations-helper_animation 1.75s ease-in-out 0.25s forwards;
+  z-index: 95 !important;
 }
 
 .ctn-login {
@@ -41,26 +42,28 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 50px;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 }
 
-.logo-login-animated {
+.logo-login {
   position: fixed;
-  top: 80px;
-  left: 77px;
-  z-index: 999 !important;
-  width: 101px;
-  height: 122px;
-  animation: logo_animation 0.75s ease-in-out 0.25s forwards;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 100 !important;
 }
 
 .logo-light {
   position: fixed;
-  top: 80px;
-  left: 77px;
-  z-index: 1000 !important;
-  animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards !important;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 110 !important;
+  display: none;
 }
 
 .arrow-sign-up {
@@ -77,16 +80,17 @@
   align-items: center;
   font-size: 20px;
   z-index: 1000 !important;
-  position: absolute !important;
+  /*position: absolute !important;
   bottom: 390px !important;
   left: calc(50% - 326px / 2) !important;
+  */
   background: #2a3647 !important;
   color: white !important;
   border: none !important;
   border-radius: 10px !important;
   width: 293px !important;
   height: 64px !important;
-  animation: slide-in 0.5s ease, slide-out 0.5s ease 2s forwards;
+  animation: slide-in 0.5s ease, slide-out 0.5s ease 2s forwards !important; 
 }
 
 input:focus {
@@ -201,8 +205,8 @@ input:focus {
   cursor: pointer;
 }
 
-.hidden-logo {
-  opacity: 0 !important;
+.hidden {
+  opacity: 0;
 }
 
 .d-none {
@@ -219,6 +223,10 @@ input:focus {
 }
 
 /* **** RESPONSIVE DESIGN **** */
+@media(max-width: 1025px){
+
+
+}
 
 @media (max-width: 760px) {
   .ctn-login {
@@ -263,7 +271,7 @@ input:focus {
   }
 
   .mobile-frame-signUp {
-    display: flex;
+    display: flex !important;
     align-items: center;
     margin-bottom: -3px;
   }
@@ -294,13 +302,22 @@ input:focus {
   }
 }
 
-@media (max-width: 450px) {
 
-  .logo-login-animated {
-    animation: logo_animation_resp 0.75s ease-in-out 0.25s forwards !important;
+@media (max-width: 675px) {
+  .start-animations-helper-responsive {
+    display: block;
+    animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards !important;
   }
+  .start-animations-helper {
+    animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards !important;
+  }
+
   .logo-light {
-    animation: logo_light_animation_resp 0.75s ease-in-out 0.25s forwards !important;
+    display: block;
+    animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards !important;
+  }
+  .logo-login {
+    animation: logo_animation_resp 0.75s ease-in-out 0.25s forwards !important;
   }
 }
 

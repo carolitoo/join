@@ -9,40 +9,26 @@ async function LoginInit() {
 }
 
 async function chooseDisplayAnimation() {
-    if (window.innerWidth >= 450) {
-        await hideAnimationsContainer();
-        await hideAnimationsContainerResponsive();
+    if (window.innerWidth >= 675) {
+        await animationLogo();
+        await animationDisplay();
     } else {
-        await animationLogoResponsive();
-        await hideAnimationsContainer();
-        await hideAnimationsContainerResponsive();
     }
+
+}
+
+async function animationLogo() {
+    let joinLogodark = document.getElementById('logo-login');
+    joinLogodark.classList.add('animate-logo');
 }
 
 
-async function hideAnimationsContainer() {
-    let AnimationsContainer = document.getElementById('start-animations-helper');
-    setTimeout(() => {
-        AnimationsContainer.classList.add('d-none');
-    }, 750);
+async function animationDisplay() {
+    let displayHelper = document.getElementById('start-animations-helper');
+    displayHelper.classList.add('animate-helper');
+
 }
 
-
-async function animationLogoResponsive() {
-    const logoLight = document.getElementById('logo-light');
-    const animateHelperResponsive = document.querySelector('.start-animations-helper-responsive');
-
-    logoLight.classList.remove('hidden-logo');
-    animateHelperResponsive.classList.remove('hidden-logo');
-}
-
-
-async function hideAnimationsContainerResponsive() {
-    let AnimationsContainer = document.querySelector('.start-animations-helper-responsive');
-    setTimeout(() => {
-        AnimationsContainer.classList.add('d-none');
-    }, 750);
-}
 
 
 /**
@@ -56,17 +42,21 @@ function callStatusofSignUp() {
     const msg = urlParams.get('msg');
     const msgBox = document.getElementById('msgBox');
 
+   // slideInAnimation('wrapper-contact-details', 'translate-x', true);//
+
     if (signUpStatus === 'completed' && msg) {
         const msgSpan = document.createElement('span');
         msgSpan.innerHTML = msg;
         msgSpan.classList.add('successfullyBtn');
-        msgBox.appendChild(msgSpan);
+       // msgBox.appendChild(msgSpan);//
+        slideInAnimation('msgBox','translate-x', true)
         localStorage.removeItem('signUpStatus');
+
     } else {
         msgBox.style.display = 'none';
     }
 }
- 
+
 
 /**
  * This function checks whether there is stored data in the Local Storage and fills it into the input fields if it exists.
