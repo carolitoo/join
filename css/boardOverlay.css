@@ -117,7 +117,7 @@
   font-size: 12px;
   background-color: #1fd7c1;
   color: white;
-  border: 2px;
+  border: 2px solid #ffffff;
   border-radius: 50%;
 }
 
@@ -137,11 +137,17 @@
   align-items: center;
   padding: 6px 16px;
   gap: 16px;
+  border-radius: 8px;
+}
+
+.ctn-task-detail-single-subtask:hover {
+  background-color: #EEEEEE;
+  cursor: pointer;
 }
 
 .task-detail-checkbox {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .ctn-task-detail-edit-delete {
@@ -185,4 +191,100 @@
   padding: 48px;
   border-radius: 30px;
   box-shadow: 0px 0px 4px 0px #0000001A;
+}
+
+
+
+/*** EDIT TASK BOARD ***/
+
+.form-edit-task-board {
+  display: flex;
+  flex-direction: column;
+  /* overflow-y: auto; */
+}
+
+.ctn-edit-task-board-header {
+  justify-content: flex-end !important;
+}
+
+.edit-task-subtitle {
+  margin-bottom: 6px;
+  color: #2a3647;
+}
+
+.form-edit-task-board textarea {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  border-radius: 8px;
+  border: solid 1px #d1d1d1;
+  padding: 12px 16px;
+  margin-bottom: 32px;
+}
+
+.form-edit-task-board textarea:active, .form-edit-task-board textarea:focus {
+  border: solid 1px  #29abe2;
+  outline: none;
+}
+
+.ctn-edit-task-prio-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.ctn-edit-task-assigned-users {
+  margin-bottom: 32px;
+}
+
+.ctn-edit-task-select-users {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: solid 1px #d1d1d1;
+}
+
+.ctn-edit-task-select-users:hover {
+  box-shadow: 0px 0px 4px 0px #0000002f;
+}
+
+.ctn-edit-task-img-drop-down {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.ctn-edit-task-img-drop-down:hover {
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+.ctn-edit-task-drop-down-user {
+  max-height: 200px;
+  box-shadow: 0px 0px 4px 0px #0000001A;
+  overflow-y: auto;
+}
+
+.ctn-edit-task-assigned-users input {
+  border: none;
+  padding: unset;
+}
+
+.edit-task-placeholder-drop-down, .ctn-edit-task-search-user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ctn-edit-task-search-user input {
+  height: unset;
+  margin-bottom: 0;
+}
+
+.ctn-edit-task-bar-assigned-user {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  overflow-x: auto;
 }

@@ -124,7 +124,7 @@ async function generateViewTaskDetailHTML(positionOfTask, currentIdTask) {
             <span>Delete</span>
           </div>
           <div class="task-detail-separator-edit"></div>
-          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-edit', 'edit_lb')" onmouseout="changeImgTo('img-task-detail-edit', 'edit_default')" onclick="editTask('${currentIdTask}')">
+          <div class="ctn-task-detail-edit-delete-single" onmouseover="changeImgTo('img-task-detail-edit', 'edit_lb')" onmouseout="changeImgTo('img-task-detail-edit', 'edit_default')" onclick="openEditTask('${currentIdTask}')">
             <img id="img-task-detail-edit" src="./assets/img/edit_default.svg">
             <span>Edit</span>
           </div>
@@ -163,8 +163,8 @@ async function generateContactViewTaskDetailHTML(positionContact, idContact) {
  */
 async function generateSubtasksDetailClosedHTML(idOfTask, idOfSubtask, titleOfSubtask) {
     return /*HTML*/ `
-        <div class="ctn-task-detail-single-subtask" id="subtask-${idOfTask}-${idOfSubtask}">
-        <img class="task-detail-checkbox" src="./assets/img/checkbox_checked_default.svg">
+        <div class="ctn-task-detail-single-subtask" id="subtask-${idOfTask}-${idOfSubtask}" onclick="changeStatusSubtask('${idOfTask}', ${idOfSubtask}, 'img-subtask-${idOfTask}-${idOfSubtask}')">
+        <img class="task-detail-checkbox" id="img-subtask-${idOfTask}-${idOfSubtask}" src="./assets/img/checkbox_checked_default.svg">
         <div>${titleOfSubtask}</div>
     </div>
     `
@@ -183,8 +183,8 @@ async function generateSubtasksDetailClosedHTML(idOfTask, idOfSubtask, titleOfSu
  */
 async function generateSubtasksOpenDetailHTML(idOfTask, idOfSubtask, titleOfSubtask) {
     return /*HTML*/ `
-        <div class="ctn-task-detail-single-subtask" id="subtask-${idOfTask}-${idOfSubtask}">
-        <img class="task-detail-checkbox" src="./assets/img/checkbox_blank_default.svg">
+        <div class="ctn-task-detail-single-subtask" id="subtask-${idOfTask}-${idOfSubtask}" onclick="changeStatusSubtask('${idOfTask}', ${idOfSubtask}, 'img-subtask-${idOfTask}-${idOfSubtask}')">
+        <img class="task-detail-checkbox" id="img-subtask-${idOfTask}-${idOfSubtask}" src="./assets/img/checkbox_blank_default.svg">
         <div>${titleOfSubtask}</div>
     </div>
     `

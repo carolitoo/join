@@ -341,11 +341,25 @@ async function getAssignedContactsViewTaskDetail(positionOfTask, numberOfAssigne
 
 
 /**
- * This function closes the overlay (containig the detailed view of a task) and ensures that scrolling is possible after closing the overlay
+ * This function changes the status of a subtask when clicking on it in the detailed view of a task in the board, it also toogles the checkbox-img and saves the changes in the task array
+ *  
+ * @param {string} idOfTask - id of the task in the array "tasks" for which the details are currently opened
+ * @param {number} idOfSubtask - id of the subtask of the opened task that is changed
+ * @param {string} idOfSubtaskImgElement - id of the image of checkbox of the subtask that is changes
  */
-function closeTaskDetails() {
-  document.getElementById("overlay-board").classList.add("d-none");
-  document.getElementsByTagName("body")[0].classList.remove("disable-scroll");
+async function changeStatusSubtask(idOfTask, idOfSubtask, idOfSubtaskImgElement) {
+  let positionTask = tasks.findIndex((id) => id["idTask"] == idOfTask);
+  let positionSubtask = tasks[positionTask]['subtasks'].findIndex((id) => id["idSubtask"] == idOfSubtask);
+  let statusCurrentSubtask = tasks[positionTask]['subtasks'][positionSubtask]['statusSubtask'];
+
+  if (statusCurrentSubtask == 'closed') {
+    tasks[positionTask]['subtasks'][positionSubtask]['statusSubtask'] = 'open';
+    document.getElementById(`${idOfSubtaskImgElement}`).src = `./assets/img/checkbox_blank_default.svg`;
+  } else {
+    tasks[positionTask]['subtasks'][positionSubtask]['statusSubtask'] = 'closed';
+    document.getElementById(`${idOfSubtaskImgElement}`).src = `./assets/img/checkbox_checked_default.svg`;
+  }
+  await saveTasks();
 }
 
 
@@ -359,6 +373,40 @@ function deleteTask(idTask) {
   tasks.splice(positionTask, 1);
   saveTasks();
   closeTaskDetails();
+  renderBoard(tasks);
+}
+
+
+
+function openEditTask(idTask) {
+  let positionTask = tasks.findIndex((id) => id["idTask"] == idTask);
+  // HTML-Code generieren + Felder vorbefüllen
+}
+
+
+function openDropDownEditTask() {
+  document.getElementById('ctn-edit-task-drop-down-user').classList.remove('d-none');
+  document.getElementById('edit-task-placeholder-drop-down').classList.add('d-none');
+  document.getElementById('ctn-edit-task-search-user').classList.remove('d-none');
+}
+
+
+function closeDropDownEditTask() {
+  document.getElementById('ctn-edit-task-drop-down-user').classList.add('d-none');
+  document.getElementById('edit-task-placeholder-drop-down').classList.remove('d-none');
+  document.getElementById('ctn-edit-task-search-user').classList.add('d-none');
+}
+
+
+
+/**
+ * This function empties and closes the overlay and ensures that scrolling is possible after closing the overlay
+ * It also renders the tasks to ensure the correct presentation in case of changes of the subtasks
+ */
+function closeTaskDetails() {
+  document.getElementById("overlay-board").classList.add("d-none");
+  document.getElementsByTagName("body")[0].classList.remove("disable-scroll");
+  document.getElementById("overlay-board").innerHTML = '';
   renderBoard(tasks);
 }
 
@@ -380,4 +428,7 @@ function closeAddTaskBoard() {
   document.getElementById("overlay-board-addTask").classList.add("d-none");
   document.getElementsByTagName("body")[0].classList.remove("disable-scroll");
 }
+
+
+
 
