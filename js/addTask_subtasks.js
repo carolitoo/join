@@ -46,9 +46,9 @@ function loadNewSubtasks() {
             
             if (currentSubtaskTitle !== '') {
                 subtaskList.innerHTML += `
-                    <div id="subtaskListElement${i}" class="subtask-list"> 
+                    <div id="subtaskListElement${i}" class="subtask-list" onmouseover="showElement('subtask-icons${i}')" onmouseout="hideElement('subtask-icons${i}')"> 
                         <span>&#x2022; ${currentSubtaskTitle}</span>
-                        <div class="subtask-icons"> 
+                        <div class="subtask-icons d-none" id="subtask-icons${i}"> 
                             <button class="delete-btn" type="button" onclick="deleteSubtask(${i})"></button>
                             <button class="confirm-btn" type="button" onclick="editSubtask(${i})"></button>
                         </div>

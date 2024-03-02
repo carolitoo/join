@@ -143,6 +143,7 @@
 .ctn-task-detail-single-subtask:hover {
   background-color: #EEEEEE;
   cursor: pointer;
+  padding: 6px 18px;
 }
 
 .task-detail-checkbox {
@@ -239,6 +240,7 @@
 
 .ctn-edit-task-select-users {
   padding: 12px 16px;
+  padding-left: 0;
   border-radius: 8px;
   border: solid 1px #d1d1d1;
 }
@@ -267,17 +269,21 @@
   overflow-y: auto;
 }
 
-.ctn-edit-task-assigned-users input {
-  border: none;
-  padding: unset;
-}
-
-.edit-task-placeholder-drop-down, .ctn-edit-task-search-user {
+.edit-task-placeholder-drop-down {
+  padding-left: 8px;
   display: flex;
   justify-content: space-between;
 }
 
-.ctn-edit-task-search-user input {
+.ctn-edit-task-search-user {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.ctn-edit-task-search-user input, .ctn-edit-form-input-subtask input, .ctn-edit-task-assigned-users input {
+  border: none;
   height: unset;
   margin-bottom: 0;
 }
@@ -288,3 +294,54 @@
   margin-top: 12px;
   overflow-x: auto;
 }
+
+.ctn-edit-form-input-subtask-btn {
+  margin-right: 8px;
+}
+
+.edit-task-subtask-btn {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.edit-task-subtask-btn:hover {
+  background-color: #EEEEEE;
+}
+
+.ctn-edit-form-input-subtask {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-radius: 8px;
+  border: solid 1px #d1d1d1;
+}
+
+.ctn-edit-form-input-subtask-reset-add {
+  display: flex;
+  gap: 4px;
+}
+
+
+/*** ADD TASK BOARD ***/
+
+.ctn-add-task-board {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-add-task-board {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.ctn-add-task-board-input-section {
+  display: flex;
+  gap: 32px
+}
+

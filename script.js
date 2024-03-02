@@ -89,3 +89,13 @@ function changeBorderColorSearchTask(idOfElement, color) {
 function returnToPreviousPage() {
   history.back();
 }
+
+
+function hideElement(idOfElement) {
+  document.getElementById(idOfElement).classList.add('d-none');
+}
+
+
+function showElement(idOfElement) {
+  document.getElementById(idOfElement).classList.remove('d-none');
+}

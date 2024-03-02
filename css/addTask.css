@@ -282,6 +282,12 @@ select:focus {
   margin-left: 20px;
   display: flex;
   justify-content: space-between;
+  padding: 8px 16px;
+  border-radius: 12px;
+}
+
+.subtask-list:hover {
+  background-color: #EEEEEE;
 }
 
 .subtask-icons { 

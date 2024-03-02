@@ -79,9 +79,12 @@
           <div class="ctn-board-status-top">
             <span class="headline-status">To do</span>
             <img
+              id="icon-plus-square-toDo"
               onclick="openAddTaskBoard('toDo')"
               class="icon-plus-square"
               src="./assets/img/plus_square_default.svg"
+              onmouseover="changeImgTo('icon-plus-square-toDo', 'plus_square_lb')"
+              onmouseout="changeImgTo('icon-plus-square-toDo', 'plus_square_default')"
             />
           </div>
           <div
@@ -103,9 +106,12 @@
           <div class="ctn-board-status-top">
             <span class="headline-status">In Progress</span>
             <img
+              id="icon-plus-square-inProgress"
               onclick="openAddTaskBoard('inProgress')"
               class="icon-plus-square"
               src="./assets/img/plus_square_default.svg"
+              onmouseover="changeImgTo('icon-plus-square-inProgress', 'plus_square_lb')"
+              onmouseout="changeImgTo('icon-plus-square-inProgress', 'plus_square_default')"
             />
           </div>
           <div
@@ -130,9 +136,12 @@
           <div class="ctn-board-status-top">
             <span class="headline-status">Await Feedback</span>
             <img
+              id="icon-plus-square-awaitFeedback"
               onclick="openAddTaskBoard('awaitFeedback')"
               class="icon-plus-square"
               src="./assets/img/plus_square_default.svg"
+              onmouseover="changeImgTo('icon-plus-square-awaitFeedback', 'plus_square_lb')"
+              onmouseout="changeImgTo('icon-plus-square-awaitFeedback', 'plus_square_default')"
             />
           </div>
           <div
@@ -174,218 +183,7 @@
       </div>
     </div>
 
-    <div class="overlay-board" id="overlay-board" onclick="closeTaskDetails()">
-      <div
-        class="ctn-task-detail"
-        id="ctn-edit-task-board"
-        onclick="stopPropagation(event)"
-      >
-        <div class="ctn-task-detail-header ctn-edit-task-board-header">
-          <div class="ctn-task-detail-close">
-            <img
-              class="task-detail-close"
-              src="./assets/img/close_black.svg"
-              onclick="closeTaskDetails()"
-            />
-          </div>
-        </div>
-
-        <form class="form-edit-task-board">
-          <span class="edit-task-subtitle">Title</span>
-          <input
-            type="text"
-            id="edit-task-title"
-            placeholder="Enter a title"
-            required
-          />
-
-          <span class="edit-task-subtitle">Description</span>
-          <textarea
-            id="edit-task-description"
-            rows="4"
-            placeholder="Enter a description"
-          ></textarea>
-
-          <span class="edit-task-subtitle">Due Date</span>
-          <input type="date" id="edit-task-dueDate" required />
-
-          <span class="edit-task-subtitle">Priority</span>
-          <div class="ctn-edit-task-prio-btn">
-            <div
-              id="urgentButton"
-              class="prio-btn-neutral"
-              onclick="changeButtonColorsUrgent()"
-            >
-              Urgent
-              <img
-                id="urgent-icon"
-                src="./assets/img/Prio alta2.svg"
-                class="urgent-icon"
-              />
-            </div>
-
-            <div
-              id="mediumButton"
-              class="medium-btn-yellow"
-              onclick="changeButtonColorsMedium()"
-            >
-              Medium
-              <img
-                id="medium-icon"
-                src="./assets/img/capa 2.svg"
-                class="urgent-icon"
-                style="fill: #ffa800"
-              />
-            </div>
-
-            <div
-              id="lowButton"
-              class="prio-btn-neutral"
-              onclick="changeButtonColorsLow()"
-            >
-              Low
-              <img
-                id="low-icon"
-                src="./assets/img/Prio baja.svg"
-                class="urgent-icon"
-              />
-            </div>
-          </div>
-
-          <span class="edit-task-subtitle">Assigned to</span>
-          <div class="ctn-edit-task-assigned-users">
-            <div class="ctn-edit-task-select-users">
-              <div class="edit-task-placeholder-drop-down" id="edit-task-placeholder-drop-down" onclick="openDropDownEditTask()">Select contacts to assign
-                <div class="ctn-edit-task-img-drop-down">
-                  <img
-                    id="edit-task-img-drop-down"
-                    src="./assets/img/arrow_drop_down_down.svg"
-                  />
-                </div>
-              </div>
-              <div class="ctn-edit-task-search-user d-none" id="ctn-edit-task-search-user">
-                <input class="edit-task-search-user" id="edit-task-search-user" type="text" />
-                <div class="ctn-edit-task-img-drop-down" onclick="closeDropDownEditTask()">
-                  <img
-                    id="edit-task-img-drop-down"
-                    src="./assets/img/arrow_drop_down_up.svg"
-                  />
-                </div>
-              </div>
-           
-            
-            </div>
-            <div class="ctn-edit-task-drop-down-user d-none" id="ctn-edit-task-drop-down-user">
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: green"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>MB</span>
-                    </div>
-                    <span>Marcel Bauer</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: violet"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>AZ</span>
-                    </div>
-                    <span>Antonia Zimmermann</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: blue"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>AS</span>
-                    </div>
-                    <span>Anja Schulz</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: grey"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>DE</span>
-                    </div>
-                    <span>David Eisenberg</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
-            </div>
-            <div class="ctn-edit-task-bar-assigned-user">
-              <div class="task-detail-assigned-user-acronym">MB</div>
-              <div class="task-detail-assigned-user-acronym">AZ</div>
-              <div class="task-detail-assigned-user-acronym">AS</div>
-            </div>
-          </div>
-
-          <span class="edit-task-subtitle">Subtasks</span>
-
-          <div class="input_box_layout">
-            <input
-              id="subtaskInput"
-              minlength="2"
-              placeholder="Enter a title"
-              onkeyup="checkInputSubtask(event)"
-            />
-            <div>
-              <button
-                type="button"
-                id="plus-btn"
-                class="subtask-plus-btn"
-                onclick="saveSubtaskToArray()"
-              >
-                +
-              </button>
-              <div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
-          </div>
-
-          <div id="added-subtask-ctn">
-            <div class="subtask-list">
-              <span>&#x2022; Implement Recipe Recommendation</span>
-              <div class="subtask-icons">
-                <button
-                  class="delete-btn"
-                  type="button"
-                  onclick="deleteSubtask(1)"
-                ></button>
-                <button
-                  class="confirm-btn"
-                  type="button"
-                  onclick="editSubtask(1)"
-                ></button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+    <div class="overlay-board d-none" id="overlay-board" onclick="closeTaskDetails()"></div>
     <div
       class="overlay-board d-none"
       id="overlay-board-submenu"
@@ -399,9 +197,12 @@
       <div class="wrapper-add-task-board">
         <div
           w3-include-html="./assets/templates/taskForm.html"
+          class="ctn-add-task-board"
           onclick="stopPropagation(event)"
         ></div>
       </div>
     </div>
+
+    <div class="pop-up-contacts d-none" id="pop-up-task-add-board">Task successfully created</div>
   </body>
 </html>

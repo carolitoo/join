@@ -378,10 +378,59 @@ function deleteTask(idTask) {
 
 
 
-function openEditTask(idTask) {
+async function openEditTask(idTask) {
   let positionTask = tasks.findIndex((id) => id["idTask"] == idTask);
   // HTML-Code generieren + Felder vorbefüllen
+  document.getElementById("overlay-board").classList.remove("d-none");
+  document.getElementsByTagName("body")[0].classList.add("disable-scroll");
+
+  document.getElementById('overlay-board').innerHTML = await generateViewEditTasklHTML(positionTask, idTask);
+  setMinDueDate('edit-task-dueDate');
+  await prefillInputFields(positionTask);
+  setPriorityEditTask(positionTask);
 }
+
+
+async function prefillInputFields (positionTask) {
+  document.getElementById('edit-task-title').value = tasks[positionTask]['titleTask'];
+  document.getElementById('edit-task-description').value = tasks[positionTask]['descriptionTask'];
+  document.getElementById('edit-task-dueDate').value= tasks[positionTask]['dueDate'].toLocaleString().substring(0,10);
+}
+
+
+function setPriorityEditTask (positionTask) {
+  let priorityOfTask = tasks[positionTask]["priority"];
+
+  if (priorityOfTask == "Urgent") {
+    changeButtonColorsUrgent();
+  } else if (priorityOfTask == "Medium") {
+    changeButtonColorsMedium();
+  } else if (priorityOfTask == "Low") {
+    changeButtonColorsLow();
+  }
+
+}
+
+
+async function editTask(idTask) {
+  let positionTask = tasks.findIndex((id) => id["idTask"] == idTask);
+
+  let title = document.getElementById('edit-task-title').value;
+  let description = document.getElementById('edit-task-description').value;
+  let date = new Date(document.getElementById('edit-task-dueDate').value);
+
+  tasks[positionTask]['titleTask'] = title;
+  tasks[positionTask]['descriptionTask'] = description;
+  tasks[positionTask]['dueDate'] = date;
+  tasks[positionTask]['priority'] = taskPrio;
+  tasks[positionTask]['subtasks'] = addedSubtasks;
+
+  console.log(title);
+  console.log(tasks);
+  await saveTasks();
+  closeTaskDetails();
+}
+
 
 
 function openDropDownEditTask() {
@@ -395,6 +444,11 @@ function closeDropDownEditTask() {
   document.getElementById('ctn-edit-task-drop-down-user').classList.add('d-none');
   document.getElementById('edit-task-placeholder-drop-down').classList.remove('d-none');
   document.getElementById('ctn-edit-task-search-user').classList.add('d-none');
+}
+
+function changeBtnSubtask(idElementDisappear, idElementDisplay)  {
+  document.getElementById(idElementDisappear).classList.add('d-none');
+  document.getElementById(idElementDisplay).classList.remove('d-none');
 }
 
 
@@ -416,8 +470,9 @@ function closeTaskDetails() {
 function openAddTaskBoard(taskStatus) {
   document.getElementById('overlay-board-addTask').classList.remove('d-none');
   addEventListenerToAddForm();
-  setMinDueDate();
-  document.getElementById('Add-Task-Form').setAttribute("onsubmit", `submitTask(${taskStatus})`);
+  setMinDueDate('task-input-dueDate');
+  document.getElementById('Add-Task-Form').setAttribute("onsubmit", `submitTask('${taskStatus}'); return false;`);
+  slideInAnimation('pop-up-task-add-board', 'translate-x', true);
 }
 
 

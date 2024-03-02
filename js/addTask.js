@@ -17,7 +17,7 @@ async function initAddTask() {
     clearAssignedUsersArray();
     changeSelectedTab('tab-add-task');
     addEventListenerToAddForm();
-    setMinDueDate();
+    setMinDueDate('task-input-dueDate');
 }
 
 function clearAssignedUsersArray () {
@@ -43,8 +43,10 @@ function addEventListenerToAddForm() {
 
   /**
  * This function ensures that dates in the past can not be selected as due date
+ *
+ * @param {string} idOfElement - id of the input field for which the min date is set
  */
-function setMinDueDate() {
+function setMinDueDate(idOfElement) {
     let startDate = new Date();
   
     let minYear = startDate.getFullYear();
@@ -52,7 +54,7 @@ function setMinDueDate() {
     let minDay = String(startDate.getDate()).padStart(2, "0");
   
     let today = `${minYear}-${minMonth}-${minDay}`;
-    document.getElementById("task-input-dueDate").setAttribute("min", today);
+    document.getElementById(idOfElement).setAttribute("min", today);
   }
 
 
@@ -60,7 +62,7 @@ function setMinDueDate() {
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsUrgent() {
-    let taskPrio = "Urgent";
+    taskPrio = "Urgent";
     document.getElementById('urgentButton').classList.add("urgent-btn-red");
     document.getElementById('urgentButton').classList.remove("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta w.svg';
@@ -72,15 +74,13 @@ function changeButtonColorsUrgent() {
     document.getElementById('lowButton').classList.remove("low-btn-green");
     document.getElementById('lowButton').classList.add("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja.svg';
-
-    console.log("Current prio is " + taskPrio);
 }
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsMedium() {
-    let taskPrio = "Medium";
+    taskPrio = "Medium";
     document.getElementById('mediumButton').classList.add("medium-btn-yellow");
     document.getElementById('mediumButton').classList.remove("prio-btn-neutral");
     document.getElementById('medium-icon').src = './assets/img/capa 2.svg';
@@ -92,15 +92,13 @@ function changeButtonColorsMedium() {
     document.getElementById('lowButton').classList.remove("low-btn-green");
     document.getElementById('lowButton').classList.add("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja.svg';
-
-    console.log("Current prio is " + taskPrio);
 }
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
 function changeButtonColorsLow() {
-    let taskPrio = "Low";
+    taskPrio = "Low";
     document.getElementById('lowButton').classList.add("low-btn-green");
     document.getElementById('lowButton').classList.remove("prio-btn-neutral");
     document.getElementById('low-icon').src = './assets/img/Prio baja w.svg';
@@ -112,8 +110,6 @@ function changeButtonColorsLow() {
     document.getElementById('urgentButton').classList.remove("urgent-btn-red");
     document.getElementById('urgentButton').classList.add("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta2.svg';
-
-    console.log("Current prio is " + taskPrio);
 }
 
 /**
