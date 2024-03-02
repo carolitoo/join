@@ -30,7 +30,6 @@ margin-bottom: 0px !important;
 
 .description-with-star {
   display: flex;
-  flex-direction: row;
 }
 
 .parting_line_grey {
@@ -51,17 +50,13 @@ margin-bottom: 0px !important;
   margin: 0px;
 }
 
-.resize {
-  resize: vertical;
-}
-
 select {
   appearance: none;
   /*  safari  */
   -webkit-appearance: none;
   /*  other styles for aesthetics */
-  width: 480px;
   height: 48px;
+  width: 100%;
   padding: 0.675em 6em 0.675em 1em;
   background-color: #fff;
   border: 1px solid #caced1;
@@ -74,14 +69,53 @@ select {
   appearance: none;
 }
 
+.custom-select {
+  width: 480px;
+}
+
 select:focus {
   border-color: #29abe2;
+}
+
+.dropDownIcon {
+  width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 10px solid #555;
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 438px;
+}
+
+.active .dropDownIcon { 
+  transform: rotate(180deg);
+}
+
+.assignedContacts-open {
+  width: 470px;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  border: none;
+  z-index: 1000;
+  background-color: #FFFFFF;
+  display: none;
 }
 
 .contact {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 12px;
+  padding-right: 16px;
+  height: 70px;
+}
+
+.contact:hover {
+  background-color: #e3e3e3;
+  border-radius: 10px;
 }
 
 .contact-circle-and-name-box {
@@ -89,11 +123,11 @@ select:focus {
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
-  width: 450px;
 }
 
 .dropdwon-checkbox {
   width: 22px;
+  margin-top: 30px;
 }
 
 .checked-contact-box {
@@ -219,21 +253,27 @@ select:focus {
   border: 0px;
 }
 
+.input-add-subtask-layout {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .subtask-plus-btn {
   height: 24px;
   width: 24px;
   position: absolute;
-  margin-top: 48px;
-  margin-left: 438px;
+  margin-top: 18px;
+  margin-right: 8px;
   border-radius: 100%;
   background-image: url(/assets/img/plus-blue.svg);
   background-repeat: no-repeat;
   background-position: center;
   border: 0;
+  background-color: white;
 }
 
 .subtask-plus-btn:hover {
-  background-color: #dcdcdc;
+  background-color: #eaeaea;
 }
 
 .subtask-list {
@@ -270,34 +310,6 @@ select:focus {
   background-repeat: no-repeat;
   background-position: center;
   border-left: 1px solid #caced1;
-}
-
-.dropDownIcon {
-  width: 0;
-	height: 0;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-	border-top: 10px solid #555;
-  position: absolute;
-  margin-top: 25px;
-  margin-left: 438px;
-}
-
-.active .dropDownIcon { 
-  transform: rotate(180deg);
-}
-
-.assignedContacts-open {
-  padding: 0.5rem 1rem;
-  width: 440px;
-  max-height: 250px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  border-top: none;
-  border: none;
-  z-index: 1000;
-  background-color: #FFFFFF;
-  display: none;
 }
 
 .bottom-section-ctn {
@@ -380,11 +392,11 @@ select:focus {
   .bottom-section-ctn {
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: center;
+    align-items: baseline;
     gap: 32px;
     margin-top: 20px;
     padding: 16px;
-    
+    width: 85%;
   }
 
   .clear-btn {
@@ -392,21 +404,127 @@ select:focus {
   }
 }
 
+@media (max-width: 565px) {
+
+  .bottom-section-ctn {
+    position: fixed;
+    bottom: 80px;
+    width: 90%;
+    z-index: 5;
+    background-color: #f6f7f8;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 32px;
+    margin-top: 20px;
+    padding-left: 0;
+    padding-right: 10;
+  }
+
+  .reqiured_txt_format {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  }
+}
 
 @media (max-width: 490px) {
 
   .bottom-section-ctn {
     position: fixed;
     bottom: 80px;
+    width: 95%;
     z-index: 5;
     background-color: #f6f7f8;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 20px;
+    padding-right: 10;
   }
 
+  .reqiured_txt_format {
+    font-size: 16px;
+    }
+  
   .input-add-task{
     width: 400px;
   }
 
+  .input_box_layout {
+    width: 400px;
+  }
+
+  .prio_box_layout {
+    width: 435px;
+  }
+
   .select.dropdown_list {
     width: 380px;
+  }
+
+  .responsive-heigth {
+    height: 300px;
+  }
+  
+  .custom-select {
+    width: 435px;
+  }
+}
+
+@media (max-width: 395px) {
+
+  .bottom-section-ctn {
+    position: fixed;
+    bottom: 80px;
+    width: 90%;
+    z-index: 5;
+    background-color: #f6f7f8;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .reqiured_txt_format {
+    font-size: 13px;
+    }
+
+  .input-add-task{
+    width: 300px;
+  }
+
+  .input_box_layout {
+    width: 300px;
+  }
+
+  .prio_box_layout {
+    width: 435px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .responsive-prio-btn {
+    height: 40px;
+    width: 330px;
+  }
+
+  .select.dropdown_list {
+    width: 380px;
+  }
+
+  .responsive-heigth {
+    height: 300px;
+  }
+  
+  /*category*/
+  .custom-select { 
+    width: 335px;
   }
 }

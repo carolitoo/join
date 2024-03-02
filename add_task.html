@@ -62,7 +62,7 @@
 
             <span class="add_task_txt_format">Description</span>
 
-            <textarea class="input-add-task resize" id="task-input-description"
+            <textarea class="input-add-task" style="resize: vertical" id="task-input-description"
               placeholder="Enter a description"> </textarea>
           </div>
 
@@ -94,15 +94,15 @@
               <span class="add_task_txt_format">Prio</span>
               <div class="prio_box_layout">
 
-                <div id="urgentButton" class="prio-btn-neutral" onclick="changeButtonColorsUrgent()">Urgent
+                <div id="urgentButton" class="prio-btn-neutral responsive-prio-btn" onclick="changeButtonColorsUrgent()">Urgent
                   <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
                 </div>
 
-                <div id="mediumButton" class="medium-btn-yellow" onclick="changeButtonColorsMedium()">Medium
+                <div id="mediumButton" class="medium-btn-yellow responsive-prio-btn" onclick="changeButtonColorsMedium()">Medium
                   <img id="medium-icon" src="./assets/img/capa 2.svg" class="urgent-icon" style="fill:#FFA800">
                 </div>
 
-                <div id="lowButton" class="prio-btn-neutral" onclick="changeButtonColorsLow()">Low
+                <div id="lowButton" class="prio-btn-neutral responsive-prio-btn" onclick="changeButtonColorsLow()">Low
                   <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
                 </div>
 
@@ -123,10 +123,12 @@
               </div>
             </div>
 
-            <div class="input_box_layout">
+            <div class="input_box_layout responsive-heigth">
               <span class="add_task_txt_format">Subtasks</span>
-              <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title" onkeyup="checkInputSubtask(event)">
-              <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()">+</button>
+              <div class="input-add-subtask-layout">
+                <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title" onkeyup="checkInputSubtask(event)">
+                <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="saveSubtaskToArray()">+</button>
+              </div>
               <div id="added-subtask-ctn"></div>
             </div>
         </div>
