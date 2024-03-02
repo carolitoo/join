@@ -301,6 +301,11 @@
   transform: translateX(800px);
 }
 
+
+.translate-xanother {
+  transform:translateY(-50%);
+}
+
 .translate-y {
   transform: translateY(600px);
 }

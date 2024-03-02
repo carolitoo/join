@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./css/logInsheet.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="./css/animation.css">
+  <link rel="stylesheet" href="./css/contact.css">
 
   <script src="./js/storage.js" defer></script>
   <script src="./js/login.js" defer></script>
@@ -22,7 +23,7 @@
   <script src="./js/contactDetail.js" defer></script>
 </head>
 
-<body onload="LoginInit(); callStatusofSignUp(); checkIfRememberedData()">
+<body onload=" checkIfforwardingSignUp(); LoginInit(); checkIfRememberedData()">
 
   <div class="wrapper">
     <img id="logo-login" class="logo-login" src="./assets/img/logo_dark.svg">
@@ -55,7 +56,8 @@
         <p>Remember me</p>
       </div>
 
-      <div id="msgBox" class="d-none"></div>
+      <div id="transp-overlay" class="transp-overlay d-none"></div>
+      <div id="msgBox" class="successfullyMessage d-none"></div>
 
       <div class="ctn-btn-login">
         <button id="LogInButton" class="logIn-button if-button-disabled" disabled="true" type="submit">Log in</button>

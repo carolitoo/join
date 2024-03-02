@@ -14,9 +14,31 @@
   animation: logo_animation_lightLogo 0.75s ease-in-out 0.25s forwards;
 }
 
-.opacity-100 {
-  opacity: 100%;
+.animation-succesmsg{
+  animation: animation-succesmsg  0.75s ease-in-out;
 }
+
+@keyframes animation-succesmsg{
+    0% {
+      transform: translateY(100%); /* Startposition: Element nach unten verschieben, außerhalb des Sichtbereichs */
+      opacity: 0; /* Start mit 0% Opazität (unsichtbar) */
+    }
+    40% {
+      transform: translateY(50%); /* Bis zur vertikalen Mitte des Bildschirms schieben */
+      opacity: 1; /* 100% Opazität, um sichtbar zu werden */
+    }
+    60% {
+      transform: translateY(50%); /* Kurze Pause, Element bleibt sichtbar */
+      opacity: 1; /* Weiterhin 100% Opazität */
+    }
+    100% {
+      transform: translateY(100%); /* Am Ende: Element wieder nach unten verschieben, außerhalb des Sichtbereichs */
+      opacity: 0; /* 0% Opazität, um unsichtbar zu werden */
+      display: none;
+    }
+  }
+
+
 
 @keyframes logo_animation {
   0% {
