@@ -378,10 +378,14 @@ function deleteTask(idTask) {
 }
 
 
-
+/**
+ * This function opens the edit task form and prefilles all values and input fields with the information stored in the backend
+ * 
+ * @param {string} idTask  - id of the task deleted
+ */
 async function openEditTask(idTask) {
   let positionTask = tasks.findIndex((id) => id["idTask"] == idTask);
-  // HTML-Code generieren + Felder vorbefüllen
+
   document.getElementById("overlay-board").classList.remove("d-none");
   document.getElementsByTagName("body")[0].classList.add("disable-scroll");
 
@@ -389,9 +393,19 @@ async function openEditTask(idTask) {
   setMinDueDate('edit-task-dueDate');
   await prefillInputFields(positionTask);
   setPriorityEditTask(positionTask);
+  await createDropDownUserEditTask(idTask);
+  clearAssignedUsersArray();
+  await updateAssignedUsers(positionTask, idTask);
+  renderCheckedContacts();
+  // SUBTASKS FEHLEN NOCH
 }
 
 
+/**
+ * This function prefilles the input field title, description and due date with the information currently stored for the task that is edited
+ * 
+ * @param {number} positionTask - position of the task that is edited in the array "tasks"
+ */
 async function prefillInputFields (positionTask) {
   document.getElementById('edit-task-title').value = tasks[positionTask]['titleTask'];
   document.getElementById('edit-task-description').value = tasks[positionTask]['descriptionTask'];
@@ -399,6 +413,11 @@ async function prefillInputFields (positionTask) {
 }
 
 
+/**
+ * This function selects the right button based on the priority currently selected for the task that is edited
+ * 
+ * @param {number} positionTask - position of the task that is edited in the array "tasks"
+ */
 function setPriorityEditTask (positionTask) {
   let priorityOfTask = tasks[positionTask]["priority"];
 
@@ -409,10 +428,44 @@ function setPriorityEditTask (positionTask) {
   } else if (priorityOfTask == "Low") {
     changeButtonColorsLow();
   }
-
 }
 
 
+/**
+ * This function generates the drop down for the assigned users in the edit task view - the checkboxes are still blank after running this function
+ * 
+ * @param {string} idTask - id of the task that is edited
+ */
+async function createDropDownUserEditTask(idTask) {
+  document.getElementById('ctn-edit-task-drop-down-user').innerHTML = await generateCurrentUserDropDownHTML(0, idTask);
+  for (let j = 1; j < contacts.length; j++) {
+    document.getElementById('ctn-edit-task-drop-down-user').innerHTML += await generateContactDropDownHTML(j, idTask);
+  }
+}
+
+
+/**
+ * This function checkes the checkboxes and filles the array assigned users for/ with the users assigned to the task currently edited
+ * 
+ * @param {number} positionTask - position of the task that is edited in the array "tasks" 
+ * @param {string} idTask - id of the task that is edited
+ */
+async function updateAssignedUsers (positionTask, idTask) {
+  for (let i = 0; i< tasks[positionTask]['assignedContacts'].length; i++) {
+    let idContact = tasks[positionTask]['assignedContacts'][i]['idContact'];
+    let positionContact = contacts.findIndex((id) => id['ID'] == idContact)
+
+    document.getElementById(`checkbox-${idTask}-${positionContact}`).checked = true;
+    assignedUsers.push({ name: contacts[positionContact]['name'], ID: contacts[positionContact]['ID'] });
+  }
+}
+
+
+/**
+ * This function updates the values/ inputs made the in edit task form in the backend and closes the overlay
+ * 
+ * @param {string} idTask - id of the task that is edited
+ */
 async function editTask(idTask) {
   let positionTask = tasks.findIndex((id) => id["idTask"] == idTask);
 
@@ -424,10 +477,9 @@ async function editTask(idTask) {
   tasks[positionTask]['descriptionTask'] = description;
   tasks[positionTask]['dueDate'] = date;
   tasks[positionTask]['priority'] = taskPrio;
+  tasks[positionTask]['assignedContacts'] = assignedUsers.map(user => ({ idContact: user.ID }));
   tasks[positionTask]['subtasks'] = addedSubtasks;
 
-  console.log(title);
-  console.log(tasks);
   await saveTasks();
   closeTaskDetails();
 }
@@ -446,6 +498,7 @@ function closeDropDownEditTask() {
   document.getElementById('edit-task-placeholder-drop-down').classList.remove('d-none');
   document.getElementById('ctn-edit-task-search-user').classList.add('d-none');
 }
+
 
 function changeBtnSubtask(idElementDisappear, idElementDisplay)  {
   document.getElementById(idElementDisappear).classList.add('d-none');
