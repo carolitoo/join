@@ -315,69 +315,9 @@ async function generateViewEditTasklHTML(positionTask, currentIdTask) {
             <div
               class="ctn-edit-task-drop-down-user d-none"
               id="ctn-edit-task-drop-down-user"
-            >
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: green"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>MB</span>
-                    </div>
-                    <span>Marcel Bauer</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: violet"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>AZ</span>
-                    </div>
-                    <span>Antonia Zimmermann</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: blue"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>AS</span>
-                    </div>
-                    <span>Anja Schulz</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
-              <div>
-                <div class="contact">
-                  <div class="contact-circle-and-name-box">
-                    <div
-                      style="background-color: grey"
-                      class="task-detail-assigned-user-acronym"
-                    >
-                      <span>DE</span>
-                    </div>
-                    <span>David Eisenberg</span>
-                  </div>
-                  <input class="dropdwon-checkbox" type="checkbox" />
-                </div>
-              </div>
+            > 
             </div>
-            <div id="checkedContactsCtn" class="checked-contacts-ctn">
-              <div class="task-detail-assigned-user-acronym">MB</div>
-              <div class="task-detail-assigned-user-acronym">AZ</div>
-              <div class="task-detail-assigned-user-acronym">AS</div>
-            </div>
+            <div id="checkedContactsCtn" class="checked-contacts-ctn"></div>
           </div>
 
           <span class="edit-task-subtitle">Subtasks</span>

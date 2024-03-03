@@ -10,6 +10,7 @@ async function initSummary() {
     await loadContacts();
     await getLoggedInEmail();
     await proofAuthentification(loggedInEmail);
+    await checkPersonalheader(loggedInEmail);
     await identifyCurrentUser();
     await personalizeAppContent(currentUser);
     await loadTasks();

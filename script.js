@@ -2,8 +2,19 @@ async function init() {
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
+  await checkPersonalheader(loggedInEmail);
   await renderAcronym(loggedInEmail);
   resetSelectedTab();
+}
+
+
+async function checkPersonalheader(loggedInEmail) {
+  if ((loggedInEmail.trim() !== "[]")) {
+    showElement('header-right');
+    showElement('navBar');
+  } else {
+    return
+  }
 }
 
 /**
@@ -20,7 +31,7 @@ async function loadUserData() {
 /**
  * This function loads the contacts data from the back-end using the getItem function and updates the global variable 'contacts' with the loaded contacts data
  */
-async function loadContacts(){
+async function loadContacts() {
   const response = await getItem('contacts');
   const contactsData = response['data']['value'];
   if (contactsData) {
@@ -51,9 +62,9 @@ async function includeHTML() {
  */
 function capitalizeFirstLetter(string) {
   return string
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 }
 
 
@@ -89,7 +100,6 @@ function changeBorderColorSearchTask(idOfElement, color) {
 function returnToPreviousPage() {
   history.back();
 }
-
 
 function hideElement(idOfElement) {
   document.getElementById(idOfElement).classList.add('d-none');

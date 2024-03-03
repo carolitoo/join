@@ -22,7 +22,12 @@ let matchingStatusTask = [
 ]
 
 
-
+/**
+ * 
+ * @param {object} event 
+ * @param {string} currentStatus - current status of the task that is supposed to be moved
+ * @param {string} idTask - id of the task that is supposed to be moved
+ */
 function changeStatusMobile(event, currentStatus, idTask) {
     event.stopPropagation();
     currentIdTask = idTask;
@@ -30,6 +35,11 @@ function changeStatusMobile(event, currentStatus, idTask) {
 }
 
 
+/**
+ * This function opens the submenu that enables the user to shift a task to another status without drag-and-drop
+ * 
+ * @param {string} currentStatus - current status of the task that is supposed to be moved (current status should not be displayed in the selection)
+ */
 async function openSubmenuChangeStatusMobile(currentStatus) {
     document.getElementById(`ctn-submenu-card-small-${currentIdTask}`).innerHTML = '';
     document.getElementById(`ctn-submenu-card-small-${currentIdTask}`).innerHTML += `<span>Change Status</span>`;

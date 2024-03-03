@@ -45,6 +45,12 @@ async function generateSingleListContactHTML(positionOfContact) {
 }
 
 
+/**
+ * This function return the code for the contact element of the current user in the contact list
+ * 
+ * @param {object} currentUserAsContact - JSON containing information for the current user
+ * @returns - HTML-Code for the contact element of the current user in the contact list
+ */
 async function generateSingleListContactHTMLCurrentUSER(currentUserAsContact) {
   return /*html*/ `
     <div class="contact-list-single-contact" id="${currentUserAsContact["ID"]}" onclick="openContactDetail('${currentUserAsContact['ID']}')">

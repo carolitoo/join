@@ -7,6 +7,7 @@ async function LoginInit() {
     //resetSelectedTab();////wo ist diese Funktion//? unter template.ja (sorgt dafür, dass richtiger oder kein Tab in Sidebar bzw. Footer ausgewählt ist)
 }
 
+
 /**
  * This function checks whether a forwarding from the SignUp page (including registration) has taken place. If this is the case, createSucessMsg is called (+animation). If only the index page is loaded, an animation is displayed.
  */
@@ -23,6 +24,12 @@ async function checkIfforwardingSignUp() {
         }
     }
 
+
+/**
+ * this function reads the current screen width and adds the animations at a max-width of 670px.
+ * 
+ * @returns - no value (continues with the following logic)
+ */
 async function chooseDisplayAnimation() {
     if (window.innerWidth >= 675) {
         await animationLogo();
@@ -32,16 +39,22 @@ async function chooseDisplayAnimation() {
     }
 }
 
+
+/**
+ * this function adds an animation class to the dark join logo.
+ */
 async function animationLogo() {
     let joinLogodark = document.getElementById('logo-login');
     joinLogodark.classList.add('animate-logo');
 }
 
 
+/**
+ * this function adds an animation class to the animation overlay.
+ */
 async function animationDisplay() {
     let displayHelper = document.getElementById('start-animations-helper');
     displayHelper.classList.add('animate-helper');
-
 }
 
 
@@ -81,6 +94,7 @@ function checkIfRememberedData() {
         disableLogInButton();
     }
 }
+
 
 /**
  * This function checks whether the input matches an existing user and then logs this user in with the saved e-mail address.
@@ -125,6 +139,7 @@ function disableLogInButton() {
     }
 }
 
+
 /**
  * This function checks whether the 'remember me' checkbox has been activated. If this is the case, the email and password are saved in the localStorage for the next login.
  */
@@ -137,6 +152,7 @@ function checkStatusofCheckBox() {
         localStorage.setItem('password', passwordInput.value);
     }
 }
+
 
 /**
  * The useGuestLogIn function sets the values of the email and password fields to predefined guest login information and saves the email address as loggedInEmail for later processing. The user is redirected to the summary page.

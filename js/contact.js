@@ -20,6 +20,7 @@ async function initContact() {
   await loadTasks();
   await getLoggedInEmail();
   await proofAuthentification(loggedInEmail);
+  await checkPersonalheader(loggedInEmail);
   await checkIfGuestOrCurrentUser();
   await renderAcronym(loggedInEmail);
   await sortArrayContacts();
@@ -190,7 +191,12 @@ async function processContactsForInitialLetter(contacts, initialLetter) {
 }
 
 
-
+/**
+ * This function runs through the contacts-array and changes the background colors of the HTML elements that represent the initial letter of the individual contact.(except the guest-user)
+ * 
+ * @param {array} contacts - an array with all contacts
+ * @param {string} initialLetter - first letter of a contact 
+ */
 async function updateContactElementStylesForInitialLetter(contacts, initialLetter) {
   for (let k = 0; k < contacts.length; k++) {
     const contactFirstNameInitial = contacts[k]["firstName"][0];
@@ -208,6 +214,12 @@ async function updateContactElementStylesForInitialLetter(contacts, initialLette
 }
 
 
+/**
+ * this function represents a single contact in the contact book
+ * 
+ * @param {number} positionOfContact - number of the current contact (in the contacts array)
+ * @returns - an empty value (if the current contact is the guest user)
+ */
 async function generateSingleListContactHTML(positionOfContact) {
   const contactFirstNameInitial = contactsSorted[positionOfContact]["firstName"][0];
   if (guest && currentUserAsContact && contactFirstNameInitial.toUpperCase() === currentUserAsContact["firstName"][0].toUpperCase()) {
@@ -216,11 +228,17 @@ async function generateSingleListContactHTML(positionOfContact) {
 }
 
 
+/**
+ * this function clears the HTML content of the contact book
+ */
 async function clearContactList() {
   document.getElementById("ctn-contact-list").innerHTML = "";
 }
 
 
+/**
+ * This function renders the current user as a contact. The current user is then displayed as the top contact.
+ */
 async function renderCurrentUserAsContact() {
   const currentUserHTML = await generateSingleListContactHTMLCurrentUSER(currentUserAsContact);
   document.getElementById("ctn-contact-list").innerHTML += currentUserHTML;
@@ -234,7 +252,7 @@ async function renderCurrentUserAsContact() {
  */
 async function sortArrayContacts() {
   contactsSorted = [...contacts].sort((a, b) => {
-    // Move currentUserAsContact to the beginning of the array
+
     if (a === currentUserAsContact) return -1;
     if (b === currentUserAsContact) return 1;
 
@@ -262,6 +280,7 @@ async function createArrayInitialLetters() {
   }
   initialLetters.sort();
 }
+
 
 /**
  * This function generates values after filling in the input fields and uses them to create a new contact.
@@ -307,13 +326,18 @@ async function addNewContact(newContact) {
   }
 }
 
-
+/**
+ * This function checks whether there is already a contact with the stored e-mail address.
+ * 
+ * @param {array} newContact - array with the filled in information (to save a new contact)
+ * @returns - true (if the contact already exists), false - if the contact does not yet exists.
+ */
 async function checkIfContactexist(newContact) {
   for (let i = 0; i < contacts.length; i++) {
     if (contacts[i].emailContact == newContact.emailContact) {
       let emailInput = document.getElementById('contacts-detail-input-mail');
       displayErrorMessage('Contact already exists', emailInput);
-      return true; // Contact exists, return true
+      return true; 
     }
   }
   return false;

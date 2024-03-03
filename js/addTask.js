@@ -10,6 +10,7 @@ async function initAddTask() {
     await loadUserData();
     await getLoggedInEmail();
     await proofAuthentification(loggedInEmail);
+    await checkPersonalheader(loggedInEmail)
     await renderAcronym(loggedInEmail);
     await loadUserData();
     await loadContacts();
