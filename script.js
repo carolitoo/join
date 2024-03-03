@@ -4,13 +4,14 @@ async function init() {
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
   await renderAcronym(loggedInEmail);
-  /*resetSelectedTab();*/
+  resetSelectedTab();
 }
 
 
 async function checkPersonalheader(loggedInEmail) {
-  if ((loggedInEmail.trim() !== "[]") ) {
-     showElement('header-right');
+  if ((loggedInEmail.trim() !== "[]")) {
+    showElement('header-right');
+    showElement('navBar');
   } else {
     return
   }
@@ -100,7 +101,7 @@ function returnToPreviousPage() {
   history.back();
 }
 
- function hideElement(idOfElement) {
+function hideElement(idOfElement) {
   document.getElementById(idOfElement).classList.add('d-none');
 }
 
