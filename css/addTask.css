@@ -299,7 +299,7 @@ select:focus {
   background-color: #eaeaea;
 }
 
-.check-sub-btn {
+.check-round-btn {
   height: 24px;
   width: 24px;
   border-radius: 100%;
@@ -314,18 +314,35 @@ select:focus {
   background-color: #eaeaea;
 }
 
+.check-square-btn {
+  height: 24px;
+  width: 24px;
+  background-image: url(/assets/img/check.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+  background-color: rgb(255, 255, 255);
+  border-right: 1px solid #caced1;
+}
+
 .small-divider {
   height: 24px;
   background-color: #caced1;
   width: 1px;
 }
 
+.input-edit-subtask {
+  border: 0;
+  background-color: transparent;
+  margin-bottom: 0px !important;
+}
+
 .subtask-list {
   margin-top: 8px;
   width: 440px;
-  margin-left: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 8px 16px;
   border-radius: 12px;
 }
@@ -334,10 +351,18 @@ select:focus {
   background-color: #EEEEEE;
 }
 
+.subtask-list-edit-mode {
+  background-color: white;
+  border-bottom: 2px solid #29ABE2;
+  border-radius: 0px !important;
+  height: 20px !important;
+}
+
 .subtask-icons { 
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  z-index: 5;
 }
 
 .delete-btn {
@@ -348,7 +373,10 @@ select:focus {
   padding-right: 5px;
   background-repeat: no-repeat;
   background-position: center;
-  border-right: 1px solid #caced1;
+}
+
+.white-bg {
+  background-color: white !important;
 }
 
 .confirm-btn {

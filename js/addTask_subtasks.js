@@ -11,7 +11,7 @@ function changeInputSubtaskButtons() {
     plusButton.innerHTML = `
         <button class="x-btn" type="button" onclick="defaultInputSubtask()"></button>
         <div class="small-divider"></div>
-        <button class="check-sub-btn" type="button" onclick="saveSubtaskToArray()"></button>
+        <button class="check-round-btn" type="button" onclick="saveSubtaskToArray()"></button>
     `
 }
 
@@ -75,6 +75,8 @@ function loadNewSubtasks() {
 };
 
 function editSubtask(i) {
+    
+
     let subtaskElement = document.getElementById(`subtaskListElement${i}`);
     let subtaskText = subtaskElement.querySelector('span').innerText.trim();
     
@@ -83,13 +85,29 @@ function editSubtask(i) {
     
     // Eingabefeld für die Bearbeitung der Subtask erstellen
     subtaskElement.innerHTML = `
-        <input type="text" id="editedSubtask${i}" class="input-add-task" value="${subtaskTitle}">
+        <input class="input-edit-subtask" type="text" id="editedSubtask${i}" class="input-add-task" value="${subtaskTitle}">
         <div class="subtask-icons"> 
-            <button class="delete-btn" type="button" onclick="deleteSubtask(${i})"></button>
-            <button class="confirm-btn" type="button" onclick="updateSubtask(${i})"></button>
+        <button class="check-square-btn" type="button" onclick="updateSubtask(${i})"></button>
+
+            <button class="delete-btn white-bg" type="button" onclick="deleteSubtask(${i})"></button>
         </div>
     `;
+    subtaskEditMode(i);
 }
+
+function removeHoverClass() {
+    let subtaskLists = document.getElementsByClassName('subtask-list');
+    for (let subtask of subtaskLists) {
+        subtask.classList.remove('hover');
+    }
+}
+
+function subtaskEditMode(i) {
+    let subtaskElement = document.getElementById(`subtaskListElement${i}`);
+    subtaskElement.classList.add('subtask-list-edit-mode');
+    removeHoverClass();
+}
+
 
 function updateSubtask(i) {
     let editedSubtaskTitle = document.getElementById(`editedSubtask${i}`).value.trim();
