@@ -1,5 +1,28 @@
 let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 
+function checkInputSubtask(event) {
+    if (event.key == "Enter") {
+      saveSubtaskToArray();
+    }
+  }
+
+function changeInputSubtaskButtons() {
+    let plusButton = document.getElementById("input-subtask-btn-ctn")
+    plusButton.innerHTML = `
+        <button class="x-btn" type="button" onclick="defaultInputSubtask()"></button>
+        <div class="small-divider"></div>
+        <button class="check-round-btn" type="button" onclick="saveSubtaskToArray()"></button>
+    `
+}
+
+function defaultInputSubtask() {
+
+    let buttonsContainer = document.getElementById("input-subtask-btn-ctn")
+    buttonsContainer.innerHTML = `    
+        <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
+    `
+    document.getElementById('subtaskInput').value = '';
+}
 
 /**
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
@@ -20,16 +43,9 @@ function saveSubtaskToArray() {
         console.log("New Subtask is " + JSON.stringify(addedSubtasks));
 
         loadNewSubtasks(); // Hier wird die loadNewSubtasks-Funktion aufgerufen
+        defaultInputSubtask()
     }
 }
-
-
-function checkInputSubtask(event) {
-    if (event.key == "Enter") {
-      saveSubtaskToArray();
-    }
-  }
-
 
 /**
  * Iterrates through the array subtasks and renders the subtasks 
@@ -57,6 +73,55 @@ function loadNewSubtasks() {
         }
     }
 };
+
+function editSubtask(i) {
+    
+
+    let subtaskElement = document.getElementById(`subtaskListElement${i}`);
+    let subtaskText = subtaskElement.querySelector('span').innerText.trim();
+    
+    // Extrahiere den Text ohne den Bullet Point
+    let subtaskTitle = subtaskText.slice(2).trim();
+    
+    // Eingabefeld für die Bearbeitung der Subtask erstellen
+    subtaskElement.innerHTML = `
+        <input class="input-edit-subtask" type="text" id="editedSubtask${i}" class="input-add-task" value="${subtaskTitle}">
+        <div class="subtask-icons"> 
+        <button class="check-square-btn" type="button" onclick="updateSubtask(${i})"></button>
+
+            <button class="delete-btn white-bg" type="button" onclick="deleteSubtask(${i})"></button>
+        </div>
+    `;
+    subtaskEditMode(i);
+}
+
+function removeHoverClass() {
+    let subtaskLists = document.getElementsByClassName('subtask-list');
+    for (let subtask of subtaskLists) {
+        subtask.classList.remove('hover');
+    }
+}
+
+function subtaskEditMode(i) {
+    let subtaskElement = document.getElementById(`subtaskListElement${i}`);
+    subtaskElement.classList.add('subtask-list-edit-mode');
+    removeHoverClass();
+}
+
+
+function updateSubtask(i) {
+    let editedSubtaskTitle = document.getElementById(`editedSubtask${i}`).value.trim();
+    if (editedSubtaskTitle) {
+        addedSubtasks[i].titleSubtask = editedSubtaskTitle;
+        loadNewSubtasks();
+    } else {
+        // Handle empty title case
+        alert("Subtask title cannot be empty!");
+    }
+
+    console.log(addedSubtasks)
+}
+
 
 
 /**

@@ -24,7 +24,6 @@ function clearAssignedUsersArray () {
     assignedUsers = [];
 }
 
-
 function addEventListenerToAddForm() {
     document.getElementById("Add-Task-Form").addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
@@ -33,13 +32,11 @@ function addEventListenerToAddForm() {
     });
   }
   
-
   function checkSubmission(event) {
     if (event.key == "Enter") {
       document.getElementById("submit-btn").click();
     }
   }
-
 
   /**
  * This function ensures that dates in the past can not be selected as due date
@@ -56,7 +53,6 @@ function setMinDueDate(idOfElement) {
     let today = `${minYear}-${minMonth}-${minDay}`;
     document.getElementById(idOfElement).setAttribute("min", today);
   }
-
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
