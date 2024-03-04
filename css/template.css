@@ -159,13 +159,17 @@ nav a:hover {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  padding-left: 56px;
-  padding-bottom: 56px;
-  gap: 16px;
+  position: absolute;
+  bottom: 38px;
 }
 
 .ctn-sidebar-legal a {
   color: #a8a8a8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 232px;
+  height: 40px;
 }
 
 .ctn-sidebar-legal a:hover {

@@ -3,7 +3,9 @@ let imgTabSelected = [
     "tab-summary": './assets/img/summary_white.svg',
     "tab-add-task": './assets/img/add_task_white.svg',
     "tab-board": './assets/img/board_white.svg',
-    "tab-contacts": './assets/img/contacts_white.svg'
+    "tab-contacts": './assets/img/contacts_white.svg',
+    "privacy-link": null,
+    "policy-link": null
   }]
 
 
@@ -15,7 +17,7 @@ function generateUserIcon() {
   userIcon.textContent = currentUser.acronym;
 }
 
-  
+
 /**
  * This function ensures that the currently selected tab is marked in the sidebar/ footer
  * 
@@ -26,15 +28,20 @@ async function changeSelectedTab(newTab) {
   document.getElementById(newTab).classList.add('tab-selected');
 
   let imgSrc = imgTabSelected[0][newTab];
-  document.getElementById(`img-${newTab}`).src = imgSrc;
+  if (imgSrc !== null) {
+    document.getElementById(`img-${newTab}`).src = imgSrc;
+  } else {
+    return;
+  }
 }
+
 
 
 /**
  * This function unmarks the selected tab (by iterating through all the availabe nav a - elements)
  */
 async function resetSelectedTab() {
-  let navElements = document.querySelectorAll('nav a');
+  let navElements = document.querySelectorAll('allNavElements');
 
   for (i = 0; i < navElements.length; i++) {
     let idOfElement = navElements[i]['id'];

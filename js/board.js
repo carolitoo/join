@@ -9,7 +9,6 @@ async function initBoard() {
   await getLoggedInEmail();
   await proofAuthentification(loggedInEmail);
   await checkPersonalheader(loggedInEmail);
-  await renderAcronym(loggedInEmail);
   await loadContacts();
   // await storeDummyTasks();
   await loadTasks();

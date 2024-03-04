@@ -22,7 +22,6 @@ async function initContact() {
   await proofAuthentification(loggedInEmail);
   await checkPersonalheader(loggedInEmail);
   await checkIfGuestOrCurrentUser();
-  await renderAcronym(loggedInEmail);
   await sortArrayContacts();
   await renderContactList();
   checkWindowWidth();

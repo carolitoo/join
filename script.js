@@ -1,17 +1,27 @@
-async function init() {
+async function initPrivacyP() {
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  await renderAcronym(loggedInEmail);
-  resetSelectedTab();
+  changeSelectedTab('privacy-link')
+ // resetSelectedTab();//
+}
+
+async function initLegalN(){
+  await includeHTML();
+  await loadUserData();
+  await getLoggedInEmail();
+  await checkPersonalheader(loggedInEmail);
+  changeSelectedTab('legal-link')
+ // resetSelectedTab();//
 }
 
 
 async function checkPersonalheader(loggedInEmail) {
-  if ((loggedInEmail.trim() !== "[]")) {
-    showElement('header-right');
-    showElement('navBar');
+  if ((loggedInEmail.trim() !== "[]") ) {
+     showElement('header-right');
+     showElement('navBar');
+     await renderAcronym(loggedInEmail);
   } else {
     return
   }
@@ -101,7 +111,7 @@ function returnToPreviousPage() {
   history.back();
 }
 
-function hideElement(idOfElement) {
+ function hideElement(idOfElement) {
   document.getElementById(idOfElement).classList.add('d-none');
 }
 
