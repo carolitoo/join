@@ -55,9 +55,9 @@ select {
   /*  safari  */
   -webkit-appearance: none;
   /*  other styles for aesthetics */
-  height: 48px;
+  height: 56px;
   width: 100%;
-  padding: 0.675em 6em 0.675em 1em;
+  padding-left: 10px;
   background-color: #fff;
   border: 1px solid #caced1;
   border-radius: 10px;
@@ -278,6 +278,7 @@ select:focus {
   background-position: center;
   border: 0;
   background-color: white;
+  cursor: pointer;
 }
 
 .subtask-plus-btn:hover {
@@ -297,6 +298,7 @@ select:focus {
 
 .x-btn:hover {
   background-color: #eaeaea;
+  cursor: pointer;
 }
 
 .check-round-btn {
@@ -308,6 +310,7 @@ select:focus {
   background-position: center;
   border: 0;
   background-color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
 .check-sub-btn:hover {
@@ -323,6 +326,7 @@ select:focus {
   border: 0;
   background-color: rgb(255, 255, 255);
   border-right: 1px solid #caced1;
+  cursor: pointer;
 }
 
 .small-divider {
@@ -373,6 +377,7 @@ select:focus {
   padding-right: 5px;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 .white-bg {
@@ -388,6 +393,7 @@ select:focus {
   background-repeat: no-repeat;
   background-position: center;
   border-left: 1px solid #caced1;
+  cursor: pointer;
 }
 
 .bottom-section-ctn {
@@ -412,6 +418,7 @@ select:focus {
   border: 1px solid #2A3647;
   background: linear-gradient(0deg, #F6F7F8, #F6F7F8);
   font-size: 20px;
+  cursor: pointer;
 }
 
 .clear-btn:hover {
@@ -437,6 +444,7 @@ select:focus {
   font-size: 20px;
   color: #fff;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .create-task-btn:hover {
@@ -453,9 +461,6 @@ select:focus {
   width: 15.49px;
   height: 11.22px;
 }
-
-
-
 
 @media (max-width: 1121px) {
 
@@ -493,7 +498,6 @@ select:focus {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
-    gap: 32px;
     margin-top: 20px;
     padding-left: 0;
     padding-right: 10;
