@@ -1,11 +1,34 @@
 let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 
+
+/**
+ * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
+ * 
+ * @param {object} event 
+ */
 function checkInputSubtask(event) {
     if (event.key == "Enter") {
       saveSubtaskToArray();
     }
   }
 
+
+/**
+ * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
+ * 
+ * @param {object} event 
+ * @param {number} i - id/ counter of the edited subtask
+ */
+function checkInputEditSubtask(event, i) {
+    if (event.key == "Enter") {
+        updateSubtask(i);
+    }
+  }
+
+
+/**
+ * This function changes the input buttons within the input field for the subtasks to the "active" view
+ */
 function changeInputSubtaskButtons() {
     let plusButton = document.getElementById("input-subtask-btn-ctn")
     plusButton.innerHTML = `
@@ -13,16 +36,36 @@ function changeInputSubtaskButtons() {
         <div class="small-divider"></div>
         <button class="check-round-btn" type="button" onclick="saveSubtaskToArray()"></button>
     `
+    focusElement('subtaskInput');
 }
 
-function defaultInputSubtask() {
 
+/**
+ * This function resets the input button within the input field to the default
+ */
+function defaultInputSubtask() {
     let buttonsContainer = document.getElementById("input-subtask-btn-ctn")
     buttonsContainer.innerHTML = `    
         <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
     `
     document.getElementById('subtaskInput').value = '';
+    focusElement('subtaskInput');
 }
+
+
+/**
+ * This function sets the focus to the chosen input field and sets the cursor to the end of the text
+ * 
+ * @param {string} idOfElement - element/ input field that should be focused 
+ */
+function focusElement(idOfElement) {
+   document.getElementById(idOfElement).focus();
+   let textLength = document.getElementById(idOfElement).value.length;
+//    if (textLength) {
+    document.getElementById(idOfElement).setSelectionRange(textLength, textLength);
+//    }
+}
+
 
 /**
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
@@ -43,9 +86,10 @@ function saveSubtaskToArray() {
         console.log("New Subtask is " + JSON.stringify(addedSubtasks));
 
         loadNewSubtasks(); // Hier wird die loadNewSubtasks-Funktion aufgerufen
-        defaultInputSubtask()
+        defaultInputSubtask();
     }
 }
+
 
 /**
  * Iterrates through the array subtasks and renders the subtasks 
@@ -62,7 +106,7 @@ function loadNewSubtasks() {
             
             if (currentSubtaskTitle !== '') {
                 subtaskList.innerHTML += `
-                    <div id="subtaskListElement${i}" class="subtask-list" onmouseover="showElement('subtask-icons${i}')" onmouseout="hideElement('subtask-icons${i}')"> 
+                    <div id="subtaskListElement${i}" class="subtask-list" onmouseover="showElement('subtask-icons${i}')" onmouseout="hideElement('subtask-icons${i}')" onclick="editSubtask(${i})"> 
                         <span>&#x2022; ${currentSubtaskTitle}</span>
                         <div class="subtask-icons d-none" id="subtask-icons${i}"> 
                             <button class="delete-btn" type="button" onclick="deleteSubtask(${i})"></button>
@@ -74,9 +118,13 @@ function loadNewSubtasks() {
     }
 };
 
-function editSubtask(i) {
-    
 
+/**
+ * This function changes a single subtask into an input field so that the subtask can be edited
+ * 
+ * @param {number} i - id/ counter of the edited subtask
+ */
+async function editSubtask(i) {
     let subtaskElement = document.getElementById(`subtaskListElement${i}`);
     let subtaskText = subtaskElement.querySelector('span').innerText.trim();
     
@@ -84,36 +132,38 @@ function editSubtask(i) {
     let subtaskTitle = subtaskText.slice(2).trim();
     
     // Eingabefeld für die Bearbeitung der Subtask erstellen
-    subtaskElement.innerHTML = `
-        <input class="input-edit-subtask" type="text" id="editedSubtask${i}" class="input-add-task" value="${subtaskTitle}">
-        <div class="subtask-icons"> 
-        <button class="check-square-btn" type="button" onclick="updateSubtask(${i})"></button>
-
-            <button class="delete-btn white-bg" type="button" onclick="deleteSubtask(${i})"></button>
-        </div>
-    `;
+    subtaskElement.innerHTML = await generateEditSubtaskHTML(i, subtaskTitle);
     subtaskEditMode(i);
 }
 
-function removeHoverClass() {
-    let subtaskLists = document.getElementsByClassName('subtask-list');
-    for (let subtask of subtaskLists) {
-        subtask.classList.remove('hover');
-    }
-}
 
+/**
+ * This function changes the classes (e.g. to prevent the hover effect) and removes the mouse events when the edit mode is active
+ * It also focuses the subtask edited and sets the cursor to the end of the text
+ * 
+ * @param {number} i - id/ counter of the edited subtask
+ */
 function subtaskEditMode(i) {
     let subtaskElement = document.getElementById(`subtaskListElement${i}`);
     subtaskElement.classList.add('subtask-list-edit-mode');
-    removeHoverClass();
+    subtaskElement.classList.remove('subtask-list');
+    subtaskElement.onmouseover = null;
+    subtaskElement.onmouseout =null;
+    focusElement(`editedSubtask${i}`);
 }
 
 
+/**
+ * This function changes the title of the subtask according to the input in the edit mode and reloads the subtasks
+ * 
+ * @param {number} i - id/ counter of the edited subtask
+ */
 function updateSubtask(i) {
     let editedSubtaskTitle = document.getElementById(`editedSubtask${i}`).value.trim();
     if (editedSubtaskTitle) {
         addedSubtasks[i].titleSubtask = editedSubtaskTitle;
         loadNewSubtasks();
+        focusElement('subtaskInput');
     } else {
         // Handle empty title case
         alert("Subtask title cannot be empty!");
@@ -121,7 +171,6 @@ function updateSubtask(i) {
 
     console.log(addedSubtasks)
 }
-
 
 
 /**

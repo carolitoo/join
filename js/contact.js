@@ -45,7 +45,6 @@ async function checkIfGuestOrCurrentUser() {
 }
 
 
-
 /**
  * This function ensures that all elements are displayed correctly regardless of the width of the window and whether a contact is selected or not
  */
@@ -82,7 +81,6 @@ async function returnToContactList() {
   await clearContactList();
   await loadContacts();
   await renderContactList();
-  // Check the window width and update the view accordingly
   checkWindowWidth();
 }
 

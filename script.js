@@ -50,11 +50,14 @@ async function loadContacts() {
 }
 
 
+/**
+ * This function adds HTML-Code to elements and can be used to integrate templates
+ */
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
     const element = includeElements[i];
-    file = element.getAttribute("w3-include-html"); // Pfad eintragen, z.B. "includes/header.html"
+    file = element.getAttribute("w3-include-html");
     let resp = await fetch(file);
     if (resp.ok) {
       element.innerHTML = await resp.text();
@@ -78,6 +81,11 @@ function capitalizeFirstLetter(string) {
 }
 
 
+/**
+ * This function prevents the default behaviour of further propagation of the current event
+ * 
+ * @param {object} event 
+ */
 function stopPropagation(event) {
   event.stopPropagation();
 }
@@ -111,11 +119,22 @@ function returnToPreviousPage() {
   history.back();
 }
 
+
+/**
+ * This function hides an element by adding the class "d-none"
+ * 
+ * @param {string} idOfElement - id of the element that is hidden 
+ */
  function hideElement(idOfElement) {
   document.getElementById(idOfElement).classList.add('d-none');
 }
 
 
+/**
+ * This function shows an element that was hidden before by removing the class "d-none"
+ * 
+ * @param {string} idOfElement - 
+ */
 function showElement(idOfElement) {
   document.getElementById(idOfElement).classList.remove('d-none');
 }

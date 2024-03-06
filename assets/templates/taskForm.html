@@ -1,4 +1,13 @@
-<h1>Add Task</h1>
+
+<div class="ctn-task-detail-header">
+  <h1>Add Task</h1>
+  <div class="ctn-task-detail-close" onclick="closeAddTaskBoard()">
+    <img
+      class="task-detail-close"
+      src="./assets/img/close_black.svg"
+    />
+  </div>
+</div>
 
 <form
   id="Add-Task-Form"
@@ -26,20 +35,21 @@
       <div class="input_box_layout">
         <span class="add_task_txt_format">Description</span>
         <textarea
-          class="input-add-task resize"
+          class="input-add-task"
+          style="resize: vertical"
           id="task-input-description"
           placeholder="Enter a description"
         >
         </textarea>
       </div>
 
-      <div class="input_box_layout">
+      <div class="input_box_layout no-margin-bottom">
         <span class="add_task_txt_format">Assigned to</span>
         <div>
           <div class="dropDownIcon"></div>
           <input class="input-add-task" onclick="activateDropdown()" />
           <div class="assignedContacts-open" id="assignedContactsCtn"></div>
-          <div id="checkedContactsCtn"></div>
+          <div id="checkedContactsCtn" class="checked-contacts-ctn"></div>
         </div>
       </div>
     </div>
@@ -128,23 +138,26 @@
         </div>
       </div>
 
-      <div class="input_box_layout">
+      <div class="input_box_layout responsive-heigth">
         <span class="add_task_txt_format">Subtasks</span>
-        <input
-          class="input-add-task"
-          id="subtaskInput"
-          minlength="2"
-          placeholder="Enter a title"
-          onkeyup="checkInputSubtask(event)"
-        />
-        <button
-          type="button"
-          id="plus-btn"
-          class="subtask-plus-btn"
-          onclick="saveSubtaskToArray()"
-        >
-          +
-        </button>
+        <div class="input-add-subtask-layout">
+          <input
+            class="input-add-task"
+            id="subtaskInput"
+            minlength="2"
+            placeholder="Enter a title"
+            onkeyup="checkInputSubtask(event)"
+            onclick="changeInputSubtaskButtons()"
+          />
+          <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
+            <button
+              type="button"
+              id="plus-btn"
+              class="subtask-plus-btn"
+              onclick="changeInputSubtaskButtons()"
+            ></button>
+          </div>
+        </div>
         <div id="added-subtask-ctn"></div>
       </div>
     </div>
