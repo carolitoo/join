@@ -170,7 +170,7 @@ async function renderCurrentUser() {
                     </div>
                     <span>${currentUser.name} (YOU)</span> 
                 </div>
-                <input class="dropdwon-checkbox" type="checkbox" onclick="saveContactsToArray(this)">
+                <input class="dropdwon-checkbox" type="checkbox" onclick="handleCheckboxClick(this)">
             </div>`;
         assignedContacts.innerHTML += currentUserHTML;
     }
@@ -194,12 +194,27 @@ async function renderOtherContacts() {
                         </div>
                         <span>${contact.name}</span> 
                     </div>
-                    <input class="dropdwon-checkbox" type="checkbox" onclick="saveContactsToArray(this)">
+                    <input class="dropdwon-checkbox" type="checkbox" onclick="handleCheckboxClick(this)">
                 </div>`;
             assignedContacts.innerHTML += contactHTML;
         }
     }
 }
+
+function handleCheckboxClick(checkbox) {
+    saveContactsToArray(checkbox);
+    toggleActive(checkbox);
+  }
+
+function toggleActive(checkbox) {
+    const contact = checkbox.parentElement;
+    if (checkbox.checked) {
+      contact.classList.add('active'); // Füge der Kontaktklasse die "active"-Klasse hinzu
+    } else {
+      contact.classList.remove('active'); // Entferne die "active"-Klasse von der Kontaktklasse
+    }
+  }
+
 
 function saveContactsToArray(checkbox) {
     let parentContact = checkbox.closest('.contact');

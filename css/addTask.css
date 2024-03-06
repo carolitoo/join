@@ -111,11 +111,18 @@ select:focus {
   padding-left: 12px;
   padding-right: 16px;
   height: 70px;
+  margin-bottom: 2px;
 }
 
 .contact:hover {
   background-color: #e3e3e3;
   border-radius: 10px;
+}
+
+.contact.active {
+  color: white;
+  border-radius: 10px;
+  background-color: #2A3647; /* Hintergrundfarbe ändern, wenn die Checkbox aktiviert ist */
 }
 
 .contact-circle-and-name-box {
@@ -408,17 +415,27 @@ select:focus {
   font-size: 18px;
 }
 
+.clear_create_btn_ctn {
+  display: flex; /* Buttons nebeneinander anordnen */
+  gap: 10px; /* Abstand zwischen den Buttons */
+}
+
 .clear-btn {
   width: 110px;
   height: 56px;
   padding: 16px;
   border-radius: 10px;
-  border: 1px;
-  gap: 4px;
   border: 1px solid #2A3647;
   background: linear-gradient(0deg, #F6F7F8, #F6F7F8);
   font-size: 20px;
   cursor: pointer;
+  display: flex; /* Um zu verhindern, dass das Bild den Textinhalt verschiebt */
+  align-items: center; /* Zentrieren Sie den Text und das Bild vertikal */
+  justify-content: space-between; /* Platziert den Text auf der linken Seite und das Bild auf der rechten Seite */
+}
+
+.clear-btn span {
+  flex-grow: 1; /* Lässt den Text den verfügbaren Platz einnehmen */
 }
 
 .clear-btn:hover {
@@ -432,6 +449,11 @@ select:focus {
   color: #091931;
   box-shadow: 0px 4px 4px 0px #00000040;
 }
+
+.clear-btn:hover .hover-icon {
+  filter: invert(32%) sepia(98%) saturate(1276%) hue-rotate(180deg) brightness(89%) contrast(89%);
+}
+
 
 .create-task-btn {
   width: 183px;
