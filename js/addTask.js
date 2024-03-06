@@ -235,7 +235,12 @@ function saveContactsToArray(checkbox) {
         // Entferne "(YOU)" aus dem Benutzernamen, falls vorhanden
         userName = userName.replace(" (YOU)", "");
 
-        let foundContact = contacts.find(contact => contact.name === userName);
+        // Extrahiere den Namen unabhängig von der Struktur (Vorname oder Vorname + Nachname)
+        let userNameParts = userName.split(' ');
+        let firstName = userNameParts[0]; // Der erste Teil ist immer der Vorname
+        let lastName = userNameParts.length > 1 ? userNameParts.slice(1).join(' ') : ""; // Alle Teile nach dem ersten sind Teil des Nachnamens
+
+        let foundContact = contacts.find(contact => contact.firstName === firstName && contact.lastName === lastName);
 
         if (foundContact) {
             let userID = foundContact.ID;
@@ -261,11 +266,15 @@ function renderCheckedContacts() {
     let checkedContactsCtn = document.getElementById('checkedContactsCtn');
     checkedContactsCtn.innerHTML = ''; // Clearing the container content to ensure no old content remains before rendering the updated contacts
     
-    assignedUsers.forEach(contact => { // Iterating over each element in the assignedUsers array
-        const foundContact = contacts.find(c => c.name === contact.name);
+    assignedUsers.forEach(user => { // Iterating over each element in the assignedUsers array
+        const foundContact = contacts.find(contact => contact.ID === user.ID);
         if (foundContact) {
-            const nameInitials = foundContact.acronymContact;
-            const contactName = foundContact.name;
+            let nameInitials;
+            if (foundContact.lastName) {
+                nameInitials = foundContact.acronymContact; // Verwende das Akronym mit zwei Buchstaben, wenn der Benutzer einen Nachnamen hat
+            } else {
+                nameInitials = foundContact.name.charAt(0); // Verwende den ersten Buchstaben des Namens, wenn der Benutzer nur einen Namen hat
+            }
             const contactBgColor = foundContact.colorContact; // Farbe des Kreises von den vorhandenen Kontakten übernehmen
 
             // Adding a new DOM element for each checked contact to the container
@@ -273,12 +282,15 @@ function renderCheckedContacts() {
                 <div class="checked-contact-box">
                     <div class="task-detail-assigned-user-acronym" style="background-color:${contactBgColor}">
                         <span>${nameInitials}</span> 
-                    </div> 
+                    </div>
                 </div>
             `;
         }
     });
 }
+
+
+
 
 /**
  * Gets the selcted value fron the Category dropdown and pushes it into the category array
