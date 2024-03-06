@@ -1,31 +1,61 @@
+async function init() {
+  await includeHTML();
+  await loadUserData();
+  await getLoggedInEmail();
+  await checkPersonalheader(loggedInEmail);
+}
+
 async function initPrivacyP() {
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  changeSelectedTab('privacy-link')
- // resetSelectedTab();//
+  checkIfSidebaravailable('privacy-link');
+  // resetSelectedTab();//
 }
 
-async function initLegalN(){
+async function initLegalN() {
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  changeSelectedTab('legal-link')
- // resetSelectedTab();//
+  checkIfSidebaravailable('legal-link');
+  // resetSelectedTab();//
 }
 
-
+/**
+ * This function checks whether an email address was selected before selecting the page and displays the personal head area if the response is positive.
+ * 
+ * @param {string} loggedInEmail - used mailadress in the login-process
+ * @returns - without value, without action
+ */
 async function checkPersonalheader(loggedInEmail) {
-  if ((loggedInEmail.trim() !== "[]") ) {
-     showElement('header-right');
-     showElement('navBar');
-     await renderAcronym(loggedInEmail);
+  if ((loggedInEmail.trim() !== "[]")) {
+    showElement('header-right');
+    showElement('navBar');
+    await renderAcronym(loggedInEmail);
   } else {
     return
   }
 }
+
+/**
+ * 
+ * @param {HTMLElement} idOfElement - 
+ * @returns 
+ */
+async function checkIfSidebaravailable(idOfElement) {
+  const sidebar = document.getElementById('sidebar');
+
+  if ((loggedInEmail.trim() == "[]") && window.innerWidth < 775) {
+    sidebar.classList.add('d-none');
+    sidebar.classList.add('moveContent');
+  } else {
+    changeSelectedTab(idOfElement);
+  }
+}
+
+
 
 /**
  * This function loads the user data from the back-end using the getItem function and updates the global variable 'users' with the loaded user data
@@ -116,7 +146,11 @@ function changeBorderColorSearchTask(idOfElement, color) {
  * This function loads the previous page
  */
 function returnToPreviousPage() {
-  history.back();
+  if (history.length > 1) {
+    history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
 }
 
 

@@ -8,6 +8,7 @@
 .headline-help-legal-privacy {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .ctn-arrow-return {
