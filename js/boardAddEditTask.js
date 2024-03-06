@@ -92,8 +92,9 @@ async function openEditTask(idTask) {
     addedSubtasks = [];
   
     for (let i=0; i < tasks[positionTask]['subtasks'].length; i++) {
-      document.getElementById('added-subtask-ctn').innerHTML += await generateSingleSubtaskHTML(positionTask, i);
       let currentSubtask = tasks[positionTask]['subtasks'][i];
+      let currentSubtaskTitle = currentSubtask['titleSubtask']
+      document.getElementById('added-subtask-ctn').innerHTML += await generateSingleSubtaskHTML(i, currentSubtaskTitle);
   
       let newSubtask = {
         'idSubtask':  currentSubtask['idSubtask'],
