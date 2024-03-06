@@ -61,9 +61,7 @@ function defaultInputSubtask() {
 function focusElement(idOfElement) {
    document.getElementById(idOfElement).focus();
    let textLength = document.getElementById(idOfElement).value.length;
-//    if (textLength) {
-    document.getElementById(idOfElement).setSelectionRange(textLength, textLength);
-//    }
+   document.getElementById(idOfElement).setSelectionRange(textLength, textLength);
 }
 
 
@@ -95,7 +93,7 @@ function saveSubtaskToArray() {
  * Iterrates through the array subtasks and renders the subtasks 
  * only adds a subtask if the array isn't empty
  */
-function loadNewSubtasks() {
+async function loadNewSubtasks() {
     let subtaskList = document.getElementById('added-subtask-ctn');
     subtaskList.innerHTML = '';
 
@@ -105,14 +103,7 @@ function loadNewSubtasks() {
             const currentSubtaskTitle = addedSubtasks[i].titleSubtask.trim();
             
             if (currentSubtaskTitle !== '') {
-                subtaskList.innerHTML += `
-                    <div id="subtaskListElement${i}" class="subtask-list" onmouseover="showElement('subtask-icons${i}')" onmouseout="hideElement('subtask-icons${i}')" onclick="editSubtask(${i})"> 
-                        <span>&#x2022; ${currentSubtaskTitle}</span>
-                        <div class="subtask-icons d-none" id="subtask-icons${i}"> 
-                            <button class="delete-btn" type="button" onclick="deleteSubtask(${i})"></button>
-                            <button class="confirm-btn" type="button" onclick="editSubtask(${i})"></button>
-                        </div>
-                    </div>`;
+                subtaskList.innerHTML += await generateSingleSubtaskHTML(i, currentSubtaskTitle);
             }
         }
     }
@@ -149,6 +140,7 @@ function subtaskEditMode(i) {
     subtaskElement.classList.remove('subtask-list');
     subtaskElement.onmouseover = null;
     subtaskElement.onmouseout =null;
+    subtaskElement.onclick = null;
     focusElement(`editedSubtask${i}`);
 }
 

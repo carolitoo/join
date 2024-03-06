@@ -43,17 +43,18 @@ async function generateContactDropDownHTML(positionContact, idTask) {
 
 
 /**
+ * This function generates the HTML-Code for a single subtask in the list of subtasks
  * 
- * @param {*} positionTask 
- * @param {*} positionSubtask 
+ * @param {number} positionSubtask - position of the subtask
+ * @param {string} currentSubtaskTitle - title of the subtask
  * @returns 
  */
-async function generateSingleSubtaskHTML(positionTask, positionSubtask) {
+async function generateSingleSubtaskHTML(positionSubtask, currentSubtaskTitle) {
     return /*html*/ `
     <div id="subtaskListElement${positionSubtask}" class="subtask-list" onmouseover="showElement('subtask-icons${positionSubtask}')" onmouseout="hideElement('subtask-icons${positionSubtask}')" onclick="editSubtask(${positionSubtask})"> 
-        <span>&#x2022; ${tasks[positionTask]['subtasks'][positionSubtask]['titleSubtask']}</span>
+        <span>&#x2022; ${currentSubtaskTitle}</span>
         <div class="subtask-icons d-none" id="subtask-icons${positionSubtask}"> 
-            <button class="delete-btn" type="button" onclick="deleteSubtask(${positionSubtask})"></button>
+            <button class="delete-btn" type="button" onclick="deleteSubtask(${positionSubtask}), stopPropagation(event)"></button>
             <button class="confirm-btn" type="button" onclick="editSubtask(${positionSubtask})"></button>
         </div>
     </div>
