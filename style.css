@@ -229,6 +229,10 @@ a {
   *::-webkit-scrollbar-track {
     margin-bottom: var(--height-footer);
   }
+
+  *::-webkit-scrollbar-track {
+    margin-bottom: var(--height-footer);
+  }
 }
 
 @media (max-width: 600px) {
