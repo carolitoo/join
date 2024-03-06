@@ -21,6 +21,7 @@ async function openContactDetail(ID) {
     document.getElementById(`contacts-detail-acronym-${ID}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
     slideInAnimation('wrapper-contact-details', 'translate-x', false);
     await resetPreviousSelectedContact(ID);
+    checkEmptyPhoneNumber(positionOfContact);
   }
 
 
@@ -34,6 +35,7 @@ async function openContactDetailCurrentUser(positionOfContact) {
     document.getElementById("wrapper-contact-details").innerHTML = await generateContactDetailHTML(positionOfContact);
     const deleteButtonContainer = document.getElementById("trash-bin-container");
     deleteButtonContainer.style.display = "none";
+    checkEmptyPhoneNumber(positionOfContact);
   }
   
   
@@ -257,24 +259,35 @@ function closeContactsDetails() {
   }
   
   
-  /**
-   * This function ensures that a contact is removed from any assigned tasks before this contact is deleted
-   * 
-   * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
-   */
-  async function removeContactFromTasks(positionOfContact) {
-    let idOfDeletedContact = contactsSorted[positionOfContact]['ID'];
+/**
+* This function ensures that a contact is removed from any assigned tasks before this contact is deleted
+* 
+* @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
+*/
+async function removeContactFromTasks(positionOfContact) {
+  let idOfDeletedContact = contactsSorted[positionOfContact]['ID'];
   
-    for (let i = 0; i < tasks.length; i++) {
-      let counterContacts = tasks[i]['assignedContacts'].length;
-      for (let j = 0; j < counterContacts; j++) {
-        if (tasks[i]['assignedContacts'][j]['idContact'] == idOfDeletedContact) {
-          tasks[i]['assignedContacts'].splice(j, 1);
-          break;
-        }
+  for (let i = 0; i < tasks.length; i++) {
+    let counterContacts = tasks[i]['assignedContacts'].length;
+    for (let j = 0; j < counterContacts; j++) {
+      if (tasks[i]['assignedContacts'][j]['idContact'] == idOfDeletedContact) {
+        tasks[i]['assignedContacts'].splice(j, 1);
+        break;
       }
-    }
-  
-    saveTasks();
-  
+    }   
   }
+  saveTasks();
+}
+
+
+/**
+ * This function checks if a phone number is available - in case that there is no phone number "n.a." is displayed instead of the phone number/ an empty field
+ * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
+*/
+function checkEmptyPhoneNumber(positionOfContact) {
+  if (contactsSorted[positionOfContact]['phoneContact'] == "") {
+    document.getElementById('contacts-detail-phone').innerHTML = "n.a.";
+    document.getElementById('contacts-detail-phone').style.color = "#a8a8a8";
+  }
+}
+

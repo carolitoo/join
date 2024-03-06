@@ -87,7 +87,7 @@
         "idContact": 7
       }
     ],
-    "dueDate": "2024-02-12T10:30:00.000Z",
+    "dueDate": "2024-04-12T10:30:00.000Z",
     "priority": "Urgent",
     "category": "Technical Task",
     "subtasks": [
@@ -171,7 +171,7 @@
         "idContact": 6
       }
     ],
-    "dueDate": "2024-02-22T09:25:00.000Z",
+    "dueDate": "2024-04-22T09:25:00.000Z",
     "priority": "Urgent",
     "category": "Technical Task",
     "subtasks": [
@@ -223,7 +223,7 @@
         "idContact": 7
       }
     ],
-    "dueDate": "2024-02-26T09:25:00.000Z",
+    "dueDate": "2024-03-26T09:25:00.000Z",
     "priority": "Medium",
     "category": "Technical Task",
     "subtasks": [

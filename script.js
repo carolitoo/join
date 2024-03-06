@@ -1,31 +1,61 @@
+async function init() {
+  await includeHTML();
+  await loadUserData();
+  await getLoggedInEmail();
+  await checkPersonalheader(loggedInEmail);
+}
+
 async function initPrivacyP() {
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  changeSelectedTab('privacy-link')
- // resetSelectedTab();//
+  checkIfSidebaravailable('privacy-link');
+  // resetSelectedTab();//
 }
 
-async function initLegalN(){
+async function initLegalN() {
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  changeSelectedTab('legal-link')
- // resetSelectedTab();//
+  checkIfSidebaravailable('legal-link');
+  // resetSelectedTab();//
 }
 
-
+/**
+ * This function checks whether an email address was selected before selecting the page and displays the personal head area if the response is positive.
+ * 
+ * @param {string} loggedInEmail - used mailadress in the login-process
+ * @returns - without value, without action
+ */
 async function checkPersonalheader(loggedInEmail) {
-  if ((loggedInEmail.trim() !== "[]") ) {
-     showElement('header-right');
-     showElement('navBar');
-     await renderAcronym(loggedInEmail);
+  if ((loggedInEmail.trim() !== "[]")) {
+    showElement('header-right');
+    showElement('navBar');
+    await renderAcronym(loggedInEmail);
   } else {
     return
   }
 }
+
+/**
+ * 
+ * @param {HTMLElement} idOfElement - 
+ * @returns 
+ */
+async function checkIfSidebaravailable(idOfElement) {
+  const sidebar = document.getElementById('sidebar');
+
+  if ((loggedInEmail.trim() == "[]") && window.innerWidth < 775) {
+    sidebar.classList.add('d-none');
+    sidebar.classList.add('moveContent');
+  } else {
+    changeSelectedTab(idOfElement);
+  }
+}
+
+
 
 /**
  * This function loads the user data from the back-end using the getItem function and updates the global variable 'users' with the loaded user data
@@ -50,11 +80,14 @@ async function loadContacts() {
 }
 
 
+/**
+ * This function adds HTML-Code to elements and can be used to integrate templates
+ */
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
     const element = includeElements[i];
-    file = element.getAttribute("w3-include-html"); // Pfad eintragen, z.B. "includes/header.html"
+    file = element.getAttribute("w3-include-html");
     let resp = await fetch(file);
     if (resp.ok) {
       element.innerHTML = await resp.text();
@@ -78,6 +111,11 @@ function capitalizeFirstLetter(string) {
 }
 
 
+/**
+ * This function prevents the default behaviour of further propagation of the current event
+ * 
+ * @param {object} event 
+ */
 function stopPropagation(event) {
   event.stopPropagation();
 }
@@ -108,14 +146,29 @@ function changeBorderColorSearchTask(idOfElement, color) {
  * This function loads the previous page
  */
 function returnToPreviousPage() {
-  history.back();
+  if (history.length > 1) {
+    history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
 }
 
+
+/**
+ * This function hides an element by adding the class "d-none"
+ * 
+ * @param {string} idOfElement - id of the element that is hidden 
+ */
  function hideElement(idOfElement) {
   document.getElementById(idOfElement).classList.add('d-none');
 }
 
 
+/**
+ * This function shows an element that was hidden before by removing the class "d-none"
+ * 
+ * @param {string} idOfElement - 
+ */
 function showElement(idOfElement) {
   document.getElementById(idOfElement).classList.remove('d-none');
 }

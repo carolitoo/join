@@ -62,10 +62,11 @@ async function generateContactIconCardSmallHTML(currentIdTask, idContact) {
 
 
 /**
+ * This function returns the HTML-Code for a single element that can be selected in the submenu to shift a task to another status
  * 
- * @param {*} newStatus 
- * @param {*} newStatusName 
- * @returns 
+ * @param {string} newStatus - status that can be chosen in camel case
+ * @param {string} newStatusName - status that can be chosen in clean writing (as displayed in the submenu)
+ * @returns - HTML-Code for a single element that can be selected in the submenu to shift a task to another status
  */
 async function generateElementSubmenuChangeStatusCardSmallHTML(newStatus, newStatusName) {
   return /*html*/ `
@@ -196,8 +197,13 @@ async function generateSubtasksOpenDetailHTML(idOfTask, idOfSubtask, titleOfSubt
 }
 
 
-
-async function generateViewEditTasklHTML(positionTask, currentIdTask) {
+/**
+ * This function generates the HTML-Code for the edit view for the selected task
+ * 
+ * @param {string} currentIdTask - id of the task for which the edit view is opened
+ * @returns - HTML-Code for the edit view for the selected task
+ */
+async function generateViewEditTasklHTML(currentIdTask) {
   return /*html*/ `
   <div
         class="ctn-task-detail"
@@ -205,22 +211,22 @@ async function generateViewEditTasklHTML(positionTask, currentIdTask) {
         onclick="stopPropagation(event)"
       >
         <div class="ctn-task-detail-header ctn-edit-task-board-header">
-          <div class="ctn-task-detail-close">
+          <div class="ctn-task-detail-close" onclick="closeTaskDetails()">
             <img
               class="task-detail-close"
               src="./assets/img/close_black.svg"
-              onclick="closeTaskDetails()"
             />
           </div>
         </div>
 
-        <form class="form-edit-task-board" onsubmit="editTask('${currentIdTask}'); return false;">
+        <form class="form-edit-task-board" id="form-edit-task-board" onsubmit="editTask('${currentIdTask}'); return false;">
           <span class="edit-task-subtitle">Title</span>
           <input
             type="text"
             id="edit-task-title"
             placeholder="Enter a title"
             required
+            onkeyup="checkSubmission(event)"
           />
 
           <span class="edit-task-subtitle">Description</span>
@@ -231,7 +237,12 @@ async function generateViewEditTasklHTML(positionTask, currentIdTask) {
           ></textarea>
 
           <span class="edit-task-subtitle">Due Date</span>
-          <input type="date" id="edit-task-dueDate" required />
+          <input 
+            type="date" 
+            id="edit-task-dueDate" 
+            required 
+            onkeyup="checkSubmission(event)"
+          />
 
           <span class="edit-task-subtitle">Priority</span>
           <div class="ctn-edit-task-prio-btn">
@@ -322,62 +333,23 @@ async function generateViewEditTasklHTML(positionTask, currentIdTask) {
 
           <span class="edit-task-subtitle">Subtasks</span>
 
-          <div class="input_box_layout">
-            <div class="ctn-edit-form-input-subtask" id="ctn-edit-form-input-subtask">
+          <div class="input_box_layout no-margin-bottom">
+            <div class="input-add-subtask-layout">
               <input
                 id="subtaskInput"
+                class="input-add-task"
                 minlength="2"
                 placeholder="Enter a title"
                 onkeyup="checkInputSubtask(event)"
-                onfocus="changeBorderColorSearchTask('ctn-edit-form-input-subtask', '#29ABE2'); changeBtnSubtask('plus-btn', 'ctn-edit-form-input-subtask-reset-add')"
-                onblur="changeBorderColorSearchTask('ctn-edit-form-input-subtask', '#a8a8a8'); changeBtnSubtask('ctn-edit-form-input-subtask-reset-add', 'plus-btn')"
+                onclick="changeInputSubtaskButtons()"
               />
-              <div class="ctn-edit-form-input-subtask-btn">
-                <div
-                  id="plus-btn"
-                  class="edit-task-subtask-btn"
-                  onclick="saveSubtaskToArray()"
-                >
-                  <img src="./assets/img/add_small_db.svg" />
-                </div>
-                <div class="ctn-edit-form-input-subtask-reset-add d-none" id="ctn-edit-form-input-subtask-reset-add">
-                  <div
-                    id="reset-input-subtask"
-                    class="edit-task-subtask-btn"
-                    onclick="resetInputSubtask()"
-                  >
-                    <img src="./assets/img/cancel_small_db.svg" />
-                  </div>
-                  <div class="separator"> | </div>
-                  <div
-                    id="confirm-input-subtask"
-                    class="edit-task-subtask-btn"
-                    onclick="saveSubtaskToArray()"
-                  >
-                    <img src="./assets/img/check_small_db.svg" />
-                  </div>
-                </div>
+              <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
+                  <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
               </div>
             </div>
           </div>
 
-          <div id="added-subtask-ctn">
-            <div class="subtask-list">
-              <span>&#x2022; Implement Recipe Recommendation</span>
-              <div class="subtask-icons d-none">
-                <button
-                  class="delete-btn"
-                  type="button"
-                  onclick="deleteSubtask(1)"
-                ></button>
-                <button
-                  class="confirm-btn"
-                  type="button"
-                  onclick="editSubtask(1)"
-                ></button>
-              </div>
-            </div>
-          </div>
+          <div id="added-subtask-ctn"></div>
 
           <button id="submit-btn" type="submit" class="create-task-btn">
         Ok

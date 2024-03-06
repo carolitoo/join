@@ -220,6 +220,7 @@
   border: solid 1px #d1d1d1;
   padding: 12px 16px;
   margin-bottom: 32px;
+  resize: vertical;
 }
 
 .form-edit-task-board textarea:active, .form-edit-task-board textarea:focus {
@@ -299,7 +300,7 @@
   margin-right: 8px;
 }
 
-.edit-task-subtask-btn {
+/* .edit-task-subtask-btn {
   height: 24px;
   width: 24px;
   display: flex;
@@ -310,7 +311,7 @@
 
 .edit-task-subtask-btn:hover {
   background-color: #EEEEEE;
-}
+} */
 
 .ctn-edit-form-input-subtask {
   display: flex;

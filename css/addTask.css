@@ -290,6 +290,7 @@ select:focus {
 
 .subtask-plus-btn:hover {
   background-color: #eaeaea;
+  cursor: pointer;
 }
 
 .x-btn {
@@ -303,7 +304,7 @@ select:focus {
   background-color: rgb(255, 255, 255);
 }
 
-.x-btn:hover {
+.x-btn:hover, .check-round-btn:hover {
   background-color: #eaeaea;
   cursor: pointer;
 }
@@ -322,6 +323,7 @@ select:focus {
 
 .check-sub-btn:hover {
   background-color: #eaeaea;
+  cursor: pointer;
 }
 
 .check-square-btn {
@@ -335,6 +337,11 @@ select:focus {
   border-right: 1px solid #caced1;
   cursor: pointer;
 }
+
+.check-square-btn:hover {
+  cursor: pointer;
+}
+
 
 .small-divider {
   height: 24px;
@@ -350,6 +357,7 @@ select:focus {
 
 .subtask-list {
   margin-top: 8px;
+  height: 24px;
   width: 440px;
   display: flex;
   justify-content: space-between;
@@ -360,6 +368,7 @@ select:focus {
 
 .subtask-list:hover {
   background-color: #EEEEEE;
+  cursor: pointer;
 }
 
 .subtask-list-edit-mode {
@@ -367,6 +376,13 @@ select:focus {
   border-bottom: 2px solid #29ABE2;
   border-radius: 0px !important;
   height: 20px !important;
+  margin-top: 8px;
+  height: 24px;
+  width: 440px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
 }
 
 .subtask-icons { 
@@ -386,6 +402,10 @@ select:focus {
   background-position: center;
   cursor: pointer;
 }
+
+.delete-btn:hover, .confirm-btn:hover {
+  cursor: pointer;
+} 
 
 .white-bg {
   background-color: white !important;

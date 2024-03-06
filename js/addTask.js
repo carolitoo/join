@@ -20,10 +20,18 @@ async function initAddTask() {
     setMinDueDate('task-input-dueDate');
 }
 
-function clearAssignedUsersArray () {
+
+/**
+ * This function empties the array with the assigned users
+ */
+function clearAssignedUsersArray() {
     assignedUsers = [];
 }
 
+
+/**
+ * This function adds an event listener to the add task form element to prevent the default behaviour of the enter key
+ */
 function addEventListenerToAddForm() {
     document.getElementById("Add-Task-Form").addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
@@ -32,13 +40,20 @@ function addEventListenerToAddForm() {
     });
   }
   
-  function checkSubmission(event) {
+
+ /**
+  * This function is used to give single elements the functionality to submit the form when the enter key is pressed
+  * 
+  * @param {object} event 
+  */ 
+function checkSubmission(event) {
     if (event.key == "Enter") {
       document.getElementById("submit-btn").click();
     }
   }
 
-  /**
+
+/**
  * This function ensures that dates in the past can not be selected as due date
  *
  * @param {string} idOfElement - id of the input field for which the min date is set
@@ -53,6 +68,7 @@ function setMinDueDate(idOfElement) {
     let today = `${minYear}-${minMonth}-${minDay}`;
     document.getElementById(idOfElement).setAttribute("min", today);
   }
+
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
@@ -72,6 +88,7 @@ function changeButtonColorsUrgent() {
     document.getElementById('low-icon').src = './assets/img/Prio baja.svg';
 }
 
+
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
@@ -90,6 +107,7 @@ function changeButtonColorsMedium() {
     document.getElementById('low-icon').src = './assets/img/Prio baja.svg';
 }
 
+
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
  */
@@ -107,6 +125,7 @@ function changeButtonColorsLow() {
     document.getElementById('urgentButton').classList.add("prio-btn-neutral");
     document.getElementById('urgent-icon').src = './assets/img/Prio alta2.svg';
 }
+
 
 /**
  * activates the rotation of the arrow icon of the dropdown menu 
@@ -134,6 +153,7 @@ function activateDropdown() {
     }
 }
 
+
 // Funktion zur Verarbeitung von Klicks außerhalb des Dropdown-Menüs
 function clickOutsideHandler(event) {
     const dropDownMenu = document.getElementById("assignedContactsCtn");
@@ -145,6 +165,7 @@ function clickOutsideHandler(event) {
     }
 }
 
+
 async function renderContacts() {
     if (!contactsRendered) {
         await renderCurrentUser();
@@ -152,6 +173,7 @@ async function renderContacts() {
         contactsRendered = true;
     }
 }
+
 
 async function renderCurrentUser() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
@@ -175,6 +197,7 @@ async function renderCurrentUser() {
         assignedContacts.innerHTML += currentUserHTML;
     }
 }
+
 
 async function renderOtherContacts() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
@@ -200,21 +223,6 @@ async function renderOtherContacts() {
         }
     }
 }
-
-function handleCheckboxClick(checkbox) {
-    saveContactsToArray(checkbox);
-    toggleActive(checkbox);
-  }
-
-function toggleActive(checkbox) {
-    const contact = checkbox.parentElement;
-    if (checkbox.checked) {
-      contact.classList.add('active'); // Füge der Kontaktklasse die "active"-Klasse hinzu
-    } else {
-      contact.classList.remove('active'); // Entferne die "active"-Klasse von der Kontaktklasse
-    }
-  }
-
 
 function saveContactsToArray(checkbox) {
     let parentContact = checkbox.closest('.contact');
@@ -251,6 +259,7 @@ function saveContactsToArray(checkbox) {
         console.error("Fehler: Das übergeordnete Kontakt-Element wurde nicht gefunden.");
     }
 }
+
 
 function renderCheckedContacts() {
     let checkedContactsCtn = document.getElementById('checkedContactsCtn');
@@ -295,6 +304,7 @@ function setCategory(i) {
     console.log("The selcted Category is " + selectedCategory);
 }
 
+
 function clearForm() {
     addedSubtasks = 0;
     
@@ -304,6 +314,7 @@ function clearForm() {
     changeButtonColorsMedium();
     loadNewSubtasks()
 }
+
 
 function resetFormElements() {
     document.getElementById("Add-Task-Form").reset();

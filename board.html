@@ -16,6 +16,7 @@
 
     <script src="script.js" defer></script>
     <script src="./js/board.js" defer></script>
+    <script src="./js/boardAddEditTask.js" defer></script>
     <script src="./js/boardHTML.js" defer></script>
     <script src="./js/boardNavigation.js" defer></script>
     <script src="./js/summary.js" defer></script>
@@ -37,7 +38,7 @@
 
     <header w3-include-html="./assets/templates/header.html"></header>
     <div w3-include-html="./assets/templates/submenu.html"></div>
-    <div
+    <div id="sidebar"
       class="sidebar"
       w3-include-html="./assets/templates/sidebarFooter.html"
     ></div>
@@ -185,11 +186,13 @@
     </div>
 
     <div class="overlay-board d-none" id="overlay-board" onclick="closeTaskDetails()"></div>
+    
     <div
       class="overlay-board d-none"
       id="overlay-board-submenu"
       onclick="closeSubmenuChangeStatusMobile()"
     ></div>
+    
     <div
       class="overlay-board d-none"
       id="overlay-board-addTask"
