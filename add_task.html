@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Task</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Task</title>
+  <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
     <link rel="stylesheet" href="./css/font.css" />
     <link rel="stylesheet" href="./css/template.css" />
@@ -31,18 +32,15 @@
   <script src="./js/contactHTML.js" defer></script>
 </head>
 
-  <body onload="initAddTask()">
-    <div class="landscape-msg">
-      Please rotate your device to portrait mode<br />
-      for better user experience.
-    </div>
+<body onload="initAddTask()">
+  <div class="landscape-msg">
+    Please rotate your device to portrait mode<br />
+    for better user experience.
+  </div>
 
-    <header w3-include-html="./assets/templates/header.html"></header>
-    <div w3-include-html="./assets/templates/submenu.html"></div>
-    <div id="sidebar"
-      class="sidebar"
-      w3-include-html="./assets/templates/sidebarFooter.html"
-    ></div>
+  <header w3-include-html="./assets/templates/header.html"></header>
+  <div w3-include-html="./assets/templates/submenu.html"></div>
+  <div id="sidebar" class="sidebar" w3-include-html="./assets/templates/sidebarFooter.html"></div>
 
   <div class="ctn-content">
 
@@ -79,89 +77,97 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="parting_line_grey"></div>
+
+        <div class="add-task-right-column">
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Due date</span>
+              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            </div>
+            <input id="task-input-dueDate" class="input-add-task" required type="date" placeholder="dd/mm/yyyy"
+              onkeyup="checkSubmission(event)">
           </div>
 
-          <div class="parting_line_grey"></div>
+          <div class="input_box_layout">
+            <span class="add_task_txt_format">Prio</span>
+            <div class="prio_box_layout">
 
-          <div class="add-task-right-column">
-
-            <div class="input_box_layout">
-              <div class="description-with-star">
-                <span class="add_task_txt_format">Due date</span>
-                <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+              <div id="urgentButton" class="prio-btn-neutral responsive-prio-btn" onclick="changeButtonColorsUrgent()">
+                Urgent
+                <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
               </div>
-              <input id="task-input-dueDate" class="input-add-task" required type="date" placeholder="dd/mm/yyyy" onkeyup="checkSubmission(event)">
+
+              <div id="mediumButton" class="medium-btn-yellow responsive-prio-btn" onclick="changeButtonColorsMedium()">
+                Medium
+                <img id="medium-icon" src="./assets/img/capa 2.svg" class="urgent-icon" style="fill:#FFA800">
+              </div>
+
+              <div id="lowButton" class="prio-btn-neutral responsive-prio-btn" onclick="changeButtonColorsLow()">Low
+                <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
+              </div>
+
             </div>
-
-            <div class="input_box_layout">
-              <span class="add_task_txt_format">Prio</span>
-              <div class="prio_box_layout">
-
-                <div id="urgentButton" class="prio-btn-neutral responsive-prio-btn" onclick="changeButtonColorsUrgent()">Urgent
-                  <img id="urgent-icon" src="./assets/img/Prio alta2.svg" class="urgent-icon" alt="...">
-                </div>
-
-                <div id="mediumButton" class="medium-btn-yellow responsive-prio-btn" onclick="changeButtonColorsMedium()">Medium
-                  <img id="medium-icon" src="./assets/img/capa 2.svg" class="urgent-icon" style="fill:#FFA800">
-                </div>
-
-                <div id="lowButton" class="prio-btn-neutral responsive-prio-btn" onclick="changeButtonColorsLow()">Low
-                  <img id="low-icon" src="./assets/img/Prio baja.svg" class="urgent-icon" alt="...">
-                </div>
-
-              </div>
-            </div>
-
-            <div class="input_box_layout">
-              <div class="description-with-star">
-                <span class="add_task_txt_format">Category</span>
-                <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
-              </div>
-              <div class="custom-select">
-                <select id="selectCategory" class="select.dropdown_list" onchange="setCategory()" required>
-                  <option value="" disabled selected>Select task category</option>
-                  <option value="Technical Task">Technical Task</option>
-                  <option value="User Story">User Story</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="input_box_layout responsive-heigth">
-              <span class="add_task_txt_format">Subtasks</span>
-              <div class="input-add-subtask-layout">
-                <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title" onkeyup="checkInputSubtask(event)" onclick="changeInputSubtaskButtons()">
-                  <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
-                    <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
-                  </div>  
-              </div>
-              <div id="added-subtask-ctn"></div>
-            </div>
-        </div>
-        
-
-        </div>
-        <div class="bottom-section-ctn">
-          <div class="description-with-star">
-            <p class="required_txt_format" style="color: #FF8190;">*</p>
-            <span class="required_txt_format">This field is required</span>
           </div>
-          <div class="clear_create_btn_ctn">
-            <button id="clear-btn" class="clear-btn" type="button" onclick="clearForm()">
-              <span>Clear</span>
-              <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark hover-icon">
-            </button>
-            <button id="submit-btn" type="submit" class="create-task-btn">
-              <span>Create Task</span>
-              <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
-            </button>
+
+          <div class="input_box_layout">
+            <div class="description-with-star">
+              <span class="add_task_txt_format">Category</span>
+              <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
+            </div>
+            <div class="custom-select">
+              <select id="selectCategory" class="select.dropdown_list" onchange="setCategory()" required>
+                <option value="" disabled selected>Select task category</option>
+                <option value="Technical Task">Technical Task</option>
+                <option value="User Story">User Story</option>
+              </select>
+            </div>
+          </div>
+          <div class="input_box_layout responsive-heigth">
+            <span class="add_task_txt_format">Subtasks</span>
+            <div class="input-add-subtask-layout">
+              <div id="maximal-letter-container">
+                <div id="maxLengthMessage" class="letter-limit d-none">please limit to 20 letters</div>
+                <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title"
+                  onkeyup="checkInputSubtask(event)" onclick="changeInputSubtaskButtons()">
+              </div>
+              <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
+                <button type="button" id="plus-btn" class="subtask-plus-btn"
+                  onclick="changeInputSubtaskButtons()"></button>
+              </div>
+            </div>
+            <div id="added-subtask-ctn"></div>
           </div>
         </div>
-        
-        </div>
-      </form>
+
+
+    </div>
+    <div class="bottom-section-ctn">
+      <div class="description-with-star">
+        <p class="required_txt_format" style="color: #FF8190;">*</p>
+        <span class="required_txt_format">This field is required</span>
+      </div>
+      <div class="clear_create_btn_ctn">
+        <button id="clear-btn" class="clear-btn" type="button" onclick="clearForm()">
+          <span>Clear</span>
+          <img src="./assets/img/close blue.svg" class="create-task-btn-checkmark hover-icon">
+        </button>
+        <button id="submit-btn" type="submit" class="create-task-btn">
+          <span>Create Task</span>
+          <img src="./assets/img/vector.svg" class="create-task-btn-checkmark">
+        </button>
+      </div>
+    </div>
+
+  </div>
+  </form>
 
   </div>
   </div>
 
 </body>
+
 </html>

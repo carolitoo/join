@@ -5,26 +5,24 @@ let addedSubtasks = []; //collects up all subtasks before sumbitting the form
  * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
  * 
  * @param {object} event 
- */
-function checkInputSubtask(event) {
-    if (event.key == "Enter") {
-      saveSubtaskToArray();
-    }
-  }
-
-
-/**
- * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
- * 
- * @param {object} event 
  * @param {number} i - id/ counter of the edited subtask
  */
-function checkInputEditSubtask(event, i) {
-    if (event.key == "Enter") {
-        updateSubtask(i);
-    }
-  }
 
+function checkInputSubtask(event) {
+    let inputElement = document.getElementById("subtaskInput");
+    let inputValue = inputElement.value;
+
+    let maxLengthMessage = document.getElementById("maxLengthMessage");
+
+    if (inputValue.length >= 20) {
+        inputElement.value = inputValue.slice(0, 20);
+        maxLengthMessage.classList.remove('d-none');
+    }
+    if (event.key == "Enter") {
+        saveSubtaskToArray();
+        maxLengthMessage.classList.add('d-none');
+    }
+}
 
 /**
  * This function changes the input buttons within the input field for the subtasks to the "active" view
@@ -37,17 +35,24 @@ function changeInputSubtaskButtons() {
         <button class="check-round-btn" type="button" onclick="saveSubtaskToArray()"></button>
     `
     focusElement('subtaskInput');
+
 }
 
 
 /**
- * This function resets the input button within the input field to the default
+ * This function resets the input button within the input field to the default and clears the error message if the maximum length is exceeded.
  */
 function defaultInputSubtask() {
-    let buttonsContainer = document.getElementById("input-subtask-btn-ctn")
+    let buttonsContainer = document.getElementById("input-subtask-btn-ctn");
+    let MessageMaxlength = document.getElementById('maxLengthMessage');
+
+    if (!MessageMaxlength.classList.contains('d-none')) {
+        MessageMaxlength.classList.add('d-none');
+    }
     buttonsContainer.innerHTML = `    
         <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
-    `
+    `;
+
     document.getElementById('subtaskInput').value = '';
     focusElement('subtaskInput');
 }
@@ -59,9 +64,9 @@ function defaultInputSubtask() {
  * @param {string} idOfElement - element/ input field that should be focused 
  */
 function focusElement(idOfElement) {
-   document.getElementById(idOfElement).focus();
-   let textLength = document.getElementById(idOfElement).value.length;
-   document.getElementById(idOfElement).setSelectionRange(textLength, textLength);
+    document.getElementById(idOfElement).focus();
+    let textLength = document.getElementById(idOfElement).value.length;
+    document.getElementById(idOfElement).setSelectionRange(textLength, textLength);
 }
 
 
@@ -74,7 +79,7 @@ function saveSubtaskToArray() {
         let timeStampSubtask = new Date().getTime();
 
         let newSubtask = {
-            'idSubtask':  `task-${timeStampSubtask}`,
+            'idSubtask': `task-${timeStampSubtask}`,
             'titleSubtask': inputText,
             'statusSubtask': "open",
         }
@@ -98,10 +103,10 @@ async function loadNewSubtasks() {
     subtaskList.innerHTML = '';
 
     for (let i = 0; i < addedSubtasks.length; i++) {
-        
+
         if (addedSubtasks[i].titleSubtask && typeof addedSubtasks[i].titleSubtask === 'string') {
             const currentSubtaskTitle = addedSubtasks[i].titleSubtask.trim();
-            
+
             if (currentSubtaskTitle !== '') {
                 subtaskList.innerHTML += await generateSingleSubtaskHTML(i, currentSubtaskTitle);
             }
@@ -118,10 +123,10 @@ async function loadNewSubtasks() {
 async function editSubtask(i) {
     let subtaskElement = document.getElementById(`subtaskListElement${i}`);
     let subtaskText = subtaskElement.querySelector('span').innerText.trim();
-    
+
     // Extrahiere den Text ohne den Bullet Point
     let subtaskTitle = subtaskText.slice(2).trim();
-    
+
     // Eingabefeld für die Bearbeitung der Subtask erstellen
     subtaskElement.innerHTML = await generateEditSubtaskHTML(i, subtaskTitle);
     subtaskEditMode(i);
@@ -139,7 +144,7 @@ function subtaskEditMode(i) {
     subtaskElement.classList.add('subtask-list-edit-mode');
     subtaskElement.classList.remove('subtask-list');
     subtaskElement.onmouseover = null;
-    subtaskElement.onmouseout =null;
+    subtaskElement.onmouseout = null;
     subtaskElement.onclick = null;
     focusElement(`editedSubtask${i}`);
 }

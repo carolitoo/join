@@ -1,5 +1,5 @@
 .no-margin-bottom {
-margin-bottom: 0px !important;
+  margin-bottom: 0px !important;
 }
 
 .form-layout {
@@ -25,7 +25,7 @@ margin-bottom: 0px !important;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  margin-bottom: 34px
+  margin-bottom: 34px;
 }
 
 .description-with-star {
@@ -34,18 +34,18 @@ margin-bottom: 0px !important;
 
 .parting_line_grey {
   width: 2px;
-  background: #D1D1D1;
+  background: #d1d1d1;
 }
 
 .input-add-task {
   height: 48px;
   width: 440px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 400;
   color: #000000;
   border-radius: 8px;
-  border: solid 1px #D1D1D1;
+  border: solid 1px #d1d1d1;
   padding: 4px 16px;
   margin: 0px;
 }
@@ -79,16 +79,16 @@ select:focus {
 
 .dropDownIcon {
   width: 0;
-	height: 0;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-	border-top: 10px solid #555;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #555;
   position: absolute;
   margin-top: 25px;
   margin-left: 438px;
 }
 
-.active .dropDownIcon { 
+.active .dropDownIcon {
   transform: rotate(180deg);
 }
 
@@ -100,7 +100,7 @@ select:focus {
   border-top: none;
   border: none;
   z-index: 1000;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: none;
 }
 
@@ -122,7 +122,7 @@ select:focus {
 .contact.active {
   color: white;
   border-radius: 10px;
-  background-color: #2A3647; /* Hintergrundfarbe ändern, wenn die Checkbox aktiviert ist */
+  background-color: #2a3647; /* Hintergrundfarbe ändern, wenn die Checkbox aktiviert ist */
 }
 
 .contact-circle-and-name-box {
@@ -178,8 +178,8 @@ select:focus {
   border-radius: 10px;
   gap: 8px;
   border: 0px;
-  background-color: #FFFFFF;
-  box-shadow: 0px 0px 4px 0px #0000001A;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 4px 0px #0000001a;
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
@@ -202,8 +202,8 @@ select:focus {
   border-radius: 10px;
   gap: 8px;
   border: 0px;
-  color: #FFFFFF;
-  background-color: #FF3D00;
+  color: #ffffff;
+  background-color: #ff3d00;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
@@ -222,8 +222,8 @@ select:focus {
   border-radius: 10px;
   gap: 8px;
   border: 0px;
-  color: #FFFFFF;
-  background-color: #FFA800;
+  color: #ffffff;
+  background-color: #ffa800;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
@@ -242,8 +242,8 @@ select:focus {
   border-radius: 10px;
   gap: 8px;
   border: 0px;
-  color: #FFFFFF;
-  background-color: #7AE229;
+  color: #ffffff;
+  background-color: #7ae229;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
@@ -265,13 +265,24 @@ select:focus {
   justify-content: flex-end;
 }
 
+#maximal-letter-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#maxLengthMessage {
+  margin-left: 6px;
+  margin-top: 6px;
+  color: red;
+  font-size: 14px;
+}
+
 .input-subtask-btn-ctn {
-  position: absolute;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 20px;
-  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
   width: fit-content;
   gap: 8px;
 }
@@ -304,7 +315,8 @@ select:focus {
   background-color: rgb(255, 255, 255);
 }
 
-.x-btn:hover, .check-round-btn:hover {
+.x-btn:hover,
+.check-round-btn:hover {
   background-color: #eaeaea;
   cursor: pointer;
 }
@@ -342,7 +354,6 @@ select:focus {
   cursor: pointer;
 }
 
-
 .small-divider {
   height: 24px;
   background-color: #caced1;
@@ -367,13 +378,13 @@ select:focus {
 }
 
 .subtask-list:hover {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   cursor: pointer;
 }
 
 .subtask-list-edit-mode {
   background-color: white;
-  border-bottom: 2px solid #29ABE2;
+  border-bottom: 2px solid #29abe2;
   border-radius: 0px !important;
   height: 20px !important;
   margin-top: 8px;
@@ -385,7 +396,7 @@ select:focus {
   padding: 8px 16px;
 }
 
-.subtask-icons { 
+.subtask-icons {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -403,9 +414,10 @@ select:focus {
   cursor: pointer;
 }
 
-.delete-btn:hover, .confirm-btn:hover {
+.delete-btn:hover,
+.confirm-btn:hover {
   cursor: pointer;
-} 
+}
 
 .white-bg {
   background-color: white !important;
@@ -445,8 +457,8 @@ select:focus {
   height: 56px;
   padding: 16px;
   border-radius: 10px;
-  border: 1px solid #2A3647;
-  background: linear-gradient(0deg, #F6F7F8, #F6F7F8);
+  border: 1px solid #2a3647;
+  background: linear-gradient(0deg, #f6f7f8, #f6f7f8);
   font-size: 20px;
   cursor: pointer;
   display: flex; /* Um zu verhindern, dass das Bild den Textinhalt verschiebt */
@@ -459,8 +471,8 @@ select:focus {
 }
 
 .clear-btn:hover {
-  border: 2px solid #29ABE2;
-  color: #29ABE2;
+  border: 2px solid #29abe2;
+  color: #29abe2;
   box-shadow: 0px 4px 4px 0px #00000040;
 }
 
@@ -471,9 +483,9 @@ select:focus {
 }
 
 .clear-btn:hover .hover-icon {
-  filter: invert(32%) sepia(98%) saturate(1276%) hue-rotate(180deg) brightness(89%) contrast(89%);
+  filter: invert(32%) sepia(98%) saturate(1276%) hue-rotate(180deg)
+    brightness(89%) contrast(89%);
 }
-
 
 .create-task-btn {
   width: 183px;
@@ -482,7 +494,7 @@ select:focus {
   border-radius: 10px;
   border: 1px;
   gap: 4px;
-  background: #2A3647;
+  background: #2a3647;
   font-size: 20px;
   color: #fff;
   font-weight: 700;
@@ -490,7 +502,7 @@ select:focus {
 }
 
 .create-task-btn:hover {
-  background-color: #29ABE2;
+  background-color: #29abe2;
   box-shadow: 0px 4px 4px 0px #00000040;
 }
 
