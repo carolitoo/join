@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="./css/board.css" />
   <link rel="stylesheet" href="./css/boardOverlay.css" />
   <link rel="stylesheet" href="./css/boardResp.css" />
+  <link rel="stylesheet" href="./css/logInsheet.css">
 
   <script src="script.js" defer></script>
   <script src="./js/template.js" defer></script>
@@ -63,7 +64,7 @@
 
             <span class="add_task_txt_format">Description</span>
 
-            <textarea class="input-add-task" style="resize: vertical" id="task-input-description"
+            <textarea class="input-add-task p-4" style="resize: vertical" id="task-input-description"
               placeholder="Enter a description"> </textarea>
           </div>
 
@@ -91,6 +92,10 @@
             <input id="task-input-dueDate" class="input-add-task" required type="date" placeholder="dd/mm/yyyy"
               onkeyup="checkSubmission(event)">
           </div>
+
+          <div id="transp-overlay" class="transp-overlay d-none"></div>
+          <div id="msgBox" class="d-none">Task added to board<img id="vectorboard-pic"
+              src="./assets/img/Vectorboard.svg"></div>
 
           <div class="input_box_layout">
             <span class="add_task_txt_format">Prio</span>
