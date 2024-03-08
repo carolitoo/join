@@ -52,6 +52,10 @@
   margin-right: 5px;
 }
 
+.p-4 {
+  padding: 4px 4px !important;
+}
+
 select {
   appearance: none;
   /*  safari  */
@@ -273,7 +277,7 @@ select:focus {
   justify-content: flex-end;
   align-items: center;
   margin-top: 8px;
-  margin-right: 7px;
+  margin-right: 12px;
   width: fit-content;
   gap: 8px;
   background: white;
@@ -326,7 +330,7 @@ select:focus {
   border: 0;
   background-color: rgb(255, 255, 255);
   cursor: pointer;
-  padding-right:22px;
+  padding-right: 24px;
 }
 
 .check-sub-btn:hover {
@@ -510,6 +514,13 @@ select:focus {
 .create-task-btn-checkmark {
   width: 15.49px;
   height: 11.22px;
+}
+
+
+#vectorboard-pic {
+  width: 26px;
+  height: 22px;
+  margin-left: 14px;
 }
 
 @media (max-width: 1121px) {
