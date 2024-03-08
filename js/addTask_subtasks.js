@@ -10,9 +10,23 @@ let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 function checkInputSubtask(event) {
     if (event.key == "Enter") {
         saveSubtaskToArray();
-        maxLengthMessage.classList.add('d-none');
     }
 }
+
+
+/**
+ * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
+ * 
+ * @param {object} event 
+ * @param {number} i - id/ counter of the edited subtask
+ */
+function checkInputEditSubtask(event, i) {
+    if (event.key == "Enter") {
+        updateSubtask(i);
+        saveSubtaskToArray();
+    }
+}
+
 
 /**
  * This function changes the input buttons within the input field for the subtasks to the "active" view
@@ -62,7 +76,7 @@ function saveSubtaskToArray() {
         let timeStampSubtask = new Date().getTime();
 
         let newSubtask = {
-            'idSubtask': `task-${timeStampSubtask}`,
+            'idSubtask': `${timeStampSubtask}`,
             'titleSubtask': inputText,
             'statusSubtask': "open",
         }

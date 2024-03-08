@@ -292,7 +292,7 @@
   margin-bottom: 0;
 }
 
-.ctn-edit-form-input-subtask input {
+.ctn-edit-form-input-subtask input, .subtask-list-edit-mode input {
   flex: 1;
 }
 
