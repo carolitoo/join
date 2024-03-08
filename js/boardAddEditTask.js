@@ -77,6 +77,8 @@ async function openEditTask(idTask) {
       let positionContact = contacts.findIndex((id) => id['ID'] == idContact)
   
       document.getElementById(`checkbox-${idTask}-${positionContact}`).checked = true;
+      document.getElementById(`checkbox-${idTask}-${positionContact}`).parentElement.classList.add('active');
+
       assignedUsers.push({ name: contacts[positionContact]['name'], ID: contacts[positionContact]['ID'] });
     }
   }
@@ -104,7 +106,7 @@ async function openEditTask(idTask) {
     addedSubtasks.push(newSubtask);
     }
   }
-  
+
   
   /**
    * This function adds an event listener to the edit task form element to prevent the default behaviour of the enter key
@@ -143,22 +145,35 @@ async function openEditTask(idTask) {
   
   
   /**
-   * This function opens the drop down with the contacts in the editTask-View
+   * This function opens the drop down with the contacts in the editTask-View 
+   * It also adds an event listener to the background so that the drop down is closed when clicking outside the drop down container
    */
   function openDropDownEditTask() {
     document.getElementById('ctn-edit-task-drop-down-user').classList.remove('d-none');
     document.getElementById('edit-task-placeholder-drop-down').classList.add('d-none');
     document.getElementById('ctn-edit-task-search-user').classList.remove('d-none');
+    document.getElementById('ctn-edit-task-board').addEventListener("click", clickOutsideHandlerEdit);
   }
-  
-  
+
+
   /**
-   * This function closes the drop down with the contacts in the editTask-View
+   * This function closes the drop down with the contacts when the user clicks outside the container (on the white background)
+   */
+  function clickOutsideHandlerEdit(event) {
+    if (event.target.className =="ctn-task-detail") {
+      closeDropDownEditTask();
+    } 
+  }
+
+
+  /**
+   * This function closes the drop down with the contacts in the editTask-View and removes the event listener
    */
   function closeDropDownEditTask() {
     document.getElementById('ctn-edit-task-drop-down-user').classList.add('d-none');
     document.getElementById('edit-task-placeholder-drop-down').classList.remove('d-none');
     document.getElementById('ctn-edit-task-search-user').classList.add('d-none');
+    document.getElementById('ctn-edit-task-board').removeEventListener("click", clickOutsideHandlerEdit);
   }
   
   

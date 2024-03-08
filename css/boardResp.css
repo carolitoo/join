@@ -61,6 +61,14 @@
 }
 
 @media (max-width: 650px) {
+  .form-edit-task-board input {
+    font-size: 16px;
+  }
+
+  .form-edit-task-board textarea {
+    font-size: 16px;
+  }
+
   .ctn-task-detail {
     width: 80%;
     min-width: 256px;
@@ -82,6 +90,10 @@
   .ctn-task-detail-date span,
   .ctn-task-detail-priority span {
     width: 112px;
+  }
+
+  .btn-edit-prio {
+    font-size: 16px !important;
   }
 
   .task-detail-assigned-user-name {
@@ -112,6 +124,17 @@
   }
 }
 
+@media (max-width: 420px) {
+  .ctn-edit-task-prio-btn {
+    flex-direction: column;
+  }
+
+  .btn-edit-prio {
+    width: unset !important;
+    height: 48px !important;
+  }
+}
+
 @media (max-width: 370px) {
   .input-search-task {
     width: 188px !important;
@@ -120,4 +143,13 @@
   .ctn-board-status {
     min-width: 200px;
   }
+
+  .ctn-task-detail {
+    width: 84%;
+    padding: 24px 16px;
+}
+
+.edit-task-search-user {
+  max-width: 180px;
+}
 }

@@ -14,7 +14,7 @@ async function generateCurrentUserDropDownHTML(positionContact, idTask) {
             </div>
             <span>${contacts[positionContact]['name']} (YOU)</span> 
         </div>
-        <input class="dropdwon-checkbox" id="checkbox-${idTask}-${positionContact}" type="checkbox" onclick="saveContactsToArray(this)"/>
+        <input class="dropdwon-checkbox" id="checkbox-${idTask}-${positionContact}" type="checkbox" onclick="handleCheckboxClick(this)"/>
     </div>
 `
 }
@@ -36,7 +36,7 @@ async function generateContactDropDownHTML(positionContact, idTask) {
             </div>
             <span>${contacts[positionContact]['name']}</span> 
         </div>
-        <input class="dropdwon-checkbox" id="checkbox-${idTask}-${positionContact}" type="checkbox" onclick="saveContactsToArray(this)"/>
+        <input class="dropdwon-checkbox" id="checkbox-${idTask}-${positionContact}" type="checkbox" onclick="handleCheckboxClick(this)"/>
     </div>
 `
 }

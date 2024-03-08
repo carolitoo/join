@@ -141,7 +141,7 @@
 }
 
 .ctn-task-detail-single-subtask:hover {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   cursor: pointer;
   padding: 6px 18px;
 }
@@ -191,10 +191,8 @@
   align-items: center;
   padding: 48px;
   border-radius: 30px;
-  box-shadow: 0px 0px 4px 0px #0000001A;
+  box-shadow: 0px 0px 4px 0px #0000001a;
 }
-
-
 
 /*** EDIT TASK BOARD ***/
 
@@ -213,6 +211,10 @@
   color: #2a3647;
 }
 
+.form-edit-task-board input {
+  width: unset;
+}
+
 .form-edit-task-board textarea {
   font-family: "Inter", sans-serif;
   font-size: 20px;
@@ -223,8 +225,9 @@
   resize: vertical;
 }
 
-.form-edit-task-board textarea:active, .form-edit-task-board textarea:focus {
-  border: solid 1px  #29abe2;
+.form-edit-task-board textarea:active,
+.form-edit-task-board textarea:focus {
+  border: solid 1px #29abe2;
   outline: none;
 }
 
@@ -265,8 +268,8 @@
 }
 
 .ctn-edit-task-drop-down-user {
-  max-height: 200px;
-  box-shadow: 0px 0px 4px 0px #0000001A;
+  max-height: 216px;
+  box-shadow: 0px 0px 4px 0px #0000001a;
   overflow-y: auto;
 }
 
@@ -281,12 +284,22 @@
   justify-content: space-between;
 }
 
-
-
-.ctn-edit-task-search-user input, .ctn-edit-form-input-subtask input, .ctn-edit-task-assigned-users input {
+.ctn-edit-task-search-user input,
+.ctn-edit-form-input-subtask input,
+.ctn-edit-task-assigned-users input {
   border: none;
   height: unset;
   margin-bottom: 0;
+}
+
+.ctn-edit-form-input-subtask input {
+  flex: 1;
+}
+
+.form-edit-task-board input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  margin: unset !important;
 }
 
 .ctn-edit-task-bar-assigned-user {
@@ -296,22 +309,13 @@
   overflow-x: auto;
 }
 
+.ctn-checked-contacts-edit {
+  width: unset !important;
+}
+
 .ctn-edit-form-input-subtask-btn {
   margin-right: 8px;
 }
-
-/* .edit-task-subtask-btn {
-  height: 24px;
-  width: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}
-
-.edit-task-subtask-btn:hover {
-  background-color: #EEEEEE;
-} */
 
 .ctn-edit-form-input-subtask {
   display: flex;
@@ -325,8 +329,20 @@
 .ctn-edit-form-input-subtask-reset-add {
   display: flex;
   gap: 4px;
+  margin-right: 8px;
 }
 
+.ctn-edit-task-added-subtask div {
+  width: unset;
+}
+
+.btn-edit-confirm {
+  align-self: flex-end;
+  max-width: 88px;
+  height: unset;
+  margin-top: 20px;
+  padding: 14px 8px !important;
+}
 
 /*** ADD TASK BOARD ***/
 
@@ -343,6 +359,5 @@
 
 .ctn-add-task-board-input-section {
   display: flex;
-  gap: 32px
+  gap: 32px;
 }
-

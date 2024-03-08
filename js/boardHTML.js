@@ -1,13 +1,17 @@
 /**
  * This function generates the HTML-Code for the small cards on the kanban board
- * 
+ *
  * @param {array} currentTasks - array of tasks currently selected
  * @param {number} positionOfTask - position of the task for which the card on the kanban board should be created in the array currentTasks
  * @param {string} currentIdTask - id of the task for which the card on the kanban board should be created
  * @returns - HTML-Code for one single small card/ task
  */
-async function generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask) {
-    return /*html*/ `
+async function generateCardSmallHTML(
+  currentTasks,
+  positionOfTask,
+  currentIdTask
+) {
+  return /*html*/ `
     <div 
     class="card-task-small" 
     id="card-task-small-${currentIdTask}" 
@@ -17,18 +21,18 @@ async function generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask
     ondragend="resetCardAndBoard('${currentIdTask}')" 
     onclick="openTaskDetail('${currentIdTask}')">    
       <div class="ctn-card-category-show-more-small">
-        <div class="card-category-small" id="category-task-${currentIdTask}">${currentTasks[positionOfTask]['category']}</div>
+        <div class="card-category-small" id="category-task-${currentIdTask}">${currentTasks[positionOfTask]["category"]}</div>
         <div 
           class="ctn-card-show-more-small"
           id="ctn-card-show-more-small-${currentIdTask}"
-          onclick="changeStatusMobile(event, '${currentTasks[positionOfTask]['statusTask']}', '${currentIdTask}')">
+          onclick="changeStatusMobile(event, '${currentTasks[positionOfTask]["statusTask"]}', '${currentIdTask}')">
           <img class="icon-card-show-more-small" src="./assets/img/more_vertical_white.svg">
         </div>
         <div class="ctn-submenu-card-small d-none" id="ctn-submenu-card-small-${currentIdTask}" onclick="stopPropagation(event)"></div>
       </div>
         <div class="ctn-card-text-small">
-            <div class="card-title-small" id="title-task-${currentIdTask}">${currentTasks[positionOfTask]['titleTask']}</div>
-            <div class="card-description-small" id="description-task-${currentIdTask}">${currentTasks[positionOfTask]['descriptionTask']}</div>
+            <div class="card-title-small" id="title-task-${currentIdTask}">${currentTasks[positionOfTask]["titleTask"]}</div>
+            <div class="card-description-small" id="description-task-${currentIdTask}">${currentTasks[positionOfTask]["descriptionTask"]}</div>
         </div>
 
         <div class="ctn-card-subtasks-small" id="ctn-card-subtasks-small-${currentIdTask}">
@@ -43,13 +47,12 @@ async function generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask
         <img class="img-card-priority-small" id="img-prio-task-${currentIdTask}" src="./assets/img/prio_medium_color.svg"/>
         </div>
     </div>
-    `
+    `;
 }
-
 
 /**
  * This function returns the HTML-Code for a single user (or dummy in case of overflow) assigned to a task on the small card on the kanban board
- * 
+ *
  * @param {string} currentIdTask - id of the task for which the card on the kanban board should be created
  * @param {string} idContact - id of the contact that is assigned to the task created on the kanban board
  * @returns - HTML-Code for a single user assigned to a task on the small card on the kanban board
@@ -57,18 +60,20 @@ async function generateCardSmallHTML(currentTasks, positionOfTask, currentIdTask
 async function generateContactIconCardSmallHTML(currentIdTask, idContact) {
   return /*html*/ `
   <div class="card-assigned-user-small" id="card-assigned-user-small-${currentIdTask}-${idContact}"></div>
-  `
+  `;
 }
-
 
 /**
  * This function returns the HTML-Code for a single element that can be selected in the submenu to shift a task to another status
- * 
+ *
  * @param {string} newStatus - status that can be chosen in camel case
  * @param {string} newStatusName - status that can be chosen in clean writing (as displayed in the submenu)
  * @returns - HTML-Code for a single element that can be selected in the submenu to shift a task to another status
  */
-async function generateElementSubmenuChangeStatusCardSmallHTML(newStatus, newStatusName) {
+async function generateElementSubmenuChangeStatusCardSmallHTML(
+  newStatus,
+  newStatusName
+) {
   return /*html*/ `
       <div 
           class="ctn-submenu-selection-card-small" 
@@ -76,36 +81,39 @@ async function generateElementSubmenuChangeStatusCardSmallHTML(newStatus, newSta
           <img class="icon-submenu-selection-card-small" src="./assets/img/arrow-left-line.svg"> 
           ${newStatusName}
       </div>
-  `
+  `;
 }
-
 
 /**
  * This function generates the HTML-Code for the detailed view of a single task (selected from the kanban board)
- * 
- * @param {number} positionOfTask  -  position of the task (in the array tasks) for which the detailed view should be opened 
- * @param {string} currentIdTask - id of the task for which the detailed view should be opened 
+ *
+ * @param {number} positionOfTask  -  position of the task (in the array tasks) for which the detailed view should be opened
+ * @param {string} currentIdTask - id of the task for which the detailed view should be opened
  * @returns  - HTML-Code for the detailed view of the selected task
  */
 async function generateViewTaskDetailHTML(positionOfTask, currentIdTask) {
-    return /*html*/ `
+  return /*html*/ `
     <div class="ctn-task-detail" id="ctn-task-detail" onclick="stopPropagation(event)">
         <div class="ctn-task-detail-header">
-          <div class="task-detail-category" id="task-detail-category">${tasks[positionOfTask]['category']}</div>
+          <div class="task-detail-category" id="task-detail-category">${
+            tasks[positionOfTask]["category"]
+          }</div>
           <div class="ctn-task-detail-close">
             <img class="task-detail-close" src="./assets/img/close_black.svg" onclick="closeTaskDetails()">
           </div>
         </div>
-        <h1>${tasks[positionOfTask]['titleTask']}</h1>
-        <div>${tasks[positionOfTask]['descriptionTask']}</div>
+        <h1>${tasks[positionOfTask]["titleTask"]}</h1>
+        <div>${tasks[positionOfTask]["descriptionTask"]}</div>
         <div class="ctn-task-detail-date">
           <span class="color-bg">Due date:</span>
-          <div>${(new Date(tasks[positionOfTask]['dueDate'])).toLocaleDateString('en-US')}</div>
+          <div>${new Date(tasks[positionOfTask]["dueDate"]).toLocaleDateString(
+            "en-US"
+          )}</div>
         </div>
         <div class="ctn-task-detail-priority">
           <span class="color-bg">Priority:</span>
           <div class="ctn-task-detail-priority-right">
-            <div>${tasks[positionOfTask]['priority']}</div>
+            <div>${tasks[positionOfTask]["priority"]}</div>
             <img id="img-prio-task-detail" src="./assets/img/prio_medium_color.svg">
           </div>
         </div>
@@ -131,75 +139,78 @@ async function generateViewTaskDetailHTML(positionOfTask, currentIdTask) {
           </div>
         </div>
 
-      </div>`
+      </div>`;
 }
 
-
 /**
- * This function returns the HTML-Code for a single user assigned to a task in the detailed view 
- * 
- * @param {number} positionContact - position of the contact (in the array contacts) which is added to the assigned users in the detailed view of a task 
+ * This function returns the HTML-Code for a single user assigned to a task in the detailed view
+ *
+ * @param {number} positionContact - position of the contact (in the array contacts) which is added to the assigned users in the detailed view of a task
  * @param {string} idContact - id of the contact that is assigned to the task
  * @returns - HTML-Code for a single user assigned to a task in the detailed view
  */
 async function generateContactViewTaskDetailHTML(positionContact, idContact) {
   return /*html*/ `
   <div class="ctn-task-detail-single-assigned-user">
-      <div class="task-detail-assigned-user-acronym" id="task-detail-assigned-user-acronym-${idContact}">${contacts[positionContact]['acronymContact']}</div>
-      <div class="task-detail-assigned-user-name">${contacts[positionContact]['name']}</div>
+      <div class="task-detail-assigned-user-acronym" id="task-detail-assigned-user-acronym-${idContact}">${contacts[positionContact]["acronymContact"]}</div>
+      <div class="task-detail-assigned-user-name">${contacts[positionContact]["name"]}</div>
   </div>
-  `
+  `;
 }
-
 
 /**
  * This function generates the HTML-Code for a single closed subtask within the detailed view of a task
- * 
+ *
  * CHECK LATER IF MERGE WITH "generateSubtasksOpenDetailHTML" IS POSSIBLE/ MAKES SENSE
- * 
+ *
  * @param {number} idOfTask - id of the task for which the detailed view is opened
  * @param {number} idOfSubtask - id of the subtask for which the HTML-Code should be created
  * @param {string} titleOfSubtask - title of the subtask for which the HTML-Code should be created
  * @returns - HTML-Code for a single closed subtask within the detailed view of a task
  */
-async function generateSubtasksDetailClosedHTML(idOfTask, idOfSubtask, titleOfSubtask) {
-    return /*HTML*/ `
+async function generateSubtasksDetailClosedHTML(
+  idOfTask,
+  idOfSubtask,
+  titleOfSubtask
+) {
+  return /*HTML*/ `
         <div class="ctn-task-detail-single-subtask" 
           id="subtask-${idOfTask}-${idOfSubtask}" 
           onclick="changeStatusSubtask('${idOfTask}', ${idOfSubtask}, 'img-subtask-${idOfTask}-${idOfSubtask}')">
         <img class="task-detail-checkbox" id="img-subtask-${idOfTask}-${idOfSubtask}" src="./assets/img/checkbox_checked_default.svg">
         <div>${titleOfSubtask}</div>
     </div>
-    `
+    `;
 }
-
-
 
 /**
  * This function generates the HTML-Code for a single open subtask within the detailed view of a task
- * 
+ *
  * CHECK LATER IF MERGE WITH "generateSubtasksClosedDetailHTML" IS POSSIBLE/ MAKES SENSE
- * 
+ *
  * @param {number} idOfTask - id of the task for which the detailed view is opened
  * @param {number} idOfSubtask - id of the subtask for which the HTML-Code should be created
  * @param {string} titleOfSubtask - title of the subtask for which the HTML-Code should be created
  * @returns - HTML-Code for a single open subtask within the detailed view of a task
  */
-async function generateSubtasksOpenDetailHTML(idOfTask, idOfSubtask, titleOfSubtask) {
-    return /*HTML*/ `
+async function generateSubtasksOpenDetailHTML(
+  idOfTask,
+  idOfSubtask,
+  titleOfSubtask
+) {
+  return /*HTML*/ `
         <div class="ctn-task-detail-single-subtask" 
           id="subtask-${idOfTask}-${idOfSubtask}" 
           onclick="changeStatusSubtask('${idOfTask}', ${idOfSubtask}, 'img-subtask-${idOfTask}-${idOfSubtask}')">
         <img class="task-detail-checkbox" id="img-subtask-${idOfTask}-${idOfSubtask}" src="./assets/img/checkbox_blank_default.svg">
         <div>${titleOfSubtask}</div>
     </div>
-    `
+    `;
 }
-
 
 /**
  * This function generates the HTML-Code for the edit view for the selected task
- * 
+ *
  * @param {string} currentIdTask - id of the task for which the edit view is opened
  * @returns - HTML-Code for the edit view for the selected task
  */
@@ -248,7 +259,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
           <div class="ctn-edit-task-prio-btn">
             <div
               id="urgentButton"
-              class="prio-btn-neutral"
+              class="prio-btn-neutral btn-edit-prio"
               onclick="changeButtonColorsUrgent()"
             >
               Urgent
@@ -261,7 +272,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
 
             <div
               id="mediumButton"
-              class="medium-btn-yellow"
+              class="medium-btn-yellow btn-edit-prio"
               onclick="changeButtonColorsMedium()"
             >
               Medium
@@ -275,7 +286,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
 
             <div
               id="lowButton"
-              class="prio-btn-neutral"
+              class="prio-btn-neutral btn-edit-prio"
               onclick="changeButtonColorsLow()"
             >
               Low
@@ -306,6 +317,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
               <div
                 class="ctn-edit-task-search-user d-none"
                 id="ctn-edit-task-search-user"
+                onclick="stopPropagation(event)"
               >
                 <input
                   class="edit-task-search-user"
@@ -328,36 +340,37 @@ async function generateViewEditTasklHTML(currentIdTask) {
               id="ctn-edit-task-drop-down-user"
             > 
             </div>
-            <div id="checkedContactsCtn" class="checked-contacts-ctn"></div>
+            <div id="checkedContactsCtn" class="checked-contacts-ctn ctn-checked-contacts-edit"></div>
           </div>
 
           <span class="edit-task-subtitle">Subtasks</span>
 
-          <div class="input_box_layout no-margin-bottom">
-            <div class="input-add-subtask-layout">
-              <input
-                id="subtaskInput"
-                class="input-add-task"
-                minlength="2"
-                placeholder="Enter a title"
-                onkeyup="checkInputSubtask(event)"
-                onclick="changeInputSubtaskButtons()"
-              />
-              <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
-                  <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
-              </div>
+          <div class="ctn-edit-form-input-subtask" id="ctn-edit-form-input-subtask">
+            <input
+              id="subtaskInput"
+              class="input-add-task"
+              minlength="2"
+              placeholder="Enter a title"
+              onkeyup="checkInputSubtask(event)"
+              onclick="changeInputSubtaskButtons()"
+              onfocus="changeBorderColorSearchTask('ctn-edit-form-input-subtask', '#29ABE2')"
+              onblur="changeBorderColorSearchTask('ctn-edit-form-input-subtask', '#a8a8a8')"
+            />
+            <div id="input-subtask-btn-ctn" class="ctn-edit-form-input-subtask-reset-add">
+              <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
             </div>
           </div>
 
-          <div id="added-subtask-ctn"></div>
+          <div id="added-subtask-ctn" class="ctn-edit-task-added-subtask"></div>
 
-          <button id="submit-btn" type="submit" class="create-task-btn">
+          <button id="submit-btn" type="submit" class="create-task-btn btn-edit-confirm">
         Ok
         <img src="./assets/img/vector.svg" class="create-task-btn-checkmark" />
       </button>
         </form>
       </div>
   
+   
   
-  `
+  `;
 }
