@@ -7,14 +7,14 @@
   <title>Add Task</title>
   <link rel="icon" type="image/x-icon" href="./assets/img/logo_dark.svg" />
 
-    <link rel="stylesheet" href="./css/font.css" />
-    <link rel="stylesheet" href="./css/template.css" />
-    <link rel="stylesheet" href="./css/addTask.css" />
-    <link rel="stylesheet" href="./css/addTaskResponsive.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./css/board.css" />
-    <link rel="stylesheet" href="./css/boardOverlay.css" />
-    <link rel="stylesheet" href="./css/boardResp.css" />
+  <link rel="stylesheet" href="./css/font.css" />
+  <link rel="stylesheet" href="./css/template.css" />
+  <link rel="stylesheet" href="./css/addTask.css" />
+  <link rel="stylesheet" href="./css/addTaskResponsive.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./css/board.css" />
+  <link rel="stylesheet" href="./css/boardOverlay.css" />
+  <link rel="stylesheet" href="./css/boardResp.css" />
 
   <script src="script.js" defer></script>
   <script src="./js/template.js" defer></script>
@@ -129,11 +129,8 @@
           <div class="input_box_layout responsive-heigth">
             <span class="add_task_txt_format">Subtasks</span>
             <div class="input-add-subtask-layout">
-              <div id="maximal-letter-container">
-                <div id="maxLengthMessage" class="letter-limit d-none">please limit to 20 letters</div>
-                <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title"
-                  onkeyup="checkInputSubtask(event)" onclick="changeInputSubtaskButtons()">
-              </div>
+              <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title"
+                onkeyup="checkInputSubtask(event)" onclick="changeInputSubtaskButtons()">
               <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
                 <button type="button" id="plus-btn" class="subtask-plus-btn"
                   onclick="changeInputSubtaskButtons()"></button>
