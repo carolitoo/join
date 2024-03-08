@@ -1,6 +1,5 @@
 let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 
-
 /**
  * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
  * 
@@ -29,7 +28,6 @@ function changeInputSubtaskButtons() {
 
 }
 
-
 /**
  * This function resets the input button within the input field to the default
  */
@@ -42,7 +40,6 @@ function defaultInputSubtask() {
     
     focusElement('subtaskInput');
 }
-
 
 /**
  * This function sets the focus to the chosen input field and sets the cursor to the end of the text
