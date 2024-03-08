@@ -10,20 +10,33 @@ async function submitTask(taskStatus) {
 
     // Fortsetzung der Aufgabenverarbeitung, wenn der Titel ausgefüllt ist
     let newTask = {
-        'idTask':  `task-${timeStamp}`,
+        'idTask': `task-${timeStamp}`,
         'titleTask': title,
         'descriptionTask': description,
-        'assignedContacts':  assignedUsers.map(user => ({ idContact: user.ID })),
+        'assignedContacts': assignedUsers.map(user => ({ idContact: user.ID })),
         'dueDate': date,
         'priority': taskPrio,
         'category': category,
         'subtasks': addedSubtasks,
         'statusTask': taskStatus,
     };
-    
+
     tasks.push(newTask);
     await saveTasks();
-    location.href='board.html';
+    await createAddedTasksmsg();
+    setTimeout(() => {
+        window.location.href = 'board.html';
+    }, 1000);
     console.log(tasks);
 }
 
+
+async function createAddedTasksmsg() {
+    const msgBox = document.getElementById('msgBox');
+    const transpOverlay = document.getElementById('transp-overlay');
+    transpOverlay.classList.remove('d-none');
+
+    msgBox.classList.remove('d-none');
+    msgBox.classList.add('successfullyMessage');
+    slideInAnimation('msgBox', 'translate-xanother', true);
+}

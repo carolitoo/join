@@ -44,6 +44,11 @@
     word-wrap: break-word;
     hyphens: auto;
     }
+
+    .added-subtask-responsive {
+      height: fit-content;
+      margin-bottom: 200px;
+    }
   }
   
   
@@ -80,6 +85,10 @@
     .input_box_layout {
       width: 400px;
     }
+
+    .assignedContacts-open {
+      width: 330px;
+    }
   
     .prio_box_layout {
       width: 435px;
@@ -95,6 +104,19 @@
     
     .custom-select {
       width: 435px;
+    }
+
+    .subtask-list {
+      width: 350px;
+    }
+
+    .subtask-list-edit-mode {
+      width: 350px;
+    }
+
+    .added-subtask-responsive {
+      height: fit-content;
+      margin-bottom: 200px;
     }
   }
 
@@ -130,6 +152,10 @@
     .input_box_layout {
       width: 250px;
     }
+
+    .assignedContacts-open {
+      width: 380px;
+    }
   
     .prio_box_layout {
       width: 435px;
@@ -155,6 +181,11 @@
     .custom-select {
       width: 380px;
     }
+
+    .added-subtask-responsive {
+      height: fit-content;
+      margin-bottom: 300px;
+    }
   }
   
   @media (max-width: 395px) {
@@ -173,9 +204,81 @@
       margin-top: 20px;
     }
   
-    .reqiured_txt_format {
-      font-size: 13px;
-      }
+    .required_txt_format {
+      font-size: 13px !important;
+    }
+  
+    .input-add-task{
+      width: 300px;
+    }
+  
+    .input_box_layout {
+      width: 300px;
+    }
+
+    .assignedContacts-open {
+      width: 330px;
+    }
+  
+    .prio_box_layout {
+      width: 435px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  
+    .responsive-prio-btn {
+      height: 40px;
+      width: 330px;
+    }
+  
+    .select.dropdown_list {
+      width: 380px;
+    }
+  
+    .responsive-heigth {
+      height: 300px;
+    }
+    
+    /*category*/
+    .custom-select { 
+      width: 335px;
+    }
+
+    .added-subtask-responsive {
+      height: fit-content;
+      margin-bottom: 300px;
+    }
+
+    .subtask-list {
+      width: 300px;
+    }
+
+    .subtask-list-edit-mode {
+      width: 300px;
+    }
+  }
+
+  @media (max-width: 325px) {
+  
+    .bottom-section-ctn {
+      position: fixed;
+      bottom: 80px;
+      width: 90%;
+      z-index: 5;
+      background-color: #f6f7f8;
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 20px;
+    }
+  
+    .required_txt_format {
+      font-size: 13px !important;
+    }
   
     .input-add-task{
       width: 300px;
@@ -209,5 +312,10 @@
     /*category*/
     .custom-select { 
       width: 335px;
+    }
+
+    .added-subtask-responsive {
+      height: fit-content;
+      margin-bottom: 300px;
     }
   }

@@ -18,16 +18,17 @@
         <span class="add_task_txt_format">Title</span>
         <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
       </div>
-      <input class="input-add-task" id="task-input-title" minlength="5" required type="text"
-        placeholder="Enter a title" onkeyup="checkSubmission(event)">
-    </div>
-    <div class="input_box_layout">
 
-      <span class="add_task_txt_format">Description</span>
-
-      <textarea class="input-add-task" style="resize: vertical" id="task-input-description"
-        placeholder="Enter a description"> </textarea>
-    </div>
+      <div class="input_box_layout">
+        <span class="add_task_txt_format">Description</span>
+        <textarea
+          class="input-add-task p-4"
+          style="resize: vertical"
+          id="task-input-description"
+          placeholder="Enter a description"
+        >
+        </textarea>
+      </div>
 
     <div class="input_box_layout no-margin-bottom">
       <label class="add_task_txt_format">Assigned to</label>
@@ -75,30 +76,48 @@
       </div>
     </div>
 
-    <div class="input_box_layout">
-      <div class="description-with-star">
-        <span class="add_task_txt_format">Category</span>
-        <p class="add_task_txt_format" ; style="color: #FF8190;">*</p>
-      </div>
-      <div class="custom-select">
-        <select id="selectCategory" class="select.dropdown_list" onchange="setCategory()" required>
-          <option value="" disabled selected>Select task category</option>
-          <option value="Technical Task">Technical Task</option>
-          <option value="User Story">User Story</option>
-        </select>
-      </div>
-    </div>
-    <div class="input_box_layout responsive-heigth">
-      <span class="add_task_txt_format">Subtasks</span>
-      <div class="input-add-subtask-layout">
-        <div id="maximal-letter-container">
-          <div id="maxLengthMessage" class="letter-limit d-none">please limit to 20 letters</div>
-          <input class="input-add-task" id="subtaskInput" minlength="2" placeholder="Enter a title"
-            onkeyup="checkInputSubtask(event)" onclick="changeInputSubtaskButtons()">
+      <div class="input_box_layout">
+        <div class="description-with-star">
+          <span class="add_task_txt_format">Category</span>
+          <p class="add_task_txt_format" ; style="color: #ff8190">*</p>
         </div>
-        <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
-          <button type="button" id="plus-btn" class="subtask-plus-btn"
-            onclick="changeInputSubtaskButtons()"></button>
+        <div class="custom-select">
+          <select
+            id="selectCategory"
+            class="select.dropdown_list"
+            onchange="setCategory()"
+            required
+          >
+            <option value="" disabled selected>Select task category</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="User Story">User Story</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="transp-overlay" class="transp-overlay d-none"></div>
+      <div id="msgBox" class="d-none">Task added to board<img id="vectorboard-pic"
+          src="./assets/img/Vectorboard.svg"></div>
+
+      <div class="input_box_layout responsive-heigth">
+        <span class="add_task_txt_format">Subtasks</span>
+        <div class="input-add-subtask-layout">
+          <input
+            class="input-add-task"
+            id="subtaskInput"
+            minlength="2"
+            placeholder="Enter a title"
+            onkeyup="checkInputSubtask(event)"
+            onclick="changeInputSubtaskButtons()"
+          />
+          <div id="input-subtask-btn-ctn" class="input-subtask-btn-ctn">
+            <button
+              type="button"
+              id="plus-btn"
+              class="subtask-plus-btn"
+              onclick="changeInputSubtaskButtons()"
+            ></button>
+          </div>
         </div>
       </div>
       <div id="added-subtask-ctn"></div>

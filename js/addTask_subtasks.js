@@ -1,6 +1,5 @@
 let addedSubtasks = []; //collects up all subtasks before sumbitting the form
 
-
 /**
  * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
  * 
@@ -9,15 +8,6 @@ let addedSubtasks = []; //collects up all subtasks before sumbitting the form
  */
 
 function checkInputSubtask(event) {
-    let inputElement = document.getElementById("subtaskInput");
-    let inputValue = inputElement.value;
-
-    let maxLengthMessage = document.getElementById("maxLengthMessage");
-
-    if (inputValue.length >= 20) {
-        inputElement.value = inputValue.slice(0, 20);
-        maxLengthMessage.classList.remove('d-none');
-    }
     if (event.key == "Enter") {
         saveSubtaskToArray();
         maxLengthMessage.classList.add('d-none');
@@ -38,25 +28,18 @@ function changeInputSubtaskButtons() {
 
 }
 
-
 /**
- * This function resets the input button within the input field to the default and clears the error message if the maximum length is exceeded.
+ * This function resets the input button within the input field to the default
  */
 function defaultInputSubtask() {
     let buttonsContainer = document.getElementById("input-subtask-btn-ctn");
-    let MessageMaxlength = document.getElementById('maxLengthMessage');
-
-    if (!MessageMaxlength.classList.contains('d-none')) {
-        MessageMaxlength.classList.add('d-none');
-    }
     buttonsContainer.innerHTML = `    
         <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
-    `;
-
+    `
     document.getElementById('subtaskInput').value = '';
+    
     focusElement('subtaskInput');
 }
-
 
 /**
  * This function sets the focus to the chosen input field and sets the cursor to the end of the text
