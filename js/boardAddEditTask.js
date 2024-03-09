@@ -1,3 +1,5 @@
+let currentStatus;
+
 /**
  * This function opens the edit task form and prefilles all values and input fields with the information stored in the backend
  * 
@@ -185,6 +187,8 @@ async function openEditTask(idTask) {
    * @param {string} taskStatus - status to which the task will be added after submission
    */
   function openAddTaskBoard(taskStatus) {
+    currentStatus = taskStatus;
+    document.getElementById('body-board').setAttribute("onresize", `checkWindowWidthAddTaskBoard()`)
     if (window.innerWidth <= 1380) {
       window.location.href = 'add_task.html';
       localStorage.setItem('statusTransfer', taskStatus);
@@ -200,6 +204,23 @@ async function openEditTask(idTask) {
   }
 
 
+  /**
+   * This function ensures that the add task overlay on the board is only displayed when the screen has a certain width
+   * On falling below the defined width the user is forwarded to the add-task-page
+   */
+  function checkWindowWidthAddTaskBoard() {
+    if (window.innerWidth <= 1380) {
+      localStorage.setItem('statusTransfer', currentStatus);
+      window.location.href = 'add_task.html';
+    }
+  }
+
+
+  /**
+   * This function ensures that the drop down is closed when the user clicks outside the box in the add task overlay
+   * 
+   * @param {obeject} event 
+   */
   function clickOutsideHandlerAdd(event) {
     if (
       event.target.className !== "assignedContacts-open" &&
@@ -211,6 +232,7 @@ async function openEditTask(idTask) {
     }
   }
   
+
   /**
    * This function closes the overlay (containig the form for adding a task), empties the temporary needed arrays and ensures that scrolling is possible after closing the overlay
    */
@@ -221,5 +243,6 @@ async function openEditTask(idTask) {
     addedSubtasks = [];
     document.getElementById('wrapper-add-task-board').removeEventListener('click', clickOutsideHandlerAdd);
     document.getElementById('Add-Task-Form').removeEventListener('click', clickOutsideHandlerAdd);
+    document.getElementById('body-board').removeAttribute("onresize");
   }
   
