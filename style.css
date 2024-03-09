@@ -227,6 +227,10 @@ a {
   animation: start-animations-helper_animation 1.5s ease-in-out forwards;
 }
 
+.pos-rel {
+  position: relative;
+}
+
 .d-none {
   display: none;
 }

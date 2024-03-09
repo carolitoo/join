@@ -189,7 +189,7 @@ async function openEditTask(idTask) {
   function openAddTaskBoard(taskStatus) {
     currentStatus = taskStatus;
     document.getElementById('body-board').setAttribute("onresize", `checkWindowWidthAddTaskBoard()`)
-    if (window.innerWidth <= 1380) {
+    if (window.innerWidth < 785) {
       window.location.href = 'add_task.html';
       localStorage.setItem('statusTransfer', taskStatus);
     } else {
@@ -209,7 +209,7 @@ async function openEditTask(idTask) {
    * On falling below the defined width the user is forwarded to the add-task-page
    */
   function checkWindowWidthAddTaskBoard() {
-    if (window.innerWidth <= 1380) {
+    if (window.innerWidth < 785) {
       localStorage.setItem('statusTransfer', currentStatus);
       window.location.href = 'add_task.html';
     }
