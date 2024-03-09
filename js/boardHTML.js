@@ -17,7 +17,6 @@ async function generateCardSmallHTML(
     id="card-task-small-${currentIdTask}" 
     draggable="true" 
     ondragstart="moveElement('${currentIdTask}')" 
-    ondrag = "checkScrollY(event)"
     ondragend="resetCardAndBoard('${currentIdTask}')" 
     onclick="openTaskDetail('${currentIdTask}')">    
       <div class="ctn-card-category-show-more-small">
@@ -25,7 +24,7 @@ async function generateCardSmallHTML(
         <div 
           class="ctn-card-show-more-small"
           id="ctn-card-show-more-small-${currentIdTask}"
-          onclick="changeStatusMobile(event, '${currentTasks[positionOfTask]["statusTask"]}', '${currentIdTask}')">
+          onclick="changeStatusMobile(event, '${currentTasks[positionOfTask]['statusTask']}', '${currentIdTask}')">
           <img class="icon-card-show-more-small" src="./assets/img/more_vertical_white.svg">
         </div>
         <div class="ctn-submenu-card-small d-none" id="ctn-submenu-card-small-${currentIdTask}" onclick="stopPropagation(event)"></div>
@@ -50,6 +49,7 @@ async function generateCardSmallHTML(
     `;
 }
 
+
 /**
  * This function returns the HTML-Code for a single user (or dummy in case of overflow) assigned to a task on the small card on the kanban board
  *
@@ -62,6 +62,7 @@ async function generateContactIconCardSmallHTML(currentIdTask, idContact) {
   <div class="card-assigned-user-small" id="card-assigned-user-small-${currentIdTask}-${idContact}"></div>
   `;
 }
+
 
 /**
  * This function returns the HTML-Code for a single element that can be selected in the submenu to shift a task to another status
@@ -83,6 +84,7 @@ async function generateElementSubmenuChangeStatusCardSmallHTML(
       </div>
   `;
 }
+
 
 /**
  * This function generates the HTML-Code for the detailed view of a single task (selected from the kanban board)
@@ -142,6 +144,7 @@ async function generateViewTaskDetailHTML(positionOfTask, currentIdTask) {
       </div>`;
 }
 
+
 /**
  * This function returns the HTML-Code for a single user assigned to a task in the detailed view
  *
@@ -157,6 +160,7 @@ async function generateContactViewTaskDetailHTML(positionContact, idContact) {
   </div>
   `;
 }
+
 
 /**
  * This function generates the HTML-Code for a single closed subtask within the detailed view of a task
@@ -183,6 +187,7 @@ async function generateSubtasksDetailClosedHTML(
     `;
 }
 
+
 /**
  * This function generates the HTML-Code for a single open subtask within the detailed view of a task
  *
@@ -207,6 +212,7 @@ async function generateSubtasksOpenDetailHTML(
     </div>
     `;
 }
+
 
 /**
  * This function generates the HTML-Code for the edit view for the selected task
