@@ -293,6 +293,10 @@
   margin-bottom: 0;
 }
 
+.edit-task-search-user {
+  flex: 1;
+ }
+
 .ctn-edit-form-input-subtask input, .subtask-list-edit-mode input {
   flex: 1;
 }

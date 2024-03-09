@@ -159,10 +159,11 @@ async function openEditTask(idTask) {
 
 
   /**
-   * This function closes the drop down with the contacts when the user clicks outside the container (on the white background) in the edit view
+   * This function closes the drop down with the contacts when the user clicks outside the container in the edit view
    */
   function clickOutsideHandlerEdit(event) {
-    if (event.target.className =="ctn-task-detail") {
+    let dropDownContent = document.getElementById('ctn-edit-task-assigned-users');
+    if (!dropDownContent.contains(event.target)) {
       closeDropDownEditTask();
     } 
   }
@@ -198,8 +199,8 @@ async function openEditTask(idTask) {
       addEventListenerToAddForm();
       setMinDueDate('task-input-dueDate');
       document.getElementById('Add-Task-Form').setAttribute("onsubmit", `submitTask('${taskStatus}'); return false;`);
-      document.getElementById('wrapper-add-task-board').addEventListener('click', clickOutsideHandlerAdd);
-      document.getElementById('Add-Task-Form').addEventListener('click', clickOutsideHandlerAdd);
+      document.getElementById('wrapper-add-task-board').addEventListener('click', clickOutsideHandler);
+      document.getElementById('Add-Task-Form').addEventListener('click', clickOutsideHandler);
     }
   }
 
@@ -217,23 +218,6 @@ async function openEditTask(idTask) {
 
 
   /**
-   * This function ensures that the drop down is closed when the user clicks outside the box in the add task overlay
-   * 
-   * @param {obeject} event 
-   */
-  function clickOutsideHandlerAdd(event) {
-    if (
-      event.target.className !== "assignedContacts-open" &&
-      event.target.className !== "input-add-task" &&
-      event.target.className !== "contact" &&
-      event.target.className !== "dropdwon-checkbox"
-    ) {
-      document.getElementById("assignedContactsCtn").style.display = "none";
-    }
-  }
-  
-
-  /**
    * This function closes the overlay (containig the form for adding a task), empties the temporary needed arrays and ensures that scrolling is possible after closing the overlay
    */
   function closeAddTaskBoard() {
@@ -241,8 +225,8 @@ async function openEditTask(idTask) {
     document.getElementsByTagName("body")[0].classList.remove("disable-scroll");
     clearAssignedUsersArray();
     addedSubtasks = [];
-    document.getElementById('wrapper-add-task-board').removeEventListener('click', clickOutsideHandlerAdd);
-    document.getElementById('Add-Task-Form').removeEventListener('click', clickOutsideHandlerAdd);
+    document.getElementById('wrapper-add-task-board').removeEventListener('click', clickOutsideHandler);
+    document.getElementById('Add-Task-Form').removeEventListener('click', clickOutsideHandler);
     document.getElementById('body-board').removeAttribute("onresize");
   }
   

@@ -305,7 +305,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
           </div>
 
           <span class="edit-task-subtitle">Assigned to</span>
-          <div class="ctn-edit-task-assigned-users">
+          <div class="ctn-edit-task-assigned-users" id="ctn-edit-task-assigned-users">
             <div class="ctn-edit-task-select-users">
               <div
                 class="edit-task-placeholder-drop-down"
