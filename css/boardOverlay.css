@@ -199,7 +199,6 @@
 .form-edit-task-board {
   display: flex;
   flex-direction: column;
-  /* overflow-y: auto; */
 }
 
 .ctn-edit-task-board-header {

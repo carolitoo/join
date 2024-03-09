@@ -364,9 +364,9 @@ async function generateViewEditTasklHTML(currentIdTask) {
           <div id="added-subtask-ctn" class="ctn-edit-task-added-subtask"></div>
 
           <button id="submit-btn" type="submit" class="create-task-btn btn-edit-confirm">
-        Ok
-        <img src="./assets/img/vector.svg" class="create-task-btn-checkmark" />
-      </button>
+            Ok
+            <img src="./assets/img/vector.svg" class="create-task-btn-checkmark" />
+          </button>
         </form>
       </div>
   

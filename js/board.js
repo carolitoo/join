@@ -184,15 +184,13 @@ async function checkAssignedContactsCardSmall(currentTasks, positionOfTask, curr
   let numberOfRemainigContacts = numberOfAssignedContacts - maxNumberOfDisplayedContacts;
 
   if (
-    numberOfAssignedContacts <= maxNumberOfDisplayedContacts &&
-    numberOfAssignedContacts > 0
+    numberOfAssignedContacts <= maxNumberOfDisplayedContacts && numberOfAssignedContacts > 0
   ) {
     for (let u = 0; u < numberOfAssignedContacts; u++) {
       await getAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask, u);
     }
   } else if (
-    numberOfAssignedContacts > maxNumberOfDisplayedContacts &&
-    numberOfAssignedContacts > 0
+    numberOfAssignedContacts > maxNumberOfDisplayedContacts && numberOfAssignedContacts > 0
   ) {
     for (let u = 0; u < maxNumberOfDisplayedContacts - 1; u++) {
       await getAssignedContactsCardSmall(currentTasks, positionOfTask, currentIdTask, u);

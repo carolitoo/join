@@ -4,11 +4,18 @@
 
 .form-layout {
   display: flex;
-  justify-content: flex-start;
-  height: unset;
-  width: unset;
-  gap: 40px;
+  /* justify-content: flex-start; */
+  flex-direction: column;
+  /* height: unset;
+  width: unset; */
+  /* gap: 40px; */
   margin-top: 24px;
+}
+
+.add-task-wrapper-form-input {
+  display: flex;
+  gap: 40px;
+
 }
 
 .add_task_txt_format {
@@ -52,8 +59,18 @@
   margin-right: 5px;
 }
 
-.p-4 {
-  padding: 4px 4px !important;
+.input-textarea {
+  resize: vertical;
+  color: #d1d1d1;
+  padding: 12px 16px;
+}
+
+.input-textarea:active,
+.input-textarea:focus,
+select:active,
+select:focus {
+  border: solid 1px #29abe2;
+  outline: none;
 }
 
 select {
@@ -66,7 +83,7 @@ select {
   padding-left: 10px;
   background-color: #fff;
   border: 1px solid #caced1;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #000;
   cursor: pointer;
   font-size: 20px;
@@ -128,7 +145,7 @@ select:focus {
 .contact.active {
   color: white;
   border-radius: 10px;
-  background-color: #2a3647; /* Hintergrundfarbe ändern, wenn die Checkbox aktiviert ist */
+  background-color: #2a3647; 
 }
 
 .contact-circle-and-name-box {
@@ -154,7 +171,7 @@ select:focus {
   align-items: center;
   margin-top: 8px;
   gap: 8px;
-  width: 480px;
+  /* width: 480px; */
   flex-wrap: wrap;
 }
 
