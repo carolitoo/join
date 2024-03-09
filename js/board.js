@@ -60,7 +60,7 @@ async function loadTasks() {
  * @param {array} currentTasks - array of tasks currently selected
  */
 async function renderBoard(currentTasks) {
-  for (i = 0; i < statusTask.length; i++) {
+  for (let i = 0; i < statusTask.length; i++) {
     document.getElementById(`tasks-${statusTask[i]}`).innerHTML = ``;
     await updateStatus(statusTask[i], currentTasks);
   }
@@ -82,7 +82,7 @@ async function updateStatus(status, currentTasks) {
     document.getElementById(`empty-tasks-${status}`).classList.remove("d-none");
   } else {
     document.getElementById(`empty-tasks-${status}`).classList.add("d-none");
-    for (j = 0; j < selectedTasks.length; j++) {
+    for (let j = 0; j < selectedTasks.length; j++) {
       let currentIdTask = selectedTasks[j]["idTask"];
       positionOfTask = currentTasks.findIndex((id) => id["idTask"] == currentIdTask);
 
@@ -154,7 +154,7 @@ async function checkSubtasks(currentTasks, positionOfTask) {
 function calculateProgressSubtasks(currentTasks, positionOfTask, numberOfSubtasks) {
   let numberOfSubtasksClosed = 0;
 
-  for (k = 0; k < numberOfSubtasks; k++) {
+  for (let k = 0; k < numberOfSubtasks; k++) {
     if (
       currentTasks[positionOfTask]["subtasks"][k]["statusSubtask"] == "closed"
     ) {
@@ -267,7 +267,7 @@ async function getSelectedSubtasks(idOfElement, currentTasks, positionOfTask) {
   if (numberOfSubtasks == 0) {
     document.getElementById(`ctn-task-detail-subtasks`).classList.add("d-none");
   } else {
-    for (k = 0; k < numberOfSubtasks; k++) {
+    for (let k = 0; k < numberOfSubtasks; k++) {
       let idOfSubtask = currentTasks[positionOfTask]["subtasks"][k]["idSubtask"];
       let titleOfSubtask = currentTasks[positionOfTask]["subtasks"][k]["titleSubtask"];
 
@@ -331,7 +331,7 @@ async function checkAssignedContactsViedTaskDetail(positionOfTask) {
 async function getAssignedContactsViewTaskDetail(positionOfTask, numberOfAssignedContacts) {
   document.getElementById("ctn-task-detail-assigned-users-wrapper").innerHTML = "";
 
-  for (u = 0; u < numberOfAssignedContacts; u++) {
+  for (let u = 0; u < numberOfAssignedContacts; u++) {
     let idContact = tasks[positionOfTask]["assignedContacts"][u]["idContact"];
     let positionContact = contacts.findIndex((id) => id["ID"] == idContact);
 
@@ -372,9 +372,8 @@ async function changeStatusSubtask(idOfTask, idOfSubtask, idOfSubtaskImgElement)
 async function deleteTask(idTask) {
   let positionTask = tasks.findIndex((id) => id["idTask"] == idTask);
   tasks.splice(positionTask, 1);
-  saveTasks();
+  await saveTasks();
   await closeTaskDetails();
-  renderBoard(tasks);
 }
 
 

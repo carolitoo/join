@@ -44,7 +44,7 @@ async function openSubmenuChangeStatusMobile(currentStatus) {
     document.getElementById(`ctn-submenu-card-small-${currentIdTask}`).innerHTML = '';
     document.getElementById(`ctn-submenu-card-small-${currentIdTask}`).innerHTML += `<span>Change Status</span>`;
 
-    for (i = 0; i < statusTask.length; i++) {
+    for (let i = 0; i < statusTask.length; i++) {
         if (statusTask[i] != currentStatus) {
             let newStatusName = matchingStatusTask.find(element => element.statusTask == statusTask[i]).statusTaskName;
             document.getElementById(`ctn-submenu-card-small-${currentIdTask}`).innerHTML += await generateElementSubmenuChangeStatusCardSmallHTML(`'${statusTask[i]}'`, `${newStatusName}`);
@@ -157,7 +157,7 @@ async function searchTask() {
     let searchInput = document.getElementById('searchTask').value.toUpperCase();
     let includedTasks = [];
 
-    for (let p=0; p < tasks.length; p++) {
+    for (let p = 0; p < tasks.length; p++) {
         let title = tasks[p]['titleTask'].toUpperCase();
         let description = tasks[p]['descriptionTask'].toUpperCase();
 
