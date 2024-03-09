@@ -131,7 +131,6 @@ async function renderContactList() {
       if (!contactListLetter.hasAttribute("data-iteration-done")) {
         await processContactsForInitialLetter(contactsSorted, initialLetter);
         contactListLetter.setAttribute("data-iteration-done", true);
-
         await checkIfContactLetterstillThere(contactsSorted, initialLetter, contactListLetter);
       }
       await updateContactElementStylesForInitialLetter(contactsSorted, initialLetter);

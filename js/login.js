@@ -16,12 +16,12 @@ async function checkIfforwardingSignUp() {
     const msg = urlParams.get('msg');
 
     if (signUpStatus === 'completed' && msg) {
-            await createSuccesmsg(msg);
-            await chooseDisplayAnimation();
-        } else {
-            await chooseDisplayAnimation();
-        }
+        await createSuccesmsg(msg);
+        await chooseDisplayAnimation();
+    } else {
+        await chooseDisplayAnimation();
     }
+}
 
 
 /**

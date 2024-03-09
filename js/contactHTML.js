@@ -178,7 +178,7 @@ async function generateOverlayEditContact(positionOfContact) {
       </h1>
       <div class="separator-contacts-edit-add"></div>
     </div>
-    <div class="acronym-contacts-edit-add" id="acronym-contacts-edit-add">${contacts[positionOfContact]["acronymContact"]}</div>
+    <div class="acronym-contacts-edit-add" id="acronym-contacts-edit-add">${contactsSorted[positionOfContact]["acronymContact"]}</div>
     <div class="ctn-contacts-detail-close" onclick="closeContactsDetails()"></div>
     <form
       class="form-contacts-edit-add"
@@ -219,7 +219,7 @@ async function generateOverlayEditContact(positionOfContact) {
         </div>
       </div>
       <div class="ctn-btns-contact-edit-add">
-        <div class="btn-outline" onclick="deleteContact(${positionOfContact})">
+        <div id="deleteButtonEdit" class="btn-outline" onclick="deleteContact(${positionOfContact})">
           Delete
         </div>
         <button class="btn-db" type="submit">

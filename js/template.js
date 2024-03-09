@@ -1,11 +1,13 @@
+let imgSrc = null;
+
 let imgTabSelected = [
   {
     "tab-summary": './assets/img/summary_white.svg',
     "tab-add-task": './assets/img/add_task_white.svg',
     "tab-board": './assets/img/board_white.svg',
     "tab-contacts": './assets/img/contacts_white.svg',
-    "privacy-link": null,
-    "policy-link": null
+    "privacy-link": 'null',
+    "policy-link": 'null'
   }]
 
 
@@ -28,13 +30,11 @@ async function changeSelectedTab(newTab) {
   document.getElementById(newTab).classList.add('tab-selected');
 
   let imgSrc = imgTabSelected[0][newTab];
-  if (imgSrc !== null) {
+
+  if (imgSrc != null && imgSrc !== 'null') {
     document.getElementById(`img-${newTab}`).src = imgSrc;
-  } else {
-    return;
   }
 }
-
 
 
 /**

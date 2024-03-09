@@ -198,9 +198,8 @@
   gap: 24px;
 }
 
-/*gucken ob das raus kann - edit-delete-container wird oft untereinander angezeigt*/
 .contacts-detail-edit-delete-container {
-  display: flex;
+  display: flex !important;
 }
 
 .d-flex {
@@ -212,6 +211,7 @@
   align-items: center;
   font-size: 16px;
   gap: 8px;
+  cursor: pointer;
 }
 
 .contacts-detail-edit-delete:hover {
@@ -262,6 +262,7 @@
   bottom: 0;
   z-index: 4;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .ctn-contacts-submenu {
