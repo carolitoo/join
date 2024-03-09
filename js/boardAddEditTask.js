@@ -143,7 +143,9 @@ async function openEditTask(idTask) {
   
     await saveTasks();
     slideInAnimation('pop-up-task-edit-board', 'translate-y', true);
-    closeTaskDetails();
+    clearAssignedUsersArray();
+    addedSubtasks = [];
+    openTaskDetail(idTask);
   }
   
   
