@@ -260,6 +260,7 @@ a {
   background-color: #a8a8a8;
 }
 
+
 /* **** RESPONSIVE DESIGN **** */
 
 @media (max-width: 784px) {
@@ -268,6 +269,11 @@ a {
     --margin-top-content: 128px !important;
     --margin-left-content: 64px !important;
   }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 8px;
+}
 
   *::-webkit-scrollbar-track {
     margin-bottom: var(--height-footer);
