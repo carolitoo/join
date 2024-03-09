@@ -262,7 +262,7 @@ function getUpcomingTask() {
 
 
 /**
- * This function checks whether tasks are available for the given priority 
+ * This function checks whether tasks are available for the given priority (tasks with the status "done" are not included) 
  * In case that tasks are availabe it sets the corresponding values in the summary and returns true (so that the for loop is interrupted)
  * 
  * @param {string} currentPriority - priority for which shall be checked if tasks exist
@@ -271,7 +271,7 @@ function getUpcomingTask() {
 async function checkExistingTasksForPriority(currentPriority) {
     let tasksCurrentPriority = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i]['priority'] == currentPriority) {
+        if (tasks[i]['priority'] == currentPriority && tasks[i]['statusTask'] !== 'done') {
             tasksCurrentPriority.push(tasks[i]);
         }
     }
