@@ -3,7 +3,6 @@ let currentUser;
 
 let prioritiesTask = ['Urgent', 'Medium', 'Low'];
 
-//aktuell noch Problem mit einbindung der contact.js (widow-with - class in unbekanntem html eingebunden (contact.html))//
 async function initSummary() {
     await includeHTML();
     await loadUserData();

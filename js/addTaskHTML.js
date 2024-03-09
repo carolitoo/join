@@ -71,7 +71,7 @@ async function generateSingleSubtaskHTML(positionSubtask, currentSubtaskTitle) {
  */
 async function generateEditSubtaskHTML(i, subtaskTitle) {
     return /*HTML*/ `
-        <input class="input-edit-subtask" type="text" id="editedSubtask${i}" class="input-add-task" value="${subtaskTitle}" onkeyup="checkInputEditSubtask(event, i)">
+        <input class="input-edit-subtask" type="text" id="editedSubtask${i}" class="input-add-task" value="${subtaskTitle}" onkeyup="checkInputEditSubtask(event, ${i})">
         <div class="subtask-icons"> 
             <button class="check-square-btn" type="button" onclick="updateSubtask(${i})"></button>
             <button class="delete-btn white-bg" type="button" onclick="deleteSubtask(${i})"></button>

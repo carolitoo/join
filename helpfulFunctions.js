@@ -9,7 +9,7 @@ async function loadContactsJSON() {
 }
 
 
-//HILFSFUNKTION (für Speichern der contacts-Daten im Backend)//*css*/`
+//HILFSFUNKTION (für Speichern der contacts-Daten im Backend)//
 async function storeContacts() {
   try {
     const contactsString = JSON.stringify(contacts);

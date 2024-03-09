@@ -82,7 +82,7 @@
   }
 
   .assignedContacts-open {
-    width: 330px;
+    width: 428px;
   }
 
   .prio_box_layout {
@@ -340,10 +340,7 @@
   }
 }
 
-
-
-@media (max-width: 340px) { 
-
+@media (max-width: 340px) {
   .input-add-task {
     width: 260px;
   }
@@ -352,16 +349,7 @@
     width: 260px;
   }
 
-  /* .prio_box_layout {
-    width: 435px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  } */
-
   .responsive-prio-btn {
-    /* height: 40px; */
     width: 290px;
   }
 
@@ -384,6 +372,4 @@
   .dropDownIcon {
     margin-left: 260px;
   }
-
-
 }

@@ -8,7 +8,6 @@ async function submitTask(taskStatus) {
     let date = new Date(document.getElementById('task-input-dueDate').value);
     let timeStamp = new Date().getTime();
 
-    // Fortsetzung der Aufgabenverarbeitung, wenn der Titel ausgefüllt ist
     let newTask = {
         'idTask': `task-${timeStamp}`,
         'titleTask': title,
@@ -27,7 +26,6 @@ async function submitTask(taskStatus) {
     setTimeout(() => {
         window.location.href = 'board.html';
     }, 1000);
-    console.log(tasks);
 }
 
 

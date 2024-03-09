@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="./css/boardResp.css" />
     <link rel="stylesheet" href="./css/addTask.css" />
     <link rel="stylesheet" href="./css/addTaskResponsive.css" />
+    <link rel="stylesheet" href="./css/contact.css" />
     <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./css/logInsheet.css">
+    <!-- <link rel="stylesheet" href="./css/logInsheet.css"> -->
 
   <script src="script.js" defer></script>
   <script src="./js/board.js" defer></script>
@@ -143,13 +144,14 @@
   <div class="overlay-board d-none" id="overlay-board-submenu" onclick="closeSubmenuChangeStatusMobile()"></div>
 
   <div class="overlay-board d-none" id="overlay-board-addTask" onclick="closeAddTaskBoard()">
-    <div class="wrapper-add-task-board">
+    <div class="wrapper-add-task-board" id="wrapper-add-task-board" onclick="stopPropagation(event)">
       <div w3-include-html="./assets/templates/taskForm.html" class="ctn-add-task-board"
         onclick="stopPropagation(event)"></div>
     </div>
   </div>
 
   <div class="pop-up-contacts d-none" id="pop-up-task-add-board">Task successfully created</div>
+  <div class="pop-up-contacts d-none" id="pop-up-task-edit-board">Task successfully edited</div>
 </body>
 
 </html>

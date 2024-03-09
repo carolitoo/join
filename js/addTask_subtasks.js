@@ -1,10 +1,9 @@
-let addedSubtasks = []; //collects up all subtasks before sumbitting the form
+let addedSubtasks = [];
 
 /**
  * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
  * 
  * @param {object} event 
- * @param {number} i - id/ counter of the edited subtask
  */
 
 function checkInputSubtask(event) {
@@ -71,8 +70,8 @@ function focusElement(idOfElement) {
 * Saves the subtasks fomt the subtaskInput to the array addedSubtasks
 */
 function saveSubtaskToArray() {
-    let inputText = document.getElementById('subtaskInput').value.trim(); // Den Wert des Eingabefeldes abrufen und führende/trailing Leerzeichen entfernen
-    if (inputText) { // Überprüfen, ob das Eingabefeld nicht leer ist
+    let inputText = document.getElementById('subtaskInput').value.trim(); 
+    if (inputText) { 
         let timeStampSubtask = new Date().getTime();
 
         let newSubtask = {
@@ -83,9 +82,8 @@ function saveSubtaskToArray() {
 
         addedSubtasks.push(newSubtask);
         document.getElementById('subtaskInput').value = '';
-        console.log("New Subtask is " + JSON.stringify(addedSubtasks));
 
-        loadNewSubtasks(); // Hier wird die loadNewSubtasks-Funktion aufgerufen
+        loadNewSubtasks(); 
         defaultInputSubtask();
     }
 }
@@ -121,10 +119,8 @@ async function editSubtask(i) {
     let subtaskElement = document.getElementById(`subtaskListElement${i}`);
     let subtaskText = subtaskElement.querySelector('span').innerText.trim();
 
-    // Extrahiere den Text ohne den Bullet Point
     let subtaskTitle = subtaskText.slice(2).trim();
 
-    // Eingabefeld für die Bearbeitung der Subtask erstellen
     subtaskElement.innerHTML = await generateEditSubtaskHTML(i, subtaskTitle);
     subtaskEditMode(i);
 }
@@ -159,11 +155,8 @@ function updateSubtask(i) {
         loadNewSubtasks();
         focusElement('subtaskInput');
     } else {
-        // Handle empty title case
         alert("Subtask title cannot be empty!");
     }
-
-    console.log(addedSubtasks)
 }
 
 

@@ -258,7 +258,6 @@ async function sortArrayContacts() {
     return nameA.localeCompare(nameB);
   });
   await createArrayInitialLetters();
-  console.log('test', contactsSorted);
 }
 
 

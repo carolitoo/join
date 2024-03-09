@@ -1,8 +1,7 @@
 const SUBTASK_ID = 0;
-let taskPrio = "Medium"; //MEDIUM ist the default Prio
-let assignedUsers = []; //collects the checked users from the "Assginded to" menu
-let category = []; //holds the chosen category from the form before submit
-// let statusTask = "toDo"; //TO_DO ist the default status
+let taskPrio = "Medium"; 
+let assignedUsers = []; 
+let category = []; 
 let contactsRendered = false;
 
 async function initAddTask() {
@@ -18,6 +17,7 @@ async function initAddTask() {
     changeSelectedTab('tab-add-task');
     addEventListenerToAddForm();
     setMinDueDate('task-input-dueDate');
+    checkReferringFromBoard();
 }
 
 function clearAssignedUsersArray () {
@@ -53,6 +53,22 @@ function setMinDueDate(idOfElement) {
     let today = `${minYear}-${minMonth}-${minDay}`;
     document.getElementById(idOfElement).setAttribute("min", today);
   }
+
+
+  /**
+ * This function checks if the user is forwarded from the board - if this is the case the status for the submission of the form is taken from the local storage
+ * 
+ * @returns - true in case that user is forwarded from the board
+ */
+function checkReferringFromBoard() {
+    if (document.referrer.slice(-10) == "board.html") {
+        let statusFromBoard = localStorage.getItem('statusTransfer');
+        if (statusFromBoard) {
+            document.getElementById('Add-Task-Form').setAttribute("onsubmit", `submitTask('${statusFromBoard}'); return false;`);
+        }
+    }
+}
+
 
 /**
  * This function changes the colors of the priority buttons and changes the remaining two buttons back, if switched between them
@@ -116,31 +132,22 @@ function activateDropdown() {
     const dropDownMenu = document.getElementById("assignedContactsCtn");
     const dropDownIcon = document.querySelector(".dropDownIcon");
 
-    // Umkehren der Klasse für das Dropdown-Symbol
     dropDownIcon.classList.toggle("active");
-
-    // Öffnen oder Schließen des Dropdown-Menüs
     dropDownMenu.style.display = dropDownMenu.style.display === "block" ? "none" : "block";
-
-    // Rendern der Kontakte
     renderContacts();
 
-    // Wenn das Dropdown-Menü geöffnet ist, fügen Sie einen Event-Listener hinzu, um Klicks außerhalb des Menüs zu überwachen
     if (dropDownMenu.style.display === "block") {
         document.body.addEventListener("click", clickOutsideHandler);
     } else {
-        // Wenn das Dropdown-Menü geschlossen ist, entfernen Sie den Event-Listener
         document.body.removeEventListener("click", clickOutsideHandler);
     }
 }
 
-// Funktion zur Verarbeitung von Klicks außerhalb des Dropdown-Menüs
+
 function clickOutsideHandler(event) {
     const dropDownMenu = document.getElementById("assignedContactsCtn");
 
-    // Überprüfen, ob das geklickte Element nicht Teil des Dropdown-Menüs und nicht das Eingabefeld ist
     if (!dropDownMenu.contains(event.target) && event.target.className !== "input-add-task") {
-        // Wenn ja, schließen Sie das Dropdown-Menü
         dropDownMenu.style.display = "none";
     }
 }
@@ -157,7 +164,6 @@ async function renderCurrentUser() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
     const existingContactNames = Array.from(document.querySelectorAll('#assignedContactsCtn .contact span:nth-child(2)')).map(span => span.innerText.trim());
 
-    // Generiere HTML für den aktuellen Benutzer (der erste Kontakt in der Liste ist der aktuelle Benutzer)
     const currentUser = contacts[0];
     const currentUserExists = existingContactNames.includes(currentUser.name);
     if (!currentUserExists) {
@@ -180,7 +186,6 @@ async function renderOtherContacts() {
     const assignedContacts = document.getElementById("assignedContactsCtn");
     const existingContactNames = Array.from(document.querySelectorAll('#assignedContactsCtn .contact span:nth-child(2)')).map(span => span.innerText.trim());
 
-    // Generiere HTML für die anderen Kontakte
     for (let i = 1; i < contacts.length; i++) {
         const contact = contacts[i];
         const contactExists = existingContactNames.includes(contact.name);
@@ -209,9 +214,9 @@ function handleCheckboxClick(checkbox) {
 function toggleActive(checkbox) {
     const contact = checkbox.parentElement;
     if (checkbox.checked) {
-      contact.classList.add('active'); // Füge der Kontaktklasse die "active"-Klasse hinzu
+      contact.classList.add('active'); 
     } else {
-      contact.classList.remove('active'); // Entferne die "active"-Klasse von der Kontaktklasse
+      contact.classList.remove('active'); 
     }
   }
 
@@ -221,15 +226,13 @@ function saveContactsToArray(checkbox) {
 
     if (parentContact) {
         let userNameElement = parentContact.querySelector('.contact span:nth-child(2)');
-        let userName = userNameElement.innerText.trim(); // Benutzernamen bereinigen
+        let userName = userNameElement.innerText.trim();
 
-        // Entferne "(YOU)" aus dem Benutzernamen, falls vorhanden
         userName = userName.replace(" (YOU)", "");
 
-        // Extrahiere den Namen unabhängig von der Struktur (Vorname oder Vorname + Nachname)
         let userNameParts = userName.split(' ');
-        let firstName = userNameParts[0]; // Der erste Teil ist immer der Vorname
-        let lastName = userNameParts.length > 1 ? userNameParts.slice(1).join(' ') : ""; // Alle Teile nach dem ersten sind Teil des Nachnamens
+        let firstName = userNameParts[0]; 
+        let lastName = userNameParts.length > 1 ? userNameParts.slice(1).join(' ') : ""; 
 
         let foundContact = contacts.find(contact => contact.firstName === firstName && contact.lastName === lastName);
 
@@ -237,13 +240,12 @@ function saveContactsToArray(checkbox) {
             let userID = foundContact.ID;
 
             if (checkbox.checked) {
-                assignedUsers.push({ name: userName, ID: userID }); // Den Namen und die ID in assignedUsers pushen
+                assignedUsers.push({ name: userName, ID: userID }); 
             } else {
-                // Den Kontakt aus assignedUsers basierend auf der ID entfernen
                 assignedUsers = assignedUsers.filter(contact => contact.ID !== userID);
             }
             
-            renderCheckedContacts(); // Aktualisierte Liste der ausgewählten Kontakte anzeigen
+            renderCheckedContacts();
         } else {
             console.error("Kontakt mit dem Namen " + userName + " wurde nicht gefunden.");
         }
@@ -254,20 +256,19 @@ function saveContactsToArray(checkbox) {
 
 function renderCheckedContacts() {
     let checkedContactsCtn = document.getElementById('checkedContactsCtn');
-    checkedContactsCtn.innerHTML = ''; // Clearing the container content to ensure no old content remains before rendering the updated contacts
+    checkedContactsCtn.innerHTML = ''; 
     
-    assignedUsers.forEach(user => { // Iterating over each element in the assignedUsers array
+    assignedUsers.forEach(user => { 
         const foundContact = contacts.find(contact => contact.ID === user.ID);
         if (foundContact) {
             let nameInitials;
             if (foundContact.lastName) {
-                nameInitials = foundContact.acronymContact; // Verwende das Akronym mit zwei Buchstaben, wenn der Benutzer einen Nachnamen hat
+                nameInitials = foundContact.acronymContact;
             } else {
-                nameInitials = foundContact.name.charAt(0); // Verwende den ersten Buchstaben des Namens, wenn der Benutzer nur einen Namen hat
+                nameInitials = foundContact.name.charAt(0);
             }
-            const contactBgColor = foundContact.colorContact; // Farbe des Kreises von den vorhandenen Kontakten übernehmen
+            const contactBgColor = foundContact.colorContact;
 
-            // Adding a new DOM element for each checked contact to the container
             checkedContactsCtn.innerHTML += ` 
                 <div class="checked-contact-box">
                     <div class="task-detail-assigned-user-acronym" style="background-color:${contactBgColor}">
@@ -291,8 +292,6 @@ function setCategory(i) {
     selectedCategory = taskCategories.value;
     category.splice(i, 1);
     category.push(selectedCategory);
-
-    console.log("The selcted Category is " + selectedCategory);
 }
 
 function clearForm() {

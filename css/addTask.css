@@ -4,18 +4,13 @@
 
 .form-layout {
   display: flex;
-  /* justify-content: flex-start; */
   flex-direction: column;
-  /* height: unset;
-  width: unset; */
-  /* gap: 40px; */
   margin-top: 24px;
 }
 
 .add-task-wrapper-form-input {
   display: flex;
   gap: 40px;
-
 }
 
 .add_task_txt_format {
@@ -61,7 +56,6 @@
 
 .input-textarea {
   resize: vertical;
-  color: #d1d1d1;
   padding: 12px 16px;
 }
 
@@ -75,9 +69,7 @@ select:focus {
 
 select {
   appearance: none;
-  /*  safari  */
   -webkit-appearance: none;
-  /*  other styles for aesthetics */
   height: 56px;
   width: 100%;
   padding-left: 10px;
@@ -145,7 +137,7 @@ select:focus {
 .contact.active {
   color: white;
   border-radius: 10px;
-  background-color: #2a3647; 
+  background-color: #2a3647;
 }
 
 .contact-circle-and-name-box {
@@ -171,7 +163,7 @@ select:focus {
   align-items: center;
   margin-top: 8px;
   gap: 8px;
-  /* width: 480px; */
+  max-width: 440px;
   flex-wrap: wrap;
 }
 
@@ -294,7 +286,7 @@ select:focus {
   justify-content: flex-end;
   align-items: center;
   margin-top: 8px;
-  margin-right: 12px;
+  margin-right: 16px;
   width: fit-content;
   gap: 8px;
   background: white;
@@ -465,8 +457,8 @@ select:focus {
 }
 
 .clear_create_btn_ctn {
-  display: flex; /* Buttons nebeneinander anordnen */
-  gap: 10px; /* Abstand zwischen den Buttons */
+  display: flex; 
+  gap: 10px; 
 }
 
 .clear-btn {
@@ -478,13 +470,13 @@ select:focus {
   background: linear-gradient(0deg, #f6f7f8, #f6f7f8);
   font-size: 20px;
   cursor: pointer;
-  display: flex; /* Um zu verhindern, dass das Bild den Textinhalt verschiebt */
-  align-items: center; /* Zentrieren Sie den Text und das Bild vertikal */
-  justify-content: space-between; /* Platziert den Text auf der linken Seite und das Bild auf der rechten Seite */
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
 }
 
 .clear-btn span {
-  flex-grow: 1; /* Lässt den Text den verfügbaren Platz einnehmen */
+  flex-grow: 1;
 }
 
 .clear-btn:hover {
@@ -533,154 +525,8 @@ select:focus {
   height: 11.22px;
 }
 
-
 #vectorboard-pic {
   width: 26px;
   height: 22px;
   margin-left: 14px;
-}
-
-@media (max-width: 1121px) {
-  .form-layout {
-    flex-wrap: wrap;
-  }
-
-  .parting_line_grey {
-    display: none;
-  }
-
-  .bottom-section-ctn {
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: baseline;
-    gap: 32px;
-    margin-top: 20px;
-    padding: 16px;
-    width: 85%;
-  }
-
-  .clear-btn {
-    display: none;
-  }
-}
-
-@media (max-width: 565px) {
-  .bottom-section-ctn {
-    position: fixed;
-    bottom: 80px;
-    width: 90%;
-    z-index: 5;
-    background-color: #f6f7f8;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-top: 20px;
-    padding-left: 0;
-    padding-right: 10;
-  }
-
-  .reqiured_txt_format {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-  }
-}
-
-@media (max-width: 490px) {
-  .bottom-section-ctn {
-    position: fixed;
-    bottom: 80px;
-    width: 95%;
-    z-index: 5;
-    background-color: #f6f7f8;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 12px;
-    margin-top: 20px;
-    padding-right: 10;
-  }
-
-  .reqiured_txt_format {
-    font-size: 16px;
-  }
-
-  .input-add-task {
-    width: 400px;
-  }
-
-  .input_box_layout {
-    width: 400px;
-  }
-
-  .prio_box_layout {
-    width: 435px;
-  }
-
-  .select.dropdown_list {
-    width: 380px;
-  }
-
-  .responsive-heigth {
-    height: 300px;
-  }
-
-  .custom-select {
-    width: 435px;
-  }
-}
-
-@media (max-width: 395px) {
-  .bottom-section-ctn {
-    position: fixed;
-    bottom: 80px;
-    width: 90%;
-    z-index: 5;
-    background-color: #f6f7f8;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .reqiured_txt_format {
-    font-size: 13px;
-  }
-
-  .input-add-task {
-    width: 300px;
-  }
-
-  .input_box_layout {
-    width: 300px;
-  }
-
-  .prio_box_layout {
-    width: 435px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .responsive-prio-btn {
-    height: 40px;
-    width: 330px;
-  }
-
-  .select.dropdown_list {
-    width: 380px;
-  }
-
-  .responsive-heigth {
-    height: 300px;
-  }
-
-  /*category*/
-  .custom-select {
-    width: 335px;
-  }
 }

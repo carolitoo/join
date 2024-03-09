@@ -369,11 +369,11 @@ async function changeStatusSubtask(idOfTask, idOfSubtask, idOfSubtaskImgElement)
  *
  * @param {string} idTask - id of the task deleted
  */
-function deleteTask(idTask) {
+async function deleteTask(idTask) {
   let positionTask = tasks.findIndex((id) => id["idTask"] == idTask);
   tasks.splice(positionTask, 1);
   saveTasks();
-  closeTaskDetails();
+  await closeTaskDetails();
   renderBoard(tasks);
 }
 
@@ -382,11 +382,11 @@ function deleteTask(idTask) {
  * This function empties and closes the overlay and ensures that scrolling is possible after closing the overlay
  * It also renders the tasks to ensure the correct presentation in case of changes of the subtasks and empties the temporary needed arrays
  */
-function closeTaskDetails() {
+async function closeTaskDetails() {
   document.getElementById("overlay-board").classList.add("d-none");
   document.getElementsByTagName("body")[0].classList.remove("disable-scroll");
   document.getElementById("overlay-board").innerHTML = '';
-  renderBoard(tasks);
   clearAssignedUsersArray();
   addedSubtasks = [];
+  renderBoard(tasks);
 }

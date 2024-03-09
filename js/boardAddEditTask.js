@@ -157,7 +157,7 @@ async function openEditTask(idTask) {
 
 
   /**
-   * This function closes the drop down with the contacts when the user clicks outside the container (on the white background)
+   * This function closes the drop down with the contacts when the user clicks outside the container (on the white background) in the edit view
    */
   function clickOutsideHandlerEdit(event) {
     if (event.target.className =="ctn-task-detail") {
@@ -179,18 +179,37 @@ async function openEditTask(idTask) {
   
   /**
    * This function opens the overlay for adding a task when the user is on the board
-   * The task is added to a status depending on which icon or button the user clicks to open the add task overlay
+   * In case of small window width the user is forwarded to the add_task.html 
+   * The task is added to the status depending on which icon or button the user clicks to open the add task dialog
    * 
    * @param {string} taskStatus - status to which the task will be added after submission
    */
   function openAddTaskBoard(taskStatus) {
-    document.getElementById('overlay-board-addTask').classList.remove('d-none');
-    addEventListenerToAddForm();
-    setMinDueDate('task-input-dueDate');
-    document.getElementById('Add-Task-Form').setAttribute("onsubmit", `submitTask('${taskStatus}'); return false;`);
-    slideInAnimation('pop-up-task-add-board', 'translate-x', true);
+    if (window.innerWidth <= 1380) {
+      window.location.href = 'add_task.html';
+      localStorage.setItem('statusTransfer', taskStatus);
+    } else {
+      document.getElementById('overlay-board-addTask').classList.remove('d-none');
+      document.getElementsByTagName("body")[0].classList.add("disable-scroll");
+      addEventListenerToAddForm();
+      setMinDueDate('task-input-dueDate');
+      document.getElementById('Add-Task-Form').setAttribute("onsubmit", `submitTask('${taskStatus}'); return false;`);
+      document.getElementById('wrapper-add-task-board').addEventListener('click', clickOutsideHandlerAdd);
+      document.getElementById('Add-Task-Form').addEventListener('click', clickOutsideHandlerAdd);
+    }
   }
-  
+
+
+  function clickOutsideHandlerAdd(event) {
+    if (
+      event.target.className !== "assignedContacts-open" &&
+      event.target.className !== "input-add-task" &&
+      event.target.className !== "contact" &&
+      event.target.className !== "dropdwon-checkbox"
+    ) {
+      document.getElementById("assignedContactsCtn").style.display = "none";
+    }
+  }
   
   /**
    * This function closes the overlay (containig the form for adding a task), empties the temporary needed arrays and ensures that scrolling is possible after closing the overlay
@@ -200,5 +219,7 @@ async function openEditTask(idTask) {
     document.getElementsByTagName("body")[0].classList.remove("disable-scroll");
     clearAssignedUsersArray();
     addedSubtasks = [];
+    document.getElementById('wrapper-add-task-board').removeEventListener('click', clickOutsideHandlerAdd);
+    document.getElementById('Add-Task-Form').removeEventListener('click', clickOutsideHandlerAdd);
   }
   

@@ -11,7 +11,6 @@ async function initPrivacyP() {
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
   checkIfSidebaravailable('privacy-link');
-  // resetSelectedTab();//
 }
 
 async function initLegalN() {
@@ -20,7 +19,6 @@ async function initLegalN() {
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
   checkIfSidebaravailable('legal-link');
-  // resetSelectedTab();//
 }
 
 /**

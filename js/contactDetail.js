@@ -201,7 +201,7 @@ function displayErrorMessage(message, element) {
    * @param {number} positionOfContact - position of the contact currently selected in the array "contactsSorted"
    */
   async function deleteContact(positionOfContact) {
-    if (!isConfirmationDisplayed) { // Überprüfen, ob die Bestätigung bereits angezeigt wird
+    if (!isConfirmationDisplayed) {
       const confirmation = await askingforCommitment();
       if (!confirmation) {
         return;
