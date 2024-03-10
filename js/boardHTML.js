@@ -271,7 +271,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
               Urgent
               <img
                 id="urgent-icon"
-                src="./assets/img/Prio alta2.svg"
+                src="./assets/img/prio alta2.svg"
                 class="urgent-icon"
               />
             </div>
@@ -298,7 +298,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
               Low
               <img
                 id="low-icon"
-                src="./assets/img/Prio baja.svg"
+                src="./assets/img/prio baja.svg"
                 class="urgent-icon"
               />
             </div>

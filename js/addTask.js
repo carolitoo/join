@@ -78,7 +78,7 @@ function changeButtonColorsUrgent() {
   taskPrio = "Urgent";
   document.getElementById("urgentButton").classList.add("urgent-btn-red");
   document.getElementById("urgentButton").classList.remove("prio-btn-neutral");
-  document.getElementById("urgent-icon").src = "./assets/img/Prio alta w.svg";
+  document.getElementById("urgent-icon").src = "./assets/img/prio alta w.svg";
 
   document.getElementById("mediumButton").classList.remove("medium-btn-yellow");
   document.getElementById("mediumButton").classList.add("prio-btn-neutral");
@@ -86,7 +86,7 @@ function changeButtonColorsUrgent() {
 
   document.getElementById("lowButton").classList.remove("low-btn-green");
   document.getElementById("lowButton").classList.add("prio-btn-neutral");
-  document.getElementById("low-icon").src = "./assets/img/Prio baja.svg";
+  document.getElementById("low-icon").src = "./assets/img/prio baja.svg";
 }
 
 
@@ -101,11 +101,11 @@ function changeButtonColorsMedium() {
 
   document.getElementById("urgentButton").classList.remove("urgent-btn-red");
   document.getElementById("urgentButton").classList.add("prio-btn-neutral");
-  document.getElementById("urgent-icon").src = "./assets/img/Prio alta2.svg";
+  document.getElementById("urgent-icon").src = "./assets/img/prio alta2.svg";
 
   document.getElementById("lowButton").classList.remove("low-btn-green");
   document.getElementById("lowButton").classList.add("prio-btn-neutral");
-  document.getElementById("low-icon").src = "./assets/img/Prio baja.svg";
+  document.getElementById("low-icon").src = "./assets/img/prio baja.svg";
 }
 
 
@@ -116,7 +116,7 @@ function changeButtonColorsLow() {
   taskPrio = "Low";
   document.getElementById("lowButton").classList.add("low-btn-green");
   document.getElementById("lowButton").classList.remove("prio-btn-neutral");
-  document.getElementById("low-icon").src = "./assets/img/Prio baja w.svg";
+  document.getElementById("low-icon").src = "./assets/img/prio baja w.svg";
 
   document.getElementById("mediumButton").classList.remove("medium-btn-yellow");
   document.getElementById("mediumButton").classList.add("prio-btn-neutral");
@@ -124,7 +124,7 @@ function changeButtonColorsLow() {
 
   document.getElementById("urgentButton").classList.remove("urgent-btn-red");
   document.getElementById("urgentButton").classList.add("prio-btn-neutral");
-  document.getElementById("urgent-icon").src = "./assets/img/Prio alta2.svg";
+  document.getElementById("urgent-icon").src = "./assets/img/prio alta2.svg";
 }
 
 

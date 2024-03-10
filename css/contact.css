@@ -309,7 +309,7 @@
 }
 
 .translate-y {
-  transform: translateY(600px);
+  transform: translateY(50%);
 }
 
 .no-transition {
