@@ -10,6 +10,8 @@ async function initBoard() {
   await proofAuthentification(loggedInEmail);
   await checkPersonalheader(loggedInEmail);
   await loadContacts();
+  await checkIfGuestOrCurrentUser();
+  await sortArrayContacts();
   // await storeDummyTasks();
   await loadTasks();
   await renderBoard(tasks);

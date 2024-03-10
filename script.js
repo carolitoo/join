@@ -10,7 +10,8 @@ async function initPrivacyP() {
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  checkIfSidebaravailable('privacy-link');
+  // checkIfSidebaravailable('privacy-link');
+  checkDisplaySidebar('privacy-link');
 }
 
 async function initLegalN() {
@@ -18,7 +19,8 @@ async function initLegalN() {
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  checkIfSidebaravailable('legal-link');
+  // checkIfSidebaravailable('legal-link');
+  checkDisplaySidebar('legal-link');
 }
 
 /**
@@ -37,22 +39,41 @@ async function checkPersonalheader(loggedInEmail) {
   }
 }
 
-/**
- * 
- * @param {HTMLElement} idOfElement - 
- * @returns 
- */
-async function checkIfSidebaravailable(idOfElement) {
-  const sidebar = document.getElementById('sidebar');
+// /**
+//  * 
+//  * 
+//  * @param {string} idOfElement - id of the element that is marked in the sidebar
+//  */
+// async function checkIfSidebaravailable(idOfElement) {
+//   const sidebar = document.getElementById('sidebar');
 
-  if ((loggedInEmail.trim() == "[]") && window.innerWidth < 775) {
-    sidebar.classList.add('d-none');
-    sidebar.classList.add('moveContent');
-  } else {
+//   if ((loggedInEmail.trim() == "[]") && window.innerWidth < 775) {
+//     sidebar.classList.add('d-none');
+//     // sidebar.classList.add('moveContent');
+//   } else {
+//     changeSelectedTab(idOfElement);
+//   }
+// }
+
+/**
+ * This function checks the window width and if a user or guest is logged in - depending on the current state the elements are displayed/ marked
+ * 
+ * @param {string} idOfElement - id of the element that is marked in the sidebar
+ */
+function checkDisplaySidebar(idOfElement) {
+  if ((loggedInEmail.trim() == "[]") && window.innerWidth < 785) {
+    document.getElementById('sidebar').classList.add('d-none');
+    document.getElementById('ctn-content').style.paddingBottom = '32px';
+  } else if (window.innerWidth < 785) {
+    document.getElementById('sidebar').classList.remove('d-none');
     changeSelectedTab(idOfElement);
+    document.getElementById('ctn-content').style.paddingBottom = '112px';
+  } else {
+    document.getElementById('sidebar').classList.remove('d-none');
+    changeSelectedTab(idOfElement);
+    document.getElementById('ctn-content').style.paddingBottom = '32px';
   }
 }
-
 
 
 /**
@@ -169,4 +190,14 @@ function returnToPreviousPage() {
  */
 function showElement(idOfElement) {
   document.getElementById(idOfElement).classList.remove('d-none');
+}
+
+
+/**
+ * This functions resets the value in the local storage for the given key
+ * 
+ * @param {string} key - key of the value(s) in the local storage that is reseted 
+ */
+function resetInputLocalStorage(key) {
+  localStorage.setItem(key, '')  
 }

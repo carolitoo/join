@@ -53,37 +53,34 @@ async function openEditTask(idTask) {
     }
   }
   
-  
+
   /**
    * This function generates the drop down for the assigned users in the edit task view - the checkboxes are still blank after running this function
-   * 
-   * @param {string} idTask - id of the task that is edited
    */
-  async function createDropDownUserEditTask(idTask) {
-    document.getElementById('ctn-edit-task-drop-down-user').innerHTML = await generateCurrentUserDropDownHTML(0, idTask);
-    for (let j = 1; j < contacts.length; j++) {
-      document.getElementById('ctn-edit-task-drop-down-user').innerHTML += await generateContactDropDownHTML(j, idTask);
+    async function createDropDownUserEditTask() {
+      document.getElementById('ctn-edit-task-drop-down-user').innerHTML = await generateCurrentUserDropDownEditTaskHTML(0);
+      for (let j = 1; j < contactsSorted.length; j++) {
+        document.getElementById('ctn-edit-task-drop-down-user').innerHTML += await generateContactDropDownEditTaskHTML(j);
+      }
     }
-  }
-  
-  
-  /**
+
+
+    /**
    * This function checkes the checkboxes and filles the array assigned users for/ with the users assigned to the task currently edited
    * 
    * @param {number} positionTask - position of the task that is edited in the array "tasks" 
-   * @param {string} idTask - id of the task that is edited
    */
-  async function updateAssignedUsers (positionTask, idTask) {
-    for (let i = 0; i< tasks[positionTask]['assignedContacts'].length; i++) {
-      let idContact = tasks[positionTask]['assignedContacts'][i]['idContact'];
-      let positionContact = contacts.findIndex((id) => id['ID'] == idContact)
+    async function updateAssignedUsers (positionTask) {
+      for (let i = 0; i< tasks[positionTask]['assignedContacts'].length; i++) {
+        let idContact = tasks[positionTask]['assignedContacts'][i]['idContact'];
+        let positionContact = contactsSorted.findIndex((id) => id['ID'] == idContact)
+    
+        document.getElementById(`checkbox-contact-${idContact}`).checked = true;
+        document.getElementById(`checkbox-contact-${idContact}`).parentElement.classList.add('active');
   
-      document.getElementById(`checkbox-${idTask}-${positionContact}`).checked = true;
-      document.getElementById(`checkbox-${idTask}-${positionContact}`).parentElement.classList.add('active');
-
-      assignedUsers.push({ name: contacts[positionContact]['name'], ID: contacts[positionContact]['ID'] });
+        assignedUsers.push({ name: contactsSorted[positionContact]['name'], ID: contactsSorted[positionContact]['ID'] });
+      }
     }
-  }
   
   
   /**
@@ -210,13 +207,37 @@ async function openEditTask(idTask) {
 
   /**
    * This function ensures that the add task overlay on the board is only displayed when the screen has a certain width
-   * On falling below the defined width the user is forwarded to the add-task-page
+   * On falling below the defined width the user is forwarded to the add-task-page - the before inserted values are transferred
    */
   function checkWindowWidthAddTaskBoard() {
     if (window.innerWidth < 785) {
       localStorage.setItem('statusTransfer', currentStatus);
       window.location.href = 'add_task.html';
+      transferInputAddTask();
     }
+  }
+
+
+  /**
+   * This function saves the current inputs and selections into the local storage
+   */
+  function transferInputAddTask() {
+      let title = document.getElementById('task-input-title').value;
+      let description = document.getElementById('task-input-description').value;
+      let date = new Date(document.getElementById('task-input-dueDate').value);
+  
+      let temporaryStorageAddTask = {
+          'titleTask': title,
+          'descriptionTask': description,
+          'assignedContacts': assignedUsers.map(user => ({ idContact: user.ID })),
+          'dueDate': date.toJSON(),
+          'priority': taskPrio,
+          'category': category,
+          'subtasks': addedSubtasks,
+      };
+
+      let temporaryInputAddTaskAsText = JSON.stringify(temporaryStorageAddTask);
+      localStorage.setItem('temporaryInputAddTask', temporaryInputAddTaskAsText);
   }
 
 
@@ -228,8 +249,9 @@ async function openEditTask(idTask) {
     document.getElementsByTagName("body")[0].classList.remove("disable-scroll");
     clearAssignedUsersArray();
     addedSubtasks = [];
+    resetFormElements();
+    renderCheckedContacts();
     document.getElementById('wrapper-add-task-board').removeEventListener('click', clickOutsideHandler);
     document.getElementById('Add-Task-Form').removeEventListener('click', clickOutsideHandler);
     document.getElementById('body-board').removeAttribute("onresize");
   }
-  

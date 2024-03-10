@@ -1,11 +1,11 @@
 let addedSubtasks = [];
 
+
 /**
  * This function checks whether the enter key was pressed - in that case the subtask is added to the array with the current subtasks
  * 
  * @param {object} event 
  */
-
 function checkInputSubtask(event) {
     if (event.key == "Enter") {
         saveSubtaskToArray();
@@ -38,8 +38,8 @@ function changeInputSubtaskButtons() {
         <button class="check-round-btn" type="button" onclick="saveSubtaskToArray()"></button>
     `
     focusElement('subtaskInput');
-
 }
+
 
 /**
  * This function resets the input button within the input field to the default
@@ -50,9 +50,9 @@ function defaultInputSubtask() {
         <button type="button" id="plus-btn" class="subtask-plus-btn" onclick="changeInputSubtaskButtons()"></button>
     `
     document.getElementById('subtaskInput').value = '';
-    
     focusElement('subtaskInput');
 }
+
 
 /**
  * This function sets the focus to the chosen input field and sets the cursor to the end of the text
@@ -79,7 +79,6 @@ function saveSubtaskToArray() {
             'titleSubtask': inputText,
             'statusSubtask': "open",
         }
-
         addedSubtasks.push(newSubtask);
         document.getElementById('subtaskInput').value = '';
 

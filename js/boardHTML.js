@@ -375,8 +375,5 @@ async function generateViewEditTasklHTML(currentIdTask) {
           </button>
         </form>
       </div>
-  
-   
-  
   `;
 }
