@@ -173,17 +173,6 @@ nav a:hover {
   padding-left: 40px;
 }
 
-/* #privacy-link {
-  position: absolute;
-  bottom: 38px;
-}
-
-#legal-link {
-  position: absolute;
-  bottom: 0px;
-  left: -7px;
-} */
-
 .ctn-sidebar-legal a:hover {
   color: #29abe2;
   font-weight: bold;

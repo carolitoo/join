@@ -137,7 +137,7 @@ function activateDropdown() {
   const dropDownMenu = document.getElementById("assignedContactsCtn");
   const dropDownIcon = document.querySelector(".dropDownIcon");
 
-  dropDownIcon.classList.toggle("active");
+  toggleIconRotation(); 
   dropDownMenu.style.display = dropDownMenu.style.display === "block" ? "none" : "block";
   renderContacts();
 
@@ -146,6 +146,15 @@ function activateDropdown() {
   } else {
     document.body.removeEventListener("click", clickOutsideHandler);
   }
+}
+
+
+/**
+ * Toggles the rotation of the dropdown icon by 180 degrees
+ */
+function toggleIconRotation() {
+  const dropDownIcon = document.querySelector(".dropDownIcon");
+  dropDownIcon.classList.toggle("rotate180");
 }
 
 
@@ -232,40 +241,6 @@ function toggleActive(checkbox) {
     contact.classList.remove("active");
   }
 }
-
-
-// async function saveContactsToArray(checkbox) {
-//     let parentContact = checkbox.closest('.contact');
-
-//     if (parentContact) {
-//         let userNameElement = parentContact.querySelector('.contact span:nth-child(2)');
-//         let userName = userNameElement.innerText.trim();
-
-//         userName = userName.replace(" (YOU)", "");
-
-//         let userNameParts = userName.split(' ');
-//         let firstName = userNameParts[0]; 
-//         let lastName = userNameParts.length > 1 ? userNameParts.slice(1).join(' ') : ""; 
-
-//         let foundContact = contactsSorted.find(contact => contact.firstName === firstName && contact.lastName === lastName);
-
-//         if (foundContact) {
-//             let userID = foundContact.ID;
-
-//             if (checkbox.checked) {
-//                 assignedUsers.push({ name: userName, ID: userID }); 
-//             } else {
-//                 assignedUsers = assignedUsers.filter(contact => contact.ID !== userID);
-//             }
-            
-//             await renderCheckedContacts();
-//         } else {
-//             console.error("Kontakt mit dem Namen " + userName + " wurde nicht gefunden.");
-//         }
-//     } else {
-//         console.error("Fehler: Das übergeordnete Kontakt-Element wurde nicht gefunden.");
-//     }
-// }
 
 
 /**

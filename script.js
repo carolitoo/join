@@ -10,7 +10,6 @@ async function initPrivacyP() {
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  // checkIfSidebaravailable('privacy-link');
   checkDisplaySidebar('privacy-link');
 }
 
@@ -19,7 +18,6 @@ async function initLegalN() {
   await loadUserData();
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
-  // checkIfSidebaravailable('legal-link');
   checkDisplaySidebar('legal-link');
 }
 
@@ -39,21 +37,6 @@ async function checkPersonalheader(loggedInEmail) {
   }
 }
 
-// /**
-//  * 
-//  * 
-//  * @param {string} idOfElement - id of the element that is marked in the sidebar
-//  */
-// async function checkIfSidebaravailable(idOfElement) {
-//   const sidebar = document.getElementById('sidebar');
-
-//   if ((loggedInEmail.trim() == "[]") && window.innerWidth < 775) {
-//     sidebar.classList.add('d-none');
-//     // sidebar.classList.add('moveContent');
-//   } else {
-//     changeSelectedTab(idOfElement);
-//   }
-// }
 
 /**
  * This function checks the window width and if a user or guest is logged in - depending on the current state the elements are displayed/ marked

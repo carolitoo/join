@@ -231,6 +231,10 @@ a {
   position: relative;
 }
 
+.rotate180 {
+  transform: rotate(180deg);
+}
+
 .d-none {
   display: none;
 }

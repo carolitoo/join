@@ -2,7 +2,6 @@
   position: relative;
 }
 
-
 .start-animations-helper {
   position: fixed;
   top: 0;
@@ -11,10 +10,9 @@
   bottom: 0;
   height: 100vh;
   width: 100%;
-  background-color: #F6F7F8;
+  background-color: #f6f7f8;
   z-index: 90 !important;
 }
-
 
 .start-animations-helper-responsive {
   display: none;
@@ -204,10 +202,6 @@ input:focus {
 }
 
 /* **** RESPONSIVE DESIGN **** */
-@media(max-width: 1025px){
-
-
-}
 
 @media (max-width: 760px) {
   .ctn-login {
@@ -283,14 +277,15 @@ input:focus {
   }
 }
 
-
 @media (max-width: 675px) {
   .start-animations-helper-responsive {
     display: block;
-    animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards !important;
+    animation: start-animations-helper_animation 0.75s ease-in-out 0.25s
+      forwards !important;
   }
   .start-animations-helper {
-    animation: start-animations-helper_animation 0.75s ease-in-out 0.25s forwards !important;
+    animation: start-animations-helper_animation 0.75s ease-in-out 0.25s
+      forwards !important;
   }
   .logo-light {
     display: block;

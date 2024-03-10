@@ -101,6 +101,7 @@ select:focus {
   position: absolute;
   margin-top: 25px;
   margin-left: 438px;
+  transition: transform 0.3s ease;
 }
 
 .active .dropDownIcon {
