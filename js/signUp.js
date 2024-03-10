@@ -24,7 +24,7 @@ async function createSignUpdata() {
 
     newUser = {
         ID: new Date().getTime(),
-        name: userName,
+        name: capitalizeFirstLetter(userName),
         firstName: filterFirstName(userName),
         lastName: filterLastName(),
         acronym: getAcronym(),

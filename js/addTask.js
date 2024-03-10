@@ -5,6 +5,7 @@ let category = [];
 let contactsRendered = false;
 
 async function initAddTask() {
+<<<<<<< Updated upstream
   await includeHTML();
   await loadUserData();
   await getLoggedInEmail();
@@ -28,6 +29,70 @@ async function initAddTask() {
  */
 function clearAssignedUsersArray() {
   assignedUsers = [];
+=======
+    await includeHTML();
+    await loadUserData();
+    await getLoggedInEmail();
+    await proofAuthentification(loggedInEmail);
+    await checkPersonalheader(loggedInEmail)
+    await loadContacts();
+    await checkIfGuestOrCurrentUser()
+    await sortArrayContacts();
+    await loadTasks();
+    clearAssignedUsersArray();
+    changeSelectedTab('tab-add-task');
+    addEventListenerToAddForm();
+    addEventListenerToInputAssignedto()
+    setMinDueDate('task-input-dueDate');
+    checkReferringFromBoard();
+}
+
+
+function addEventListenerToInputAssignedto() {
+    const taskInput = document.getElementById('input-assignedTo');
+    taskInput.addEventListener("input", filterContacts);
+
+    document.body.addEventListener("click", clickOutsideHandler);
+    document.addEventListener("DOMContentLoaded", initAddTask); // Korrekte Funktion aufrufen*/
+}
+
+
+function filterContacts() {
+    let searchedContact = document.getElementById('input-assignedTo').value.toLowerCase();
+
+
+    let filteredContacts = contactsSorted.filter(contact =>
+        contact.name.toLowerCase().startsWith(searchedContact)
+    );
+    renderFilteredContacts(filteredContacts);
+}
+
+
+function renderFilteredContacts(filteredContacts) {
+    const assignedContacts = document.getElementById("assignedContactsCtn");
+    
+    assignedContacts.innerHTML = ""; // Löscht die vorhandenen Kontakte
+
+    for (const contact of filteredContacts) {
+        const contactInitials = contact.acronymContact;
+        const contactHTML = `
+            <div class="contact">
+                <div class="contact-circle-and-name-box">
+                    <div style="background-color:${contact.colorContact}" class="task-detail-assigned-user-acronym">
+                        <span>${contactInitials}</span> 
+                    </div>
+                    <span>${contact.name}</span> 
+                </div>
+                <input class="dropdwon-checkbox" type="checkbox" onclick="handleCheckboxClick(this)">
+            </div>`;
+        assignedContacts.innerHTML += contactHTML;
+    }
+}
+
+
+function clearAssignedUsersArray() {
+    assignedUsers = [];
+>>>>>>> Stashed changes
 }
 
 
@@ -35,6 +100,7 @@ function clearAssignedUsersArray() {
  * This function adds an event listener to the add task form element to prevent the default behaviour of the enter key
  */
 function addEventListenerToAddForm() {
+<<<<<<< Updated upstream
   document.getElementById("Add-Task-Form").addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
@@ -62,13 +128,58 @@ function checkSubmission(event) {
  */
 function setMinDueDate(idOfElement) {
   let startDate = new Date();
+=======
+    document.getElementById("Add-Task-Form").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    });
+}
+
+function checkSubmission(event) {
+    if (event.key == "Enter") {
+        document.getElementById("submit-btn").click();
+    }
+}
+
+/**
+* This function ensures that dates in the past can not be selected as due date
+*
+* @param {string} idOfElement - id of the input field for which the min date is set
+*/
+function setMinDueDate(idOfElement) {
+    let startDate = new Date();
+
+    let minYear = startDate.getFullYear();
+    let minMonth = String(startDate.getMonth() + 1).padStart(2, "0");
+    let minDay = String(startDate.getDate()).padStart(2, "0");
+
+    let today = `${minYear}-${minMonth}-${minDay}`;
+    document.getElementById(idOfElement).setAttribute("min", today);
+}
+>>>>>>> Stashed changes
 
   let minYear = startDate.getFullYear();
   let minMonth = String(startDate.getMonth() + 1).padStart(2, "0");
   let minDay = String(startDate.getDate()).padStart(2, "0");
 
+<<<<<<< Updated upstream
   let today = `${minYear}-${minMonth}-${minDay}`;
   document.getElementById(idOfElement).setAttribute("min", today);
+=======
+/**
+* This function checks if the user is forwarded from the board - if this is the case the status for the submission of the form is taken from the local storage
+* 
+* @returns - true in case that user is forwarded from the board
+*/
+function checkReferringFromBoard() {
+    if (document.referrer.slice(-10) == "board.html") {
+        let statusFromBoard = localStorage.getItem('statusTransfer');
+        if (statusFromBoard) {
+            document.getElementById('Add-Task-Form').setAttribute("onsubmit", `submitTask('${statusFromBoard}'); return false;`);
+        }
+    }
+>>>>>>> Stashed changes
 }
 
 
@@ -141,6 +252,7 @@ function activateDropdown() {
   dropDownMenu.style.display = dropDownMenu.style.display === "block" ? "none" : "block";
   renderContacts();
 
+<<<<<<< Updated upstream
   if (dropDownMenu.style.display === "block") {
     document.body.addEventListener("click", clickOutsideHandler);
   } else {
@@ -148,6 +260,154 @@ function activateDropdown() {
   }
 }
 
+=======
+    if (dropDownMenu.style.display === "block") {
+        document.body.addEventListener("click", clickOutsideHandler);
+    } else {
+        document.body.removeEventListener("click", clickOutsideHandler);
+    }
+}
+
+
+function clickOutsideHandler(event) {
+    const dropDownMenu = document.getElementById("assignedContactsCtn");
+
+    if (!dropDownMenu.contains(event.target) && event.target.className !== "input-add-task") {
+        dropDownMenu.style.display = "none";
+    }
+}
+
+async function renderContacts() {
+    if (!contactsRendered) {
+        await renderCurrentUser();
+        await renderOtherContacts();
+        contactsRendered = true;
+    }
+}
+
+async function renderCurrentUser() {
+    const assignedContacts = document.getElementById("assignedContactsCtn");
+    const existingContactNames = Array.from(document.querySelectorAll('#assignedContactsCtn .contact span:nth-child(2)')).map(span => span.innerText.trim());
+
+    const currentUser = contactsSorted[0];
+    const currentUserExists = existingContactNames.includes(currentUser.name);
+    if (!currentUserExists) {
+        const currentUserInitials = currentUser.acronymContact;
+        const currentUserHTML = `
+            <div class="contact">
+                <div class="contact-circle-and-name-box">
+                    <div style="background-color:${currentUser.colorContact}" class="task-detail-assigned-user-acronym">
+                        <span>${currentUserInitials}</span> 
+                    </div>
+                    <span>${currentUser.name} (YOU)</span> 
+                </div>
+                <input class="dropdwon-checkbox" type="checkbox" onclick="handleCheckboxClick(this)">
+            </div>`;
+        assignedContacts.innerHTML += currentUserHTML;
+    }
+}
+
+async function renderOtherContacts() {
+    const assignedContacts = document.getElementById("assignedContactsCtn");
+    const existingContactNames = Array.from(document.querySelectorAll('#assignedContactsCtn .contact span:nth-child(2)')).map(span => span.innerText.trim());
+
+    for (let i = 1; i < contactsSorted.length; i++) {
+        const contact = contactsSorted[i];
+        const contactExists = existingContactNames.includes(contact.name);
+        if (!contactExists) {
+            const contactInitials = contact.acronymContact;
+            const contactHTML = `
+                <div class="contact">
+                    <div class="contact-circle-and-name-box">
+                        <div style="background-color:${contact.colorContact}" class="task-detail-assigned-user-acronym">
+                            <span>${contactInitials}</span> 
+                        </div>
+                        <span>${contact.name}</span> 
+                    </div>
+                    <input class="dropdwon-checkbox" type="checkbox" onclick="handleCheckboxClick(this)">
+                </div>`;
+            assignedContacts.innerHTML += contactHTML;
+        }
+    }
+}
+
+function handleCheckboxClick(checkbox) {
+    saveContactsToArray(checkbox);
+    toggleActive(checkbox);
+}
+
+function toggleActive(checkbox) {
+    const contact = checkbox.parentElement;
+    if (checkbox.checked) {
+        contact.classList.add('active');
+    } else {
+        contact.classList.remove('active');
+    }
+}
+
+
+function saveContactsToArray(checkbox) {
+    let parentContact = checkbox.closest('.contact');
+
+    if (parentContact) {
+        let userNameElement = parentContact.querySelector('.contact span:nth-child(2)');
+        let userName = userNameElement.innerText.trim();
+
+        userName = userName.replace(" (YOU)", "");
+
+        let userNameParts = userName.split(' ');
+        let firstName = userNameParts[0];
+        let lastName = userNameParts.length > 1 ? userNameParts.slice(1).join(' ') : "";
+
+        let foundContact = contacts.find(contact => contact.firstName === firstName && contact.lastName === lastName);
+
+        if (foundContact) {
+            let userID = foundContact.ID;
+
+            if (checkbox.checked) {
+                assignedUsers.push({ name: userName, ID: userID });
+            } else {
+                assignedUsers = assignedUsers.filter(contact => contact.ID !== userID);
+            }
+
+            renderCheckedContacts();
+        } else {
+            console.error("Kontakt mit dem Namen " + userName + " wurde nicht gefunden.");
+        }
+    } else {
+        console.error("Fehler: Das übergeordnete Kontakt-Element wurde nicht gefunden.");
+    }
+}
+
+function renderCheckedContacts() {
+    let checkedContactsCtn = document.getElementById('checkedContactsCtn');
+    checkedContactsCtn.innerHTML = '';
+
+    assignedUsers.forEach(user => {
+        const foundContact = contacts.find(contact => contact.ID === user.ID);
+        if (foundContact) {
+            let nameInitials;
+            if (foundContact.lastName) {
+                nameInitials = foundContact.acronymContact;
+            } else {
+                nameInitials = foundContact.name.charAt(0);
+            }
+            const contactBgColor = foundContact.colorContact;
+
+            checkedContactsCtn.innerHTML += ` 
+                <div class="checked-contact-box">
+                    <div class="task-detail-assigned-user-acronym" style="background-color:${contactBgColor}">
+                        <span>${nameInitials}</span> 
+                    </div>
+                </div>
+            `;
+        }
+    });
+}
+
+
+
+>>>>>>> Stashed changes
 
 /**
  * Toggles the rotation of the dropdown icon by 180 degrees
@@ -294,6 +554,7 @@ function setCategory(i) {
   category.push(selectedCategory);
 }
 
+<<<<<<< Updated upstream
 
 /**
  * This function clears all inputs and arrays in the add task form
@@ -305,6 +566,16 @@ async function clearForm() {
   await renderCheckedContacts();
   changeButtonColorsMedium();
   loadNewSubtasks();
+=======
+function clearForm() {
+    addedSubtasks = 0;
+
+    clearAssignedUsersArray();
+    resetFormElements();
+    renderCheckedContacts();
+    changeButtonColorsMedium();
+    loadNewSubtasks()
+>>>>>>> Stashed changes
 }
 
 
@@ -312,5 +583,11 @@ async function clearForm() {
  * This function resets all the input fields in the add task form
  */
 function resetFormElements() {
+<<<<<<< Updated upstream
   document.getElementById("Add-Task-Form").reset();
 }
+=======
+    document.getElementById("Add-Task-Form").reset();
+}
+
+>>>>>>> Stashed changes
