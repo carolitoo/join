@@ -21,6 +21,9 @@ async function initLegalN() {
   checkDisplaySidebar('legal-link');
 }
 
+
+
+
 /**
  * This function checks whether an email address was selected before selecting the page and displays the personal head area if the response is positive.
  * 

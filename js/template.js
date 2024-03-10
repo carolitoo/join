@@ -28,7 +28,6 @@ function generateUserIcon() {
 async function changeSelectedTab(newTab) {
   await resetSelectedTab();
   document.getElementById(newTab).classList.add('tab-selected');
-
   let imgSrc = imgTabSelected[0][newTab];
 
   if (imgSrc != null && imgSrc !== 'null') {

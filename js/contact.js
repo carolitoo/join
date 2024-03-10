@@ -332,7 +332,7 @@ async function checkIfContactexist(newContact) {
     if (contacts[i].emailContact == newContact.emailContact) {
       let emailInput = document.getElementById('contacts-detail-input-mail');
       displayErrorMessage('Contact already exists', emailInput);
-      return true; 
+      return true;
     }
   }
   return false;
