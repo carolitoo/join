@@ -54,6 +54,9 @@ async function animationLogo() {
 async function animationDisplay() {
     let displayHelper = document.getElementById('start-animations-helper');
     displayHelper.classList.add('animate-helper');
+    setTimeout(() => {
+        document.getElementById('start-animations-helper').classList.add('d-none');
+      }, 1000);
 }
 
 
