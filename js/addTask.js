@@ -190,10 +190,10 @@ async function renderCurrentUser() {
   const existingContactNames = Array.from(
     document.querySelectorAll("#assignedContactsCtn .contact span:nth-child(2)")).map((span) => span.innerText.trim());
 
-  const currentUser = contactsSorted[0];
-  const currentUserExists = existingContactNames.includes(currentUser.name);
-  if (!currentUserExists) {
-    assignedContacts.innerHTML += await generateCurrentUserDropDownHTML(currentUser);
+    const currentUserExists = existingContactNames.includes(currentUser.name);
+    if (!currentUserExists && currentUser.name !== 'Guest') {
+      const currentUser = contactsSorted[0]
+      assignedContacts.innerHTML += await generateCurrentUserDropDownHTML(currentUser);
   }
 }
 
@@ -205,8 +205,13 @@ async function renderOtherContacts() {
   const assignedContacts = document.getElementById("assignedContactsCtn");
   const existingContactNames = Array.from(
     document.querySelectorAll("#assignedContactsCtn .contact span:nth-child(2)")).map((span) => span.innerText.trim());
+    
+    let firstContact = 1;
+    if (currentUser.name === 'Guest') {
+      firstContact = 0;
+    }
 
-  for (let i = 1; i < contactsSorted.length; i++) {
+  for (let i = firstContact; i < contactsSorted.length; i++) {
     const contact = contactsSorted[i];
     const contactExists = existingContactNames.includes(contact.name);
     if (!contactExists) {

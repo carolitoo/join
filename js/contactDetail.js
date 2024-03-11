@@ -10,6 +10,7 @@ async function openContactDetail(ID) {
   const isCurrentUser = currentUserAsContact && String(currentUserAsContact.ID) === String(ID);
 
   checkWindowWidth();
+  await resetPreviousSelectedContact(ID);
   markSelectedContact(ID);
 
   if (isCurrentUser) {
@@ -20,7 +21,6 @@ async function openContactDetail(ID) {
   }
   document.getElementById(`contacts-detail-acronym-${ID}`).style.backgroundColor = contactsSorted[positionOfContact]["colorContact"];
   slideInAnimation('wrapper-contact-details', 'translate-x', false);
-  await resetPreviousSelectedContact(ID);
   checkEmptyPhoneNumber(positionOfContact);
 }
 
@@ -61,6 +61,7 @@ async function resetPreviousSelectedContact(ID) {
  * @param {string} ID - id of the contact for which the details are displayed
  */
 function markSelectedContact(ID) {
+  console.log(ID);
   document.getElementById(`${ID}`).style = `pointer-events: none`;
   document.getElementById(`${ID}`).style.backgroundColor = "#2A3647";
   document.getElementById(`${ID}`).style.color = "white";

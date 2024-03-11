@@ -58,7 +58,9 @@ async function openEditTask(idTask) {
    * This function generates the drop down for the assigned users in the edit task view - the checkboxes are still blank after running this function
    */
     async function createDropDownUserEditTask() {
-      document.getElementById('ctn-edit-task-drop-down-user').innerHTML = await generateCurrentUserDropDownEditTaskHTML(0);
+      if (currentUser.name !== 'Guest') {
+        document.getElementById('ctn-edit-task-drop-down-user').innerHTML = await generateCurrentUserDropDownEditTaskHTML(0);
+      }
       for (let j = 1; j < contactsSorted.length; j++) {
         document.getElementById('ctn-edit-task-drop-down-user').innerHTML += await generateContactDropDownEditTaskHTML(j);
       }

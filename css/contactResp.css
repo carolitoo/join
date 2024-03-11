@@ -141,6 +141,10 @@
     margin-bottom: var(--height-footer);
   }
 
+  .ctn-contact-list {
+    padding-bottom: 96px;
+  }
+
   .ctn-contacts-details-name {
     flex-direction: row;
     align-items: center;
