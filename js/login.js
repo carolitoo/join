@@ -1,5 +1,3 @@
-
-
 async function LoginInit() {
     await includeHTML();
     await loadUserData();
@@ -30,12 +28,8 @@ async function checkIfforwardingSignUp() {
  * @returns - no value (continues with the following logic)
  */
 async function chooseDisplayAnimation() {
-    if (window.innerWidth >= 675) {
-        await animationLogo();
-        await animationDisplay();
-    } else {
-        return
-    }
+    await animationLogo();
+    await animationDisplay();
 }
 
 
@@ -56,7 +50,7 @@ async function animationDisplay() {
     displayHelper.classList.add('animate-helper');
     setTimeout(() => {
         document.getElementById('start-animations-helper').classList.add('d-none');
-      }, 1000);
+    }, 1000);
 }
 
 
@@ -76,6 +70,9 @@ async function createSuccesmsg(msg) {
     msgBox.appendChild(msgSpan);
     localStorage.removeItem('signUpStatus');
     slideInAnimation('msgBox', 'translate-xanother', true)
+    setTimeout(() => {
+        document.getElementById('transp-overlay').classList.add('d-none');
+    }, 1000);
 }
 
 
