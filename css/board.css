@@ -133,6 +133,16 @@
   gap: 16px;
 }
 
+.preview-drop-task {
+  z-index: 1000; 
+  border: 2px dashed #000; 
+  border-radius: 10px;
+  padding: 10px; 
+  box-sizing: border-box; 
+  pointer-events: none; 
+  height:250px !important;
+}
+
 .card-task-small {
   display: flex;
   flex-direction: column;
