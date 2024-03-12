@@ -1,3 +1,4 @@
+
 let currentIdTask;
 let currentDraggedElement;
 let idOfCurrentDraggedElement;
@@ -93,12 +94,15 @@ function allowDropWithPreview(event, newStatus) {
     let heightOfDraggedElement = document.getElementById(`card-task-small-${currentIdTask}`).offsetHeight;
 
     if (statusOfCurrentDraggedElement != newStatus) {
-        document.getElementById(`preview-drop-task-${newStatus}`).style.height = `${heightOfDraggedElement}px`;
-        document.getElementById(`preview-drop-task-${newStatus}`).classList.remove('d-none');
+        const previewElement = document.getElementById(`preview-drop-task-${newStatus}`);
+        previewElement.style.height = `${heightOfDraggedElement + 20}px`;
+
+        previewElement.style.width = '100px';
+
+        previewElement.classList.remove('d-none');
         document.getElementById(`empty-tasks-${newStatus}`).classList.add('d-none');
     }
 }
-
 
 /**
  * This function ensures that the preview for a task is only displayed while the task is dragged over an element/ status

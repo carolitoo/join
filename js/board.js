@@ -3,6 +3,7 @@ let tasks = [];
 let positionOfTask;
 
 
+
 async function initBoard() {
   await includeHTML();
   await loadUserData();
