@@ -11,9 +11,9 @@ async function initBoard() {
   await proofAuthentification(loggedInEmail);
   await checkPersonalheader(loggedInEmail);
   await loadContacts();
+  await loadTasks();
   await checkIfGuestOrCurrentUser();
   await sortArrayContacts();
-  await loadTasks();
   await renderBoard(tasks);
   changeSelectedTab("tab-board");
 }

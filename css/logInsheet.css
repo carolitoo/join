@@ -288,9 +288,18 @@ input:focus {
 }
 
 @media (max-width: 400px) {
+  body {
+    overflow-y: scroll;
+  }
   .ctn-login {
     width: 320px;
     min-width: 320px;
+    height: 484px;
+  }
+  .sep-login {
+    height: 7px;
+    margin-bottom: 13px;
+    margin-top: 4px;
   }
 
   .if-button-disabled {

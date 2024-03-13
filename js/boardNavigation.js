@@ -91,10 +91,12 @@ function moveElement(idTask) {
 function allowDropWithPreview(event, newStatus) {
     event.preventDefault();
     statusOfCurrentDraggedElement = checkStatusofCurrentDraggedElement();
-   // let heightOfDraggedElement = document.getElementById(`card-task-small-${currentIdTask}`).offsetHeight;//
+    let idOfdraggedElement = document.getElementById(`card-task-small-${currentIdTask}`);
 
     if (statusOfCurrentDraggedElement != newStatus) {
         const previewElement = document.getElementById(`preview-drop-task-${newStatus}`);
+        previewElement.style.height = `${idOfdraggedElement + 100}px`;
+        previewElement.style.width = `${idOfdraggedElement + 300}px`;
 
         previewElement.classList.remove('d-none');
         document.getElementById(`empty-tasks-${newStatus}`).classList.add('d-none');
