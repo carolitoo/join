@@ -6,7 +6,7 @@
  */
 async function generateCurrentUserDropDownHTML(currentUser) {
     return /*html*/ ` 
-    <div class="contact">
+    <div class="contact" onclick="handleContactClick(event)">
         <div class="contact-circle-and-name-box">
             <div style="background-color:${currentUser.colorContact}" class="task-detail-assigned-user-acronym">
                 <span>${currentUser.acronymContact}</span> 
@@ -27,7 +27,7 @@ async function generateCurrentUserDropDownHTML(currentUser) {
  */
 async function generateContactDropDownHTML(contact) {
     return /*html*/ ` 
-    <div class="contact">
+    <div class="contact" onclick="handleContactClick(event)">
         <div class="contact-circle-and-name-box">
             <div style="background-color:${contact.colorContact}" class="task-detail-assigned-user-acronym">
                 <span>${contact.acronymContact}</span> 
@@ -38,6 +38,21 @@ async function generateContactDropDownHTML(contact) {
     </div>`
 } 
 
+
+/**
+ * Handles clicking on a contact div to activate checkbox click function.
+ *
+ * @param {HTMLElement} contactDiv - The contact <div> element that was clicked.
+ */
+function handleContactDivClick(contactDiv) {
+    const checkbox = contactDiv.querySelector(".dropdwon-checkbox");
+    if (checkbox) {
+      checkbox.checked = !checkbox.checked; // Toggle checkbox state
+      handleCheckboxClick(checkbox); // Call handleCheckboxClick function
+    }
+  }
+  
+  
 
 /**
  * This function returns the HTML-Code for the icon of an assigned user in the edit/ add task form
@@ -65,7 +80,7 @@ async function generateIconCheckedContactHTML(foundContact) {
 async function generateCurrentUserDropDownEditTaskHTML(positionContact) {
     
     return /*html*/ `
-    <div class="contact">
+    <div class="contact" onclick="handleCheckboxClick(this)">
         <div class="contact-circle-and-name-box">
             <div style="background-color:${contactsSorted[positionContact]['colorContact']}" class="task-detail-assigned-user-acronym">
                 <span>${contactsSorted[positionContact]['acronymContact']}</span> 

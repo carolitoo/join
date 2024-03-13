@@ -206,17 +206,39 @@ async function renderOtherContacts() {
   const existingContactNames = Array.from(
     document.querySelectorAll("#assignedContactsCtn .contact span:nth-child(2)")).map((span) => span.innerText.trim());
     
-    let firstContact = 1;
-    if (currentUser.name === 'Guest') {
-      firstContact = 0;
-    }
+  let firstContact = 1;
+  if (currentUser.name === 'Guest') {
+    firstContact = 0;
+  }
 
   for (let i = firstContact; i < contactsSorted.length; i++) {
     const contact = contactsSorted[i];
     const contactExists = existingContactNames.includes(contact.name);
     if (!contactExists) {
-        assignedContacts.innerHTML += await generateContactDropDownHTML(contact);
+      assignedContacts.innerHTML += await generateContactDropDownHTML(contact);
     }
+  }
+
+  addClickEventListenersToContactDivs(); // Add click event listeners to contact divs
+}
+
+
+/**
+ * This function adds click event listeners to contact divs to activate the checkboxes.
+ */
+function addClickEventListenersToContactDivs() {
+  var contactDivs = document.getElementsByClassName('contact');
+  for (var i = 0; i < contactDivs.length; i++) {
+      var div = contactDivs[i];
+      div.addEventListener('click', function(event) {     
+          var checkbox = this.querySelector('input[type="checkbox"]'); // Die Checkbox innerhalb des Divs finden
+          if (event.target === checkbox) { // Überprüfen, ob das Klicken auf die Checkbox selbst erfolgt ist
+              return; // Checkbox-Klick, nichts weiter tun
+          }
+          checkbox.checked = !checkbox.checked; // Wenn ungecheckt Checkbox umschalten
+
+          handleCheckboxClick(checkbox)
+      });
   }
 }
 
