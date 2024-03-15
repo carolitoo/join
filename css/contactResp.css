@@ -142,7 +142,7 @@
   }
 
   .ctn-contact-list {
-    padding-bottom: 96px;
+    padding-bottom: 0px !important;
   }
 
   .ctn-contacts-details-name {
