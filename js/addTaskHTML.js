@@ -6,7 +6,7 @@
  */
 async function generateCurrentUserDropDownHTML(currentUser) {
     return /*html*/ ` 
-    <div class="contact" onclick="handleContactClick(event)">
+    <div class="contact" onclick="handleCheckboxClick(this)">
         <div class="contact-circle-and-name-box">
             <div style="background-color:${currentUser.colorContact}" class="task-detail-assigned-user-acronym">
                 <span>${currentUser.acronymContact}</span> 
@@ -27,7 +27,7 @@ async function generateCurrentUserDropDownHTML(currentUser) {
  */
 async function generateContactDropDownHTML(contact) {
     return /*html*/ ` 
-    <div class="contact" onclick="handleContactClick(event)">
+    <div class="contact" onclick="handleCheckboxClick(this)">
         <div class="contact-circle-and-name-box">
             <div style="background-color:${contact.colorContact}" class="task-detail-assigned-user-acronym">
                 <span>${contact.acronymContact}</span> 
