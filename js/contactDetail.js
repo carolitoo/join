@@ -61,7 +61,6 @@ async function resetPreviousSelectedContact(ID) {
  * @param {string} ID - id of the contact for which the details are displayed
  */
 function markSelectedContact(ID) {
-  console.log(ID);
   document.getElementById(`${ID}`).style = `pointer-events: none`;
   document.getElementById(`${ID}`).style.backgroundColor = "#2A3647";
   document.getElementById(`${ID}`).style.color = "white";

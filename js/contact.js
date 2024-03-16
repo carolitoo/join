@@ -36,7 +36,7 @@ async function initContact() {
 async function checkIfGuestOrCurrentUser() {
   currentUserAsContact = contacts.find(c => c.emailContact === loggedInEmail);
 
-  if (currentUserAsContact && currentUserAsContact.emailContact === 'guest@account') {
+  if (!currentUserAsContact && currentUser.email === 'guest@account') {
     guest = true;
     loggedInEmail = 'guest@account';
     return true;

@@ -33,7 +33,10 @@
     <script src="./js/contactHTML.js" defer></script>
   </head>
 
-  <body onload="initAddTask()" onbeforeunload="resetInputLocalStorage('temporaryInputAddTask')">
+  <body
+    onload="initAddTask()"
+    onbeforeunload="resetInputLocalStorage('temporaryInputAddTask')"
+  >
     <div class="landscape-msg">
       Please rotate your device to portrait mode<br />
       for better user experience.
@@ -86,7 +89,11 @@
               <label class="add_task_txt_format">Assigned to</label>
               <div class="pos-rel">
                 <div class="dropDownIcon"></div>
-                <input id="input-assignedTo" class="input-add-task" onclick="activateDropdown()" />
+                <input
+                  id="input-assignedTo"
+                  class="input-add-task"
+                  onclick="activateDropdown()"
+                />
                 <div
                   class="assignedContacts-open"
                   id="assignedContactsCtn"
@@ -246,7 +253,6 @@
           </div>
         </div>
       </form>
-
     </div>
   </body>
 </html>
