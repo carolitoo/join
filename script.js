@@ -11,6 +11,7 @@ async function initPrivacyP() {
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
   checkDisplaySidebar('privacy-link');
+  await setOnresizeFunction('body-privacy', 'checkDisplaySidebar(`privacy-link`)');
 }
 
 async function initLegalN() {
@@ -19,9 +20,8 @@ async function initLegalN() {
   await getLoggedInEmail();
   await checkPersonalheader(loggedInEmail);
   checkDisplaySidebar('legal-link');
+  await setOnresizeFunction('body-legal', 'checkDisplaySidebar(`legal-link`)');
 }
-
-
 
 
 /**
@@ -186,4 +186,15 @@ function showElement(idOfElement) {
  */
 function resetInputLocalStorage(key) {
   localStorage.setItem(key, '')  
+}
+
+
+/**
+ * This function sets the onresize attribute for an element
+ * 
+ * @param {string} idOfElement - id of the element for which the onresize attribute is set 
+ * @param {string} functionOnresize  - function that is assigned to the onresize attribute
+ */
+async function setOnresizeFunction(idOfElement, functionOnresize) {
+  document.getElementById(idOfElement).setAttribute("onresize", functionOnresize);
 }

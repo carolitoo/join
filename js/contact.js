@@ -25,6 +25,7 @@ async function initContact() {
   await sortArrayContacts();
   await renderContactList();
   checkWindowWidth();
+  await setOnresizeFunction('body-contacts', 'checkWindowWidth()');
 }
 
 /**

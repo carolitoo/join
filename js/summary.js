@@ -16,6 +16,7 @@ async function initSummary() {
     await renderOverviewTasks();
     changeSelectedTab('tab-summary');
     checkDisplayGreetingAnimation();
+    await setOnresizeFunction('body-summary', 'checkWindowWidthSummary()');
 }
 
 
