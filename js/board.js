@@ -3,6 +3,7 @@ let tasks = [];
 let positionOfTask;
 
 
+
 async function initBoard() {
   await includeHTML();
   await loadUserData();
@@ -10,9 +11,9 @@ async function initBoard() {
   await proofAuthentification(loggedInEmail);
   await checkPersonalheader(loggedInEmail);
   await loadContacts();
+  await loadTasks();
   await checkIfGuestOrCurrentUser();
   await sortArrayContacts();
-  await loadTasks();
   await renderBoard(tasks);
   changeSelectedTab("tab-board");
 }

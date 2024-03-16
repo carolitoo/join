@@ -147,6 +147,7 @@ select:focus {
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .dropdwon-checkbox {

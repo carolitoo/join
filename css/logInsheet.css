@@ -14,19 +14,6 @@
   z-index: 90 !important;
 }
 
-.start-animations-helper-responsive {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: #2a3647 !important;
-  z-index: 95 !important;
-}
-
 .ctn-login {
   border: unset;
   border-radius: 30px;
@@ -51,6 +38,14 @@
   height: 40%;
   transform: translate(-50%, -50%);
   z-index: 100 !important;
+}
+
+.logo-fixed {
+  position: fixed;
+  top: 80px !important;
+  left: 90px !important;
+  width: 13% !important;
+  height: 13% !important;
 }
 
 .logo-light {
@@ -278,14 +273,10 @@ input:focus {
 }
 
 @media (max-width: 675px) {
-  .start-animations-helper-responsive {
-    display: block;
-    animation: start-animations-helper_animation 0.75s ease-in-out 0.25s
-      forwards !important;
-  }
   .start-animations-helper {
     animation: start-animations-helper_animation 0.75s ease-in-out 0.25s
       forwards !important;
+    background-color: #2a3647 !important;
   }
   .logo-light {
     display: block;
@@ -297,9 +288,18 @@ input:focus {
 }
 
 @media (max-width: 400px) {
+  body {
+    overflow-y: scroll;
+  }
   .ctn-login {
     width: 320px;
     min-width: 320px;
+    height: 484px;
+  }
+  .sep-login {
+    height: 7px;
+    margin-bottom: 13px;
+    margin-top: 4px;
   }
 
   .if-button-disabled {

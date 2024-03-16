@@ -4,6 +4,11 @@
     align-items: flex-start;
     gap: 24px;
   }
+  .preview-drop-task {
+    border: 1px dashed #000; 
+    height: 250px !important;
+    width: 235px !important;
+  }
 
   .ctn-board {
     flex-direction: column;
