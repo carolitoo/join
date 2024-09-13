@@ -271,7 +271,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
               Urgent
               <img
                 id="urgent-icon"
-                src="./assets/img/prio alta2.svg"
+                src="./assets/img/prio_alta2.svg"
                 class="urgent-icon"
               />
             </div>
@@ -284,7 +284,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
               Medium
               <img
                 id="medium-icon"
-                src="./assets/img/capa 2.svg"
+                src="./assets/img/capa_2.svg"
                 class="urgent-icon"
                 style="fill: #ffa800"
               />
@@ -298,7 +298,7 @@ async function generateViewEditTasklHTML(currentIdTask) {
               Low
               <img
                 id="low-icon"
-                src="./assets/img/prio baja.svg"
+                src="./assets/img/prio_low_color.svg"
                 class="urgent-icon"
               />
             </div>

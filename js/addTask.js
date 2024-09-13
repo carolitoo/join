@@ -78,15 +78,15 @@ function changeButtonColorsUrgent() {
   taskPrio = "Urgent";
   document.getElementById("urgentButton").classList.add("urgent-btn-red");
   document.getElementById("urgentButton").classList.remove("prio-btn-neutral");
-  document.getElementById("urgent-icon").src = "./assets/img/prio alta w.svg";
+  document.getElementById("urgent-icon").src = "./assets/img/prio_alta_w.svg";
 
   document.getElementById("mediumButton").classList.remove("medium-btn-yellow");
   document.getElementById("mediumButton").classList.add("prio-btn-neutral");
-  document.getElementById("medium-icon").src = "./assets/img/prio media y.svg";
+  document.getElementById("medium-icon").src = "./assets/img/prio_medium_color.svg";
 
   document.getElementById("lowButton").classList.remove("low-btn-green");
   document.getElementById("lowButton").classList.add("prio-btn-neutral");
-  document.getElementById("low-icon").src = "./assets/img/prio baja.svg";
+  document.getElementById("low-icon").src = "./assets/img/prio_baja.svg";
 }
 
 
@@ -97,15 +97,15 @@ function changeButtonColorsMedium() {
   taskPrio = "Medium";
   document.getElementById("mediumButton").classList.add("medium-btn-yellow");
   document.getElementById("mediumButton").classList.remove("prio-btn-neutral");
-  document.getElementById("medium-icon").src = "./assets/img/capa 2.svg";
+  document.getElementById("medium-icon").src = "./assets/img/prio_medium_white.svg";
 
   document.getElementById("urgentButton").classList.remove("urgent-btn-red");
   document.getElementById("urgentButton").classList.add("prio-btn-neutral");
-  document.getElementById("urgent-icon").src = "./assets/img/prio alta2.svg";
+  document.getElementById("urgent-icon").src = "./assets/img/prio_alta2.svg";
 
   document.getElementById("lowButton").classList.remove("low-btn-green");
   document.getElementById("lowButton").classList.add("prio-btn-neutral");
-  document.getElementById("low-icon").src = "./assets/img/prio baja.svg";
+  document.getElementById("low-icon").src = "./assets/img/prio_baja.svg";
 }
 
 
@@ -116,15 +116,15 @@ function changeButtonColorsLow() {
   taskPrio = "Low";
   document.getElementById("lowButton").classList.add("low-btn-green");
   document.getElementById("lowButton").classList.remove("prio-btn-neutral");
-  document.getElementById("low-icon").src = "./assets/img/prio baja w.svg";
+  document.getElementById("low-icon").src = "./assets/img/prio_baja_w.svg";
 
   document.getElementById("mediumButton").classList.remove("medium-btn-yellow");
   document.getElementById("mediumButton").classList.add("prio-btn-neutral");
-  document.getElementById("medium-icon").src = "./assets/img/prio media y.svg";
+  document.getElementById("medium-icon").src = "./assets/img/prio_medium_color.svg";
 
   document.getElementById("urgentButton").classList.remove("urgent-btn-red");
   document.getElementById("urgentButton").classList.add("prio-btn-neutral");
-  document.getElementById("urgent-icon").src = "./assets/img/prio alta2.svg";
+  document.getElementById("urgent-icon").src = "./assets/img/prio_alta2.svg";
 }
 
 
